@@ -27,6 +27,11 @@ public class AcademicHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+        if (action.equalsIgnoreCase("addACourse"))
+        {
+            String courseName = request.getParameter("courseName");
+        }
+
     }
 
     @Override
