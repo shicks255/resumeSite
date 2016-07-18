@@ -26,6 +26,23 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+        if (action.equalsIgnoreCase("css"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/css.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("javaScript"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javaScript.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("java"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

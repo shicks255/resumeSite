@@ -16,10 +16,7 @@
 <body>
 <jsp:include page="_pageSections/header.jsp"/>
 <jsp:include page="_pageSections/navBar.jsp"/>
-
-<a href="${pageContext.request.contextPath}/techPractice?">CSS</a>
-<a href="${pageContext.request.contextPath}/techPractice?">Javascript</a>
-<a href="${pageContext.request.contextPath}/techPractice?">Java</a>
+<jsp:include page="/techPractice/techPracticeNavBar.jsp"/>
 
 <h1>Tech Practice:</h1>
 

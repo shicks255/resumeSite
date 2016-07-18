@@ -1,5 +1,7 @@
 package com.steven.hicks;
 
+import jdk.nashorn.internal.ir.RuntimeNode;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +32,19 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("addACourse"))
         {
             String courseName = request.getParameter("courseName");
+        }
+
+        if (action.equalsIgnoreCase("thesis"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education/thesis.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("bibliography"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education/bibliography.jsp");
+            dispatcher.forward(request, response);
+
         }
 
     }

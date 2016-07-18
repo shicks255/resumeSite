@@ -16,9 +16,7 @@
 <body>
 <jsp:include page="_pageSections/header.jsp"/>
 <jsp:include page="_pageSections/navBar.jsp"/>
-
-    <a href="${pageContext.request.contextPath}/academic?">Thesis</a>
-    <a href="${pageContext.request.contextPath}/academic?">Bibliography</a>
+<jsp:include page="/education/educationNavBar.jsp"/>
 
 <h1>Course History:</h1>
 
