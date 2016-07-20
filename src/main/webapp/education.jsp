@@ -9,8 +9,15 @@
 <html>
 <head>
     <title>My Education</title>
-
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>
+
+    <script>
+        function buttonAddACourse()
+        {
+            $( '#addACourse' ).css("display","inline");
+        }
+    </script>
 
 </head>
 <body>
@@ -20,8 +27,9 @@
 
 <h1>Course History:</h1>
 
+<button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
 
-<div id="addACourse">
+<div id="addACourse" style="display:none">
     <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
         <table>
             <tr>
@@ -30,7 +38,7 @@
             </tr>
             <tr>
                 <td><label for="courseCode">Course Code:</label></td>
-                <td><input type="text" name="courseCode" id="courseCode"/></td>
+                <td><input required="true" type="text" name="courseCode" id="courseCode"/></td>
             </tr>
             <tr>
                 <td><label for="collegeName">College:</label></td>
@@ -38,7 +46,7 @@
             </tr>
             <tr>
                 <td><label for="">Semester:</label></td>
-                <td><select>
+                <td><select required="true">
                     <option value="dslkafjds">Lkdfjaf</option>
                     <option value="dslkafjds2">Lkdfjaf2</option>
                 </select></td>
@@ -56,7 +64,7 @@
                 <td></td>
             </tr>
         </table>
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Submit" />
     </form>
 </div>
 
