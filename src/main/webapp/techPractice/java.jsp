@@ -16,8 +16,10 @@
 <jsp:include page="techPracticeNavBar.jsp"/>
 
 <br/>
-Java
+<h1>Java Programs/Practice</h1>
 
+<a href="${pageContext.request.contextPath}/techPractice?action=steamApi">Calling A Restful Service</a>
 
+<jsp:include page="/_pageSections/footer.jsp" />
 </body>
 </html>

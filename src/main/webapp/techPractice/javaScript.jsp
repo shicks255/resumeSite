@@ -18,5 +18,7 @@
 <br/>
 Javacsript
 
+
+<jsp:include page="/_pageSections/footer.jsp" />
 </body>
 </html>
