@@ -1,14 +1,26 @@
 package com.steven.hicks.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Steven on 7/18/2016.
  */
+
+@Entity
 public class AcademicCourse
 {
-    private String courseName = "";
+    @Id
     private String courseCode = "";
+
+    @Column
+    private String courseName = "";
+    @Column
     private String college = "";
+    @Column
     private String semester = "";
+    @Column
     private String gradeReceived = "";
 
     public AcademicCourse()

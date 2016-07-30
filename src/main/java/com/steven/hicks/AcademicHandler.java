@@ -1,5 +1,7 @@
 package com.steven.hicks;
 
+import com.steven.hicks.entities.AcademicCourse;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +32,18 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("addACourse"))
         {
             String courseName = request.getParameter("courseName");
+            String courseCode = request.getParameter("courseCode");
+            String collegeName = request.getParameter("collegeName");
+            String courseGrade = request.getParameter("courseGrade");
+
+            AcademicCourse course = new AcademicCourse();
+            course.setCourseName(courseName);
+            course.setCourseCode(courseCode);
+            course.setCollege(collegeName);
+            AcademicLogic.addCourse(course);
+
+            response.sendRedirect("academic?action=form");
+
         }
 
         if (action.equalsIgnoreCase("thesis"))
