@@ -1,8 +1,6 @@
 package com.steven.hicks.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Steven on 7/18/2016.
@@ -12,14 +10,19 @@ import javax.persistence.Id;
 public class AcademicCourse
 {
     @Id
-    private String courseCode = "";
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int objectId = 0;
 
+    @Column
+    private String courseCode = "";
     @Column
     private String courseName = "";
     @Column
     private String college = "";
     @Column
     private String semester = "";
+    @Column
+    private int semesterTrackingNumber;
     @Column
     private String gradeReceived = "";
 
@@ -44,21 +47,28 @@ public class AcademicCourse
 
         AcademicCourse that = (AcademicCourse) o;
 
-        if (!courseCode.equals(that.courseCode)) return false;
-        return semester.equals(that.semester);
+        return objectId == that.objectId;
 
     }
 
     @Override
     public int hashCode()
     {
-        int result = courseCode.hashCode();
-        result = 31 * result + semester.hashCode();
-        return result;
+        return objectId;
     }
 
-//    ----------Getters & Setters
+    //    ----------Getters & Setters
 
+
+    public int getObjectId()
+    {
+        return objectId;
+    }
+
+    public void setObjectId(int objectId)
+    {
+        this.objectId = objectId;
+    }
 
     public String getCourseName()
     {
@@ -98,6 +108,16 @@ public class AcademicCourse
     public void setSemester(String semester)
     {
         this.semester = semester;
+    }
+
+    public int getSemesterTrackingNumber()
+    {
+        return semesterTrackingNumber;
+    }
+
+    public void setSemesterTrackingNumber(int semesterTrackingNumber)
+    {
+        this.semesterTrackingNumber = semesterTrackingNumber;
     }
 
     public String getGradeReceived()

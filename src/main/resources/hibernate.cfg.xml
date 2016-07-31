@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://192.168.1.2:8888/resumesite</property>
+        <property name="connection.username">shicks</property>
+        <property name="connection.password">Unreal25</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">
+            org.hibernate.dialect.MySQL5Dialect
+        </property>
+
+        <!--Disable the second-level cache-->
+        <property name="cache.provider_class">org.hibernate.cache.CacheException</property>
+
+        <!--Echo SQL statements to stdout-->
+        <property name="show_sql">true</property>
+
+        <property name="hbm2ddl.auto">update</property>
+
+        <!--MAPPINGS-->
+        <mapping class="com.steven.hicks.entities.AcademicCourse"/>
+
+    </session-factory>
+</hibernate-configuration>
