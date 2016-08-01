@@ -17,7 +17,12 @@
     <script>
         function buttonAddACourse()
         {
-            $( '#frmDiv' ).css("display","inline");
+            $('#addACourse').removeClass('hiddenDiv').addClass('popup');
+        }
+
+        function closeAddCourse()
+        {
+            $( '#addACourse' ).removeClass('popup').addClass('hiddenDiv');
         }
 
         function editCourse(objectId)
@@ -25,11 +30,26 @@
             $.post( 'academic?action=getAjaxForEditingCourse&courseObjectId=' + objectId,
                 function(data)
                 {
-                    $( '#editCourse' ).addClass('popup');
-                    $( '#editCourse' ).html(data);
+                    $( '#editCourseDiv' ).removeClass('hiddenDiv').addClass('popup').html(data);
                 }
-
             );
+        }
+
+        var courseObjectId;
+        function deleteACourse(objectId)
+        {
+            courseObjectId = objectId;
+            $( '#deletePrompt' ).removeClass('hiddenDiv').addClass('popup');
+        }
+
+        function deleteCourse(objectId)
+        {
+            console.log(objectId);
+            $.post( 'academic?action=deleteACourse&objectId=' + objectId,
+                function(data)
+                {
+                    location.reload();
+                })
         }
 
     </script>
@@ -44,14 +64,55 @@
 
 <button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
 
-<div id="editCourse">
+<div id="editCourseDiv" class="hiddenDiv">
     <div id="frmEditCourse" style="display:none">
-        hello
     </div>
 </div>
 
-<div id="addACourse" class="notecard">
-    <div id="frmDiv" style="display:none">
+
+
+<br/>
+<br/>
+
+
+<div id="courseList" class="notecard">
+    <table border="1">
+        <tr>
+            <td>Semester:</td>
+            <td>Code:</td>
+            <td>Course:</td>
+            <td>Grade:</td>
+            <td>Actions:</td>
+        </tr>
+
+        <c:forEach var="course" items="${courseList}">
+            <tr>
+                <td><c:out value="${course.semester}"/></td>
+                <td><c:out value="${course.courseCode}"/></td>
+                <td><c:out value="${course.courseName}"/></td>
+                <td><c:out value="${course.gradeReceived}"/></td>
+                <td>
+                    <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="">Upload Coursework</button>
+                    <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
+                    <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
+
+<br/><br/>
+
+<div id="deletePrompt" class="hiddenDiv">
+    <div class="popupContent">
+        <h4>Are you sure you wanna delete this shit nigga??</h4>
+        <button id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >Ok</button>
+        <button id="deletePrompt_denyButton" onclick="location.reload();">Cancel</button>
+    </div>
+</div>
+
+<div id="addACourse"  class="hiddenDiv">
+    <div id="frmDiv" class="popupContent">
         <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
             <table>
                 <tr>
@@ -120,40 +181,8 @@
             </table>
             <input type="submit" value="Submit" />
         </form>
+        <button id="closeAddCourse" name="closeAddCourse" onclick="closeAddCourse();">Close</button>
     </div>
-</div>
-
-<br/>
-<br/>
-
-
-<div id="courseList" class="notecard">
-
-    <table border="1">
-        <tr>
-            <td>Semester:</td>
-            <td>Code:</td>
-            <td>Course:</td>
-            <td>Grade:</td>
-            <td>Actions:</td>
-        </tr>
-
-        <c:forEach var="course" items="${courseList}">
-            <tr>
-                <td><c:out value="${course.semester}"/></td>
-                <td><c:out value="${course.courseCode}"/></td>
-                <td><c:out value="${course.courseName}"/></td>
-                <td><c:out value="${course.gradeReceived}"/></td>
-                <td>
-                    <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="">Upload Coursework</button>
-                    <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
-                </td>
-            </tr>
-        </c:forEach>
-
-
-    </table>
-
 </div>
 
 <jsp:include page="_pageSections/footer.jsp" />

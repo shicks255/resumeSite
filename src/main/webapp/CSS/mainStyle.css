@@ -65,10 +65,25 @@ h1 {color : red;
     z-index: 10;
     display : inline;
     border : 1px solid black;
-    /*min-height : 255px;*/
-    /*min-width : 255px;*/
-    top : 15%;
-    bottom : 15%;
-    left : 15%;
-    right : 15%;
+    background-color : grey;
+    border-radius : 15px;
+    opacity: .95;
+    top : 35%;
+    bottom : 20%;
+    left : 25%;
+    right : 25%;
     position : fixed;}
+
+.popup .popupContent{
+    margin-left : 10%;
+    margin-right : 25%;
+    margin-top : 5%;
+}
+
+.hiddenDiv {
+    display : none;
+}
+
+/*.popup table {*/
+        /*!*padding : 175px;*!*/
+        /*margin : 10%}*/

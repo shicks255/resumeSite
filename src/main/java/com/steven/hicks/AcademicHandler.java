@@ -1,6 +1,9 @@
 package com.steven.hicks;
 
 import com.steven.hicks.entities.AcademicCourse;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +27,7 @@ public class AcademicHandler extends HttpServlet
     {
         String action = request.getParameter("action");
 
+//        ------PAGE LOAD
         if (action.equalsIgnoreCase("form"))
         {
             List<AcademicCourse> academicCourseList = AcademicLogic.getCourseList();
@@ -33,12 +37,14 @@ public class AcademicHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        ------THESIS REDIRECT
         if (action.equalsIgnoreCase("thesis"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education/thesis.jsp");
             dispatcher.forward(request, response);
         }
 
+//        ------BIBLIOGRAPHY REDIRECT
         if (action.equalsIgnoreCase("bibliography"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education/bibliography.jsp");
@@ -46,6 +52,7 @@ public class AcademicHandler extends HttpServlet
 
         }
 
+//        ------ADD COURSE ACTION
         if (action.equalsIgnoreCase("addACourse"))
         {
             String courseName = request.getParameter("courseName");
@@ -67,6 +74,50 @@ public class AcademicHandler extends HttpServlet
             response.sendRedirect("academic?action=form");
         }
 
+//        ------EDIT COURSE ACTION
+        if (action.equalsIgnoreCase("editACourse"))
+        {
+            String courseId = request.getParameter("courseId");
+            AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(courseId));
+
+            course.setCourseName(request.getParameter("courseNameEdit"));
+            course.setCourseCode(request.getParameter("courseCodeEdit"));
+            course.setCollege(request.getParameter("collegeNameEdit"));
+            course.setSemester(request.getParameter("semesterEdit"));
+            course.setGradeReceived(request.getParameter("courseGradeEdit"));
+
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.update(course);
+            session.getTransaction().commit();
+            session.close();
+            sessionFactory.close();
+
+            response.sendRedirect("academic?action=form");
+        }
+
+//        ------DELETE A COURSE ACTION
+        if (action.equalsIgnoreCase("deleteACourse"))
+        {
+            String courseObjectId = request.getParameter("objectId");
+            AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(courseObjectId));
+
+            if (course != null)
+            {
+                SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+                Session session = sessionFactory.openSession();
+                session.beginTransaction();
+                session.delete(course);
+                session.getTransaction().commit();
+                session.close();
+                sessionFactory.close();
+            }
+
+            response.sendRedirect("academic?action=form");
+        }
+
+//        ------AJAX GET A COURSE TO EDIT
         if (action.equalsIgnoreCase("getAjaxForEditingCourse"))
         {
             int courseObjectId = Integer.valueOf(request.getParameter("courseObjectId"));
@@ -77,7 +128,6 @@ public class AcademicHandler extends HttpServlet
             RequestDispatcher dispatcher = request.getRequestDispatcher("/education/editCoursePopup.jsp");
             dispatcher.forward(request, response);
         }
-
     }
 
     @Override
