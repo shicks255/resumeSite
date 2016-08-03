@@ -1,5 +1,7 @@
 package com.steven.hicks;
 
+import com.steven.hicks.entities.SteamGame;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,7 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by Steven on 7/17/2016.
@@ -47,24 +52,23 @@ public class TechHandler extends HttpServlet
         }
         if (action.equalsIgnoreCase("steamApi"))
         {
-            List<String> allGameList = TechLogic.doSteamApiCall(false);
-            List<String> trimmedGameList = new ArrayList<>();
+            List<SteamGame> allGameList = (ArrayList<SteamGame>)TechLogic.doSteamApiCall();
 
-            for (int i = 0; i <36; i++)
-                trimmedGameList.add(allGameList.get(i));
-            for (int i = 1; i <= 25; i++)
-                trimmedGameList.add(allGameList.get(allGameList.size()-i));
+            Collections.sort(allGameList, new Comparator<SteamGame>()
+                    {
+                        @Override
+                        public int compare(SteamGame o1, SteamGame o2)
+                        {
+                            int returnValue = 0;
+                            if (o1.getAppId() > o2.getAppId())
+                                returnValue = 1;
+                            if (o1.getAppId() < o2.getAppId())
+                                returnValue = -1;
 
-            List<String> allGameParsedList = TechLogic.doSteamApiCallParsed();
-            List<String> trimmedAllGameParsedList = new ArrayList<>();
-
-            for (int i = 0; i <36; i++)
-                trimmedAllGameParsedList.add(allGameParsedList.get(i));
-            for (int i = 1; i <= 25; i++)
-                trimmedAllGameParsedList.add(allGameParsedList.get(allGameParsedList.size()-i));
-
-            request.setAttribute("steamGameList", trimmedGameList);
-            request.setAttribute("steamGameListParsed", trimmedAllGameParsedList);
+                            return returnValue;
+                        }
+                    });
+            request.setAttribute("allGameList", allGameList);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
             dispatcher.forward(request, response);
         }

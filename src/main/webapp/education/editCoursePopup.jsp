@@ -32,7 +32,9 @@
 <body>
 
 <div class="popupContent">
+    <button value="Cancel" onclick="closePopup();">Close</button>
 <form name="frmEditACourse" id="frmEditACourse" action="${pageContext.request.contextPath}\academic?&action=editACourse&courseId=${course.objectId}" method="post">
+    <input type="submit" value="Submit" />
     <table>
         <tr>
             <td><label for="courseNameEdit">Course Name:</label></td>
@@ -93,14 +95,8 @@
             <td><label for="relevantCourseWork">Relevant Course Work:</label></td>
             <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
     </table>
-    <input type="submit" value="Submit" />
 </form>
-    <button value="Cancel" onclick="closePopup();">Close</button>
 </div>
 
 </body>

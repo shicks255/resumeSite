@@ -52,6 +52,11 @@
                 })
         }
 
+        function test()
+        {
+
+        }
+
     </script>
 
 </head>
@@ -69,11 +74,8 @@
     </div>
 </div>
 
-
-
 <br/>
 <br/>
-
 
 <div id="courseList" class="notecard">
     <table border="1">
@@ -82,7 +84,7 @@
             <td>Code:</td>
             <td>Course:</td>
             <td>Grade:</td>
-            <td>Actions:</td>
+            <td class="rightAlign">Actions:</td>
         </tr>
 
         <c:forEach var="course" items="${courseList}">
@@ -108,12 +110,15 @@
         <h4>Are you sure you wanna delete this shit nigga??</h4>
         <button id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >Ok</button>
         <button id="deletePrompt_denyButton" onclick="location.reload();">Cancel</button>
-    </div>
+    </div>/
 </div>
 
 <div id="addACourse"  class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
+        <button id="closeAddCourse" name="closeAddCourse" onclick="closeAddCourse();">Close</button>
         <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
+            <input type="submit" value="Submit" />
+
             <table>
                 <tr>
                     <td><label for="courseName">Course Name:</label></td>
@@ -174,14 +179,8 @@
                     <td><label for="relevantCourseWork">Relevant Course Work:</label></td>
                     <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
             </table>
-            <input type="submit" value="Submit" />
         </form>
-        <button id="closeAddCourse" name="closeAddCourse" onclick="closeAddCourse();">Close</button>
     </div>
 </div>
 
