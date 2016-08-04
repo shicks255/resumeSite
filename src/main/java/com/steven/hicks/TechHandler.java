@@ -68,6 +68,43 @@ public class TechHandler extends HttpServlet
                             return returnValue;
                         }
                     });
+
+            String sortType = request.getParameter("sort");
+
+            if (sortType.equalsIgnoreCase("reverseId"))
+            {
+                Collections.sort(allGameList, new Comparator<SteamGame>()
+                {
+                    @Override
+                    public int compare(SteamGame o1, SteamGame o2)
+                    {
+                        int returnValue = 0;
+                        if (o1.getAppId() > o2.getAppId())
+                            returnValue = -1;
+                        if (o1.getAppId() < o2.getAppId())
+                            returnValue = 1;
+
+                        return returnValue;
+                    }
+
+                });
+            }
+
+            if (sortType.equalsIgnoreCase("alpha"))
+            {
+                allGameList = allGameList.stream()
+                        .sorted( (o1, o2) -> o1.getName().compareTo(o2.getName()))
+                        .collect(Collectors.toList());
+            }
+
+            if (sortType.equalsIgnoreCase("reverseAlpha"))
+            {
+                allGameList = allGameList.stream()
+                        .sorted( (o1, o2) -> -o1.getName().compareTo(o2.getName()))
+                        .collect(Collectors.toList());
+            }
+
+
             request.setAttribute("allGameList", allGameList);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
             dispatcher.forward(request, response);

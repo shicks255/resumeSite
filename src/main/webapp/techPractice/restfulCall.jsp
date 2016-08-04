@@ -11,10 +11,52 @@
 <html>
 <head>
 
+    <script>
+
+        function sortReverseIdOrder()
+        {
+            $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi&sort=reverseId',
+                    function(data)
+                    {
+//                        $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                        $( '#steamApiResultsPopup' ).html(data);
+                        $(window).resize();
+                    }
+            );
+        }
+
+        function sortAlpha()
+        {
+            $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi&sort=alpha',
+                    function(data)
+                    {
+//                        $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                        $( '#steamApiResultsPopup' ).html(data);
+                        $(window).resize();
+                    }
+            );
+        }
+
+        function sortReverseAlpha()
+        {
+            $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi&sort=reverseAlpha',
+                    function(data)
+                    {
+//                        $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                        $( '#steamApiResultsPopup' ).html(data);
+                        $(window).resize();
+                    }
+            );
+        }
+
+    </script>
 
 </head>
 <body>
 <button onclick="closePopup();">Close</button>
+<button onclick="sortReverseIdOrder();">Reverse Order</button>
+<button onclick="sortAlpha();">Alphabetical</button>
+<button onclick="sortReverseAlpha();">Reverse Alphabetical</button>
 <br/>
     <table border="1">
         <tr>

@@ -17,8 +17,7 @@
 
         function getSteamApi()
         {
-            console.log("test");
-            $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi',
+            $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi&sort=id',
                 function(data)
                 {
                     $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
