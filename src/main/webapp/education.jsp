@@ -80,16 +80,23 @@
 <div id="courseList" class="notecard">
     <table border="1">
         <tr>
+            <td>#:</td>
             <td>Semester:</td>
+            <td>College:</td>
             <td>Code:</td>
             <td>Course:</td>
             <td>Grade:</td>
             <td class="rightAlign">Actions:</td>
         </tr>
 
+        <c:set var="index" value="${0}"/>
+
         <c:forEach var="course" items="${courseList}">
+            <c:set var="index" value="${index + 1}"/>
             <tr>
+                <td><c:out value="${index}"/></td>
                 <td><c:out value="${course.semester}"/></td>
+                <td><c:out value="${course.college}"/></td>
                 <td><c:out value="${course.courseCode}"/></td>
                 <td><c:out value="${course.courseName}"/></td>
                 <td><c:out value="${course.gradeReceived}"/></td>

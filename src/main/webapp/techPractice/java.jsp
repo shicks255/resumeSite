@@ -44,8 +44,6 @@
 <br/>
 <h1>Java Programs/Practice</h1>
 
-<a href="${pageContext.request.contextPath}/techPractice?action=steamApi">Calling A Restful Service</a>
-<br/>
 <button onclick='getSteamApi();' >Calling a Restful Service</button>
 
 <div id="steamApiResultsBox" class="hiddenDiv">
