@@ -17,6 +17,8 @@
 
 <!-- START SKILLS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
+<a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>
+
 <br><br>
 <h3 style="text-align: center; font-weight : bold;">Skills</h3>
 <br>

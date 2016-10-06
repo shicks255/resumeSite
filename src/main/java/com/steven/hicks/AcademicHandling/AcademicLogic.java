@@ -1,5 +1,6 @@
-package com.steven.hicks;
+package com.steven.hicks.AcademicHandling;
 
+import com.steven.hicks.HibernateUtil;
 import com.steven.hicks.entities.AcademicCourse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

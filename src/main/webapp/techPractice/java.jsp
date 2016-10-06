@@ -27,6 +27,11 @@
             );
         }
 
+        function goToSessionPage()
+        {
+            window.open('${pageContext.request.contextPath}/techPractice?action=sessionPractice', "_self");
+        }
+
         function closePopup()
         {
             $( '#steamApiResultsBox' ).removeClass('popup').addClass('hiddenDiv');
@@ -45,6 +50,9 @@
 <h1>Java Programs/Practice</h1>
 
 <button onclick='getSteamApi();' >Calling a Restful Service</button>
+<br/><br/>
+
+<button onclick="goToSessionPage();">Session Practice</button>
 
 <div id="steamApiResultsBox" class="hiddenDiv">
     <div id="steamApiResultsPopup" class="popupContent">

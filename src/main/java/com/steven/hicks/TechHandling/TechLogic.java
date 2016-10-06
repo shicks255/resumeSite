@@ -1,4 +1,4 @@
-package com.steven.hicks;
+package com.steven.hicks.TechHandling;
 
 //import com.sun.org.apache.xerces.internal.parsers.SAXParser;
 import com.steven.hicks.entities.SteamGame;
