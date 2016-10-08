@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by Steven on 7/17/2016.
@@ -68,7 +64,7 @@ public class TechHandler extends HttpServlet
 //        -----DO STEAM API
         if (action.equalsIgnoreCase("steamApi"))
         {
-            List<SteamGame> allGameList = (ArrayList<SteamGame>) TechLogic.doSteamApiCall(request);
+            List<SteamGame> allGameList = TechLogic.doSteamApiCall(request);
 
             request.setAttribute("allGameList", allGameList);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
