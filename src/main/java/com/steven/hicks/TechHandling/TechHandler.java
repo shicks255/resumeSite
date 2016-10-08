@@ -63,58 +63,7 @@ public class TechHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("steamApi"))
         {
-            List<SteamGame> allGameList = (ArrayList<SteamGame>) TechLogic.doSteamApiCall();
-
-            Collections.sort(allGameList, new Comparator<SteamGame>()
-                    {
-                        @Override
-                        public int compare(SteamGame o1, SteamGame o2)
-                        {
-                            int returnValue = 0;
-                            if (o1.getAppId() > o2.getAppId())
-                                returnValue = 1;
-                            if (o1.getAppId() < o2.getAppId())
-                                returnValue = -1;
-
-                            return returnValue;
-                        }
-                    });
-
-            String sortType = request.getParameter("sort");
-
-            if (sortType.equalsIgnoreCase("reverseId"))
-            {
-                Collections.sort(allGameList, new Comparator<SteamGame>()
-                {
-                    @Override
-                    public int compare(SteamGame o1, SteamGame o2)
-                    {
-                        int returnValue = 0;
-                        if (o1.getAppId() > o2.getAppId())
-                            returnValue = -1;
-                        if (o1.getAppId() < o2.getAppId())
-                            returnValue = 1;
-
-                        return returnValue;
-                    }
-
-                });
-            }
-
-            if (sortType.equalsIgnoreCase("alpha"))
-            {
-                allGameList = allGameList.stream()
-                        .sorted( (o1, o2) -> o1.getName().compareTo(o2.getName()))
-                        .collect(Collectors.toList());
-            }
-
-            if (sortType.equalsIgnoreCase("reverseAlpha"))
-            {
-                allGameList = allGameList.stream()
-                        .sorted( (o1, o2) -> -o1.getName().compareTo(o2.getName()))
-                        .collect(Collectors.toList());
-            }
-
+            List<SteamGame> allGameList = (ArrayList<SteamGame>) TechLogic.doSteamApiCall(request);
 
             request.setAttribute("allGameList", allGameList);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
