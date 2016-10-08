@@ -55,6 +55,7 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        -----SESSION PRACTICE REDIRECT
         if (action.equalsIgnoreCase("sessionPractice"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");

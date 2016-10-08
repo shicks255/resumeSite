@@ -56,7 +56,6 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("addACourse"))
         {
             AcademicLogic.addCourse(request);
-
             response.sendRedirect("academic?action=form");
         }
 
