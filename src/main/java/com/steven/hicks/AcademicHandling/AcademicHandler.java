@@ -55,21 +55,7 @@ public class AcademicHandler extends HttpServlet
 //        ------ADD COURSE ACTION
         if (action.equalsIgnoreCase("addACourse"))
         {
-            String courseName = request.getParameter("courseName");
-            String courseCode = request.getParameter("courseCode");
-            String collegeName = request.getParameter("collegeName");
-            String courseGrade = request.getParameter("courseGrade");
-            String semester = request.getParameter("semester");
-
-            AcademicCourse course = new AcademicCourse();
-            course.setCourseName(courseName);
-            course.setCourseCode(courseCode);
-            course.setCollege(collegeName);
-            course.setGradeReceived(courseGrade);
-            course.setSemester(semester);
-
-            course.setSemesterTrackingNumber(AcademicLogic.getSemesterNumberForSemester(semester));
-            AcademicLogic.addCourse(course);
+            AcademicLogic.addCourse(request);
 
             response.sendRedirect("academic?action=form");
         }
@@ -80,19 +66,7 @@ public class AcademicHandler extends HttpServlet
             String courseId = request.getParameter("courseId");
             AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(courseId));
 
-            course.setCourseName(request.getParameter("courseNameEdit"));
-            course.setCourseCode(request.getParameter("courseCodeEdit"));
-            course.setCollege(request.getParameter("collegeNameEdit"));
-            course.setSemester(request.getParameter("semesterEdit"));
-            course.setGradeReceived(request.getParameter("courseGradeEdit"));
-
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.update(course);
-            session.getTransaction().commit();
-            session.close();
-            sessionFactory.close();
+            AcademicLogic.editCourse(request, course);
 
             response.sendRedirect("academic?action=form");
         }
@@ -104,15 +78,7 @@ public class AcademicHandler extends HttpServlet
             AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(courseObjectId));
 
             if (course != null)
-            {
-                SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-                Session session = sessionFactory.openSession();
-                session.beginTransaction();
-                session.delete(course);
-                session.getTransaction().commit();
-                session.close();
-                sessionFactory.close();
-            }
+                AcademicLogic.deleteCourse(course);
 
             response.sendRedirect("academic?action=form");
         }

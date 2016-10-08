@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -13,8 +14,23 @@ import java.util.List;
  */
 public class AcademicLogic
 {
-    public static void addCourse(AcademicCourse course)
+    public static void addCourse(HttpServletRequest request)
     {
+        String courseName = request.getParameter("courseName");
+        String courseCode = request.getParameter("courseCode");
+        String collegeName = request.getParameter("collegeName");
+        String courseGrade = request.getParameter("courseGrade");
+        String semester = request.getParameter("semester");
+
+        AcademicCourse course = new AcademicCourse();
+        course.setCourseName(courseName);
+        course.setCourseCode(courseCode);
+        course.setCollege(collegeName);
+        course.setGradeReceived(courseGrade);
+        course.setSemester(semester);
+
+        course.setSemesterTrackingNumber(AcademicLogic.getSemesterNumberForSemester(semester));
+
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
         session.beginTransaction();
@@ -36,6 +52,34 @@ public class AcademicLogic
         sessionFactory.close();
 
         return list;
+    }
+
+    public static void editCourse(HttpServletRequest request, AcademicCourse course)
+    {
+        course.setCourseName(request.getParameter("courseNameEdit"));
+        course.setCourseCode(request.getParameter("courseCodeEdit"));
+        course.setCollege(request.getParameter("collegeNameEdit"));
+        course.setSemester(request.getParameter("semesterEdit"));
+        course.setGradeReceived(request.getParameter("courseGradeEdit"));
+
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(course);
+        session.getTransaction().commit();
+        session.close();
+        sessionFactory.close();
+    }
+
+    public static void deleteCourse(AcademicCourse course)
+    {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.delete(course);
+        session.getTransaction().commit();
+        session.close();
+        sessionFactory.close();
     }
 
     public static AcademicCourse getCourse(int courseId)

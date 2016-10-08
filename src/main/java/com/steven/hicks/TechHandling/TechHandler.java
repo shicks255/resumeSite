@@ -28,24 +28,28 @@ public class TechHandler extends HttpServlet
     {
         String action = request.getParameter("action");
 
+//        -----PAGE LOAD
         if (action.equalsIgnoreCase("form"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice.jsp");
             dispatcher.forward(request, response);
         }
 
+//        -----CSS REDIRECT
         if (action.equalsIgnoreCase("css"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/css.jsp");
             dispatcher.forward(request, response);
         }
 
+//        -----JAVASCRIPT REDIRECT
         if (action.equalsIgnoreCase("javaScript"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javaScript.jsp");
             dispatcher.forward(request, response);
         }
 
+//        -----JAVA REDIRECT
         if (action.equalsIgnoreCase("java"))
         {
             HttpSession session = request.getSession();
@@ -61,6 +65,7 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        -----DO STEAM API
         if (action.equalsIgnoreCase("steamApi"))
         {
             List<SteamGame> allGameList = (ArrayList<SteamGame>) TechLogic.doSteamApiCall(request);
