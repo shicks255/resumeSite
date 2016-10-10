@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,6 +23,26 @@ import java.util.stream.Collectors;
  */
 public class TechLogic
 {
+    public static int getSessionAccessAcount(HttpSession session, HttpServletRequest request)
+    {
+        Integer accessCount;
+        synchronized(session)
+        {
+            if (!request.isRequestedSessionIdValid())
+                session = request.getSession();
+
+            accessCount = (Integer)session.getAttribute("accessCount");
+            if (accessCount == null)
+                accessCount = 1;   // autobox int to Integer
+            else
+                accessCount = new Integer(accessCount + 1);
+        }
+
+        session.setAttribute("accessCount", accessCount);
+
+        return accessCount;
+    }
+
     public static ArrayList<SteamGame> doSteamApiCall(HttpServletRequest request)
     {
         String URLAddress = "http://api.steampowered.com/ISteamApps/GetAppList/v0002/?count=3&maxlength=300&format=xml";

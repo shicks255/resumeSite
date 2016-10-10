@@ -1,5 +1,6 @@
 package com.steven.hicks.TechHandling;
 
+import com.steven.hicks.Utils;
 import com.steven.hicks.entities.SteamGame;
 
 import javax.servlet.RequestDispatcher;
@@ -58,6 +59,16 @@ public class TechHandler extends HttpServlet
 //        -----SESSION PRACTICE REDIRECT
         if (action.equalsIgnoreCase("sessionPractice"))
         {
+            String invalidate = Utils.getString(request.getParameter("invalidate"));
+            HttpSession session = request.getSession();
+            if (invalidate.length() > 0)
+            {
+                session.invalidate();
+            }
+
+            int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
+            request.setAttribute("accessCount", Utils.getString(numberOfTimesPageAccessedSoFar));
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
             dispatcher.forward(request, response);
         }
