@@ -1,5 +1,9 @@
 package com.steven.hicks;
 
+import com.steven.hicks.entities.Visitor;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +25,48 @@ public class ServerStart extends HttpServlet
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        String visitorIPAddress = request.getRemoteHost();
+        String visitorAddr = request.getRemoteAddr();
+        System.out.println(visitorIPAddress);
+        System.out.println(visitorAddr);
+
+//        HttpSession httpSession = request.getSession();
+//        if (httpSession.isNew())
+//        {
+        Visitor visitor;
+        if (Visitor.getVisitor(visitorIPAddress) != null)
+        {
+            visitor = Visitor.getVisitor(visitorIPAddress);
+            visitor.setCountOfVisits(visitor.getCountOfVisits() + 1);
+
+            System.out.println(visitor);
+
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.openSession();
+            session.beginTransaction();
+            session.update(visitor);
+            session.getTransaction().commit();
+            session.close();
+            factory.close();
+        }
+
+        else
+        {
+            visitor = new Visitor();
+            visitor.setIpAddress(visitorIPAddress);
+            visitor.setCountOfVisits(1);
+
+            System.out.println(visitor);
+
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.openSession();
+            session.beginTransaction();
+            session.save(visitor);
+            session.getTransaction().commit();
+            session.close();
+            factory.close();
+        }
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }

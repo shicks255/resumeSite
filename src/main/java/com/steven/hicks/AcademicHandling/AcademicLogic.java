@@ -93,7 +93,6 @@ public class AcademicLogic
         sessionFactory.close();
 
         return course;
-
     }
 
     public static int getSemesterNumberForSemester(String semester)

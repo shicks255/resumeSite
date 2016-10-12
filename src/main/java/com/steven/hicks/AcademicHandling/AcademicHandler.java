@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,6 +33,12 @@ public class AcademicHandler extends HttpServlet
         {
             List<AcademicCourse> academicCourseList = AcademicLogic.getCourseList();
             request.setAttribute("courseList", academicCourseList);
+
+            String visitingIPAddress = request.getRemoteHost();
+            if (visitingIPAddress.equals("74.90.116.112"))
+                request.setAttribute("adminComputer", "adminComputer");
+
+            System.out.println(visitingIPAddress);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education.jsp");
             dispatcher.forward(request, response);

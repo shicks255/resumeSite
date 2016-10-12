@@ -8,6 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="courseList" type="java.util.List<com.steven.hicks.entities.AcademicCourse>" scope="request"/>
+
+<c:if test="${!empty adminComputer}">
+    <jsp:useBean id="adminComputer" type="java.lang.String" scope="request"/>
+</c:if>
 <html>
 <head>
     <title>My Education</title>
@@ -67,7 +71,9 @@
 
 <h1>Course History:</h1>
 
-<button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
+<c:if test="${!empty adminComputer}">
+    <button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
+</c:if>
 
 <div id="editCourseDiv" class="hiddenDiv">
     <div id="frmEditCourse" style="display:none">
@@ -101,9 +107,12 @@
                 <td><c:out value="${course.courseName}"/></td>
                 <td><c:out value="${course.gradeReceived}"/></td>
                 <td>
-                    <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="">Upload Coursework</button>
-                    <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
-                    <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
+                    <c:if test="${!empty adminComputer}">
+                        <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="">Upload Coursework</button>
+                        <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
+                        <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
+                    </c:if>
+                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="">View Courswork</button>
                 </td>
             </tr>
         </c:forEach>
