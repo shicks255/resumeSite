@@ -57,8 +57,35 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy file="target/resumeSite.war" todir="//HTTPTOMCAT/Tomcat/webapps/"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
         <finalName>resumeSite</finalName>
     </build>
+
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<uniqueVersion>false</uniqueVersion>-->
+            <!--<id>MyReleases</id>-->
+            <!--<name>My Releases</name>-->
+            <!--<url>file:////HTTPTOMCAT/Tomcat</url>-->
+            <!--<layout>default</layout>-->
+        <!--</repository>-->
+    <!--</distributionManagement>-->
 
 </project>
