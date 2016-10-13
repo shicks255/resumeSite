@@ -64,7 +64,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy file="target/resumeSite.war" todir="//HTTPTOMCAT/Tomcat/webapps/"/>
+                                <copy file="target/resumeSite.war" todir="//HTTPTomcat/Tomcat/webapps/" />
                             </tasks>
                         </configuration>
                         <goals>

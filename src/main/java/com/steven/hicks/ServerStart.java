@@ -19,16 +19,14 @@ import java.time.LocalDateTime;
  * Created by Steven on 6/6/2016.
  */
 
-@WebServlet(urlPatterns = "/resumeSite")
+@WebServlet(urlPatterns = "/")
 public class ServerStart extends HttpServlet
 {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String visitorIPAddress = request.getRemoteHost();
-        String visitorAddr = request.getRemoteAddr();
+        String visitorIPAddress = request.getRemoteAddr();
         System.out.println(visitorIPAddress);
-        System.out.println(visitorAddr);
 
 //        HttpSession httpSession = request.getSession();
 //        if (httpSession.isNew())

@@ -28,9 +28,11 @@
 <h1>Session Tracking Practice</h1>
 
 ${cookie}
+<br/>
 
 Session:
-${pageContext.session}
+<%--${pageContext.session.Id}--%>
+${sessionScope.user}
 <br/>
 
 Request:
