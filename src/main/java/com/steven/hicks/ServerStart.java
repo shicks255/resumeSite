@@ -26,43 +26,45 @@ public class ServerStart extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String visitorIPAddress = request.getRemoteAddr();
+        if (request.getHeader("x-forwarded-for")!=null)
+            visitorIPAddress = request.getHeader("x-forwarded-for");
         System.out.println(visitorIPAddress);
+        System.out.println(request.getContextPath());
 
-//        HttpSession httpSession = request.getSession();
-//        if (httpSession.isNew())
-//        {
-        Visitor visitor;
-        if (Visitor.getVisitor(visitorIPAddress) != null)
+        if (request.getSession(false) == null)
         {
-            visitor = Visitor.getVisitor(visitorIPAddress);
-            visitor.setCountOfVisits(visitor.getCountOfVisits() + 1);
+            Visitor visitor;
+            if (Visitor.getVisitor(visitorIPAddress) != null)
+            {
+                visitor = Visitor.getVisitor(visitorIPAddress);
+                visitor.setCountOfVisits(visitor.getCountOfVisits() + 1);
 
-            System.out.println(visitor);
+                System.out.println(visitor);
 
-            SessionFactory factory = HibernateUtil.getSessionFactory();
-            Session session = factory.openSession();
-            session.beginTransaction();
-            session.update(visitor);
-            session.getTransaction().commit();
-            session.close();
-            factory.close();
-        }
+                SessionFactory factory = HibernateUtil.getSessionFactory();
+                Session session = factory.openSession();
+                session.beginTransaction();
+                session.update(visitor);
+                session.getTransaction().commit();
+                session.close();
+                factory.close();
+            }
+            else
+            {
+                visitor = new Visitor();
+                visitor.setIpAddress(visitorIPAddress);
+                visitor.setCountOfVisits(1);
 
-        else
-        {
-            visitor = new Visitor();
-            visitor.setIpAddress(visitorIPAddress);
-            visitor.setCountOfVisits(1);
+                System.out.println(visitor);
 
-            System.out.println(visitor);
-
-            SessionFactory factory = HibernateUtil.getSessionFactory();
-            Session session = factory.openSession();
-            session.beginTransaction();
-            session.save(visitor);
-            session.getTransaction().commit();
-            session.close();
-            factory.close();
+                SessionFactory factory = HibernateUtil.getSessionFactory();
+                Session session = factory.openSession();
+                session.beginTransaction();
+                session.save(visitor);
+                session.getTransaction().commit();
+                session.close();
+                factory.close();
+            }
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
