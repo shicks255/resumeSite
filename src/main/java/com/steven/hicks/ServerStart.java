@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  * Created by Steven on 6/6/2016.
  */
 
-@WebServlet(urlPatterns = "/")
+@WebServlet(urlPatterns = "/resumeSite")
 public class ServerStart extends HttpServlet
 {
     @Override
