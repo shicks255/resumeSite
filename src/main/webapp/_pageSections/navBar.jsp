@@ -18,7 +18,7 @@
 <nav>
     <div class="nav-wrapper">
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a href="${pageContext.request.contextPath}">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}/resumeSite">Home</a></li>
             <li><a href="${pageContext.request.contextPath}/academic?action=form">Education</a></li>
             <li><a href="${pageContext.request.contextPath}/techPractice?action=form">Tech Practice</a></li>
             <li><a href="${pageContext.request.contextPath}/pictures?action=form">Galleries</a></li>
