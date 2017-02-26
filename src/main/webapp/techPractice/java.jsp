@@ -42,7 +42,6 @@
 
 </head>
 <body>
-<jsp:include page="/_pageSections/header.jsp"/>
 <jsp:include page="/_pageSections/navBar.jsp"/>
 <jsp:include page="techPracticeNavBar.jsp"/>
 

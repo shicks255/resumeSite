@@ -3,25 +3,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/materialize.min.js"></script>
-</head>
-<body>
-<jsp:include page="_pageSections/header.jsp"/>
 <jsp:include page="_pageSections/navBar.jsp"/>
-
-<!-- Need to figure out the spacing on this issue -->
-
 <!-- START SKILLS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
+<%--Start materliaze container here--%>
 <div class="container">
 
     <a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>

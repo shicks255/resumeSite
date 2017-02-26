@@ -1,22 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Steven
-  Date: 6/18/2016
-  Time: 6:41 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="courseList" type="java.util.List<com.steven.hicks.entities.AcademicCourse>" scope="request"/>
 
 <c:if test="${!empty adminComputer}">
     <jsp:useBean id="adminComputer" type="java.lang.String" scope="request"/>
 </c:if>
+<!DOCTYPE html>
 <html>
 <head>
     <title>My Education</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>
+    <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">--%>
+    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>--%>
 
     <script>
         function buttonAddACourse()
@@ -65,7 +59,7 @@
 
 </head>
 <body>
-<jsp:include page="_pageSections/header.jsp"/>
+<%--<jsp:include page="_pageSections/header.jsp"/>--%>
 <jsp:include page="_pageSections/navBar.jsp"/>
 <jsp:include page="/education/educationNavBar.jsp"/>
 
