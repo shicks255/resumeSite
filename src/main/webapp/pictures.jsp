@@ -14,10 +14,8 @@
 
 </head>
 <body>
-<jsp:include page="_pageSections/header.jsp"/>
 <jsp:include page="_pageSections/navBar.jsp"/>
 
-<%--<a href="${pageContext.request.contextPath}/techPractice?">Java</a>--%>
 
 <h1>Various Photos:</h1>
 

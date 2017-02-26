@@ -15,7 +15,6 @@
 </head>
 <body>
 <jsp:include page="_pageSections/navBar.jsp"/>
-<jsp:include page="/techPractice/techPracticeNavBar.jsp"/>
 
 <h1>Tech Practice:</h1>
 

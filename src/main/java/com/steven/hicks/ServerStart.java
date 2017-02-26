@@ -67,7 +67,7 @@ public class ServerStart extends HttpServlet
             }
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/inde.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
 
