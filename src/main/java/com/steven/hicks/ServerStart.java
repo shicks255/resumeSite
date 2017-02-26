@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
  * Created by Steven on 6/6/2016.
  */
 
-@WebServlet(urlPatterns = "/resumeSite")
+@WebServlet(urlPatterns = "")
 public class ServerStart extends HttpServlet
 {
     @Override
@@ -67,7 +67,7 @@ public class ServerStart extends HttpServlet
             }
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/inde.jsp");
         dispatcher.forward(request, response);
     }
 
