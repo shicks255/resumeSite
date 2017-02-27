@@ -21,6 +21,18 @@
             );
         }
 
+        function getLastFmAPI()
+        {
+            $.post( '${pageContext.request.contextPath}/techPractice?action=getLastFmAPI&sort=id',
+                function(data)
+                {
+                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                    $( '#steamApiResultsPopup' ).html(data);
+                    $(window).resize();
+                }
+            );
+        }
+
         function goToSessionPage()
         {
             window.open('${pageContext.request.contextPath}/techPractice?action=sessionPractice', "_self");

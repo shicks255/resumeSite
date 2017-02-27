@@ -82,6 +82,15 @@ public class TechHandler extends HttpServlet
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
             dispatcher.forward(request, response);
         }
+
+        //        -----DO STEAM API
+        if (action.equalsIgnoreCase("getLastFmAPI"))
+        {
+            List<SteamGame> artist = TechLogic.
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override
