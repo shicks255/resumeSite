@@ -12,17 +12,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
-    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>--%>
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
 
     <script>
-
         $(document).ready(function() {
             $('.dropdown-button').dropdown({
                 inDuration: 300,
                 outDuration: 225,
-                constrainWidth: true, // Does not change width of dropdown to that of the activator
+                constrainWidth: false, // Does not change width of dropdown to that of the activator
                 hover: true, // Activate on hover
+                gutter: 0, // Spacing from edge
+                belowOrigin: true, // Displays dropdown below the button
+                alignment: 'left', // Displays dropdown with edge aligned to the left of button
+                stopPropagation: false // Stops event propagation
+            });
+        });
+        $(document).ready(function() {
+            $('.dropdown-button-mobile').dropdown({
+                inDuration: 300,
+                outDuration: 225,
+                constrainWidth: false, // Does not change width of dropdown to that of the activator
+                hover: false, // Activate on hover
                 gutter: 0, // Spacing from edge
                 belowOrigin: true, // Displays dropdown below the button
                 alignment: 'left', // Displays dropdown with edge aligned to the left of button
@@ -49,14 +59,40 @@
         <li class="divider"></li>
         <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=css">CSS</a></li>
     </ul>
+
+    <ul id="dropdown4" class="dropdown-content cyan">
+        <li class="divider"></li>
+        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?&action=java">Java</a></li>
+        <li class="divider"></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=javaScript">JavaScript</a></li>
+        <li class="divider"></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=css">CSS</a></li>
+    </ul>
+
+    <ul id="dropdown3" class="dropdown-content cyan">
+        <li class="divider"></li>
+        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?&action=thesis">Thesis</a></li>
+        <li class="divider"></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?&action=bibliography">Bibliography</a></li>
+    </ul>
+
     <nav>
         <div class="nav-wrapper cyan">
-            <a href="#!" class="brand-logo right cyan">STEVEN HICKS</a>
+            <a href="${pageContext.request.contextPath}/" class="brand-logo right hide-on-small-and-down cyan">STEVEN HICKS</a>
             <ul id="nav-mobile" class="left hide-on-small-and-down cyan">
                 <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/academic?action=form"     data-activates="dropdown1">Education<i class="material-icons right"></i></a></li>
-                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown2">Tech Practice<i class="material-icons right"></i></a></li>
+                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/academic?action=form"     data-activates="dropdown3">Education<i class="material-icons right"></i></a></li>
+                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown4">Tech Practice<i class="material-icons right"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/pictures?action=form">Galleries</a></li>
+            </ul>
+            <a href="${pageContext.request.contextPath}/" class="brand-logo hide-on-med-and-up right cyan">SH</a>
+            <ul id="nav-mobile1" class="left hide-on-med-and-up cyan">
+                <li><a href="${pageContext.request.contextPath}/">H</a></li>
+                <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/academic?action=form" data-activates="dropdown1">.edu<i class="material-icons right"></i></a></li>
+                <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown2">Tech<i class="material-icons right"></i></a></li>
+                <li><a href="${pageContext.request.contextPath}/pictures?action=form">Pics</a></li>
             </ul>
         </div>
     </nav>
+
+

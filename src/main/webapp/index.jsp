@@ -1,15 +1,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="_pageSections/navBar.jsp"/>
-<!-- START SKILLS HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<jsp:include page="/_pageSections/navBar.jsp"/>
+
+<html>
+<head>
+    <title>Steven M Hicks</title>
+</head>
+<body>
+
 
 <%--Start materliaze container here--%>
 <div class="container">
 
-    <a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>
+    <%--<a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>--%>
 
     <br><br>
     <h3 style="text-align: center; font-weight : bold;">Skills</h3>
@@ -139,7 +144,3 @@
 
 <jsp:include page="_pageSections/footer.jsp" />
 
-</body>
-
-
-</html>

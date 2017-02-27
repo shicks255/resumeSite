@@ -1,23 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Steven
-  Date: 7/17/2016
-  Time: 7:42 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<jsp:include page="/_pageSections/navBar.jsp"/>
+
 <html>
 <head>
-    <title>JavaScript Practice</title>
+    <title>Javascript</title>
 </head>
 <body>
-<jsp:include page="/_pageSections/navBar.jsp"/>
-<jsp:include page="techPracticeNavBar.jsp"/>
+<div class="container">
 
 <br/>
 Javacsript
 
-
+</div>
 <jsp:include page="/_pageSections/footer.jsp" />
 </body>
 </html>

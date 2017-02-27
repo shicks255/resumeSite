@@ -1,18 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Steven
-  Date: 7/17/2016
-  Time: 7:42 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<jsp:include page="/_pageSections/navBar.jsp"/>
+
 <html>
 <head>
     <title>Java Practice</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>
-
     <script>
 
         function getSteamApi()
@@ -42,19 +36,19 @@
 
 </head>
 <body>
-<jsp:include page="/_pageSections/navBar.jsp"/>
-<jsp:include page="techPracticeNavBar.jsp"/>
+<div class="container">
 
-<br/>
-<h1>Java Programs/Practice</h1>
+    <br/>
+    <h1>Java Programs/Practice</h1>
 
-<button onclick='getSteamApi();' >Calling a Restful Service</button>
-<br/><br/>
+    <button onclick='getSteamApi();' >Calling a Restful Service</button>
+    <br/><br/>
 
-<button onclick="goToSessionPage();">Session Practice</button>
+    <button onclick="goToSessionPage();">Session Practice</button>
 
-<div id="steamApiResultsBox" class="hiddenDiv">
-    <div id="steamApiResultsPopup" class="popupContent">
+    <div id="steamApiResultsBox" class="hiddenDiv">
+        <div id="steamApiResultsPopup" class="popupContent">
+        </div>
     </div>
 </div>
 
