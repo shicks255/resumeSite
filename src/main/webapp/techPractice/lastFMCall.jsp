@@ -6,21 +6,22 @@
     <title>Title</title>
 </head>
 <body>
-
+<button onclick="closePopupLastfm();">Close</button>
 Music Guy
 
 <table border="1">
     <tr>
         <td>#</td>
-        <td>Game ID</td>
-        <td>Name</td>
+        <td>Artist</td>
     </tr>
 
     <c:set var="rowIndex" value="${0}"/>
     <c:forEach var="mu" items="${musicArtist}">
         <tr>
+            <td><c:out value="${rowIndex +1}"/></td>
             <td><c:out value="${mu.artistName}"/></td>
         </tr>
+        <c:set var="rowIndex" value="${rowIndex +1}"/>
     </c:forEach>
 
     <%--<c:forEach var="artist" items="${musicArtist}">--%>
