@@ -23,15 +23,6 @@ Music Guy
         </tr>
         <c:set var="rowIndex" value="${rowIndex +1}"/>
     </c:forEach>
-
-    <%--<c:forEach var="artist" items="${musicArtist}">--%>
-        <%--<c:set var="rowIndex" value="${rowIndex + 1}"/>--%>
-        <%--<tr>--%>
-            <%--<td><c:out value="${rowIndex}"/></td>--%>
-            <%--<td><c:out value="${musicArtist.size()}"/></td>--%>
-            <%--<td class="rightAlign"><c:out value="${artist.lastName}"/></td>--%>
-            <%--<td><c:out value="${artist.artistName}"/></td>--%>
-        <%--</tr>--%>
 </table>
 
 

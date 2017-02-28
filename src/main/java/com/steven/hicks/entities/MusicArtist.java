@@ -1,11 +1,8 @@
 package com.steven.hicks.entities;
 
-/**
- * Created by Steven on 0027, February 27, 2017.
- */
 public class MusicArtist
 {
-    String artistName = "";
+    private String artistName = "";
 
     public MusicArtist(String name)
     {

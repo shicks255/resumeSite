@@ -1,6 +1,7 @@
 package com.steven.hicks.TechHandling;
 
 import com.steven.hicks.Utils;
+import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
 
 import javax.servlet.RequestDispatcher;
@@ -12,10 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
-
-/**
- * Created by Steven on 7/17/2016.
- */
 
 @WebServlet(urlPatterns = "/techPractice")
 public class TechHandler extends HttpServlet
@@ -83,12 +80,13 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
-        //        -----DO STEAM API
-        if (action.equalsIgnoreCase("getLastFmAPI"))
+//        -----Do last.fm call
+        if (action.equalsIgnoreCase("getMusicArtistsFromLast_FM"))
         {
-            List<SteamGame> artist = TechLogic.
+            List<MusicArtist> musicArtists = TechLogic.getMusicArtistsFromLast_FM(request);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
+            request.setAttribute("musicArtist", musicArtists);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCall.jsp");
             dispatcher.forward(request, response);
         }
     }
