@@ -56,7 +56,7 @@ public class TechHandler extends HttpServlet
 //        -----SESSION PRACTICE REDIRECT
         if (action.equalsIgnoreCase("sessionPractice"))
         {
-            String invalidate = Utils.getString(request.getParameter("invalidate"));
+            String invalidate = request.getParameter("invalidate");
             HttpSession session = request.getSession();
             if (invalidate.length() > 0)
             {
@@ -64,7 +64,7 @@ public class TechHandler extends HttpServlet
             }
 
             int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
-            request.setAttribute("accessCount", Utils.getString(numberOfTimesPageAccessedSoFar));
+            request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
             dispatcher.forward(request, response);
