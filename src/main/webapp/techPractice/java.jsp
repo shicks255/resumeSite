@@ -23,7 +23,7 @@
 
         function getLastFmAPI()
         {
-            $.post( '${pageContext.request.contextPath}/techPractice?action=getLastFmAPI&sort=id',
+            $.post( '${pageContext.request.contextPath}/techPractice?action=getMusicArtistsFromLast_FM',
                 function(data)
                 {
                     $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
@@ -43,6 +43,11 @@
             $( '#steamApiResultsBox' ).removeClass('popup').addClass('hiddenDiv');
         }
 
+        function closePopupLastfm()
+        {
+            $( '#steamApiResultsBox' ).removeClass('popup').addClass('hiddenDiv');
+        }
+
 
     </script>
 
@@ -57,6 +62,9 @@
     <br/><br/>
 
     <button onclick="goToSessionPage();">Session Practice</button>
+    <br/><br/>
+
+    <button onclick="getLastFmAPI();">Last FM Api</button>
 
     <div id="steamApiResultsBox" class="hiddenDiv">
         <div id="steamApiResultsPopup" class="popupContent">
