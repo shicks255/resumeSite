@@ -2,11 +2,13 @@ package com.steven.hicks.TechHandling;
 
 //import com.sun.org.apache.xerces.internal.parsers.SAXParser;
 
+import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
@@ -18,9 +20,6 @@ import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by Steven on 7/26/2016.
- */
 public class TechLogic
 {
     public static int getSessionAccessAcount(HttpSession session, HttpServletRequest request)
@@ -42,6 +41,48 @@ public class TechLogic
 
         return accessCount;
     }
+
+    public static ArrayList<MusicArtist> getMusicArtistsFromLast_FM(HttpServletRequest request)
+    {
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.getTopArtists&user=test&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml&callback=?";
+        String inputString = null;
+        List<MusicArtist> musicArtists = new ArrayList<>();
+
+        try
+        {
+            URL url = new URL(URLAddress);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+
+            String artistName = "";
+            Map<Integer, String> mapOfMusicArtists = new HashMap<>();
+
+            while ((inputString = in.readLine()) != null)
+            {
+                if (inputString.contains("<name>") && inputString.contains("</name>"))
+                {
+                    int lengthOfInputString = inputString.length();
+                    artistName = inputString.substring(inputString.indexOf("<name>")+5, inputString.indexOf("</name>"));
+                    MusicArtist musicArtist = new MusicArtist(artistName);
+                    musicArtists.add(musicArtist);
+                }
+            }
+            in.close();
+
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return (ArrayList<MusicArtist>) musicArtists;
+    }
+
 
     public static ArrayList<SteamGame> doSteamApiCall(HttpServletRequest request)
     {

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Steven
-  Date: 7/26/2016
-  Time: 8:20 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="allGameList" type="java.util.List<com.steven.hicks.entities.SteamGame>" scope="request"/>
