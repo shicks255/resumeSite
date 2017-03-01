@@ -33,6 +33,21 @@
             );
         }
 
+        function searchArtist()
+        {
+            var searchTerms = $( '#artistSearchField' ).val();
+            console.log(searchTerms);
+
+            $.post( '${pageContext.request.contextPath}/techPractice?&action=artistSearch&artistSearchField=' + searchTerms,
+                function(data)
+                {
+                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                    $( '#steamApiResultsPopup' ).html(data);
+                    $(window).resize();
+                }
+            );
+        }
+
         function goToSessionPage()
         {
             window.open('${pageContext.request.contextPath}/techPractice?action=sessionPractice', "_self");
@@ -65,11 +80,17 @@
     <br/><br/>
 
     <button onclick="getLastFmAPI();">Last FM Api</button>
+    <br/><br/>
+
+    <label for="artistSearchField">Search for an artist:</label>
+    <input type="text" name="artistSearchField" id="artistSearchField"/>
+    <input type="button" onclick="searchArtist();" value="Submit" />
 
     <div id="steamApiResultsBox" class="hiddenDiv">
         <div id="steamApiResultsPopup" class="popupContent">
         </div>
     </div>
+
 </div>
 
 <jsp:include page="/_pageSections/footer.jsp" />

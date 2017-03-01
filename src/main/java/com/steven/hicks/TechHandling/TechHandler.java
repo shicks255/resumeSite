@@ -89,6 +89,16 @@ public class TechHandler extends HttpServlet
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCall.jsp");
             dispatcher.forward(request, response);
         }
+
+//        -----Last FM artist search
+        if (action.equalsIgnoreCase("artistSearch"))
+        {
+            String artistSearchName = request.getParameter("artistSearchField");
+
+            request.setAttribute("musicArtist", TechLogic.searchForArtists(request, artistSearchName));
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCall.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

@@ -42,6 +42,88 @@ public class TechLogic
         return accessCount;
     }
 
+    public static List<MusicArtist> searchForArtists(HttpServletRequest request, String artistSearch)
+    {
+        List<MusicArtist> searchResults = Collections.emptyList();
+
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + artistSearch + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml&callback=?";
+        String inputString = null;
+        List<MusicArtist> musicArtists = new ArrayList<>();
+
+        try
+        {
+            URL url = new URL(URLAddress);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+
+            Map<Integer, String> mapOfMusicArtists = new HashMap<>();
+
+            boolean startArtistTag = false;
+            boolean stopArtistTag = false;
+            String artistName = "";
+            String urll = "";
+            String imageUrl = "";
+            MusicArtist musicArtist = new MusicArtist();
+
+            while ((inputString = in.readLine()) != null)
+            {
+
+                if (inputString.contains("<artist>"))
+                {
+                    startArtistTag = true;
+                    stopArtistTag = false;
+                }
+                if (inputString.contains("</artist>"))
+                {
+                    stopArtistTag = true;
+                    startArtistTag = false;
+                }
+
+                if (startArtistTag)
+                {
+
+                    if (inputString.contains("<name>") && inputString.contains("</name>"))
+                    {
+                        artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name>"));
+//                        musicArtist.setArtistName(artistName);
+                    }
+
+                    if (inputString.contains("<url>") && inputString.contains("</url>"))
+                    {
+                        urll = inputString.substring(inputString.indexOf("<url>") + 5, inputString.indexOf("</url>"));
+//                        musicArtist.setUrl(urll);
+                    }
+
+                    if (inputString.contains("<image>") && inputString.contains("</image>"))
+                    {
+                        imageUrl = inputString.substring(inputString.indexOf("<image>") + 5, inputString.indexOf("</image>"));
+//                        musicArtist.setImageURL(imageUrl);
+                    }
+                }
+
+                if (stopArtistTag)
+                {
+                    musicArtist = new MusicArtist();
+
+                    musicArtist.setArtistName(artistName);
+                    musicArtist.setUrl(urll);
+                    musicArtists.add(musicArtist);
+                }
+            }
+            in.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return musicArtists;
+    }
+
     public static ArrayList<MusicArtist> getMusicArtistsFromLast_FM(HttpServletRequest request)
     {
         String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.getTopArtists&user=test&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml&callback=?";
