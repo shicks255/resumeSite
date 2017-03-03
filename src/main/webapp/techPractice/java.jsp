@@ -48,6 +48,21 @@
             );
         }
 
+        function searchAlbum()
+        {
+            var searchTerms = $( '#albumSearchName' ).val();
+            console.log(searchTerms);
+
+            $.post( '${pageContext.request.contextPath}/techPractice?&action=albumSearch&albumSearchName=' + searchTerms,
+                function(data)
+                {
+                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                    $( '#steamApiResultsPopup' ).html(data);
+                    $(window).resize();
+                }
+            );
+        }
+
         function goToSessionPage()
         {
             window.open('${pageContext.request.contextPath}/techPractice?action=sessionPractice', "_self");
@@ -85,6 +100,11 @@
     <label for="artistSearchField">Search for an artist:</label>
     <input type="text" name="artistSearchField" id="artistSearchField"/>
     <input type="button" onclick="searchArtist();" value="Submit" />
+    <br/><br/>
+
+    <label for="albumSearchName">Search for an album:</label>
+    <input type="text" name="albumSearchName" id="albumSearchName"/>
+    <input type="button" onclick="searchAlbum();" value="Submit" />
 
     <div id="steamApiResultsBox" class="hiddenDiv">
         <div id="steamApiResultsPopup" class="popupContent">

@@ -1,8 +1,10 @@
 package com.steven.hicks.TechHandling;
 
 import com.steven.hicks.Utils;
+import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
+import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -99,6 +101,18 @@ public class TechHandler extends HttpServlet
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCall.jsp");
             dispatcher.forward(request, response);
         }
+
+//        -----Album search
+        if (action.equalsIgnoreCase("albumSearch"))
+        {
+            String albumSearchName = request.getParameter("albumSearchName");
+
+            List<Album> albums = TechLogic.searchForAlbums(request, albumSearchName);
+            request.setAttribute("albums", albums);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCallAlbum.jsp");
+            dispatcher.forward(request, response);
+        }
+
     }
 
     @Override

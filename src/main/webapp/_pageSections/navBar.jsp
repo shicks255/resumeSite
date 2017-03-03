@@ -15,7 +15,14 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function()
+        {
+            doDropdown();
+            doDropdownMobile();
+        });
+
+        function doDropdown()
+        {
             $('.dropdown-button').dropdown({
                 inDuration: 300,
                 outDuration: 225,
@@ -25,9 +32,11 @@
                 belowOrigin: true, // Displays dropdown below the button
                 alignment: 'left', // Displays dropdown with edge aligned to the left of button
                 stopPropagation: false // Stops event propagation
-            });
-        });
-        $(document).ready(function() {
+            })
+        }
+
+        function doDropdownMobile()
+        {
             $('.dropdown-button-mobile').dropdown({
                 inDuration: 300,
                 outDuration: 225,
@@ -38,7 +47,8 @@
                 alignment: 'left', // Displays dropdown with edge aligned to the left of button
                 stopPropagation: false // Stops event propagation
             });
-        });
+        }
+
     </script>
 
 </head>

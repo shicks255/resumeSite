@@ -2,6 +2,7 @@ package com.steven.hicks.TechHandling;
 
 //import com.sun.org.apache.xerces.internal.parsers.SAXParser;
 
+import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
 import org.xml.sax.Attributes;
@@ -40,6 +41,83 @@ public class TechLogic
         session.setAttribute("accessCount", accessCount);
 
         return accessCount;
+    }
+
+    public static List<Album> searchForAlbums(HttpServletRequest request, String albumSearch)
+    {
+        List<Album> searchResults = Collections.emptyList();
+
+//        String URLAddress = " http://ws.audioscrobbler.com/2.0/?method=album.search&album=believe&api_key=YOUR_API_KEY "
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=album.search&album=" + albumSearch + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml";
+        String inputString = null;
+        List<Album> albums = new ArrayList<>();
+
+        try
+        {
+            URL url = new URL(URLAddress);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+
+            Map<Integer, String> mapOfMusicArtists = new HashMap<>();
+
+            boolean startAlbumTag = false;
+            boolean stopAlbumTag = false;
+            String artistName = "";
+            String urll = "";
+            String albumName = "";
+            Album album = new Album();
+
+            while ((inputString = in.readLine()) != null)
+            {
+
+                if (inputString.contains("<album>"))
+                {
+                    startAlbumTag = true;
+                    stopAlbumTag = false;
+                }
+                if (inputString.contains("</album>"))
+                {
+                    stopAlbumTag = true;
+                    startAlbumTag = false;
+                }
+
+                if (startAlbumTag)
+                {
+
+                    if (inputString.contains("<artist>") && inputString.contains("</artist>"))
+                    {
+                        artistName = inputString.substring(inputString.indexOf("<artist>") + 8, inputString.indexOf("</artist>"));
+                        album.setArtist(artistName);
+                    }
+
+                    if (inputString.contains("<name>") && inputString.contains("</name>"))
+                    {
+                        albumName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name>"));
+                        album.setAlbum(albumName);
+                    }
+                }
+
+                if (stopAlbumTag)
+                {
+                    album = new Album();
+                    album.setArtist(artistName);
+                    album.setAlbum(albumName);
+                    albums.add(album);
+                }
+            }
+            in.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return albums;
+
     }
 
     public static List<MusicArtist> searchForArtists(HttpServletRequest request, String artistSearch)
