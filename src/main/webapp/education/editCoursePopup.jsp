@@ -46,8 +46,8 @@
         </tr>
         <tr>
             <td><label for="collegeNameEdit">College:</label></td>
-            <td>
-                <select required="true" id="collegeNameEdit"  name="collegeNameEdit">
+            <td class="input-field col s12">
+                <select class="browser-default" required="true" id="collegeNameEdit"  name="collegeNameEdit">
                     <option value="RVCC">RVCC</option>
                     <option value="Stockton College">Stockton College</option>
                 </select>
@@ -55,8 +55,8 @@
         </tr>
         <tr>
             <td><label for="semesterEdit">Semester:</label></td>
-            <td>
-                <select required="true" name="semesterEdit" id="semesterEdit">
+            <td class="input-field col s12">
+                <select class="browser-default" required="true" name="semesterEdit" id="semesterEdit">
                     <option value="2007Fall">Fall 2007</option>
                     <option value="2008Spring">Spring 2008</option>
                     <option value="2008Summer">Summer 2008</option>

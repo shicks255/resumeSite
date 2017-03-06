@@ -35,7 +35,7 @@ public class AcademicHandler extends HttpServlet
             request.setAttribute("courseList", academicCourseList);
 
             String visitingIPAddress = request.getRemoteHost();
-            if (visitingIPAddress.equals("74.90.116.112"))
+            if (visitingIPAddress.equals("67.87.211.190"))
                 request.setAttribute("adminComputer", "adminComputer");
 
             System.out.println(visitingIPAddress);
