@@ -4,6 +4,8 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
+<jsp:useBean id="fileList" type="java.util.List<java.lang.String>" scope="request"/>
+
 <html>
 <head>
     <title>Gallery</title>
@@ -16,7 +18,18 @@
 
             $( '.materialboxed' ).materialbox();
 
+
         });
+
+        function showImage(pic)
+        {
+            console.log("hi");
+            console.log(pic);
+            var picBox = $( '#pic' );
+//            picBox.addClass('materialboxed');
+            $( '#picBox').addClass('materialboxed');
+            $( '.materialboxed' ).materialbox();
+        }
     </script>
 
 </head>
@@ -26,15 +39,16 @@
     <h1>Various Photos:</h1>
 
     <div class="carousel">
-        <a class="carousel-item" onclick="showImage();" href="#one!">  <img src="images/AccordFinal.jpg"></a>
-        <a class="carousel-item" href="#two!">  <img src="images/ArlingtonHillView.JPG"></a>
-        <a class="carousel-item" href="#three!"><img src="images/DSCF0375.JPG"></a>
-        <a class="carousel-item" href="#four!"> <img src="images/DSCF0547new.jpg"></a>
-        <a class="carousel-item" href="#five!"> <img src="images/Whitehouse.JPG"></a>
+        <c:set var="index" value="${0}"/>
+        <c:forEach var="file" items="${fileList}">
+            <c:set var="index" value="${index + 1}"/>
+            <a id="pic${index}" class="carousel-item" onclick="showImage('pic${index}');" href="#${index}!">
+                <img class="" src="images/${file}">
+            </a>
+        </c:forEach>
     </div>
 
-    <img class="materialboxed" width="650" src="images/AccordFinal.jpg"/>
-
+    <img height="450" src="images/AccordFinal.jpg"/>
 
 </div>
 
