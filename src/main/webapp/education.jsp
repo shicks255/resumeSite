@@ -63,9 +63,9 @@
 
 <h1>Course History:</h1>
 
-<%--<c:if test="${!empty adminComputer}">--%>
+<c:if test="${!empty adminComputer}">
     <button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
-<%--</c:if>--%>
+</c:if>
 
 <div id="editCourseDiv" class="hiddenDiv">
     <div id="frmEditCourse" style="display:none">
@@ -99,11 +99,11 @@
                 <td><c:out value="${course.courseName}"/></td>
                 <td><c:out value="${course.gradeReceived}"/></td>
                 <td>
-                    <%--<c:if test="${!empty adminComputer}">--%>
+                    <c:if test="${!empty adminComputer}">
                         <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="">Upload Coursework</button>
                         <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
                         <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
-                    <%--</c:if>--%>
+                    </c:if>
                     <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="">View Courswork</button>
                 </td>
             </tr>
