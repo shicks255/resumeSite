@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,12 +30,11 @@ public class PicturesHandler extends HttpServlet
             ServletContext context = getServletContext();
             String path = context.getRealPath("/");
 
-
+            String imageRoot = path.replace(path, "") + File.separator + "images" + File.separator;
+            System.out.println(path + " " + imageRoot);
 
 //            URL imagesPath = context.getResource("/src/main/webapp/images/");
-            List<Object> files = Files.
-                    list(Paths.get("C:/Users/Steven/IdeaProjects/resumeSite/src/main/webapp/images/"))
-                    .collect(Collectors.toList());
+            List<Object> files = Files.list(Paths.get(path + imageRoot)).collect(Collectors.toList());
 
             List<String> fileList = new ArrayList<>();
             files.forEach(file ->

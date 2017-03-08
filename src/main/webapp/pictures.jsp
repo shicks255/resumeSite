@@ -41,6 +41,7 @@
         <c:set var="index" value="${0}"/>
         <c:forEach var="file" items="${fileList}">
             <c:set var="index" value="${index + 1}"/>
+            <script>console.log("hi");</script>
             <a id="pic${index}" class="carousel-item" onclick="showImage('pic${index}');" href="#${index}!">
                 <%--<img class="materialboxed" src="images/${file}">--%>
                 <img src="images/${file}">
