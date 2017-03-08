@@ -58,20 +58,25 @@ public class TechHandler extends HttpServlet
 //        -----SESSION PRACTICE REDIRECT
         if (action.equalsIgnoreCase("sessionPractice"))
         {
-            String invalidate = request.getParameter("invalidate");
             HttpSession session = request.getSession();
-            if (invalidate.equalsIgnoreCase("true"))
-            {
-                session.invalidate();
-                invalidate = "false";
-            }
 
             int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
             request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar + "");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
             dispatcher.forward(request, response);
-//            response.sendRedirect("/techPractice?action=sessionPractice&invalidate=" + invalidate);
+        }
+
+        if (action.equalsIgnoreCase("sessionInvalidate"))
+        {
+            HttpSession session = request.getSession();
+            session.invalidate();
+
+            int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
+            request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar + "");
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
+            dispatcher.forward(request, response);
         }
 
 //        -----DO STEAM API

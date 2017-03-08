@@ -3,6 +3,8 @@
 
 <jsp:useBean id="accessCount" type="java.lang.String" scope="request"/>
 
+
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -16,7 +18,7 @@
     function resetURL()
     {
         location.reload(true);
-        window.open("${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true", "_self");
+        window.open("${pageContext.request.contextPath}/techPractice?action=sessionInvalidate", "_self");
     }
 </script>
 
@@ -29,7 +31,6 @@ ${cookie}
 <br/>
 
 Session:
-<%--${pageContext.session.Id}--%>
 ${sessionScope.user}
 <br/>
 

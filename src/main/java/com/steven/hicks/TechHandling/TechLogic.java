@@ -35,7 +35,7 @@ public class TechLogic
             if (accessCount == null)
                 accessCount = 1;   // autobox int to Integer
             else
-                accessCount = new Integer(accessCount + 1);
+                accessCount = new Integer(accessCount + 1 + "");
         }
 
         session.setAttribute("accessCountSession", accessCount);
