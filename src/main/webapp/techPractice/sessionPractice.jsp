@@ -16,6 +16,7 @@
     function resetURL()
     {
         location.reload();
+        window.open("${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true", "_self");
     }
 </script>
 
@@ -48,5 +49,8 @@ Refresh the page to see this number increase.
 
 
 <br/><br/>
-Click <a onclick="resetURL();" href="${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true">here</a> to clear out your session
+<%--Click <a onclick="resetURL();" href="${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true">here</a> to clear out your session--%>
+Click
+<button onclick="resetURL()" >here</button>
+to clear out your session
 
