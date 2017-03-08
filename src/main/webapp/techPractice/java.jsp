@@ -4,9 +4,6 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>Java Practice</title>
     <script>
 
         function getSteamApi()
@@ -65,7 +62,7 @@
 
         function goToSessionPage()
         {
-            window.open('${pageContext.request.contextPath}/techPractice?action=sessionPractice', "_self");
+            window.open('${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=false', "_self");
         }
 
         function closePopup()
@@ -81,8 +78,6 @@
 
     </script>
 
-</head>
-<body>
 <div class="container">
 
     <br/>
@@ -114,5 +109,3 @@
 </div>
 
 <jsp:include page="/_pageSections/footer.jsp" />
-</body>
-</html>

@@ -4,11 +4,6 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>Javascript</title>
-</head>
-<body>
 <div class="container">
 
 <br/>
@@ -30,5 +25,3 @@ Javacsript
 
 </div>
 <jsp:include page="/_pageSections/footer.jsp" />
-</body>
-</html>

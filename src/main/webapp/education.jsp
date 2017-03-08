@@ -5,12 +5,6 @@
 <c:if test="${!empty adminComputer}">
     <jsp:useBean id="adminComputer" type="java.lang.String" scope="request"/>
 </c:if>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Education</title>
-    <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">--%>
-    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>--%>
 
     <script>
         function buttonAddACourse()
@@ -57,8 +51,6 @@
 
     </script>
 
-</head>
-<body>
 <jsp:include page="_pageSections/navBar.jsp"/>
 
 <h1>Course History:</h1>
@@ -193,5 +185,3 @@
 </div>
 
 <jsp:include page="_pageSections/footer.jsp" />
-</body>
-</html>

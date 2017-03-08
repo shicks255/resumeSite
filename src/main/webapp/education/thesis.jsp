@@ -4,12 +4,6 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>Thesis</title>
-</head>
-<body>
-
 <div class="container">
 
     <h1 align="center">A Travelling Culture:  The Impact of Colonial Roadways on Regional Identity</h1>
@@ -577,5 +571,3 @@
 </div>
 
 <jsp:include page="/_pageSections/footer.jsp" />
-</body>
-</html>

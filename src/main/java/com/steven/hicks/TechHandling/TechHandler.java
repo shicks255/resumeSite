@@ -60,13 +60,14 @@ public class TechHandler extends HttpServlet
         {
             String invalidate = request.getParameter("invalidate");
             HttpSession session = request.getSession();
-            if (invalidate.length() > 0)
+            if (invalidate.equalsIgnoreCase("true"))
             {
                 session.invalidate();
+                invalidate = "false";
             }
 
             int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
-            request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar);
+            request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar + "");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
             dispatcher.forward(request, response);

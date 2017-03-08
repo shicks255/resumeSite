@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="allGameList" type="java.util.List<com.steven.hicks.entities.SteamGame>" scope="request"/>
-<html>
-<head>
 
     <script>
 
@@ -44,8 +42,6 @@
 
     </script>
 
-</head>
-<body>
 <button onclick="closePopup();">Close</button>
 <button onclick="sortReverseIdOrder();">Reverse Order</button>
 <button onclick="sortAlpha();">Alphabetical</button>
@@ -69,5 +65,3 @@
             </tr>
         </c:forEach>
     </table>
-</body>
-</html>

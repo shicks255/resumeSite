@@ -4,16 +4,9 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>CSS</title>
-</head>
-<body>
 <div class="container">
 
     <br/>
     CSS
 </div>
 <jsp:include page="/_pageSections/footer.jsp" />
-</body>
-</html>

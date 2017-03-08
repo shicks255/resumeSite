@@ -4,15 +4,8 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>Thesis Bibliography</title>
-</head>
-<body>
 <div class="container">
 
     <h1>Tech Practice:</h1>
 </div>
 <jsp:include page="_pageSections/footer.jsp" />
-</body>
-</html>

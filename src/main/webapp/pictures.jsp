@@ -6,10 +6,6 @@
 
 <jsp:useBean id="fileList" type="java.util.List<java.lang.String>" scope="request"/>
 
-<html>
-<head>
-    <title>Gallery</title>
-
     <script>
         $(document).ready(function()
         {
@@ -31,8 +27,6 @@
         }
     </script>
 
-</head>
-<body>
 <div class="container">
 
     <h1>Various Photos:</h1>
@@ -54,6 +48,3 @@
 </div>
 
 <jsp:include page="_pageSections/footer.jsp" />
-
-</body>
-</html>

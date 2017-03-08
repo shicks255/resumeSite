@@ -4,11 +4,6 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>Thesis Bibliography</title>
-</head>
-<body>
 <div class="container">
 
     <h1 align="center">Thesis Bibliography</h1> <!--TITLE-->
@@ -80,5 +75,3 @@
 </div>
 
 <jsp:include page="/_pageSections/footer.jsp" />
-</body>
-</html>

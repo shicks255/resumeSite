@@ -4,13 +4,6 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<html>
-<head>
-    <title>Steven M Hicks</title>
-</head>
-<body>
-
-
 <%--Start materliaze container here--%>
 <div class="container">
 
