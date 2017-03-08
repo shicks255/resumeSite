@@ -71,10 +71,6 @@ public class TechHandler extends HttpServlet
         {
             HttpSession session = request.getSession();
             session.invalidate();
-//            int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
-//            request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar + "");
-//            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
-//            dispatcher.forward(request, response);
             response.sendRedirect("/techPractice?action=sessionPractice");
         }
 
