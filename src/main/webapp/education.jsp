@@ -107,7 +107,7 @@
 
 <div id="deletePrompt" class="hiddenDiv">
     <div class="popupContent">
-        <h4>Are you sure you wanna delete this shit nigga??</h4>
+        <h4>Are you sure you wanna delete this entry?</h4>
         <button id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >Ok</button>
         <button id="deletePrompt_denyButton" onclick="location.reload();">Cancel</button>
     </div>/
