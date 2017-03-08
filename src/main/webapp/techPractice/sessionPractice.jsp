@@ -15,7 +15,7 @@
 <script>
     function resetURL()
     {
-        location.reload();
+        location.reload(true);
         window.open("${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true", "_self");
     }
 </script>
