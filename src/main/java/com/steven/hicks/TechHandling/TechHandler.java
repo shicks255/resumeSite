@@ -71,6 +71,7 @@ public class TechHandler extends HttpServlet
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
             dispatcher.forward(request, response);
+//            response.sendRedirect("/techPractice?action=sessionPractice&invalidate=" + invalidate);
         }
 
 //        -----DO STEAM API
