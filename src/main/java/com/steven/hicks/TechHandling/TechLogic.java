@@ -31,14 +31,14 @@ public class TechLogic
             if (!request.isRequestedSessionIdValid())
                 session = request.getSession();
 
-            accessCount = (Integer)session.getAttribute("accessCount");
+            accessCount = (Integer)session.getAttribute("accessCountSession");
             if (accessCount == null)
                 accessCount = 1;   // autobox int to Integer
             else
                 accessCount = new Integer(accessCount + 1);
         }
 
-        session.setAttribute("accessCount", accessCount);
+        session.setAttribute("accessCountSession", accessCount);
 
         return accessCount;
     }
