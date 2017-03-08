@@ -13,11 +13,10 @@
     <script>
         $(document).ready(function()
         {
-//            $('.carousel .carousel-slider').carousel({fullWidth: true});
+            $('.carousel.carousel-slider').carousel({fullWidth: true});
             $('.carousel').carousel();
 
-            $( '.materialboxed' ).materialbox();
-
+//            $( '.materialboxed' ).materialbox();
 
         });
 
@@ -38,17 +37,18 @@
 
     <h1>Various Photos:</h1>
 
-    <div class="carousel">
+    <div class="carousel carousel-slider">
         <c:set var="index" value="${0}"/>
         <c:forEach var="file" items="${fileList}">
             <c:set var="index" value="${index + 1}"/>
             <a id="pic${index}" class="carousel-item" onclick="showImage('pic${index}');" href="#${index}!">
-                <img class="" src="images/${file}">
+                <%--<img class="materialboxed" src="images/${file}">--%>
+                <img src="images/${file}">
             </a>
         </c:forEach>
     </div>
 
-    <img height="450" src="images/AccordFinal.jpg"/>
+    <%--<img height="450" src="images/AccordFinal.jpg"/>--%>
 
 </div>
 
