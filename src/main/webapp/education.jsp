@@ -52,8 +52,9 @@
     </script>
 
 <jsp:include page="_pageSections/navBar.jsp"/>
+<div class="container">
 
-<h1>Course History:</h1>
+<h1 style="text-align:center;">Course History:</h1>
 
 <c:if test="${!empty adminComputer}">
     <button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
@@ -101,6 +102,7 @@
             </tr>
         </c:forEach>
     </table>
+</div>
 </div>
 
 <br/><br/>

@@ -10,44 +10,41 @@
     <%--<a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>--%>
 
     <br><br>
-    <h3 style="text-align: center; font-weight : bold;">Skills</h3>
+    <h1 style="text-align: center; font-weight : bold;">Skills</h1>
     <br>
 
-    <ul>
-        <li>Proven and demonstrated customer service ability in different environments,
-            both over the phone and face to face</li>
-        <li>Adept with computer hardware/software specifications and maintenance</li>
-        <li>Well accustomed to using Microsoft Word, Excel, Powerpoint and Access</li>
-        <li>Advanced Spanish Skills</li>
-    </ul>
+        <div style="text-align: center;">
+            <ul>
+                <li>Proven and demonstrated customer service ability in different environments,
+                    both over the phone and face to face</li>
+                <li>Adept with computer hardware/software specifications and maintenance</li>
+                <li>Well accustomed to using Microsoft Word, Excel, Powerpoint and Access</li>
+                <li>Advanced Spanish Skills</li>
+            </ul>
+        </div>
 
     <!-- START LANGUAGES HERE!!!!!!!!!!!!!!!!!! -->
 
-    <h3 style="text-align: center; font-weight : bold;">Computer Languages</h3>
+    <h1 style="text-align: center; font-weight : bold;">Tools and Frameworks</h1>
 
-    <ul>
-        <li>Java</li>
-        <li>JavaScript</li>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>SQL</li>
-    </ul>
-
-    <h3 style="text-align: center; font-weight : bold;">Technical Competencies</h3>
-
-    <ul>
-        <li>Windows XP,Vista,7,8</li>
-        <li>Linux (Ubunut Distribution)</li>
-        <li>Microsoft Office</li>
-        <li>Windows Batch Files</li>
-        <li>Apache</li>
-        <li>MySQL</li>
-        <li>AS400</li>
-    </ul>
+        <ul>
+            <li>Java</li>
+            <li>-Java EE7 with jdk 8</li>
+            <li>-Java collections, JPA, JDBC</li>
+            <li>-MVC framework using servlets and jsp</li>
+            <li>-Oracle Database 12c</li>
+            <li>-Apache Tomcat 8 web container/server</li>
+            <li>-Apache POI library</li>
+            <li>-Javascript, jQuery, jQuery UI</li>
+            <li>-JSON and ajax</li>
+            <li>-Intellij Idea IDE</li>
+            <li>-Maven deployment and dependencies</li>
+            <li>-JIRA issue tracking</li>
+        </ul>
 
     <!-- START EDUCATION HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
-    <h3 style="text-align:center; font-weight : bold;">Education</h3>
+    <h1 style="text-align:center; font-weight : bold;">Education</h1>
 
     <b>Raritan Valley Community College</b>, Branchburg NJ
     <br>
@@ -79,7 +76,7 @@
     <!-- START WORK HISTORY HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 
-<h3 style="text-align:center ; font-weight : bold;">Work History</h3>
+<h1 style="text-align:center ; font-weight : bold;">Work History</h1>
 
     <b>Fedway Associates Inc</b>., Basking Ridge NJ
     <br>

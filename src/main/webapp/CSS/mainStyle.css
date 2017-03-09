@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
     line-height: 1;
+    background-color : #e3f2fd;
 }
 ol, ul {
     list-style: none;
@@ -51,9 +52,13 @@ table {
 
 #navBar {color : red;}
 
-h1 {color : red;
+/*h1 {color : red;*/
+    /*text-align : center;*/
+    /*font-size : 35px;}*/
+
+h1 {color : #e57373;
     text-align : center;
-    font-size : 35px;}
+}
 
 button {border-radius : 5px;}
 
