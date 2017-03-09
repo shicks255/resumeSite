@@ -53,15 +53,7 @@
 
     <title>Steven M Hicks</title>
 </head>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8804788892764052",
-        enable_page_level_ads: true
-    });
-</script>
-
 <body>
-
     <ul id="dropdown1" class="dropdown-content cyan">
         <li class="divider"></li>
         <li><a class="white-text" href="${pageContext.request.contextPath}/academic?&action=thesis">Thesis</a></li>
