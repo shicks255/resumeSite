@@ -41,8 +41,9 @@
             </div>
             <div class="col s4 center">
                 <h5 class="blue-text">Links</h5>
-                <ul></ul>
-                <li><a class="black-text text-lighten-3" href="https://shicks255.wordpress.com/">My First WordPress</a></li>
+                <ul>
+                    <li><a class="black-text text-lighten-3" href="https://shicks255.wordpress.com/">My First WordPress</a></li>
+                </ul>
             </div>
         </div>
     </div>
