@@ -68,6 +68,8 @@
         <li>Dean's List recipient during 4 semesters</li>
     </ul>
 
+        <br><br><br>
+
     <b>Raritan Valley Community College</b>, Branchburg NJ
     <br>
     A.A. Liberal Studies, Spring 2011
