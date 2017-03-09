@@ -43,6 +43,8 @@
                 <h5 class="blue-text">Links</h5>
                 <ul>
                     <li><a class="black-text text-lighten-3" href="https://shicks255.wordpress.com/">My First WordPress</a></li>
+                    <li><a class="black-text text-lighten-3" href="https://www.linkedin.com/in/steven-hicks-03390093/">LinkedIn</a></li>
+                    <li><a class="black-text text-lighten-3" href="https://www.facebook.com/steven.hix.9">Facebook</a></li>
                 </ul>
             </div>
         </div>
