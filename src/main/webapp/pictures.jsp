@@ -24,7 +24,7 @@
     <div class="row">
         <c:set var="classType" value="col s12 m6 l3"/>
         <c:forEach var="file" items="${fileList}">
-            <div class="${classType}">
+            <div class="${classType}" style="margin-bottom : 1.8%;">
                 <img class="materialboxed liquidPic hoverable" data-caption="A pic" src="images/${file}"/>
             </div>
         </c:forEach>

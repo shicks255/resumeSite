@@ -3,18 +3,9 @@
    License: none (public domain)
 */
 
-/*body {*/
-    /*display: flex;*/
-    /*min-height: 100vh;*/
-    /*flex-direction: column;*/
-/*}*/
-
-main {
-    flex: 1 0 auto;
-}
 
 body {
-    /*line-height: 1;*/
+    line-height: 1;
     background-color : #e3f2fd;
     display: flex;
     min-height: 100vh;
@@ -25,9 +16,6 @@ body {
 
 #navBar {color : red;}
 
-/*h1 {color : red;*/
-    /*text-align : center;*/
-    /*font-size : 35px;}*/
 
 h1 {color : #e57373;
     text-align : center;
