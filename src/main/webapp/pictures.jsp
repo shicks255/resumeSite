@@ -14,18 +14,20 @@
         });
 
     </script>
+<style>
+    .liquidPic {width : 100%;}
+</style>
 
 <div class="container">
 
     <h1>Various Photos:</h1>
 
-    <div class="carousel carousel-slider">
-        <c:set var="index" value="${0}"/>
+    <div class="row">
+        <c:set var="classType" value="col s12 m6 l3"/>
         <c:forEach var="file" items="${fileList}">
-            <c:set var="index" value="${index + 1}"/>
-            <a id="pic${index}" class="carousel-item" href="#${index}!">
-                <img src="/images/${file}">
-            </a>
+            <div class="${classType}">
+                <img class="materialboxed liquidPic" data-caption="A pic" src="images/${file}"/>
+            </div>
         </c:forEach>
     </div>
 
