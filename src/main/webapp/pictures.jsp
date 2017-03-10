@@ -25,11 +25,11 @@
         <c:set var="classType" value="col s12 m6 l3"/>
         <c:forEach var="file" items="${fileList}">
             <div class="${classType}">
-                <img class="materialboxed liquidPic" data-caption="A pic" src="images/${file}"/>
+                <img class="materialboxed liquidPic hoverable" data-caption="A pic" src="images/${file}"/>
             </div>
         </c:forEach>
     </div>
 
-</div>
 
+</div>
 <jsp:include page="_pageSections/footer.jsp" />

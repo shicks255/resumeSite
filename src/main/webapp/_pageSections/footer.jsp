@@ -14,6 +14,18 @@
     ga('send', 'pageview');
 
 </script>
+<style>
+
+    body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    .container {
+        flex: 1 0 auto;
+    }
+</style>
 
 <footer class="page-footer">
 
