@@ -9,14 +9,13 @@
     <script>
         $(document).ready(function()
         {
-            $('.carousel.carousel-slider').carousel({fullWidth: true});
-            $('.carousel').carousel();
-        });
 
+        });
     </script>
-<style>
-    .liquidPic {width : 100%;}
-</style>
+
+    <style>
+        .liquidPic {width : 100%;}
+    </style>
 
 <div class="container">
 
