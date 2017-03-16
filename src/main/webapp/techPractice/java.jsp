@@ -6,6 +6,35 @@
 
     <script>
 
+        $( document ).ready(function()
+        {
+            var textField = "";
+            $( '#artistSearchField' ).focus(function()
+            {
+                textField = "artistSearchEnter";
+            });
+            $( '#albumSearchName').focus(function()
+            {
+                textField = "albumSearchEnter";
+            });
+
+            $( '#albumSearchButton' ).keypress(function()
+            {
+                console.log(textField);
+            });
+
+            $( '#artistSearchButton').bind('keypress', function(e)
+            {
+                console.log(textField);
+            })
+
+        });
+
+//        function pressEnter()
+//        {
+//            keyPressed =
+//        }
+
         function getSteamApi()
         {
             $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi&sort=id',
@@ -33,7 +62,6 @@
         function searchArtist()
         {
             var searchTerms = $( '#artistSearchField' ).val();
-            console.log(searchTerms);
 
             $.post( '${pageContext.request.contextPath}/techPractice?&action=artistSearch&artistSearchField=' + searchTerms,
                 function(data)
@@ -48,7 +76,6 @@
         function searchAlbum()
         {
             var searchTerms = $( '#albumSearchName' ).val();
-            console.log(searchTerms);
 
             $.post( '${pageContext.request.contextPath}/techPractice?&action=albumSearch&albumSearchName=' + searchTerms,
                 function(data)
@@ -94,12 +121,12 @@
 
     <label for="artistSearchField">Search for an artist:</label>
     <input type="text" name="artistSearchField" id="artistSearchField"/>
-    <input type="button" onclick="searchArtist();" value="Submit" />
+    <input type="button" id="artistSearchButton" onclick="searchArtist();" value="Submit" />
     <br/><br/>
 
     <label for="albumSearchName">Search for an album:</label>
     <input type="text" name="albumSearchName" id="albumSearchName"/>
-    <input type="button" onclick="searchAlbum();" value="Submit" />
+    <input type="button" id="albumSearchButton" onclick="searchAlbum();" value="Submit" />
 
     <div id="steamApiResultsBox" class="hiddenDiv">
         <div id="steamApiResultsPopup" class="popupContent">
