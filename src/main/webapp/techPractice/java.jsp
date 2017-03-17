@@ -86,11 +86,13 @@
         function closePopup()
         {
             $( '#steamApiResultsBox' ).removeClass('popup').addClass('hiddenDiv');
+            location.reload();
         }
 
         function closePopupLastfm()
         {
             $( '#steamApiResultsBox' ).removeClass('popup').addClass('hiddenDiv');
+            location.reload();
         }
 
 
