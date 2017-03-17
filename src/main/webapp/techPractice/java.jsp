@@ -8,32 +8,23 @@
 
         $( document ).ready(function()
         {
-            var textField = "";
-            $( '#artistSearchField' ).focus(function()
+            $( '#artistSearchField' ).keyup(function(event)
             {
-                textField = "artistSearchEnter";
-            });
-            $( '#albumSearchName').focus(function()
-            {
-                textField = "albumSearchEnter";
+                if (event.keyCode == 13)
+                {
+                    $( '#artistSearchButton' ).click();
+                }
             });
 
-            $( '#albumSearchButton' ).keypress(function()
+            $( '#albumSearchName' ).keyup(function(event)
             {
-                console.log(textField);
+                if (event.keyCode == 13)
+                {
+                    $( '#albumSearchButton' ).click();
+                }
             });
-
-            $( '#artistSearchButton').bind('keypress', function(e)
-            {
-                console.log(textField);
-            })
 
         });
-
-//        function pressEnter()
-//        {
-//            keyPressed =
-//        }
 
         function getSteamApi()
         {
