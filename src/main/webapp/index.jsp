@@ -1,17 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/WEB-INF/taglib.tld" prefix="sh" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
 <%--Start materliaze container here--%>
 <div class="container">
-
     <%--<a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>--%>
 
     <br><br>
     <h1 style="text-align: center; font-weight : bold;">Skills</h1>
     <br>
+
 
         <div style="text-align: center;">
             <ul>

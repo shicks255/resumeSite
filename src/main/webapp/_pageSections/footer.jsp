@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sh" uri="/WEB-INF/taglib.tld" %>
 
 
 <script>
@@ -64,12 +65,12 @@
 
     <div class="footer-copyright">
         <div class="container">
+            <br/>
             &copy; Steven M Hicks
-            <%
-                LocalDate date = LocalDate.now();
-                out.print(date.toString());
-            %>
+            <sh:currentDateTime/>
+            <br/>
             <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <sh:weekdayGreeting/>
         </div>
     </div>
 </footer>
