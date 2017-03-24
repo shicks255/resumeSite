@@ -69,19 +69,21 @@
 <br/>
 
 <div id="courseList" class="notecard">
-    <table border="1">
+    <table border="1" class="highlight">
+        <thead>
         <tr>
-            <td>#:</td>
-            <td>Semester:</td>
-            <td>College:</td>
-            <td>Code:</td>
-            <td>Course:</td>
-            <td>Grade:</td>
-            <td class="rightAlign">Actions:</td>
+            <th>#:</th>
+            <th>Semester:</th>
+            <th>College:</th>
+            <th>Code:</th>
+            <th>Course:</th>
+            <th>Grade:</th>
+            <th class="rightAlign">Actions:</th>
         </tr>
+        </thead>
 
+        <tbody>
         <c:set var="index" value="${0}"/>
-
         <c:forEach var="course" items="${courseList}">
             <c:set var="index" value="${index + 1}"/>
             <tr>
@@ -101,6 +103,7 @@
                 </td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
 </div>
 </div>
