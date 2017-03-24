@@ -68,8 +68,8 @@
 <br/>
 <br/>
 
-<div id="courseList" class="notecard">
-    <table border="1" class="highlight">
+<div id="courseList" class="">
+    <table border="1" class="highlight responsive-table">
         <thead>
         <tr>
             <th>#:</th>
