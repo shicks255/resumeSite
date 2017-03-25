@@ -8,11 +8,8 @@ import org.hibernate.SessionFactory;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import javax.servlet.http.*;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -99,6 +96,56 @@ public class AcademicHandler extends HttpServlet
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("/education/editCoursePopup.jsp");
             dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("uploadCoursework"))
+        {
+            System.out.println("we got here");
+            int courseObjectId = Integer.valueOf(request.getParameter("uploadCourseId"));
+
+            AcademicCourse course = AcademicLogic.getCourse(courseObjectId);
+
+            String fileLocation = request.getParameter("filePicker");
+            System.out.println(fileLocation);
+
+            // Create path components to save the file
+            final String path = System.getProperty("java.io.tmpdir");
+            final Part filePart = request.getPart("filePicker");
+//            final String fileName = getFileName(filePart);
+
+            OutputStream out = null;
+            InputStream filecontent = null;
+            final PrintWriter writer = response.getWriter();
+
+            try {
+                out = new FileOutputStream(new File(path + File.separator
+                        + filePart.getName()));
+                filecontent = filePart.getInputStream();
+
+                int read = 0;
+                final byte[] bytes = new byte[1024];
+
+                while ((read = filecontent.read(bytes)) != -1) {
+                    out.write(bytes, 0, read);
+                }
+                writer.println("New file " + filePart.getName() + " created at " + path);
+            } catch (FileNotFoundException fne) {
+                writer.println("You either did not specify a file to upload or are "
+                        + "trying to upload a file to a protected or nonexistent "
+                        + "location.");
+                writer.println("<br/> ERROR: " + fne.getMessage());
+
+            } finally {
+                if (out != null) {
+                    out.close();
+                }
+                if (filecontent != null) {
+                    filecontent.close();
+                }
+                if (writer != null) {
+                    writer.close();
+                }
+            }
         }
     }
 

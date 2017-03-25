@@ -36,7 +36,6 @@
 
         function deleteCourse(objectId)
         {
-            console.log(objectId);
             $.post( 'academic?action=deleteACourse&objectId=' + objectId,
                 function(data)
                 {
@@ -44,9 +43,15 @@
                 })
         }
 
-        function test()
+        function showUploadDialog(objectId)
         {
+            $( '#uploadCourseId' ).val(objectId);
+            $( '#uploadFile' ).removeClass('hiddenDiv').addClass('popup');
+        }
 
+        function closeUpload()
+        {
+            $( '#uploadFile' ).removeClass('popup').addClass('hiddenDiv');
         }
 
     </script>
@@ -94,11 +99,11 @@
                 <td><c:out value="${course.courseName}"/></td>
                 <td><c:out value="${course.gradeReceived}"/></td>
                 <td>
-                    <c:if test="${!empty adminComputer}">
-                        <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="">Upload Coursework</button>
+                    <%--<c:if test="${!empty adminComputer}">--%>
+                        <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="showUploadDialog('${course.objectId}');">Upload Coursework</button>
                         <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
                         <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
-                    </c:if>
+                    <%--</c:if>--%>
                     <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="">View Courswork</button>
                 </td>
             </tr>
@@ -109,6 +114,17 @@
 </div>
 
 <br/><br/>
+
+<div id="uploadFile" class="hiddenDiv">
+    <div class="popupContent">
+        <button id="closeUpload" name="closeUpload" onclick="closeUpload();">Close</button>
+        <form enctype="application/x-www-form-urlencoded" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\upload">
+            <input type="hidden" name="uploadCourseId" id="uploadCourseId" value=""/>
+            Choose a file: <input type="file" name="file" id="file" enctype="multipart/form-data">
+            <input type="submit" value="select">
+        </form>
+    </div>
+</div>
 
 <div id="deletePrompt" class="hiddenDiv">
     <div class="popupContent">

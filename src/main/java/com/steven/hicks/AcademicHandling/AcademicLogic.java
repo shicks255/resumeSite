@@ -9,9 +9,6 @@ import org.hibernate.query.Query;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-/**
- * Created by Steven on 7/29/2016.
- */
 public class AcademicLogic
 {
     public static void addCourse(HttpServletRequest request)
