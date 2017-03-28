@@ -1,15 +1,21 @@
 package com.steven.hicks.AcademicHandling;
 
+import com.steven.hicks.FileUploadUtil;
 import com.steven.hicks.HibernateUtil;
 import com.steven.hicks.entities.AcademicCourse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -99,6 +105,16 @@ public class AcademicHandler extends HttpServlet
         }
 
         if (action.equalsIgnoreCase("uploadCoursework"))
+        {
+//            String academicCourseId = request.getParameter("uploadCourseId");
+
+//            AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(academicCourseId));
+
+            FileUploadUtil.uploadFile(request, null, null);
+
+        }
+
+        if (action.equalsIgnoreCase("uploadCoursework2"))
         {
             System.out.println("we got here");
             int courseObjectId = Integer.valueOf(request.getParameter("uploadCourseId"));

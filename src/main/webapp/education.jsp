@@ -45,6 +45,7 @@
 
         function showUploadDialog(objectId)
         {
+            console.log(objectId);
             $( '#uploadCourseId' ).val(objectId);
             $( '#uploadFile' ).removeClass('hiddenDiv').addClass('popup');
         }
@@ -118,9 +119,10 @@
 <div id="uploadFile" class="hiddenDiv">
     <div class="popupContent">
         <button id="closeUpload" name="closeUpload" onclick="closeUpload();">Close</button>
-        <form enctype="application/x-www-form-urlencoded" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\upload">
+        <form enctype="multipart/form-data" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
             <input type="hidden" name="uploadCourseId" id="uploadCourseId" value=""/>
             Choose a file: <input type="file" name="file" id="file" enctype="multipart/form-data">
+            <input type="text" name="test" id="test"/>
             <input type="submit" value="select">
         </form>
     </div>
