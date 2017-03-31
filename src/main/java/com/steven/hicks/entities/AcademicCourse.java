@@ -1,6 +1,9 @@
 package com.steven.hicks.entities;
 
+import com.steven.hicks.AcademicHandling.AcademicLogic;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Steven on 7/18/2016.
@@ -55,6 +58,11 @@ public class AcademicCourse
     public int hashCode()
     {
         return objectId;
+    }
+
+    public List<Coursework> getCoursework()
+    {
+        return AcademicLogic.getCoursework(this);
     }
 
     //    ----------Getters & Setters

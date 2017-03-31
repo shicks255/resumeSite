@@ -3,6 +3,7 @@ package com.steven.hicks.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Coursework
@@ -20,7 +21,9 @@ public class Coursework
     private String additionalNotes = "";
     @Column
     private String grade = "";
+
     @Column
+    @Lob
     private byte[] file;
 
 

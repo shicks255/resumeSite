@@ -23,8 +23,7 @@
                 function(data)
                 {
                     $( '#editCourseDiv' ).removeClass('hiddenDiv').addClass('popup').html(data);
-                }
-            );
+                });
         }
 
         var courseObjectId;
@@ -45,7 +44,6 @@
 
         function showUploadDialog(objectId)
         {
-            console.log(objectId);
             $( '#uploadCourseId' ).val(objectId);
             $( '#uploadFile' ).removeClass('hiddenDiv').addClass('popup');
         }
@@ -53,6 +51,15 @@
         function closeUpload()
         {
             $( '#uploadFile' ).removeClass('popup').addClass('hiddenDiv');
+        }
+
+        function showCoursework(objectId)
+        {
+            $.get('academic?action=getCoursework&courseObjectId=' + objectId,
+                function(data)
+                {
+                    $( '#showCourseworkDiv' ).removeClass('hiddenDiv').addClass('popup').html(data);
+                });
         }
 
     </script>
@@ -67,8 +74,9 @@
 </c:if>
 
 <div id="editCourseDiv" class="hiddenDiv">
-    <div id="frmEditCourse" style="display:none">
-    </div>
+</div>
+
+<div id="showCourseworkDiv" class="hiddenDiv">
 </div>
 
 <br/>
@@ -105,7 +113,7 @@
                         <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
                         <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
                     <%--</c:if>--%>
-                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="">View Courswork</button>
+                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">View Courswork</button>
                 </td>
             </tr>
         </c:forEach>

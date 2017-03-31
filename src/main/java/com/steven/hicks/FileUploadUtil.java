@@ -3,6 +3,7 @@ package com.steven.hicks;
 import com.steven.hicks.AcademicHandling.AcademicLogic;
 import com.steven.hicks.entities.AcademicCourse;
 import com.steven.hicks.entities.Coursework;
+import com.steven.hicks.entities.FileRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class FileUploadUtil extends HttpServlet
 {
-    public static String uploadFile(HttpServletRequest request, Object object, Class className)
+    public static File uploadFile(HttpServletRequest request)
             throws ServletException, IOException
     {
         File file;
@@ -54,8 +55,6 @@ public class FileUploadUtil extends HttpServlet
                 while (i.hasNext())
                 {
                     FileItem fileItem = (FileItem)i.next();
-                    String field1 = fileItem.getFieldName();
-                    String field1Content = fileItem.getString();
                     if (!fileItem.isFormField())
                     {
                         String fieldName = fileItem.getFieldName();
@@ -72,8 +71,9 @@ public class FileUploadUtil extends HttpServlet
                         {
                             file = new File( tempLocation + fileName.substring(fileName.lastIndexOf("\\") +1));
                         }
-                        storeFile(file, object, className);
                         fileItem.write (file);
+
+                        return file;
                     }
                 }
             }
@@ -82,30 +82,49 @@ public class FileUploadUtil extends HttpServlet
                 System.out.println(e);
             }
         }
-        return fileNameReturn;
+        return null;
     }
 
-    public static void storeFile(File file, Object object, Class className)
+    public static FileRequest getFileRequest(HttpServletRequest request)
     {
-        String fileName = "";
-        String additionalNotes = "";
-        String course = "";
-        String grade = "";
-        String semester = "";
-        String year = "";
+        FileRequest fileRequest = new FileRequest();
 
+        DiskFileItemFactory factory = new DiskFileItemFactory();
+        ServletFileUpload upload = new ServletFileUpload(factory);
+        File tempFile = null;
+        try
+        {
+            List items = upload.parseRequest(request);
+            for(Object item1 : items)
+            {
+                FileItem item = (FileItem) item1;
+                if (!item.isFormField() && item.getSize()>0 && item.getName()!=null && item.getName().length()>0)
+                {
+                    String extension = "";
+                    String filename = item.getName().toLowerCase();
+                    if (filename.contains("."))
+                        extension = filename.substring(filename.lastIndexOf('.') + 1);
 
-        Coursework coursework = new Coursework();
+                    // Store in the temporary directory
+                    tempFile = File.createTempFile("temp", "." + extension, new File(System.getProperty("java.io.tmpdir")));
+                    item.write(tempFile);
+                    item.delete();
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
-        session.beginTransaction();
+                    fileRequest.setUploadedFile(tempFile);
+                    fileRequest.setShortFilename(item.getName());
+                }
 
-        session.save(course);
-        session.getTransaction().commit();
-        session.close();
-        factory.close();
+                if (item.isFormField() && item.getFieldName()!=null && item.getFieldName().length()>0)
+                    fileRequest.getParameters().put(item.getFieldName(), item.getString());
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+
+        return fileRequest;
+
     }
-
 
 }

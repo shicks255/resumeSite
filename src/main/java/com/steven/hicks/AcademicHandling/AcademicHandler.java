@@ -2,7 +2,10 @@ package com.steven.hicks.AcademicHandling;
 
 import com.steven.hicks.FileUploadUtil;
 import com.steven.hicks.HibernateUtil;
+import com.steven.hicks.Utils;
 import com.steven.hicks.entities.AcademicCourse;
+import com.steven.hicks.entities.Coursework;
+import com.steven.hicks.entities.FileRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -12,11 +15,15 @@ import org.hibernate.SessionFactory;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import static java.lang.Thread.sleep;
 
 /**
  * Created by Steven on 6/18/2016.
@@ -104,65 +111,78 @@ public class AcademicHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
-        if (action.equalsIgnoreCase("uploadCoursework"))
+        if (action.equalsIgnoreCase("getCoursework"))
         {
-//            String academicCourseId = request.getParameter("uploadCourseId");
-
-//            AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(academicCourseId));
-
-            FileUploadUtil.uploadFile(request, null, null);
-
-        }
-
-        if (action.equalsIgnoreCase("uploadCoursework2"))
-        {
-            System.out.println("we got here");
-            int courseObjectId = Integer.valueOf(request.getParameter("uploadCourseId"));
+            int courseObjectId = Integer.valueOf(request.getParameter("courseObjectId"));
 
             AcademicCourse course = AcademicLogic.getCourse(courseObjectId);
 
-            String fileLocation = request.getParameter("filePicker");
-            System.out.println(fileLocation);
-
-            // Create path components to save the file
-            final String path = System.getProperty("java.io.tmpdir");
-            final Part filePart = request.getPart("filePicker");
-//            final String fileName = getFileName(filePart);
-
-            OutputStream out = null;
-            InputStream filecontent = null;
-            final PrintWriter writer = response.getWriter();
-
-            try {
-                out = new FileOutputStream(new File(path + File.separator
-                        + filePart.getName()));
-                filecontent = filePart.getInputStream();
-
-                int read = 0;
-                final byte[] bytes = new byte[1024];
-
-                while ((read = filecontent.read(bytes)) != -1) {
-                    out.write(bytes, 0, read);
-                }
-                writer.println("New file " + filePart.getName() + " created at " + path);
-            } catch (FileNotFoundException fne) {
-                writer.println("You either did not specify a file to upload or are "
-                        + "trying to upload a file to a protected or nonexistent "
-                        + "location.");
-                writer.println("<br/> ERROR: " + fne.getMessage());
-
-            } finally {
-                if (out != null) {
-                    out.close();
-                }
-                if (filecontent != null) {
-                    filecontent.close();
-                }
-                if (writer != null) {
-                    writer.close();
-                }
+            if (course != null)
+            {
+                List<Coursework> courseworks = course.getCoursework();
+                request.setAttribute("courseWorkList", courseworks);
             }
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/education/showCourseworkPopup.jsp");
+            dispatcher.forward(request, response);
         }
+
+        if (action.equalsIgnoreCase("printCoursework"))
+        {
+            String courseworkName = request.getParameter("courseworkName");
+            Coursework coursework = AcademicLogic.getCourseworkByFileName(courseworkName);
+
+            String fileName = coursework.getFileName();
+            String prefix = fileName.substring(0, fileName.lastIndexOf("."));
+            String suffix = fileName.substring(fileName.lastIndexOf("."));
+
+            File tempFile = File.createTempFile(prefix, suffix, new File(System.getProperty("java.io.tmpdir")));
+
+            response.setContentLengthLong(tempFile.length());
+            response.setContentType("application/octet-stream");
+            response.addHeader("Content-Disposition", "attachment; filename=" + coursework.getFileName());
+
+            FileOutputStream outputStream = new FileOutputStream(tempFile);
+            outputStream.write(coursework.getFile());
+
+            byte[] bytes = new byte[32_000];
+            ServletOutputStream outputStream1 = response.getOutputStream();
+            try(FileInputStream inputStream = new FileInputStream(tempFile))
+            {
+                for (int bytesRead = inputStream.read(bytes); bytesRead >= 0; bytesRead = inputStream.read(bytes))
+                    outputStream1.write(bytes);
+                outputStream1.flush();
+            }
+
+//            FileInputStream inputStream = new FileInputStream(tempFile);
+//            PrintWriter out = response.getWriter();
+//
+//            int i = inputStream.read();
+//            while (i != -1)
+//            {
+//                out.write(i);
+//                i = inputStream.read();
+//            }
+//            inputStream.close();
+//            out.close();
+//            out.flush();
+            outputStream.close();
+
+            tempFile.delete();
+        }
+
+//        --------Upload coursework
+        if (action.equalsIgnoreCase("uploadCoursework"))
+        {
+            FileRequest fr = FileUploadUtil.getFileRequest(request);
+
+            File file = fr.getUploadedFile();
+            Map<String, String> parameters = fr.getParameters();
+
+            String errorMessage = AcademicLogic.saveCoursework(file, fr);
+
+        }
+
     }
 
     @Override

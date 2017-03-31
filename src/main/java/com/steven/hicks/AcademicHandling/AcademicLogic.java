@@ -2,12 +2,19 @@ package com.steven.hicks.AcademicHandling;
 
 import com.steven.hicks.HibernateUtil;
 import com.steven.hicks.entities.AcademicCourse;
+import com.steven.hicks.entities.Coursework;
+import com.steven.hicks.entities.FileRequest;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.util.List;
+import java.util.Map;
 
 public class AcademicLogic
 {
@@ -90,6 +97,84 @@ public class AcademicLogic
         sessionFactory.close();
 
         return course;
+    }
+
+    public static String saveCoursework(File file, FileRequest fr) throws IOException
+    {
+        StringBuilder errorMessage = new StringBuilder("");
+        if (file == null || !file.isFile())
+            errorMessage.append("No valid file was selected");
+
+        Map<String, String> params = fr.getParameters();
+
+        AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(params.get("uploadCourseId")));
+
+        String fileName = fr.getShortFilename().substring(fr.getShortFilename().lastIndexOf(File.separator) + 1);
+
+        Coursework coursework = new Coursework();
+        coursework.setAdditionalNotes("");
+        coursework.setCourse(course.getCourseName());
+        coursework.setGrade(course.getGradeReceived());
+//        coursework.setSemester(course.getSemesterTrackingNumber());
+        coursework.setFileName(fileName);
+
+        byte[] bytes = new byte[(int) file.length()];
+
+        try
+        {
+            FileInputStream inputStream = new FileInputStream(file);
+            inputStream.read(bytes);
+            inputStream.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+        coursework.setFile(bytes);
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+
+        session.save(coursework);
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
+
+        File tempFile = file.getAbsoluteFile();
+        tempFile.delete();
+        file.delete();
+
+        return errorMessage.toString();
+    }
+
+    public static List<Coursework> getCoursework(AcademicCourse course)
+    {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Query query = session.createQuery("from Coursework  where course = :course ");
+        query.setParameter("course", course.getCourseName());
+        List courseWork = query.list();
+
+        session.close();
+        sessionFactory.close();
+
+        return courseWork;
+    }
+
+    public static Coursework getCourseworkByFileName(String fileName)
+    {
+        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Coursework coursework = session.get(Coursework.class, fileName);
+
+        session.close();
+        sessionFactory.close();
+
+        return coursework;
     }
 
     public static int getSemesterNumberForSemester(String semester)
