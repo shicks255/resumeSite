@@ -145,15 +145,16 @@ public class AcademicHandler extends HttpServlet
             FileOutputStream outputStream = new FileOutputStream(tempFile);
             outputStream.write(coursework.getFile());
 
-            byte[] bytes = new byte[32_000];
+            byte[] bytes = new byte[16_000];
             ServletOutputStream outputStream1 = response.getOutputStream();
             try(FileInputStream inputStream = new FileInputStream(tempFile))
             {
-                for (int bytesRead = inputStream.read(bytes); bytesRead >= 0; bytesRead = inputStream.read(bytes))
-                    outputStream1.write(bytes);
+                for (int bytesRead = inputStream.read(bytes); bytesRead != -1; bytesRead = inputStream.read(bytes))
+                    outputStream1.write(bytes, 0, bytesRead);
                 outputStream1.flush();
             }
 
+            //Way i say to do it online
 //            FileInputStream inputStream = new FileInputStream(tempFile);
 //            PrintWriter out = response.getWriter();
 //

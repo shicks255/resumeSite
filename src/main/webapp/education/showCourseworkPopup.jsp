@@ -27,6 +27,7 @@
         <table>
             <c:forEach var="coursework" items="${courseWorkList}">
                 <a href="academic?action=printCoursework&courseworkName=${coursework.fileName}"><c:out value="${coursework.fileName}"/></a>
+                <br/>
             </c:forEach>
         </table>
 </div>
