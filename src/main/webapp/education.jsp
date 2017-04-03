@@ -113,7 +113,7 @@
                         <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
                         <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
                     <%--</c:if>--%>
-                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">View Courswork</button>
+                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">View Courswork (${course.coursework.size()})</button>
                 </td>
             </tr>
         </c:forEach>

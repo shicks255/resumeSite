@@ -14,8 +14,8 @@
 
         function closePopup()
         {
-            $( '#editCourseDiv' ).removeClass('popup').addClass('hiddenDiv');
-            location.reload();
+            $( '#showCourseworkDiv' ).removeClass('popup').addClass('hiddenDiv');
+//            location.reload();
         }
 
     </script>
@@ -24,12 +24,18 @@
 <body>
 
 <div class="popupContent">
+    <table>
+        <button value="Cancel" onclick="closePopup();">Close</button>
+        <c:set var="index" value="${0}"/>
         <table>
             <c:forEach var="coursework" items="${courseWorkList}">
-                <a href="academic?action=printCoursework&courseworkName=${coursework.fileName}"><c:out value="${coursework.fileName}"/></a>
-                <br/>
+                <c:set var="index" value="${index +1}"/>
+                <tr>
+                    <td>${index} <a href="academic?action=printCoursework&courseworkName=${coursework.fileName}"><c:out value="${coursework.fileName}"/></a></td>
+                </tr>
             </c:forEach>
         </table>
+    </table>
 </div>
 
 </body>
