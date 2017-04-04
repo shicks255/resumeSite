@@ -18,6 +18,14 @@
 //            location.reload();
         }
 
+        function deleteThisCoursework(fileName)
+        {
+            $.post("academic?action=deleteCoursework&fileName=" + fileName,
+            function(data){
+               location.reload();
+            });
+        }
+
     </script>
 
 </head>
@@ -27,11 +35,16 @@
     <table>
         <button value="Cancel" onclick="closePopup();">Close</button>
         <c:set var="index" value="${0}"/>
-        <table>
+        <table border="1">
             <c:forEach var="coursework" items="${courseWorkList}">
                 <c:set var="index" value="${index +1}"/>
                 <tr>
                     <td>${index} <a href="academic?action=printCoursework&courseworkName=${coursework.fileName}"><c:out value="${coursework.fileName}"/></a></td>
+                    <td><button value="Delete" onclick="deleteThisCoursework('${coursework.fileName}');">Delete</button> </td>
+                </tr>
+                <tr>
+                    <td>${coursework.additionalNotes}</td>
+                    <td></td>
                 </tr>
             </c:forEach>
         </table>

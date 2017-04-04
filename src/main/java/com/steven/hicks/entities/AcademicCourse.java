@@ -28,6 +28,8 @@ public class AcademicCourse
     private int semesterTrackingNumber;
     @Column
     private String gradeReceived = "";
+    @Column
+    private int countOfCourseworks;
 
     public AcademicCourse()
     {}
@@ -136,5 +138,15 @@ public class AcademicCourse
     public void setGradeReceived(String gradeReceived)
     {
         this.gradeReceived = gradeReceived;
+    }
+
+    public int getCountOfCourseworks()
+    {
+        return countOfCourseworks;
+    }
+
+    public void setCountOfCourseworks(int countOfCourseworks)
+    {
+        this.countOfCourseworks = countOfCourseworks;
     }
 }

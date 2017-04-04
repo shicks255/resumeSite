@@ -21,6 +21,8 @@ public class Coursework
     private String additionalNotes = "";
     @Column
     private String grade = "";
+    @Column
+    private int courseId;
 
     @Column
     @Lob
@@ -122,5 +124,15 @@ public class Coursework
     public void setFile(byte[] file)
     {
         this.file = file;
+    }
+
+    public int getCourseId()
+    {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId)
+    {
+        this.courseId = courseId;
     }
 }

@@ -113,7 +113,7 @@
                         <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
                         <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
                     <%--</c:if>--%>
-                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">View Courswork (${course.coursework.size()})</button>
+                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">View Courswork (${course.countOfCourseworks})</button>
                 </td>
             </tr>
         </c:forEach>
@@ -129,9 +129,13 @@
         <button id="closeUpload" name="closeUpload" onclick="closeUpload();">Close</button>
         <form enctype="multipart/form-data" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
             <input type="hidden" name="uploadCourseId" id="uploadCourseId" value=""/>
-            Choose a file: <input type="file" name="file" id="file" enctype="multipart/form-data">
-            <input type="text" name="test" id="test"/>
-            <input type="submit" value="select">
+            <br/>
+            File: <input type="file" name="file" id="file" enctype="multipart/form-data">
+            <br/>
+            <br/>
+            <label for="courseworkNotes">Coursework notes:</label>
+            <input type="text" name="courseworkNotes" id="courseworkNotes"/>
+            <input type="submit" value="Upload">
         </form>
     </div>
 </div>

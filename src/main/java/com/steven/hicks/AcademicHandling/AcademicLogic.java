@@ -1,6 +1,7 @@
 package com.steven.hicks.AcademicHandling;
 
 import com.steven.hicks.HibernateUtil;
+import com.steven.hicks.Utils;
 import com.steven.hicks.entities.AcademicCourse;
 import com.steven.hicks.entities.Coursework;
 import com.steven.hicks.entities.FileRequest;
@@ -8,9 +9,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.util.List;
@@ -32,6 +36,7 @@ public class AcademicLogic
         course.setCollege(collegeName);
         course.setGradeReceived(courseGrade);
         course.setSemester(semester);
+        course.setCountOfCourseworks(0);
 
         course.setSemesterTrackingNumber(AcademicLogic.getSemesterNumberForSemester(semester));
 
@@ -115,8 +120,14 @@ public class AcademicLogic
         coursework.setAdditionalNotes("");
         coursework.setCourse(course.getCourseName());
         coursework.setGrade(course.getGradeReceived());
-//        coursework.setSemester(course.getSemesterTrackingNumber());
         coursework.setFileName(fileName);
+        coursework.setAdditionalNotes(params.get("courseworkNotes"));
+
+        String year = course.getSemester().substring(0,4);
+        String semester = course.getSemester().substring(4);
+        coursework.setYear(year);
+        coursework.setSemester(semester);
+        coursework.setCourseId(course.getObjectId());
 
         byte[] bytes = new byte[(int) file.length()];
 
@@ -138,6 +149,8 @@ public class AcademicLogic
         session.beginTransaction();
 
         session.save(coursework);
+        course.setCountOfCourseworks(course.getCountOfCourseworks()+1);
+        session.update(course);
         session.getTransaction().commit();
         session.close();
         factory.close();
@@ -147,6 +160,75 @@ public class AcademicLogic
         file.delete();
 
         return errorMessage.toString();
+    }
+
+    public static String deleteCoursework(String fileName)
+    {
+        Coursework coursework = AcademicLogic.getCourseworkByFileName(fileName);
+
+        String errorMessage = "";
+        if (coursework != null)
+        {
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.openSession();
+            session.beginTransaction();
+
+            session.delete(coursework);
+
+            AcademicCourse course = AcademicLogic.getCourse(coursework.getCourseId());
+            if (course != null)
+            {
+                course.setCountOfCourseworks(course.getCountOfCourseworks() > 0 ? course.getCountOfCourseworks() - 1 : 0);
+                session.update(course);
+            }
+
+            session.getTransaction().commit();
+            session.close();
+        }
+        if (coursework == null)
+            errorMessage = "Error...coursework not found.";
+
+        return errorMessage;
+    }
+
+    public static void printCoursework(HttpServletRequest request, HttpServletResponse response) throws IOException
+    {
+        String courseworkName = request.getParameter("courseworkName");
+        Coursework coursework = AcademicLogic.getCourseworkByFileName(courseworkName);
+
+        String fileName = coursework.getFileName();
+        String prefix = fileName.substring(0, fileName.lastIndexOf("."));
+        String suffix = fileName.substring(fileName.lastIndexOf("."));
+
+        File tempFile = File.createTempFile(prefix, suffix, new File(System.getProperty("java.io.tmpdir")));
+
+//            response.setContentLengthLong(tempFile.length());
+        response.setContentType(Utils.getMimeType(fileName));
+        response.addHeader("Content-Disposition", "filename=\"" + coursework.getFileName() + "\"");
+//            response.addHeader("Content-Disposition", "filename=" + coursework.getFileName());
+
+        try(FileOutputStream outputStream = new FileOutputStream(tempFile))
+        {
+            outputStream.write(coursework.getFile());
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+
+        byte[] buffer = new byte[16_000];
+        ServletOutputStream outputStream1 = response.getOutputStream();
+        try(FileInputStream inputStream = new FileInputStream(tempFile))
+        {
+            for (int bytesRead = inputStream.read(buffer); bytesRead >= 0; bytesRead = inputStream.read(buffer))
+                outputStream1.write(buffer, 0, bytesRead);
+            outputStream1.flush();
+            outputStream1.close();
+        }
+
+        tempFile.delete();
+
+
     }
 
     public static List<Coursework> getCoursework(AcademicCourse course)

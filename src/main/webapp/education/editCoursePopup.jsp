@@ -83,10 +83,6 @@
             <td><label for="courseGradeEdit">Course Grade:</label></td>
             <td><input type="text" id="courseGradeEdit" name="courseGradeEdit" value="${course.gradeReceived}"/></td>
         </tr>
-        <tr>
-            <td><label for="relevantCourseWork">Relevant Course Work:</label></td>
-            <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
-        </tr>
     </table>
 </form>
 </div>

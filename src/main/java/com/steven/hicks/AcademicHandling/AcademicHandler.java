@@ -111,6 +111,7 @@ public class AcademicHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        -----AJAX TO GET COURSEWORK
         if (action.equalsIgnoreCase("getCoursework"))
         {
             int courseObjectId = Integer.valueOf(request.getParameter("courseObjectId"));
@@ -127,60 +128,32 @@ public class AcademicHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        -----PRINT COURSEWORK TO BROWSER
         if (action.equalsIgnoreCase("printCoursework"))
         {
-            String courseworkName = request.getParameter("courseworkName");
-            Coursework coursework = AcademicLogic.getCourseworkByFileName(courseworkName);
-
-            String fileName = coursework.getFileName();
-            String prefix = fileName.substring(0, fileName.lastIndexOf("."));
-            String suffix = fileName.substring(fileName.lastIndexOf("."));
-
-            File tempFile = File.createTempFile(prefix, suffix, new File(System.getProperty("java.io.tmpdir")));
-
-            response.setContentLengthLong(tempFile.length());
-            response.setContentType("application/octet-stream");
-            response.addHeader("Content-Disposition", "attachment; filename=" + coursework.getFileName());
-
-            FileOutputStream outputStream = new FileOutputStream(tempFile);
-            outputStream.write(coursework.getFile());
-
-            byte[] bytes = new byte[16_000];
-            ServletOutputStream outputStream1 = response.getOutputStream();
-            try(FileInputStream inputStream = new FileInputStream(tempFile))
-            {
-                for (int bytesRead = inputStream.read(bytes); bytesRead != -1; bytesRead = inputStream.read(bytes))
-                    outputStream1.write(bytes, 0, bytesRead);
-                outputStream1.flush();
-            }
-
-            //Way i say to do it online
-//            FileInputStream inputStream = new FileInputStream(tempFile);
-//            PrintWriter out = response.getWriter();
-//
-//            int i = inputStream.read();
-//            while (i != -1)
-//            {
-//                out.write(i);
-//                i = inputStream.read();
-//            }
-//            inputStream.close();
-//            out.close();
-//            out.flush();
-            outputStream.close();
-
-            tempFile.delete();
+            AcademicLogic.printCoursework(request, response);
         }
 
 //        --------Upload coursework
         if (action.equalsIgnoreCase("uploadCoursework"))
         {
             FileRequest fr = FileUploadUtil.getFileRequest(request);
-
             File file = fr.getUploadedFile();
-            Map<String, String> parameters = fr.getParameters();
 
             String errorMessage = AcademicLogic.saveCoursework(file, fr);
+
+            if (errorMessage.length() == 0)
+                response.sendRedirect("/academic?action=form");
+
+        }
+
+//        -----DELETE A COURSEWORK ITEM
+        if (action.equalsIgnoreCase("deleteCoursework"))
+        {
+            String fileName = request.getParameter("fileName");
+            String errorMessage = AcademicLogic.deleteCoursework(fileName);
+
+            response.sendRedirect("/academic?action=form");
 
         }
 
