@@ -5,12 +5,27 @@
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
 <jsp:useBean id="fileList" type="java.util.List<java.lang.String>" scope="request"/>
+<jsp:useBean id="imagePath" type="java.lang.String" scope="request"/>
 
     <script>
         $(document).ready(function()
         {
 
         });
+
+        function openPicture(fileName)
+        {
+            var cutHere = fileName.indexOf("_small");
+            var bigPicNameStart = fileName.slice(0,cutHere);
+            var bigPicNameEnd = fileName.slice(cutHere+6);
+
+            var newFileName = bigPicNameStart + bigPicNameEnd;
+            <%--var servletContext = ${imagePath};--%>
+            console.log(servletContext);
+            var servletContext = "/images/";
+            window.open(servletContext + newFileName, '');
+
+        }
     </script>
 
     <style>
@@ -25,7 +40,7 @@
         <c:set var="classType" value="col s12 m6 l3"/>
         <c:forEach var="file" items="${fileList}">
             <div class="${classType}" style="margin-bottom : 1.8%;">
-                <img class="materialboxed liquidPic hoverable" data-caption="A pic" src="images/${file}"/>
+                <a href="#"><img onclick="openPicture('${file}');" class="liquidPic hoverable" data-caption="A pic" src="images/${file}"/></a>
             </div>
         </c:forEach>
     </div>

@@ -37,7 +37,6 @@ public class PicturesHandler extends HttpServlet
             String imageRoot = path.replace(path, "") + File.separator + "images" + File.separator;
             System.out.println(path + " " + imageRoot);
 
-//            URL imagesPath = context.getResource("/src/main/webapp/images/");
             List<Object> files = Files.list(Paths.get(path + imageRoot)).collect(Collectors.toList());
 
             List<String> fileList = new ArrayList<>();
@@ -48,7 +47,10 @@ public class PicturesHandler extends HttpServlet
                 fileList.add(newFile);
             });
 
+            fileList.removeIf(fileName -> !fileName.contains("_small"));
+
             request.setAttribute("fileList", fileList);
+            request.setAttribute("imagePath", getServletContext().getAttribute("imagesPath"));
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/pictures.jsp");
             dispatcher.forward(request, response);
         }
