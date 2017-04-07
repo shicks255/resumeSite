@@ -39,8 +39,10 @@ public class PicturesLogic
             {
                 BufferedImage image = ImageIO.read(file);
 
-                int scaledWidth = (int) (image.getWidth() * 0.15);
-                int scaledHeight = (int) (image.getHeight() * 0.15);
+//                int scaledWidth = (int) (image.getWidth() * 0.15);
+//                int scaledHeight = (int) (image.getHeight() * 0.15);
+                int scaledWidth = (300);
+                int scaledHeight = (200);
                 BufferedImage resizedImage = new BufferedImage(scaledWidth, scaledHeight, image.getType());
 
                 Graphics2D g2d = resizedImage.createGraphics();
