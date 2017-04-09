@@ -41,12 +41,16 @@ public class PicturesLogic
 
 //                int scaledWidth = (int) (image.getWidth() * 0.15);
 //                int scaledHeight = (int) (image.getHeight() * 0.15);
-                int scaledWidth = (300);
-                int scaledHeight = (200);
+                int scaledWidth = (450);
+                int scaledHeight = (300);
                 BufferedImage resizedImage = new BufferedImage(scaledWidth, scaledHeight, image.getType());
 
                 Graphics2D g2d = resizedImage.createGraphics();
-                g2d.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
+//                g2d.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
+                g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+                g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+
+                g2d.drawImage(image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH), 0, 0, scaledWidth, scaledHeight, null);
                 g2d.dispose();
 
 //                images.add(resizedImage);
