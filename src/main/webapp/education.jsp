@@ -5,8 +5,24 @@
 <c:if test="${!empty adminComputer}">
     <jsp:useBean id="adminComputer" type="java.lang.String" scope="request"/>
 </c:if>
+<jsp:include page="_pageSections/navBar.jsp"/>
 
     <script>
+
+        $(document).ready(function()
+        {
+            $(document.body).keyup(function(event)
+            {
+                if (event.keyCode == 27)
+                {
+                    $( '.popup' ).each(function(i, obj){
+                        $( this ).removeClass('popup').addClass('hiddenDiv');
+//                        obj.removeClass('popup').addClass('hiddenDiv');
+                    });
+                }
+            });
+        });
+
         function buttonAddACourse()
         {
             $('#addACourse').removeClass('hiddenDiv').addClass('popup');
@@ -64,7 +80,6 @@
 
     </script>
 
-<jsp:include page="_pageSections/navBar.jsp"/>
 <div class="container">
 
 <h1 style="text-align:center;">Course History:</h1>
