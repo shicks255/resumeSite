@@ -25,33 +25,35 @@
 <jsp:include page="/_pageSections/navBar.jsp"/>
 <br/>
 
-<h1>Session Tracking Practice</h1>
+<div class="container">
+    <h1>Session Tracking Practice</h1>
 
 ${cookie}
-<br/>
+    <br/>
 
-Session:
+    Session:
 ${sessionScope.user}
-<br/>
+    <br/>
 
-Request:
+    Request:
 ${pageContext.request}
-<br/>
+    <br/>
 
-Response:
+    Response:
 ${pageContext.response}
-<br/>
+    <br/>
 
 
 <br/>
-<br/>
-You have accessed this page <c:out value="${accessCount}"/> time this session.
-Refresh the page to see this number increase.
+    <br/>
+    You have accessed this page <c:out value="${accessCount}"/> time this session.
+    Refresh the page to see this number increase.
 
 
 <br/><br/>
-<%--Click <a onclick="resetURL();" href="${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true">here</a> to clear out your session--%>
-Click
-<button onclick="resetURL()" >here</button>
-to clear out your session
+    <%--Click <a onclick="resetURL();" href="${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true">here</a> to clear out your session--%>
+    Click
+    <button class="waves-effect waves-teal btn-flat" onclick="resetURL()" >here</button>
+    to clear out your session
 
+</div>

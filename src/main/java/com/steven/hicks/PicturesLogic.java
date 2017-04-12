@@ -13,9 +13,6 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by Steven on 0005, April 5, 2017.
- */
 public class PicturesLogic
 {
     public static void loadPictures(ServletContext sc)

@@ -103,13 +103,13 @@
     <br/>
     <h1>Java Programs/Practice</h1>
 
-    <button onclick='getSteamApi();' >List of All Steam Games</button>
+    <button class="btn waves-effect waves-light" onclick='getSteamApi();' >List of All Steam Games</button>
     <br/><br/>
 
-    <button onclick="goToSessionPage();">Session Practice</button>
+    <button class="btn waves-effect waves-light" onclick="goToSessionPage();">Session Practice</button>
     <br/><br/>
 
-    <button onclick="getLastFmAPI();">Last FM Api</button>
+    <button class="btn waves-effect waves-light" onclick="getLastFmAPI();">Last FM Api</button>
     <br/><br/>
 
     <h3>Last FM API</h3>
