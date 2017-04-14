@@ -33,14 +33,14 @@
 
 <div class="popupContent">
     <table>
-        <button value="Cancel" onclick="closePopup();">Close</button>
+        <a class="waves-effect waves-light btn" value="Cancel" onclick="closePopup();">Close</a>
         <c:set var="index" value="${0}"/>
         <table border="1">
             <c:forEach var="coursework" items="${courseWorkList}">
                 <c:set var="index" value="${index +1}"/>
                 <tr>
                     <td>${index} <a href="academic?action=printCoursework&courseworkName=${coursework.fileName}"><c:out value="${coursework.fileName}"/></a></td>
-                    <td><button value="Delete" onclick="deleteThisCoursework('${coursework.fileName}');">Delete</button> </td>
+                    <td><a class="waves-effect waves-light btn" value="Delete" onclick="deleteThisCoursework('${coursework.fileName}');">Delete</a> </td>
                 </tr>
                 <tr>
                     <td>${coursework.additionalNotes}</td>

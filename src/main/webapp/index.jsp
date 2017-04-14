@@ -5,22 +5,33 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
+<script>
+    function emailPopup()
+    {
+        $( '#dialog-emailPopup' ).removeClass('hiddenDiv').addClass('popup');
+    }
+    function closeEmailPopup()
+    {
+        $( '#dialog-emailPopup' ).removeClass('popup').addClass('hiddenDiv');
+    }
+</script>
+
 <%--Start materliaze container here--%>
 <div class="container">
     <%--<a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>--%>
+
+
+    <div onclick="emailPopup();" class="fixed-action-btn hide-on-small-and-down" style="bottom:45px; right: 14px;">
+        <a class="btn-floating btn-medium waves-effect waves-light deep-purple lighten-3"><i class="large material-icons">mail</i></a>
+    </div>
 
     <br><br>
     <h1 style="text-align: center; font-weight : bold;">Skills</h1>
     <br>
 
-
         <div style="text-align: center;">
             <ul>
-                <li>Proven and demonstrated customer service ability in different environments,
-                    both over the phone and face to face</li>
-                <li>Adept with computer hardware/software specifications and maintenance</li>
-                <li>Well accustomed to using Microsoft Word, Excel, Powerpoint and Access</li>
-                <li>Advanced Spanish Skills</li>
+                Maintain and enhance the functionality of an industry leading JAVA EE8 web application used by New Jersey schools for staff management.
             </ul>
         </div>
 
@@ -41,6 +52,8 @@
             <li>-Intellij Idea IDE</li>
             <li>-Maven deployment and dependencies</li>
             <li>-JIRA issue tracking</li>
+            <li>-Jenkins Continuous Integration</li>
+            <li>-BitBucket Git Repository</li>
         </ul>
 
     <!-- START EDUCATION HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
@@ -69,7 +82,7 @@
         <li>Dean's List recipient during 4 semesters</li>
     </ul>
 
-        <br><br><br>
+        <br>
 
     <b>Raritan Valley Community College</b>, Branchburg NJ
     <br>
@@ -81,57 +94,90 @@
 
 <h1 style="text-align:center ; font-weight : bold;">Work History</h1>
 
-    <b>Fedway Associates Inc</b>., Basking Ridge NJ
-    <br>
+        <b>Forge-Tech Inc</b> , Martinsville NJ
+        <br/>
 
-    Computer Support Specialist November 2014 - Present
+        <u>Web Developer/Programmer January 2016 - Present</u>
 
-    <ul>
-        <li>Help everybody with computer issues</li>
-    </ul>
+        <ul>
+            <li>Help design and write software used by New Jersey school districts including:</li>
+            <li>
+                <ul>
+                    <li>Staff Management and Teacher Evaluations</li>
+                    <li>Attendance and Reporting</li>
+                    <li>Techer and other Employees Portal</li>
+                    <li>Payroll System</li>
+                </ul>
+            </li>
+        </ul>
 
-    <br>
+        <b>Fedway Associates Inc</b>., Basking Ridge NJ
+        <br>
 
-    Accounts Receivable Agent August 2013 - November 2014
+        <u>Computer Support Specialist November 2014 - Present</u>
 
-    <ul>
-        <li>Responsible for billing customers for goods delivered through various sales divisions of a $900
-            million corporation.</li>
-        <li>Work with customers and internal sales force daily to ensure prompt payments, and to identify
-            past-due balances, short payments, and over payments.</li>
-        <li>Contact customers as needed to obtain or communicate account information as well as for collections
-            and the resolution of discrepancies.</li>
-        <li>Review aging reports to confirm outstanding unpaid balances have been filed with the state's
-            Credit Compliance website, as defined by legal requirementes established by the New Jersey Alcohol
-            Beverage Control.</li>
-    </ul>
+        <ul>
+            <li>Help everybody with computer issues</li>
+        </ul>
+
+        <br>
+
+        <u>Accounts Receivable Agent August 2013 - November 2014</u>
+
+        <ul>
+            <li>Responsible for billing customers for goods delivered through various sales divisions of a $900
+                million corporation.</li>
+            <li>Work with customers and internal sales force daily to ensure prompt payments, and to identify
+                past-due balances, short payments, and over payments.</li>
+            <li>Contact customers as needed to obtain or communicate account information as well as for collections
+                and the resolution of discrepancies.</li>
+            <li>Review aging reports to confirm outstanding unpaid balances have been filed with the state's
+                Credit Compliance website, as defined by legal requirementes established by the New Jersey Alcohol
+                Beverage Control.</li>
+        </ul>
 
 
 <br>
 
-    <b>Stockton College</b>, Galloway NJ
-    <br>
-    Computer Services Student Worker September 2011 - May 2012
+        <b>Stockton College</b>, Galloway NJ
+        <br>
+        <u>Computer Services Student Worker September 2011 - May 2012</u>
 
-    <ul>
-        <li>Assisted both students and teachers with audio visual queries, as well as providing
-            general computer help.</li>
+        <ul>
+            <li>Assisted both students and teachers with audio visual queries, as well as providing
+                general computer help.</li>
 
-    </ul>
+        </ul>
 
-    <br>
+        <br>
 
-    <b>Five Below Inc</b>., Flemington NJ
-    <br>
-    Shift Manager September 2009 - August 2011
+        <b>Five Below Inc</b>., Flemington NJ
+        <br>
+        <u>Shift Manager September 2009 - August 2011</u>
 
-    <ul>
-        <li>Resonsible for providing outstanding service to customers and performing operational duties to help
-            drive sales through product knowledge, merchandising, register functions, store cleanliness and other
-            related duties.</li>
-    </ul>
+        <ul>
+            <li>Resonsible for providing outstanding service to customers and performing operational duties to help
+                drive sales through product knowledge, merchandising, register functions, store cleanliness and other
+                related duties.</li>
+        </ul>
 
-    <br><br>
+        <br><br>
+
+        <div id="dialog-emailPopup" class="hiddenDiv">
+            <div class="popupContent">
+                <button class="waves-effect waves-light btn" id="closeEmail" name="closeEmail" onclick="closeEmailPopup();">Close</button>
+                    <br/>
+                    <br/>
+                    <br/>
+                <form name="" id="" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
+                    <label for="emailSubject">Subject:</label>
+                    <input type="text" name="emailSubject" id="emailSubject">
+
+                    <label for="emailBody">Body:</label>
+                    <textarea placeholder="Enter your message here..." id="emailBody" id="emailBody"></textarea>
+                </form>
+            </div>
+        </div>
 
 </div>
 

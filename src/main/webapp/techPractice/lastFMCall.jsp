@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="musicArtist" type="java.util.List<com.steven.hicks.entities.MusicArtist>" scope="request"/>
-<button onclick="closePopupLastfm();">Close</button>
-Music Guy
+<button class="waves-effect waves-light btn" onclick="closePopupLastfm();">Close</button>
 
 <table border="1">
     <tr>

@@ -9,20 +9,6 @@
 
     <script>
 
-        $(document).ready(function()
-        {
-            $(document.body).keyup(function(event)
-            {
-                if (event.keyCode == 27)
-                {
-                    $( '.popup' ).each(function(i, obj){
-                        $( this ).removeClass('popup').addClass('hiddenDiv');
-//                        obj.removeClass('popup').addClass('hiddenDiv');
-                    });
-                }
-            });
-        });
-
         function buttonAddACourse()
         {
             $('#addACourse').removeClass('hiddenDiv').addClass('popup');
@@ -85,7 +71,7 @@
 <h1 style="text-align:center;">Course History:</h1>
 
 <c:if test="${!empty adminComputer}">
-    <button value="Add A Course" onclick="buttonAddACourse();">Add A Course</button>
+    <a class="waves-effect waves-light btn" value="Add A Course" onclick="buttonAddACourse();">Add A Course</a>
 </c:if>
 
 <div id="editCourseDiv" class="hiddenDiv">
@@ -124,11 +110,11 @@
                 <td><c:out value="${course.gradeReceived}"/></td>
                 <td>
                     <%--<c:if test="${!empty adminComputer}">--%>
-                        <button name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="showUploadDialog('${course.objectId}');">Upload Coursework</button>
-                        <button name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</button>
-                        <button name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</button>
+                        <a class="waves-effect waves-light btn" name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="showUploadDialog('${course.objectId}');">Upload Coursework</a>
+                        <a class="waves-effect waves-light btn" name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</a>
+                        <a class="waves-effect waves-light btn" name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</a>
                     <%--</c:if>--%>
-                    <button name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">View Courswork (${course.countOfCourseworks})</button>
+                    <a class="waves-effect waves-light btn" name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">Coursework (${course.countOfCourseworks})</a>
                 </td>
             </tr>
         </c:forEach>
@@ -141,7 +127,7 @@
 
 <div id="uploadFile" class="hiddenDiv">
     <div class="popupContent">
-        <button id="closeUpload" name="closeUpload" onclick="closeUpload();">Close</button>
+        <a class="waves-effect waves-light btn" id="closeUpload" name="closeUpload" onclick="closeUpload();">Close</a>
         <form enctype="multipart/form-data" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
             <input type="hidden" name="uploadCourseId" id="uploadCourseId" value=""/>
             <br/>
@@ -158,14 +144,14 @@
 <div id="deletePrompt" class="hiddenDiv">
     <div class="popupContent">
         <h4>Are you sure you wanna delete this entry?</h4>
-        <button id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >Ok</button>
-        <button id="deletePrompt_denyButton" onclick="location.reload();">Cancel</button>
+        <a class="waves-effect waves-light btn" id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >Ok</a>
+        <a class="waves-effect waves-light btn" id="deletePrompt_denyButton" onclick="location.reload();">Cancel</a>
     </div>/
 </div>
 
 <div id="addACourse"  class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
-        <button id="closeAddCourse" name="closeAddCourse" onclick="closeAddCourse();">Close</button>
+        <a class="waves-effect waves-light btn" id="closeAddCourse" name="closeAddCourse" onclick="closeAddCourse();">Close</a>
         <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
             <input type="submit" value="Submit" />
 

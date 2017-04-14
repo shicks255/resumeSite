@@ -42,10 +42,10 @@
 
     </script>
 
-<button onclick="closePopup();">Close</button>
-<button onclick="sortReverseIdOrder();">Reverse Order</button>
-<button onclick="sortAlpha();">Alphabetical</button>
-<button onclick="sortReverseAlpha();">Reverse Alphabetical</button>
+<button class="waves-effect waves-light btn" onclick="closePopup();">Close</button>
+<button class="waves-effect waves-light btn" onclick="sortReverseIdOrder();">Reverse Order</button>
+<button class="waves-effect waves-light btn" onclick="sortAlpha();">Alphabetical</button>
+<button class="waves-effect waves-light btn" onclick="sortReverseAlpha();">Reverse Alphabetical</button>
 <br/>
     <table border="1">
         <tr>

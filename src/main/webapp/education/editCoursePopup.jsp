@@ -24,9 +24,11 @@
 <body>
 
 <div class="popupContent">
-    <button value="Cancel" onclick="closePopup();">Close</button>
+    <a class="waves-effect waves-light btn" value="Cancel" onclick="closePopup();">Close</a>
 <form name="frmEditACourse" id="frmEditACourse" action="${pageContext.request.contextPath}\academic?&action=editACourse&courseId=${course.objectId}" method="post">
-    <input type="submit" value="Submit" />
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
     <table>
         <tr>
             <td><label for="courseNameEdit">Course Name:</label></td>

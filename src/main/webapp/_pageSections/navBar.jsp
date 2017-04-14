@@ -11,6 +11,8 @@
     <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Steven M. Hicks - New Jersey based Website Developer and Computer Programmer, currelty using Java and Tomcat with various front end libraries...JQuery/Jquery UI, Materialize CSS, ajax & json,."/>
     <meta name="keywords" content="Steven Hicks, Steven M Hicks, Steven M. Hicks, shicks, shicks255, New Jersey, NJ, Hunterdon County, java, forge-tech, forge tech, web developer, software developer, computer programmer, programming"/>
@@ -23,6 +25,18 @@
         {
             doDropdown();
             doDropdownMobile();
+
+            $(document.body).keyup(function(event)
+            {
+                if (event.keyCode == 27)
+                {
+                    $( '.popup' ).each(function(i, obj){
+                        $( this ).removeClass('popup').addClass('hiddenDiv');
+//                        obj.removeClass('popup').addClass('hiddenDiv');
+                    });
+                }
+            });
+
         });
 
         function doDropdown()
@@ -98,12 +112,12 @@
                 <li><a class="dropdown-button" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown4">Tech Practice<i class="material-icons right"></i></a></li>
                 <li><a href="${pageContext.request.contextPath}/pictures?action=form">Galleries</a></li>
             </ul>
-            <a href="${pageContext.request.contextPath}/" class="brand-logo hide-on-med-and-up right cyan">SH</a>
+            <a href="${pageContext.request.contextPath}/" class="brand-logo hide-on-med-and-up right cyan">S. HICKS</a>
             <ul id="nav-mobile1" class="left hide-on-med-and-up cyan">
-                <li><a href="${pageContext.request.contextPath}/">H</a></li>
-                <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/academic?action=form" data-activates="dropdown1">.edu<i class="material-icons right"></i></a></li>
-                <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown2">Tech<i class="material-icons right"></i></a></li>
-                <li><a href="${pageContext.request.contextPath}/pictures?action=form">Pics</a></li>
+                <li><a href="${pageContext.request.contextPath}/"><i class="material-icons">home</i></a></li>
+                <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/academic?action=form" data-activates="dropdown1"><i class="material-icons">school</i></a></li>
+                <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown2"><i class="material-icons">memory</i></a></li>
+                <li><a href="${pageContext.request.contextPath}/pictures?action=form"><i class="material-icons">collections</i></a></li>
             </ul>
         </div>
     </nav>

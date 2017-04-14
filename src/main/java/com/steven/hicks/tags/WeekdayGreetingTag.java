@@ -19,8 +19,17 @@ public class WeekdayGreetingTag extends TagSupport
 
         if (day == Calendar.SATURDAY || day == Calendar.SUNDAY)
             greetingTest = "I hope you're enjoying the weekend :)";
+        else if (day == Calendar.FRIDAY)
+            greetingTest = "At least it's friday :)";
         else
-            greetingTest = "At least it's almost Friday :)";
+        {
+            int daysLeft = 6 - day;
+
+            if (daysLeft == 1)
+                greetingTest = "Only " + daysLeft + " day left until friday.";
+            else
+                greetingTest = "Only " + daysLeft + " days left until friday";
+        }
 
         try
         {

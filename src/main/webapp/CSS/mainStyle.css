@@ -99,7 +99,7 @@ input[type=submit]:hover {color : red;}
     margin : 15% auto;
     padding : 20px;
     border : 1px solid black;
-    background-color : #FFFFF1;
+    background-color : #f4eff7    ;
     width : 65%;
     border-radius : 10px;
 }
@@ -114,6 +114,10 @@ input[type=submit]:hover {color : red;}
 
 .hiddenDiv {
     display : none;
+}
+
+.btn {
+    border-radius : 100px;
 }
 
 /*.popup table {*/
