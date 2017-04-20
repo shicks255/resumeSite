@@ -16,6 +16,9 @@ public class User
     private String userName = "";
 
     @Column
+    private int userRoleId;
+
+    @Column
     private String hashedPasswordAndSalt = "";
 
     @Column
@@ -75,7 +78,6 @@ public class User
 
     public static void createUser(String userName, String password, String emailAddress, String firstName, String lastName)
     {
-
         User user = new User();
         user.setUserName(userName);
         user.setEmailAddress(emailAddress);
@@ -94,8 +96,9 @@ public class User
         {
             user.setHashedPasswordAndSalt(digestedPassword);
 
-            HibernateUtil.createItem(user);
             HibernateUtil.createItem(userRole);
+            user.setUserRoleId(userRole.getId());
+            HibernateUtil.createItem(user);
         }
     }
 
@@ -117,6 +120,16 @@ public class User
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    public int getUserRoleId()
+    {
+        return userRoleId;
+    }
+
+    public void setUserRoleId(int userRoleId)
+    {
+        this.userRoleId = userRoleId;
     }
 
     public String getHashedPasswordAndSalt()

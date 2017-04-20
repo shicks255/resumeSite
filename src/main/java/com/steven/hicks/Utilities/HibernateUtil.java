@@ -24,6 +24,7 @@ public class HibernateUtil
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
+        session.beginTransaction();
         session.save(o);
 
         session.getTransaction().commit();
@@ -35,7 +36,7 @@ public class HibernateUtil
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
-
+        session.beginTransaction();
         session.delete(o);
 
         session.getTransaction().commit();
@@ -47,7 +48,7 @@ public class HibernateUtil
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
-
+        session.beginTransaction();
         session.update(o);
 
         session.getTransaction().commit();

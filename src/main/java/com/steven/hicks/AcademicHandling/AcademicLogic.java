@@ -71,11 +71,6 @@ public class AcademicLogic
         HibernateUtil.deleteItem(course);
     }
 
-    public static AcademicCourse getCourse(int courseId)
-    {
-        return AcademicLogic.getCourse(courseId);
-    }
-
     public static String saveCoursework(File file, FileRequest fr) throws IOException
     {
         StringBuilder errorMessage = new StringBuilder("");
@@ -84,7 +79,7 @@ public class AcademicLogic
 
         Map<String, String> params = fr.getParameters();
 
-        AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(params.get("uploadCourseId")));
+        AcademicCourse course = AcademicCourse.getCourse(Integer.valueOf(params.get("uploadCourseId")));
 
         String fileName = fr.getShortFilename().substring(fr.getShortFilename().lastIndexOf(File.separator) + 1);
 
@@ -136,7 +131,7 @@ public class AcademicLogic
         {
             HibernateUtil.deleteItem(coursework);
 
-            AcademicCourse course = AcademicLogic.getCourse(coursework.getCourseId());
+            AcademicCourse course = AcademicCourse.getCourse(coursework.getCourseId());
             if (course != null)
             {
                 course.setCountOfCourseworks(course.getCountOfCourseworks() > 0 ? course.getCountOfCourseworks() - 1 : 0);

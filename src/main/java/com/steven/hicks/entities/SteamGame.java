@@ -1,10 +1,5 @@
 package com.steven.hicks.entities;
 
-import java.util.Comparator;
-
-/**
- * Created by Steven on 7/31/2016.
- */
 public class SteamGame
 {
     private int appId;

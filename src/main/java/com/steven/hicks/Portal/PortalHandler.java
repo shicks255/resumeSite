@@ -34,8 +34,6 @@ public class PortalHandler extends HttpServlet
             Principal principal = request.getUserPrincipal();
             User user = User.getUser(principal.getName());
 
-            request.setAttribute("user", user);
-
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 

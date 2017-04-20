@@ -11,9 +11,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-/**
- * Created by Steven on 0018, April 18, 2017.
- */
 public class PortalLogic
 {
 

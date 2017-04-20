@@ -8,9 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * Created by Steven on 10/11/2016.
- */
 @Entity
 public class Visitor
 {

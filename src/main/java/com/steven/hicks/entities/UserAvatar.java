@@ -6,10 +6,6 @@ import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 
-/**
- * Created by Steven on 0018, April 18, 2017.
- */
-
 @Entity
 public class UserAvatar
 {
@@ -42,15 +38,19 @@ public class UserAvatar
 
     public static UserAvatar getAvatar(Integer avatarObjectId)
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        if (avatarObjectId != null)
+        {
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+            UserAvatar avatar = session.get(UserAvatar.class, avatarObjectId);
 
-        UserAvatar avatar = session.get(UserAvatar.class, avatarObjectId);
+            session.close();
+            sessionFactory.close();
 
-        session.close();
-        sessionFactory.close();
-
-        return avatar;
+            return avatar;
+        }
+        return null;
     }
 
     @Override

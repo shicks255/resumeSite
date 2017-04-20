@@ -52,7 +52,6 @@ public class AcademicCourse
         AcademicCourse that = (AcademicCourse) o;
 
         return objectId == that.objectId;
-
     }
 
     @Override
@@ -66,7 +65,7 @@ public class AcademicCourse
         return AcademicLogic.getCoursework(this);
     }
 
-    public AcademicCourse getCourse(int courseId)
+    public static AcademicCourse getCourse(int courseId)
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();

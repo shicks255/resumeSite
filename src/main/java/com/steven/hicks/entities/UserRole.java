@@ -1,18 +1,29 @@
 package com.steven.hicks.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class UserRole
 {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Column
     private String role = "";
 
     @Column
     private String userName = "";
+
+    @Override
+    public String toString()
+    {
+        return "UserRole{" +
+                "id=" + id +
+                ", role='" + role + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o)
@@ -22,21 +33,23 @@ public class UserRole
 
         UserRole userRole = (UserRole) o;
 
-        return role.equals(userRole.role);
+        return id == userRole.id;
     }
 
     @Override
     public int hashCode()
     {
-        return role.hashCode();
+        return id;
     }
 
-    @Override
-    public String toString()
+    public int getId()
     {
-        return "UserRole{" +
-                "role='" + role + '\'' +
-                '}';
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public String getRole()

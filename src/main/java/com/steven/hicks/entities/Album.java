@@ -1,11 +1,7 @@
 package com.steven.hicks.entities;
 
-/**
- * Created by Steven on 0001, March 1, 2017.
- */
 public class Album
 {
-
     private String artist = "";
     private String album = "";
     private String year = "";

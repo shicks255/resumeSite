@@ -64,7 +64,7 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("editACourse"))
         {
             String courseId = request.getParameter("courseId");
-            AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(courseId));
+            AcademicCourse course = AcademicCourse.getCourse(Integer.valueOf(courseId));
 
             AcademicLogic.editCourse(request, course);
 
@@ -75,7 +75,7 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("deleteACourse"))
         {
             String courseObjectId = request.getParameter("objectId");
-            AcademicCourse course = AcademicLogic.getCourse(Integer.valueOf(courseObjectId));
+            AcademicCourse course = AcademicCourse.getCourse(Integer.valueOf(courseObjectId));
 
             if (course != null)
                 AcademicLogic.deleteCourse(course);
@@ -87,7 +87,7 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("getAjaxForEditingCourse"))
         {
             int courseObjectId = Integer.valueOf(request.getParameter("courseObjectId"));
-            AcademicCourse course = AcademicLogic.getCourse(courseObjectId);
+            AcademicCourse course = AcademicCourse.getCourse(courseObjectId);
 
             request.setAttribute("course", course);
 
@@ -100,7 +100,7 @@ public class AcademicHandler extends HttpServlet
         {
             int courseObjectId = Integer.valueOf(request.getParameter("courseObjectId"));
 
-            AcademicCourse course = AcademicLogic.getCourse(courseObjectId);
+            AcademicCourse course = AcademicCourse.getCourse(courseObjectId);
 
             if (course != null)
             {
