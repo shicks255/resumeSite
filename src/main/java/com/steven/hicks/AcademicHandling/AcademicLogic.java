@@ -64,7 +64,6 @@ public class AcademicLogic
         course.setGradeReceived(request.getParameter("courseGradeEdit"));
 
         HibernateUtil.updateItem(course);
-
     }
 
     public static void deleteCourse(AcademicCourse course)
