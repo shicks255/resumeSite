@@ -29,6 +29,7 @@ public class PortalHandler extends HttpServlet
     {
         String action = request.getParameter("action");
 
+//        -----Home Page
         if (action.equalsIgnoreCase("form"))
         {
             Principal principal = request.getUserPrincipal();
@@ -41,6 +42,7 @@ public class PortalHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        -----Edit Profile
         if (action.equalsIgnoreCase("editProfile"))
         {
             String editFirstName = request.getParameter("editFirstName");
@@ -59,6 +61,7 @@ public class PortalHandler extends HttpServlet
             response.sendRedirect("portal?action=form");
         }
 
+//        -----Edit Avatar
         if (action.equalsIgnoreCase("editAvatar"))
         {
             HttpSession userSession = request.getSession();

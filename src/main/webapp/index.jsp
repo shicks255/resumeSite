@@ -16,10 +16,7 @@
     }
 </script>
 
-<%--Start materliaze container here--%>
 <div class="container">
-    <%--<a href="${pageContext.request.contextPath}/control?tab1=test&tab2=test2">Click Here</a>--%>
-
 
     <div onclick="emailPopup();" class="fixed-action-btn hide-on-small-and-down" style="bottom:45px; right: 14px;">
         <a class="btn-floating btn-medium waves-effect waves-light deep-purple lighten-3"><i class="large material-icons">mail</i></a>

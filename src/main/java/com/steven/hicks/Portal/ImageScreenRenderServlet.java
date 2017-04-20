@@ -29,15 +29,6 @@ public class ImageScreenRenderServlet extends HttpServlet
             response.setContentLengthLong(user.getAvatar().getPicture().length);
 
             response.getOutputStream().write(user.getAvatar().getPicture());
-
-//            PrintWriter out = response.getWriter();
-//            String imageSource = "data:image/png;base64, ";
-//            imageSource += Base64.getEncoder().encodeToString(user.getAvatar().getPicture());
-//            imageSource += org.apache.commons.codec.binary.Base64.encodeBase64String(user.getAvatar().getPicture());
-//            out.write(imageSource);
-
-//            out.flush();
-//            out.close();
         }
     }
 

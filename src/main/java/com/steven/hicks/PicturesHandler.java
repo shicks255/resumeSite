@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class PicturesHandler extends HttpServlet
 {
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String action = request.getParameter("action");
 
@@ -57,9 +57,9 @@ public class PicturesHandler extends HttpServlet
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        doPost(request, response);
+        doGet(request, response);
     }
 
 }

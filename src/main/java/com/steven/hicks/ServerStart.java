@@ -21,7 +21,7 @@ import java.io.IOException;
 public class ServerStart extends HttpServlet
 {
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String visitorIPAddress = request.getRemoteAddr();
         if (request.getHeader("x-forwarded-for")!=null)
@@ -70,8 +70,8 @@ public class ServerStart extends HttpServlet
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        doPost(request, response);
+        doGet(request, response);
     }
 }
