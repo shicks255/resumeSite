@@ -140,8 +140,8 @@
     <li><a href="#!">Order History</a></li>
     <li><a href="#!">Your Product Reviews</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Sign Out</a></li>
+    <li><a class="waves-effect" href="${pageContext.request.contextPath}/">StevenMHicks.com</a></li>
+    <li><a class="waves-effect" href="${pageContext.request.contextPath}/portal?action=signOut">Sign Out</a></li>
 </ul>
 
 <div id="editProfileDialog" class="hiddenDiv">

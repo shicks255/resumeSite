@@ -20,11 +20,8 @@
             var bigPicNameEnd = fileName.slice(cutHere+6);
 
             var newFileName = bigPicNameStart + bigPicNameEnd;
-            <%--var servletContext = ${imagePath};--%>
-            console.log(servletContext);
-            var servletContext = "/images/";
-            window.open(servletContext + newFileName, '');
-
+            var servletContext = "${pageContext.request.contextPath}";
+            window.open(servletContext + '/images/' + newFileName, '');
         }
     </script>
 
@@ -40,7 +37,7 @@
         <c:set var="classType" value="col s12 m6 l3"/>
         <c:forEach var="file" items="${fileList}">
             <div class="${classType}" style="margin-bottom : 1.8%;">
-                <a href="#"><img onclick="openPicture('${file}');" class="liquidPic hoverable" data-caption="A pic" src="images/${file}"/></a>
+                <a href="#"><img onclick="openPicture('${file}');" class="liquidPic hoverable" data-caption="A pic" src="${pageContext.request.contextPath}/images/${file}"/></a>
             </div>
         </c:forEach>
     </div>

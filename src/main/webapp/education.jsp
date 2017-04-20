@@ -136,7 +136,9 @@
             <br/>
             <label for="courseworkNotes">Coursework notes:</label>
             <input type="text" name="courseworkNotes" id="courseworkNotes"/>
-            <input type="submit" value="Upload">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Upload
+                <i class="material-icons right">send</i>
+            </button>
         </form>
     </div>
 </div>

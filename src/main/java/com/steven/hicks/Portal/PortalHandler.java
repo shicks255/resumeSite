@@ -68,7 +68,8 @@ public class PortalHandler extends HttpServlet
             User user = (User)userSession.getAttribute("user");
 
             UserAvatar avatar = user.getAvatar();
-            HibernateUtil.deleteItem(avatar);
+            if (avatar != null)
+                HibernateUtil.deleteItem(avatar);
 
             user.setAvatarObjectId(null);
             HibernateUtil.updateItem(user);
@@ -79,6 +80,16 @@ public class PortalHandler extends HttpServlet
             PortalLogic.saveAvater(file, fr, user);
 
             response.sendRedirect("portal?action=form");
+        }
+
+//        -----Sign Out
+        if (action.equalsIgnoreCase("signOut"))
+        {
+            HttpSession userSession = request.getSession();
+            userSession.invalidate();
+
+            response.sendRedirect(getServletContext().getContextPath() + "/techPractice?action=form");
+
         }
 
     }

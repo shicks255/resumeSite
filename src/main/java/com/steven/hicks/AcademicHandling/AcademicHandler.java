@@ -57,7 +57,7 @@ public class AcademicHandler extends HttpServlet
         if (action.equalsIgnoreCase("addACourse"))
         {
             AcademicLogic.addCourse(request);
-            response.sendRedirect("academic?action=form");
+            response.sendRedirect(getServletContext().getContextPath() + "/academic?action=form");
         }
 
 //        ------EDIT COURSE ACTION
@@ -68,7 +68,7 @@ public class AcademicHandler extends HttpServlet
 
             AcademicLogic.editCourse(request, course);
 
-            response.sendRedirect("academic?action=form");
+            response.sendRedirect(getServletContext().getContextPath() + "/academic?action=form");
         }
 
 //        ------DELETE A COURSE ACTION
@@ -80,7 +80,7 @@ public class AcademicHandler extends HttpServlet
             if (course != null)
                 AcademicLogic.deleteCourse(course);
 
-            response.sendRedirect("academic?action=form");
+            response.sendRedirect(getServletContext().getContextPath() + "/academic?action=form");
         }
 
 //        ------AJAX GET A COURSE TO EDIT
@@ -126,7 +126,7 @@ public class AcademicHandler extends HttpServlet
 
             AcademicLogic.saveCoursework(file, fr);
 
-            response.sendRedirect("/academic?action=form");
+            response.sendRedirect(getServletContext().getContextPath() + "/academic?action=form");
         }
 
 //        -----DELETE A COURSEWORK ITEM
@@ -135,9 +135,8 @@ public class AcademicHandler extends HttpServlet
             String fileName = request.getParameter("fileName");
             AcademicLogic.deleteCoursework(fileName);
 
-            response.sendRedirect("/academic?action=form");
+            response.sendRedirect(getServletContext().getContextPath() + "/academic?action=form");
         }
-
     }
 
     @Override
