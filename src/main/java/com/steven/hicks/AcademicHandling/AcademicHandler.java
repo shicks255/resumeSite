@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-
 @WebServlet(urlPatterns = "/academic")
 public class AcademicHandler extends HttpServlet
 {
@@ -52,7 +51,6 @@ public class AcademicHandler extends HttpServlet
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education/bibliography.jsp");
             dispatcher.forward(request, response);
-
         }
 
 //        ------ADD COURSE ACTION
@@ -126,21 +124,18 @@ public class AcademicHandler extends HttpServlet
             FileRequest fr = FileUploadUtil.getFileRequest(request);
             File file = fr.getUploadedFile();
 
-            String errorMessage = AcademicLogic.saveCoursework(file, fr);
+            AcademicLogic.saveCoursework(file, fr);
 
-            if (errorMessage.length() == 0)
-                response.sendRedirect("/academic?action=form");
-
+            response.sendRedirect("/academic?action=form");
         }
 
 //        -----DELETE A COURSEWORK ITEM
         if (action.equalsIgnoreCase("deleteCoursework"))
         {
             String fileName = request.getParameter("fileName");
-            String errorMessage = AcademicLogic.deleteCoursework(fileName);
+            AcademicLogic.deleteCoursework(fileName);
 
             response.sendRedirect("/academic?action=form");
-
         }
 
     }
