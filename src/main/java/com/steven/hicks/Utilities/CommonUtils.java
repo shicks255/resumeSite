@@ -1,9 +1,9 @@
-package com.steven.hicks;
+package com.steven.hicks.Utilities;
 
 import javax.servlet.ServletContext;
 
 
-public final class Utils
+public final class CommonUtils
 {
     public static void sleep(int millis)
     {

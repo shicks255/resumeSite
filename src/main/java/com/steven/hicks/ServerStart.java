@@ -1,5 +1,6 @@
 package com.steven.hicks;
 
+import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.Visitor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,10 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Created by Steven on 6/6/2016.

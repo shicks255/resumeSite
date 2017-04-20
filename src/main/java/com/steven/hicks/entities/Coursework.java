@@ -1,5 +1,9 @@
 package com.steven.hicks.entities;
 
+import com.steven.hicks.Utilities.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -48,6 +52,17 @@ public class Coursework
         Coursework that = (Coursework) o;
 
         return fileName.equals(that.fileName);
+    }
+
+    public static Coursework getCourseworkByFileName(String fileName)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        Coursework coursework = session.get(Coursework.class, fileName);
+        session.close();
+        factory.close();
+
+        return coursework;
     }
 
     @Override

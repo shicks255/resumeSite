@@ -1,29 +1,17 @@
-package com.steven.hicks;
+package com.steven.hicks.Utilities;
 
-import com.steven.hicks.AcademicHandling.AcademicLogic;
-import com.steven.hicks.entities.AcademicCourse;
-import com.steven.hicks.entities.Coursework;
 import com.steven.hicks.entities.FileRequest;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-
-/**
- * Created by Steven on 0023, March 23, 2017.
- */
 
 public class FileUploadUtil extends HttpServlet
 {

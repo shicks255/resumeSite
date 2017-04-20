@@ -86,7 +86,7 @@ input[type=submit]:hover {color : red;}
 .popup{
     display : block;
     position : fixed;
-    z-index : 10;
+    z-index : 1000;
     left : 0;
     top : 0;
     width : 100%;
@@ -119,6 +119,19 @@ input[type=submit]:hover {color : red;}
 .btn {
     border-radius : 100px;
 }
+
+input,
+input::-webkit-input-placeholder {
+    font-size: 20px;
+    line-height: 3;
+}
+input,
+input::-moz-placeholder {
+    font-size: 20px;
+    line-height: 3;
+}
+
+
 
 /*.popup table {*/
         /*!*padding : 175px;*!*/

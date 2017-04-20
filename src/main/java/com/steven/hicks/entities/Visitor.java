@@ -1,12 +1,11 @@
 package com.steven.hicks.entities;
 
-import com.steven.hicks.HibernateUtil;
+import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**

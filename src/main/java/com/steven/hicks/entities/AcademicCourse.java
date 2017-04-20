@@ -1,13 +1,12 @@
 package com.steven.hicks.entities;
 
 import com.steven.hicks.AcademicHandling.AcademicLogic;
+import com.steven.hicks.Utilities.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 import java.util.List;
-
-/**
- * Created by Steven on 7/18/2016.
- */
 
 @Entity
 public class AcademicCourse
@@ -65,6 +64,17 @@ public class AcademicCourse
     public List<Coursework> getCoursework()
     {
         return AcademicLogic.getCoursework(this);
+    }
+
+    public AcademicCourse getCourse(int courseId)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        AcademicCourse course = session.get(AcademicCourse.class, courseId);
+        session.close();
+        factory.close();
+        return course;
     }
 
     //    ----------Getters & Setters

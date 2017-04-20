@@ -1,7 +1,7 @@
 package com.steven.hicks.AcademicHandling;
 
-import com.steven.hicks.HibernateUtil;
-import com.steven.hicks.Utils;
+import com.steven.hicks.Utilities.HibernateUtil;
+import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.AcademicCourse;
 import com.steven.hicks.entities.Coursework;
 import com.steven.hicks.entities.FileRequest;
@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Blob;
 import java.util.List;
 import java.util.Map;
 
@@ -40,14 +39,7 @@ public class AcademicLogic
 
         course.setSemesterTrackingNumber(AcademicLogic.getSemesterNumberForSemester(semester));
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
-        session.beginTransaction();
-
-        session.save(course);
-        session.getTransaction().commit();
-        session.close();
-        factory.close();
+        HibernateUtil.createItem(course);
     }
 
     public static List<AcademicCourse> getCourseList()
@@ -71,37 +63,18 @@ public class AcademicLogic
         course.setSemester(request.getParameter("semesterEdit"));
         course.setGradeReceived(request.getParameter("courseGradeEdit"));
 
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.update(course);
-        session.getTransaction().commit();
-        session.close();
-        sessionFactory.close();
+        HibernateUtil.updateItem(course);
+
     }
 
     public static void deleteCourse(AcademicCourse course)
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.delete(course);
-        session.getTransaction().commit();
-        session.close();
-        sessionFactory.close();
+        HibernateUtil.deleteItem(course);
     }
 
     public static AcademicCourse getCourse(int courseId)
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        AcademicCourse course = session.get(AcademicCourse.class, courseId);
-
-        session.close();
-        sessionFactory.close();
-
-        return course;
+        return AcademicLogic.getCourse(courseId);
     }
 
     public static String saveCoursework(File file, FileRequest fr) throws IOException
@@ -144,16 +117,9 @@ public class AcademicLogic
 
         coursework.setFile(bytes);
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
-        session.beginTransaction();
-
-        session.save(coursework);
+        HibernateUtil.createItem(coursework);
         course.setCountOfCourseworks(course.getCountOfCourseworks()+1);
-        session.update(course);
-        session.getTransaction().commit();
-        session.close();
-        factory.close();
+        HibernateUtil.updateItem(course);
 
         File tempFile = file.getAbsoluteFile();
         tempFile.delete();
@@ -169,21 +135,14 @@ public class AcademicLogic
         String errorMessage = "";
         if (coursework != null)
         {
-            SessionFactory factory = HibernateUtil.getSessionFactory();
-            Session session = factory.openSession();
-            session.beginTransaction();
-
-            session.delete(coursework);
+            HibernateUtil.deleteItem(coursework);
 
             AcademicCourse course = AcademicLogic.getCourse(coursework.getCourseId());
             if (course != null)
             {
                 course.setCountOfCourseworks(course.getCountOfCourseworks() > 0 ? course.getCountOfCourseworks() - 1 : 0);
-                session.update(course);
+                HibernateUtil.updateItem(course);
             }
-
-            session.getTransaction().commit();
-            session.close();
         }
         if (coursework == null)
             errorMessage = "Error...coursework not found.";
@@ -202,10 +161,8 @@ public class AcademicLogic
 
         File tempFile = File.createTempFile(prefix, suffix, new File(System.getProperty("java.io.tmpdir")));
 
-//            response.setContentLengthLong(tempFile.length());
-        response.setContentType(Utils.getMimeType(fileName));
+        response.setContentType(CommonUtils.getMimeType(fileName));
         response.addHeader("Content-Disposition", "filename=\"" + coursework.getFileName() + "\"");
-//            response.addHeader("Content-Disposition", "filename=" + coursework.getFileName());
 
         try(FileOutputStream outputStream = new FileOutputStream(tempFile))
         {
@@ -227,8 +184,6 @@ public class AcademicLogic
         }
 
         tempFile.delete();
-
-
     }
 
     public static List<Coursework> getCoursework(AcademicCourse course)
@@ -248,15 +203,7 @@ public class AcademicLogic
 
     public static Coursework getCourseworkByFileName(String fileName)
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Coursework coursework = session.get(Coursework.class, fileName);
-
-        session.close();
-        sessionFactory.close();
-
-        return coursework;
+        return Coursework.getCourseworkByFileName(fileName);
     }
 
     public static int getSemesterNumberForSemester(String semester)

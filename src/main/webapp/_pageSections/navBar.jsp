@@ -73,34 +73,34 @@
 <body>
     <ul id="dropdown1" class="dropdown-content cyan">
         <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?&action=thesis">Thesis</a></li>
+        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?action=thesis">Thesis</a></li>
         <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?&action=bibliography">Bibliography</a></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a></li>
     </ul>
 
     <ul id="dropdown2" class="dropdown-content cyan">
         <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?&action=java">Java</a></li>
+        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=java">Java</a></li>
         <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=javaScript">JavaScript</a></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=javaScript">JavaScript</a></li>
         <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=css">CSS</a></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=css">CSS</a></li>
     </ul>
 
     <ul id="dropdown4" class="dropdown-content cyan">
         <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?&action=java">Java</a></li>
+        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=java">Java</a></li>
         <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=javaScript">JavaScript</a></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=javaScript">JavaScript</a></li>
         <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?&action=css">CSS</a></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=css">CSS</a></li>
     </ul>
 
     <ul id="dropdown3" class="dropdown-content cyan">
         <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?&action=thesis">Thesis</a></li>
+        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?action=thesis">Thesis</a></li>
         <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?&action=bibliography">Bibliography</a></li>
+        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a></li>
     </ul>
 
     <nav>

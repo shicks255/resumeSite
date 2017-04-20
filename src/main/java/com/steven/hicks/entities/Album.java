@@ -6,9 +6,9 @@ package com.steven.hicks.entities;
 public class Album
 {
 
-    String artist = "";
-    String album = "";
-    String year = "";
+    private String artist = "";
+    private String album = "";
+    private String year = "";
 
     public Album()
     {}

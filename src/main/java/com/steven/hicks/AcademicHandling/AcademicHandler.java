@@ -1,40 +1,26 @@
 package com.steven.hicks.AcademicHandling;
 
-import com.steven.hicks.FileUploadUtil;
-import com.steven.hicks.HibernateUtil;
-import com.steven.hicks.Utils;
+import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.entities.AcademicCourse;
 import com.steven.hicks.entities.Coursework;
 import com.steven.hicks.entities.FileRequest;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.*;
-import java.util.Iterator;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
-import static java.lang.Thread.sleep;
-
-/**
- * Created by Steven on 6/18/2016.
- */
 
 
 @WebServlet(urlPatterns = "/academic")
 public class AcademicHandler extends HttpServlet
 {
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String action = request.getParameter("action");
 
@@ -160,8 +146,8 @@ public class AcademicHandler extends HttpServlet
     }
 
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        doPost(request, response);
+        doGet(request, response);
     }
 }

@@ -7,5 +7,13 @@
 <div class="container">
 
     <h1>Tech Practice:</h1>
+
+
+    Time to enter the store <a href="${pageContext.request.contextPath}/portal?action=form">here</a>
+
+
+
+
+
 </div>
 <jsp:include page="_pageSections/footer.jsp" />
