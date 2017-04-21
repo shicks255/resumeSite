@@ -9,10 +9,6 @@ import javax.servlet.annotation.WebListener;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Steven on 0005, April 5, 2017.
- */
-
 @WebListener
 public class ServerStartupListener implements ServletContextListener
 {
