@@ -76,17 +76,17 @@ public class User
         return user;
     }
 
-    public static void createUser(String userName, String password, String emailAddress, String firstName, String lastName)
+    public static void createUser(String userName, String password, String emailAddress, String firstName, String lastName, String role)
     {
         User user = new User();
         user.setUserName(userName);
         user.setEmailAddress(emailAddress);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        user.setRole("user");
+        user.setRole(role);
 
         UserRole userRole = new UserRole();
-        userRole.setRole("user");
+        userRole.setRole(role);
         userRole.setUserName(userName);
 
         String digestedPassword = "";

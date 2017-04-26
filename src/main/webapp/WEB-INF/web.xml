@@ -12,6 +12,11 @@
         </form-login-config>
     </login-config>
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/portal/loginError_unauthorized.jsp</location>
+    </error-page>
+
     <!--<security-role>-->
         <!--<role-name>test</role-name>-->
     <!--</security-role>-->

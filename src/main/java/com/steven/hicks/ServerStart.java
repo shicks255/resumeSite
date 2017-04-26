@@ -2,8 +2,7 @@ package com.steven.hicks;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.Visitor;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,21 +12,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Steven on 6/6/2016.
- */
-
 @WebServlet(urlPatterns = "")
 public class ServerStart extends HttpServlet
 {
+    private static final Logger log = Logger.getLogger(ServerStart.class.getName());
+
+    @Override
+    public void init() throws ServletException
+    {
+        log.info("ResumeSite starting up");
+        ServerStartupTasks.loadDefaultItemTypes();
+    }
+
+    @Override
+    public void destroy()
+    {
+        log.info("ResumeSite shutting down");
+    }
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String visitorIPAddress = request.getRemoteAddr();
         if (request.getHeader("x-forwarded-for")!=null)
             visitorIPAddress = request.getHeader("x-forwarded-for");
-        System.out.println(visitorIPAddress);
-        System.out.println(request.getContextPath());
 
         if (request.getSession(false) == null)
         {
@@ -37,15 +45,8 @@ public class ServerStart extends HttpServlet
                 visitor = Visitor.getVisitor(visitorIPAddress);
                 visitor.setCountOfVisits(visitor.getCountOfVisits() + 1);
 
-                System.out.println(visitor);
-
-                SessionFactory factory = HibernateUtil.getSessionFactory();
-                Session session = factory.openSession();
-                session.beginTransaction();
-                session.update(visitor);
-                session.getTransaction().commit();
-                session.close();
-                factory.close();
+                HibernateUtil.updateItem(visitor);
+                log.info("Visitor returning " + visitor.toString());
             }
             else
             {
@@ -53,15 +54,8 @@ public class ServerStart extends HttpServlet
                 visitor.setIpAddress(visitorIPAddress);
                 visitor.setCountOfVisits(1);
 
-                System.out.println(visitor);
-
-                SessionFactory factory = HibernateUtil.getSessionFactory();
-                Session session = factory.openSession();
-                session.beginTransaction();
-                session.save(visitor);
-                session.getTransaction().commit();
-                session.close();
-                factory.close();
+                HibernateUtil.createItem(visitor);
+                log.info("New visited logged " + visitor.toString());
             }
         }
 

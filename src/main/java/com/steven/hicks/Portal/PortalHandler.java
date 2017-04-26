@@ -19,9 +19,11 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebServlet (urlPatterns = "/portal")
-@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"user"} ))
+@ServletSecurity(value = @HttpConstraint(rolesAllowed = {"user", "admin"} ))
 public class PortalHandler extends HttpServlet
 {
     @Override
@@ -86,12 +88,37 @@ public class PortalHandler extends HttpServlet
         if (action.equalsIgnoreCase("signOut"))
         {
             HttpSession userSession = request.getSession();
+
+
             userSession.invalidate();
 
             response.sendRedirect(getServletContext().getContextPath() + "/techPractice?action=form");
-
         }
 
+//        -----Order Reviews
+        if (action.equalsIgnoreCase("reviews"))
+        {
+
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalReviews.jsp");
+            dispatcher.forward(request, response);
+        }
+
+//        -----Order History
+        if (action.equalsIgnoreCase("orderHistory"))
+        {
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalOrderHistory.jsp");
+            dispatcher.forward(request, response);
+        }
+
+//        -----My Cart
+        if (action.equalsIgnoreCase("portalCart"))
+        {
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalCart.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     @Override

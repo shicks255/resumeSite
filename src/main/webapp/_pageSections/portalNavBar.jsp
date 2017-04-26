@@ -94,10 +94,10 @@
     <div class="nav-wrapper cyan">
         <ul>
             <li id="menuButton">
-                <a href="#"  data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+                <a href=""  data-activates="slide-out" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
             </li>
             <li id="portalNavTitle">
-                <a href="#"> Portal Search</a>
+                <a href="${pageContext.request.contextPath}/portal?action=form"> Portal Search</a>
             </li>
             <li id="searchBar">
                 <input type="text" name="search" placeholder="Search for an item">
@@ -106,7 +106,7 @@
                 <a href="#" ><i class="material-icons">search</i></a>
             </li>
             <li id="cartIcon">
-                <a href="#"> <i class="material-icons">shopping_cart</i></a>
+                <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
             </li>
         </ul>
     </div>
@@ -137,10 +137,13 @@
         </div>
     </li>
     <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Order History</a></li>
-    <li><a href="#!">Your Product Reviews</a></li>
+    <li><a href="${pageContext.request.contextPath}/portal?action=orderHistory">Order History</a></li>
+    <li><a href="${pageContext.request.contextPath}/portal?action=reviews">Your Product Reviews</a></li>
     <li><div class="divider"></div></li>
     <li><a class="waves-effect" href="${pageContext.request.contextPath}/">StevenMHicks.com</a></li>
+    <c:if test="${user.role == 'admin'}">
+        <li><a class="waves-effect" href="${pageContext.request.contextPath}/portalItemHandler?action=form">Item Maintenance</a></li>
+    </c:if>
     <li><a class="waves-effect" href="${pageContext.request.contextPath}/portal?action=signOut">Sign Out</a></li>
 </ul>
 

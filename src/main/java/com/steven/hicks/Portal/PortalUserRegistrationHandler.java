@@ -26,7 +26,7 @@ public class PortalUserRegistrationHandler extends HttpServlet
             String firstName = request.getParameter("newFirstName");
             String lastName  = request.getParameter("newLastName");
 
-            User.createUser(userName, password, email, firstName, lastName);
+            User.createUser(userName, password, email, firstName, lastName, "user");
 
             response.sendRedirect("portal?action=form");
         }
@@ -44,6 +44,20 @@ public class PortalUserRegistrationHandler extends HttpServlet
 
             response.setContentType("text/plain");
             response.getWriter().write(userExists);
+        }
+
+        if (action.equalsIgnoreCase("addAdminUser"))
+        {
+
+            String userName = request.getParameter("adminUserName");
+            String password = request.getParameter("adminPassword");
+            String email    = request.getParameter("adminEmail");
+            String firstName = request.getParameter("adminFirstName");
+            String lastName = request.getParameter("adminLastName");
+
+            User.createUser(userName, password, email, firstName, lastName, "admin");
+
+            response.sendRedirect("portal?action=form");
         }
 
     }

@@ -17,14 +17,12 @@ public class Visitor
     @Column
     private int countOfVisits;
 
-    public Visitor()
-    {}
-
     @Override
     public String toString()
     {
         return "Visitor{" +
                 "ipAddress='" + ipAddress + '\'' +
+                ", countOfVisits=" + countOfVisits +
                 '}';
     }
 
