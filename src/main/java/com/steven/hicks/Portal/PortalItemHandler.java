@@ -2,8 +2,12 @@ package com.steven.hicks.Portal;
 
 
 import com.steven.hicks.Utilities.HibernateUtil;
+import com.steven.hicks.Utilities.StoreItemHelpers;
 import com.steven.hicks.entities.StoreItems.MusicAlbum;
 import com.steven.hicks.entities.StoreItems.StoreItemType;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -66,6 +70,19 @@ public class PortalItemHandler extends HttpServlet
         {
             String itemType = request.getParameter("itemType");
             StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
+
+            Class clazz = StoreItemHelpers.getStoreItemQueryFromItemType(itemType);
+
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.openSession();
+
+            Query query = session.createQuery("from " + clazz.getName());
+            List<Object> list = query.list();
+
+            session.close();
+            factory.close();
+
+            String balls = "balls";
 
 
 
