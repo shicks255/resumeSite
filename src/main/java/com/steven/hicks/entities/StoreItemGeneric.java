@@ -3,21 +3,40 @@ package com.steven.hicks.entities;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "ITEM_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorColumn()
-@DiscriminatorValue("StoreItemGeneric")
 public abstract class StoreItemGeneric
 {
     @Id
-    String itemCode;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int itemNumber;
+
     @Column
     String itemName;
     @Column
     String itemDescription;
     @Column
-    String getItemType;
+    int itemType;
     @Column
-    String getPrice;
+    String itemPrice;
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StoreItemGeneric that = (StoreItemGeneric) o;
+
+        return itemNumber == that.itemNumber;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return itemNumber;
+    }
 
     public String getItemName()
     {
@@ -39,33 +58,33 @@ public abstract class StoreItemGeneric
         this.itemDescription = itemDescription;
     }
 
-    public String getItemCode()
+    public int getItemNumber()
     {
-        return itemCode;
+        return itemNumber;
     }
 
-    public void setItemCode(String itemCode)
+    public void setItemNumber(int itemNumber)
     {
-        this.itemCode = itemCode;
+        this.itemNumber = itemNumber;
     }
 
-    public String getGetItemType()
+    public int getItemType()
     {
-        return getItemType;
+        return itemType;
     }
 
-    public void setGetItemType(String getItemType)
+    public void setItemType(int itemType)
     {
-        this.getItemType = getItemType;
+        this.itemType = itemType;
     }
 
-    public String getGetPrice()
+    public String getItemPrice()
     {
-        return getPrice;
+        return itemPrice;
     }
 
-    public void setGetPrice(String getPrice)
+    public void setItemPrice(String itemPrice)
     {
-        this.getPrice = getPrice;
+        this.itemPrice = itemPrice;
     }
 }

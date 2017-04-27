@@ -1,22 +1,17 @@
 package com.steven.hicks.entities.StoreItems;
 
 import com.steven.hicks.entities.StoreItem;
+import com.steven.hicks.entities.StoreItemGeneric;
 
 import javax.persistence.*;
 
 @Entity
-public class MusicAlbum implements StoreItem
+@DiscriminatorValue("MusicAlbum")
+public class MusicAlbum extends StoreItemGeneric
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int itemNumber;
-
-    @Column
-    String itemDescription = "";
-    @Column
-    String itemPrice = "";
-    @Column
-    int itemType;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    String musicAlbumItemId = "";
 
     @Column
     String artist = "";
@@ -27,23 +22,6 @@ public class MusicAlbum implements StoreItem
 
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MusicAlbum that = (MusicAlbum) o;
-
-        return itemNumber == that.itemNumber;
-    }
-
-    @Override
-    public int hashCode()
-    {
-        return itemNumber;
-    }
-
-    @Override
     public String toString()
     {
         return artist + " - " + albumTitle;
@@ -52,58 +30,18 @@ public class MusicAlbum implements StoreItem
     public String getItemCode()
     {
         StoreItemType itemType = StoreItemType.getItemTypeByName("Music_Album");
-        return "" + getItemNumber() + itemType.getItemTypeCode();
+        return "" + super.getItemNumber() + itemType.getItemTypeCode();
     }
 
-
-    @Override
-    public int getItemNumber()
-    {
-        return itemNumber;
-    }
-
-    public void setItemNumber(int itemNumber)
-    {
-        this.itemNumber = itemNumber;
-    }
-
-    @Override
-    public String getItemName()
-    {
-        return toString();
-    }
-
-    @Override
-    public String getItemDescription()
-    {
-        return itemDescription;
-    }
-
-    public void setItemDescription(String itemDescription)
-    {
-        this.itemDescription = itemDescription;
-    }
-
-    public String getItemPrice()
-    {
-        return itemPrice;
-    }
-
-    public void setItemPrice(String itemPrice)
-    {
-        this.itemPrice = itemPrice;
-    }
-
-    @Override
-    public int getItemType()
-    {
-        return itemType;
-    }
-
-    public void setItemType(int itemType)
-    {
-        this.itemType = itemType;
-    }
+//    public String getMusicAlbumItemId()
+//    {
+//        return musicAlbumItemId;
+//    }
+//
+//    public void setMusicAlbumItemId(String musicAlbumItemId)
+//    {
+//        this.musicAlbumItemId = musicAlbumItemId;
+//    }
 
     public String getArtist()
     {

@@ -59,6 +59,7 @@ public class PortalItemHandler extends HttpServlet
             musicAlbum.setArtist(artistName);
             musicAlbum.setAlbumTitle(albumTitle);
             musicAlbum.setReleaseYear(releaseYear);
+            musicAlbum.setItemName(artistName + " - " + albumTitle);
             musicAlbum.setItemType(StoreItemType.getItemTypeByName("Music_Album").getItemTypeCode());
 
             HibernateUtil.createItem(musicAlbum);
@@ -83,8 +84,6 @@ public class PortalItemHandler extends HttpServlet
             factory.close();
 
             String balls = "balls";
-
-
 
         }
 

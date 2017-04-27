@@ -25,6 +25,7 @@ public class ServerStartupListener implements ServletContextListener
 
     public void contextDestroyed(ServletContextEvent event)
     {
+        String test = "test";
 
     }
 

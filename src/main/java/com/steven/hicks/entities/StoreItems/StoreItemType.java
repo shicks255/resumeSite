@@ -27,6 +27,9 @@ public class StoreItemType
         Query query = session.createQuery("from StoreItemType order by itemTypeCode");
         List<StoreItemType> list = query.list();
 
+        session.close();
+        factory.close();
+
         return list;
     }
 
@@ -48,6 +51,10 @@ public class StoreItemType
 
         Query query = session.createQuery("from StoreItemType where itemType = \'" + itemTypeName + "\'");
         List<StoreItemType> items = query.list();
+
+        session.close();
+        factory.close();
+
         if (items.size() > 0)
             return items.get(0);
         else
