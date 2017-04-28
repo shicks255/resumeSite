@@ -13,8 +13,8 @@ public class ServerStartupTasks
     public static void loadDefaultItemTypes()
     {
         List<String> itemTypesToAdd = new ArrayList<>();
-        itemTypesToAdd.add("Music_Album");
-        itemTypesToAdd.add("Lego_Set");
+        itemTypesToAdd.add("MusicAlbum");
+        itemTypesToAdd.add("LegoSet");
 
         for (String itemType : itemTypesToAdd)
         {

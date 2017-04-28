@@ -3,6 +3,7 @@ package com.steven.hicks.Portal;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.Utilities.StoreItemHelpers;
+import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.StoreItems.MusicAlbum;
 import com.steven.hicks.entities.StoreItems.StoreItemType;
 import org.hibernate.Session;
@@ -60,11 +61,42 @@ public class PortalItemHandler extends HttpServlet
             musicAlbum.setAlbumTitle(albumTitle);
             musicAlbum.setReleaseYear(releaseYear);
             musicAlbum.setItemName(artistName + " - " + albumTitle);
-            musicAlbum.setItemType(StoreItemType.getItemTypeByName("Music_Album").getItemTypeCode());
+            musicAlbum.setItemType(StoreItemType.getItemTypeByName("MusicAlbum").getItemTypeCode());
 
             HibernateUtil.createItem(musicAlbum);
 
             response.sendRedirect("portalItemHandler?action=form");
+        }
+
+        if (action.equalsIgnoreCase("editMusicAlbums"))
+        {
+            List<StoreItemGeneric> musicAlbums = StoreItemGeneric.getItemsOfType("MusicAlbum");
+
+            for (StoreItemGeneric musicAlbum : musicAlbums)
+            {
+
+                String newName = request.getParameter("name_" + musicAlbum.getItemNumber());
+                String newDescription = request.getParameter("description_" + musicAlbum.getItemNumber());
+                String newPrice = request.getParameter("price_" + musicAlbum.getItemNumber());
+                String newArtistName = request.getParameter("artist_" + musicAlbum.getItemNumber());
+                String newAlbumTitle = request.getParameter("albumTitle_" + musicAlbum.getItemNumber());
+                String newReleaseYear = request.getParameter("releaseYear_" + musicAlbum.getItemNumber());
+
+                if (newName.length() > 0)
+                    musicAlbum.setItemName(newName);
+                if (newDescription.length() > 0)
+                    musicAlbum.setItemDescription(newDescription);
+                if (newPrice.length() > 0)
+                    musicAlbum.setItemPrice(newPrice);
+                if (newArtistName.length() > 0)
+//                    musicAlbum.set(newDescription);
+                if (newAlbumTitle.length() > 0)
+                    musicAlbum.setItemDescription(newDescription);
+                if (newReleaseYear.length() > 0)
+                    musicAlbum.setItemDescription(newDescription);
+
+
+            }
         }
 
         if (action.equalsIgnoreCase("ajaxGetItems"))
@@ -72,18 +104,25 @@ public class PortalItemHandler extends HttpServlet
             String itemType = request.getParameter("itemType");
             StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
 
-            Class clazz = StoreItemHelpers.getStoreItemQueryFromItemType(itemType);
-
             SessionFactory factory = HibernateUtil.getSessionFactory();
             Session session = factory.openSession();
 
-            Query query = session.createQuery("from " + clazz.getName());
-            List<Object> list = query.list();
+            Query query = session.createQuery("from StoreItemGeneric ");
+            List<StoreItemGeneric> list = query.list();
 
             session.close();
             factory.close();
 
-            String balls = "balls";
+            list.removeIf(item -> item.getItemType() != storeItemType.getItemTypeCode());
+            request.setAttribute("items", list);
+
+            RequestDispatcher dispatcher;
+
+            if (itemType.equalsIgnoreCase("MusicAlbum"))
+            {
+                dispatcher = request.getRequestDispatcher("portal/items/musicAlbumTable.jsp");
+                dispatcher.forward(request, response);
+            }
 
         }
 

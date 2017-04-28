@@ -11,7 +11,7 @@
     function filterItemAdds()
     {
         var itemType = $( '#productType' ).val();
-        if (itemType == 'Music_Album')
+        if (itemType == 'MusicAlbum')
             $( '#addMusicAlbum' ).css('display', 'inline');
     }
 

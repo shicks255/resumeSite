@@ -1,6 +1,14 @@
 package com.steven.hicks.entities;
 
+import com.steven.hicks.Utilities.HibernateUtil;
+import com.steven.hicks.entities.StoreItems.MusicAlbum;
+import com.steven.hicks.entities.StoreItems.StoreItemType;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.*;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
@@ -36,6 +44,30 @@ public abstract class StoreItemGeneric
     public int hashCode()
     {
         return itemNumber;
+    }
+
+    public static List<StoreItemGeneric> getAllItems()
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric ");
+        List<StoreItemGeneric> list = query.list();
+
+        factory.close();
+        session.close();
+
+        return list;
+    }
+
+    public static List<StoreItemGeneric> getItemsOfType(String itemType)
+    {
+        List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
+        StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
+        items.removeIf(item -> item.getItemType() != storeItemType.getItemTypeCode());
+
+
+        return items;
     }
 
     public String getItemName()

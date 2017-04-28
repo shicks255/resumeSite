@@ -28,8 +28,8 @@ public class MusicAlbum extends StoreItemGeneric
 
     public String getItemCode()
     {
-        StoreItemType itemType = StoreItemType.getItemTypeByName("Music_Album");
-        return "" + super.getItemNumber() + itemType.getItemTypeCode();
+        StoreItemType itemType = StoreItemType.getItemTypeByName("MusicAlbum");
+        return "" + itemType.getItemTypeCode() + super.getItemNumber();
     }
 
 //    public String getMusicAlbumItemId()
