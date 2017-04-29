@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -60,14 +61,24 @@ public abstract class StoreItemGeneric
         return list;
     }
 
-    public static List<StoreItemGeneric> getItemsOfType(String itemType)
+    public static <T> List<T> getItemsOfType(String itemType)
     {
+        List<T> itemsOfAType = new ArrayList<>();
+
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric");
+        itemsOfAType = query.list();
+
+        factory.close();
+        session.close();
+
         List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
         StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
         items.removeIf(item -> item.getItemType() != storeItemType.getItemTypeCode());
 
-
-        return items;
+        return itemsOfAType;
     }
 
     public String getItemName()

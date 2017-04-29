@@ -72,31 +72,34 @@ public class PortalItemHandler extends HttpServlet
         {
             List<StoreItemGeneric> musicAlbums = StoreItemGeneric.getItemsOfType("MusicAlbum");
 
-            for (StoreItemGeneric musicAlbum : musicAlbums)
-            {
+            List<MusicAlbum> albums = StoreItemGeneric.getItemsOfType("MusicAlbum");
 
-                String newName = request.getParameter("name_" + musicAlbum.getItemNumber());
-                String newDescription = request.getParameter("description_" + musicAlbum.getItemNumber());
-                String newPrice = request.getParameter("price_" + musicAlbum.getItemNumber());
-                String newArtistName = request.getParameter("artist_" + musicAlbum.getItemNumber());
-                String newAlbumTitle = request.getParameter("albumTitle_" + musicAlbum.getItemNumber());
-                String newReleaseYear = request.getParameter("releaseYear_" + musicAlbum.getItemNumber());
+            for (MusicAlbum album : albums)
+            {
+                String newName = request.getParameter("name_" + album.getItemNumber());
+                String newDescription = request.getParameter("description_" + album.getItemNumber());
+                String newPrice = request.getParameter("price_" + album.getItemNumber());
+                String newArtistName = request.getParameter("artist_" + album.getItemNumber());
+                String newAlbumTitle = request.getParameter("albumTitle_" + album.getItemNumber());
+                String newReleaseYear = request.getParameter("releaseYear_" + album.getItemNumber());
 
                 if (newName.length() > 0)
-                    musicAlbum.setItemName(newName);
+                    album.setItemName(newName);
                 if (newDescription.length() > 0)
-                    musicAlbum.setItemDescription(newDescription);
+                    album.setItemDescription(newDescription);
                 if (newPrice.length() > 0)
-                    musicAlbum.setItemPrice(newPrice);
+                    album.setItemPrice(newPrice);
                 if (newArtistName.length() > 0)
-//                    musicAlbum.set(newDescription);
+                    album.setArtist(newArtistName);
                 if (newAlbumTitle.length() > 0)
-                    musicAlbum.setItemDescription(newDescription);
+                    album.setAlbumTitle(newAlbumTitle);
                 if (newReleaseYear.length() > 0)
-                    musicAlbum.setItemDescription(newDescription);
+                    album.setReleaseYear(newReleaseYear);
 
-
+                HibernateUtil.updateItem(album);
             }
+
+            response.sendRedirect("portalItemHandler?action=editItems");
         }
 
         if (action.equalsIgnoreCase("ajaxGetItems"))

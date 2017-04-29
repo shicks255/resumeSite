@@ -8,9 +8,6 @@ import javax.persistence.*;
 @DiscriminatorValue("MusicAlbum")
 public class MusicAlbum extends StoreItemGeneric
 {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    String musicAlbumItemId = "";
 
     @Column
     String artist = "";
@@ -31,16 +28,6 @@ public class MusicAlbum extends StoreItemGeneric
         StoreItemType itemType = StoreItemType.getItemTypeByName("MusicAlbum");
         return "" + itemType.getItemTypeCode() + super.getItemNumber();
     }
-
-//    public String getMusicAlbumItemId()
-//    {
-//        return musicAlbumItemId;
-//    }
-//
-//    public void setMusicAlbumItemId(String musicAlbumItemId)
-//    {
-//        this.musicAlbumItemId = musicAlbumItemId;
-//    }
 
     public String getArtist()
     {
