@@ -10,12 +10,11 @@ public class MusicAlbum extends StoreItemGeneric
 {
 
     @Column
-    String artist = "";
+    private String artist = "";
     @Column
-    String albumTitle = "";
+    private String albumTitle = "";
     @Column
-    String releaseYear = "";
-
+    private String releaseYear = "";
 
     @Override
     public String toString()
@@ -58,4 +57,5 @@ public class MusicAlbum extends StoreItemGeneric
     {
         this.releaseYear = releaseYear;
     }
+
 }

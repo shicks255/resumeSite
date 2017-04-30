@@ -10,11 +10,13 @@
 
     function filterItemAdds()
     {
+        $( '.addingItemDiv' ).css('display', 'none');
         var itemType = $( '#productType' ).val();
         if (itemType == 'MusicAlbum')
             $( '#addMusicAlbum' ).css('display', 'inline');
+        if (itemType == 'LegoSet')
+            $( '#addLegoSet' ).css('display', 'inline');
     }
-
 
 </script>
 
@@ -33,19 +35,19 @@
         </c:forEach>
     </select>
 
-    <div id="addMusicAlbum" style="display:none">
-        <form name="frmAddItem" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=addMusicAlbum">
+    <div id="addMusicAlbum" class="addingItemDiv" style="display:none">
+        <form enctype="multipart/form-data" name="frmAddItem" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=addMusicAlbum">
             <table>
                 <tr>
                     <td>
-                        <label for="productDescription">Product Description:</label>
-                        <input type="text" name="productDescription" id="productDescription"/>
+                        <label for="productDescriptionMusicAlbum">Product Description:</label>
+                        <input type="text" name="productDescriptionMusicAlbum" id="productDescriptionMusicAlbum"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label for="productPrice">Product Price:</label>
-                        <input type="text" name="productPrice" id="productPrice"/>
+                        <label for="productPriceMusicAlbum">Product Price:</label>
+                        <input type="text" name="productPriceMusicAlbum" id="productPriceMusicAlbum"/>
                     </td>
                 </tr>
 
@@ -65,6 +67,69 @@
                     <td>
                         <label for="releaseYear">Release Year:</label>
                         <input type="text" name="releaseYear" id="releaseYear">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Item Picture: <input type="file" name="file" id="file" enctype="multipart/form-data">
+                    </td>
+                </tr>
+            </table>
+            <button class="waves-effect waves-light btn" type="submit">
+                Add
+            </button>
+        </form>
+    </div>
+
+    <div id="addLegoSet" class="addingItemDiv" style="display:none">
+        <form enctype="multipart/form-data" name="frmAddItem" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=addLegoSet">
+            <table>
+                <tr>
+                    <td>
+                        <label for="productDescriptionLego">Product Description:</label>
+                        <input type="text" name="productDescriptionLego" id="productDescriptionLego"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="productNameLego">Product Name:</label>
+                        <input type="text" name="productNameLego" id="productNameLego"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="productPriceLego">Product Price:</label>
+                        <input type="text" name="productPriceLego" id="productPriceLego"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="legoCode">Lego Code:</label>
+                        <input type="text" name="legoCode" id="legoCode">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="legoTheme">Lego Theme:</label>
+                        <input type="text" name="legoTheme" id="legoTheme">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="numberOfPieces">Pieces:</label>
+                        <input type="text" name="numberOfPieces" id="numberOfPieces">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="releaseYearLego">Release Year:</label>
+                        <input type="text" name="releaseYearLego" id="releaseYearLego">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Item Picture: <input type="file" name="file" id="fileLego" enctype="multipart/form-data">
                     </td>
                 </tr>
             </table>

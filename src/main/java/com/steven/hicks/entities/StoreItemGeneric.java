@@ -2,6 +2,7 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItems.MusicAlbum;
+import com.steven.hicks.entities.StoreItems.StoreItemPicture;
 import com.steven.hicks.entities.StoreItems.StoreItemType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,13 +23,15 @@ public abstract class StoreItemGeneric
     int itemNumber;
 
     @Column
-    String itemName;
+    private String itemName;
     @Column
-    String itemDescription;
+    private String itemDescription;
     @Column
-    int itemType;
+    private int itemType;
     @Column
-    String itemPrice;
+    private String itemPrice;
+    @Column
+    private int pictureObjectId;
 
     @Override
     public boolean equals(Object o)
@@ -81,6 +84,11 @@ public abstract class StoreItemGeneric
         return itemsOfAType;
     }
 
+    public StoreItemPicture getItemPicture()
+    {
+        return StoreItemPicture.getItemPicture(getPictureObjectId());
+    }
+
     public String getItemName()
     {
         return itemName;
@@ -129,5 +137,15 @@ public abstract class StoreItemGeneric
     public void setItemPrice(String itemPrice)
     {
         this.itemPrice = itemPrice;
+    }
+
+    public int getPictureObjectId()
+    {
+        return pictureObjectId;
+    }
+
+    public void setPictureObjectId(int pictureObjectId)
+    {
+        this.pictureObjectId = pictureObjectId;
     }
 }

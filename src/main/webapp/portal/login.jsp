@@ -20,6 +20,8 @@
     <script>
         $(document).ready(function()
         {
+            $( '#j_username' ).focus();
+
             $(document.body).keyup(function(event)
             {
                 if (event.keyCode == 27)

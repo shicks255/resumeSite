@@ -12,11 +12,16 @@
     {
         var itemType = $( '#productType' ).val();
 
-        $.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetItems&itemType=' + itemType,
-            function(data)
-            {
-                $( '#editItemsList' ).html(data);
-            });
+        if (itemType.length == 0)
+            $( '#editItemsList' ).html('');
+        else
+        {
+            $.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetItems&itemType=' + itemType,
+                function(data)
+                {
+                    $( '#editItemsList' ).html(data);
+                });
+        }
     }
 
 

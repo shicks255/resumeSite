@@ -5,11 +5,13 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.Utilities.StoreItemHelpers;
 import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.StoreItems.MusicAlbum;
+import com.steven.hicks.entities.StoreItems.StoreItemPicture;
 import com.steven.hicks.entities.StoreItems.StoreItemType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/portalItemHandler")
@@ -48,23 +51,13 @@ public class PortalItemHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("addMusicAlbum"))
         {
-            String productDescription = request.getParameter("productDescription");
-            String productPrice = request.getParameter("productPrice");
-            String artistName = request.getParameter("artistName");
-            String albumTitle = request.getParameter("albumTitle");
-            String releaseYear = request.getParameter("releaseYear");
+           PortalItemLogic.addMusicAlbum(request);
+           response.sendRedirect("portalItemHandler?action=form");
+        }
 
-            MusicAlbum musicAlbum = new MusicAlbum();
-            musicAlbum.setItemDescription(productDescription);
-            musicAlbum.setItemPrice(productPrice);
-            musicAlbum.setArtist(artistName);
-            musicAlbum.setAlbumTitle(albumTitle);
-            musicAlbum.setReleaseYear(releaseYear);
-            musicAlbum.setItemName(artistName + " - " + albumTitle);
-            musicAlbum.setItemType(StoreItemType.getItemTypeByName("MusicAlbum").getItemTypeCode());
-
-            HibernateUtil.createItem(musicAlbum);
-
+        if (action.equalsIgnoreCase("addLegoSet"))
+        {
+            PortalItemLogic.addLegoSet(request);
             response.sendRedirect("portalItemHandler?action=form");
         }
 
@@ -102,6 +95,17 @@ public class PortalItemHandler extends HttpServlet
             response.sendRedirect("portalItemHandler?action=editItems");
         }
 
+        if (action.equalsIgnoreCase("getItemPicture"))
+        {
+            Integer itemPictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
+            StoreItemPicture picture = StoreItemPicture.getItemPicture(itemPictureObjectId);
+
+            response.setContentType("image/jpg");
+            response.setContentLengthLong(picture.getImage().length);
+
+            response.getOutputStream().write(picture.getImage());
+        }
+
         if (action.equalsIgnoreCase("ajaxGetItems"))
         {
             String itemType = request.getParameter("itemType");
@@ -124,6 +128,11 @@ public class PortalItemHandler extends HttpServlet
             if (itemType.equalsIgnoreCase("MusicAlbum"))
             {
                 dispatcher = request.getRequestDispatcher("portal/items/musicAlbumTable.jsp");
+                dispatcher.forward(request, response);
+            }
+            if (itemType.equalsIgnoreCase("LegoSet"))
+            {
+                dispatcher = request.getRequestDispatcher("portal/items/legoSetTable.jsp");
                 dispatcher.forward(request, response);
             }
 
