@@ -58,4 +58,10 @@ public class MusicAlbum extends StoreItemGeneric
         this.releaseYear = releaseYear;
     }
 
+    @Override
+    public String getItemName()
+    {
+        return artist + " - " + albumTitle;
+    }
+
 }

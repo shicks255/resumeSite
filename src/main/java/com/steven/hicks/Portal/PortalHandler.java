@@ -4,6 +4,7 @@ package com.steven.hicks.Portal;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.FileRequest;
+import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.UserAvatar;
 
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +41,9 @@ public class PortalHandler extends HttpServlet
 
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+
+            List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
+            session.setAttribute("allItems", allItems);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalHome.jsp");
             dispatcher.forward(request, response);

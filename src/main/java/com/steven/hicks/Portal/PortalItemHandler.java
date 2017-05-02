@@ -7,6 +7,7 @@ import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.StoreItems.MusicAlbum;
 import com.steven.hicks.entities.StoreItems.StoreItemPicture;
 import com.steven.hicks.entities.StoreItems.StoreItemType;
+import com.sun.corba.se.impl.protocol.RequestDispatcherRegistryImpl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -136,6 +137,23 @@ public class PortalItemHandler extends HttpServlet
                 dispatcher.forward(request, response);
             }
 
+        }
+
+        if (action.equalsIgnoreCase("ajaxGetSearchResults"))
+        {
+            String searchInput = request.getParameter("searchInput").toLowerCase();
+
+            List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
+            items.removeIf(item -> !item.getItemName().toLowerCase().contains(searchInput));
+
+
+            int size = items.size();
+            if (size > 10)
+                items.subList(10, size).clear();
+
+            request.setAttribute("items", items);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResultsInjected.jsp");
+            dispatcher.forward(request, response);
         }
 
     }

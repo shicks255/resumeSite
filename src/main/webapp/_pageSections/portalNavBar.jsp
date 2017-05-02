@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:useBean id="user" type="com.steven.hicks.entities.User" scope="session"/>
+<jsp:useBean id="allItems" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,7 @@
     <title>Steven M Hicks | Java Developer</title>
 
     <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/CSS/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,11 +22,28 @@
 
     <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>
 
     <script>
         $(document).ready(function()
         {
+            $( document ).click(function (event)
+            {
+                $( '#searchResults' ).html('');
+            });
+
+            $( '#search' ).focus(function (event)
+            {
+               doASearch('');
+            });
+
             $(".button-collapse").sideNav();
+
+            $( '#search' ).keyup(function( event )
+            {
+                var searchInput = $( '#search' ).val();
+                doASearch(searchInput);
+            });
 
             $(document.body).keyup(function(event)
             {
@@ -38,6 +57,17 @@
             });
         });
 
+        function doASearch(searchInput)
+        {
+            if (searchInput.length == 0)
+                $( '#searchResults' ).html('');
+            $.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetSearchResults&searchInput=' + searchInput,
+                function(data)
+                {
+                    $( '#searchResults' ).html(data);
+                });
+        }
+
         function dialogEditProfile()
         {
             $( '#editProfileDialog' ).removeClass('hiddenDiv').addClass('popup');
@@ -46,6 +76,12 @@
         function closeEditProfile()
         {
             $( '#editProfileDialog' ).removeClass('popup').addClass('hiddenDiv');
+        }
+
+        function fetchResults()
+        {
+            var searchinput = $( '#search' ).val();
+            console.log(searchinput);
         }
 
     </script>
@@ -100,7 +136,9 @@
                 <a href="${pageContext.request.contextPath}/portal?action=form"> Portal Search</a>
             </li>
             <li id="searchBar">
-                <input type="text" name="search" placeholder="Search for an item">
+                <input type="text" id="search" name="search" placeholder="Search for an item">
+                <div style="background-color : red;" id="searchResults" name="searchResults">
+                </div>
             </li>
             <li id="searchIcon">
                 <a href="#" ><i class="material-icons">search</i></a>
