@@ -142,10 +142,18 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("ajaxGetSearchResults"))
         {
             String searchInput = request.getParameter("searchInput").toLowerCase();
+            String[] searchTerms = searchInput.split("\\s+");
 
             List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
-            items.removeIf(item -> !item.getItemName().toLowerCase().contains(searchInput));
-
+            items.removeIf(item ->
+            {
+                for (String searchTerm : searchTerms)
+                {
+                    if (!item.getItemName().toLowerCase().contains(searchTerm.toLowerCase()))
+                        return true;
+                }
+                return false;
+            });
 
             int size = items.size();
             if (size > 10)
