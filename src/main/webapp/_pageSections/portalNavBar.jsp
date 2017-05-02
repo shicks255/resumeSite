@@ -34,7 +34,8 @@
 
             $( '#search' ).focus(function (event)
             {
-               doASearch('');
+                var searchTerms = $( '#search' ).val();
+                doASearch(searchTerms);
             });
 
             $(".button-collapse").sideNav();
