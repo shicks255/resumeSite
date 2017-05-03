@@ -4,6 +4,7 @@ package com.steven.hicks.Portal;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.Utilities.StoreItemHelpers;
 import com.steven.hicks.entities.StoreItemGeneric;
+import com.steven.hicks.entities.StoreItems.LegoSet;
 import com.steven.hicks.entities.StoreItems.MusicAlbum;
 import com.steven.hicks.entities.StoreItems.StoreItemPicture;
 import com.steven.hicks.entities.StoreItems.StoreItemType;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/portalItemHandler")
 public class PortalItemHandler extends HttpServlet
@@ -65,8 +67,12 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("editMusicAlbums"))
         {
             List<StoreItemGeneric> musicAlbums = StoreItemGeneric.getItemsOfType("MusicAlbum");
+            StoreItemType itemType = StoreItemType.getItemTypeByName("MusicAlbum");
 
-            List<MusicAlbum> albums = StoreItemGeneric.getItemsOfType("MusicAlbum");
+            List<MusicAlbum> albums = musicAlbums.stream()
+                    .filter(item -> item.getItemType() == itemType.getItemTypeCode())
+                    .map(item -> (MusicAlbum)item)
+                    .collect(Collectors.toList());
 
             for (MusicAlbum album : albums)
             {
@@ -91,6 +97,47 @@ public class PortalItemHandler extends HttpServlet
                     album.setReleaseYear(newReleaseYear);
 
                 HibernateUtil.updateItem(album);
+            }
+
+            response.sendRedirect("portalItemHandler?action=editItems");
+        }
+
+        if (action.equalsIgnoreCase("editLegoSet"))
+        {
+            List<StoreItemGeneric> genericItems = StoreItemGeneric.getItemsOfType("LegoSet");
+            StoreItemType itemType = StoreItemType.getItemTypeByName("LegoSet");
+
+            List<LegoSet> legoSets = genericItems.stream()
+                    .filter(item -> item.getItemType() == itemType.getItemTypeCode())
+                    .map(item -> (LegoSet)item)
+                    .collect(Collectors.toList());
+
+            for (LegoSet legoSet : legoSets)
+            {
+                String newName = request.getParameter("name_" + legoSet.getItemNumber());
+                String newDescription = request.getParameter("description_" + legoSet.getItemNumber());
+                String newPrice = request.getParameter("price_" + legoSet.getItemNumber());
+                String newLegoCode = request.getParameter("legoCode_" + legoSet.getItemNumber());
+                String newTheme = request.getParameter("theme_" + legoSet.getItemNumber());
+                String newPieces = request.getParameter("pieces_" + legoSet.getItemNumber());
+                String newReleaseYear = request.getParameter("releaseYear_" + legoSet.getItemNumber());
+
+                if (newName.length() > 0)
+                    legoSet.setItemName(newName);
+                if (newDescription.length() > 0)
+                    legoSet.setItemDescription(newDescription);
+                if (newPrice.length() > 0)
+                    legoSet.setItemPrice(newPrice);
+                if (newLegoCode.length() > 0)
+                    legoSet.setLegoCode(newLegoCode);
+                if (newTheme.length() > 0)
+                    legoSet.setLegoTheme(newTheme);
+                if (newPieces.length() > 0)
+                    legoSet.setNumberOfPieces(Integer.valueOf(newPieces));
+                if (newReleaseYear.length() > 0)
+                    legoSet.setReleaseYear(newReleaseYear);
+
+                HibernateUtil.updateItem(legoSet);
             }
 
             response.sendRedirect("portalItemHandler?action=editItems");

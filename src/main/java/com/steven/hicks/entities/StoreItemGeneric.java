@@ -66,22 +66,24 @@ public abstract class StoreItemGeneric
 
     public static <T> List<T> getItemsOfType(String itemType)
     {
-        List<T> itemsOfAType = new ArrayList<>();
+        List<T> genericItems = new ArrayList<>();
 
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
-
         org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric");
-        itemsOfAType = query.list();
-
+        genericItems = query.list();
         factory.close();
         session.close();
 
-        List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
-        StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
-        items.removeIf(item -> item.getItemType() != storeItemType.getItemTypeCode());
+//        List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
+//        StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
 
-        return itemsOfAType;
+//        Class clazz = Class.forName("com.steven.hicks.entities.StoreItems." + itemType);
+//        List<? extends StoreItemGeneric> itemsToReturn = new ArrayList<>();
+
+//        genericItems.forEach(clazz::cast);
+
+        return genericItems;
     }
 
     public StoreItemPicture getItemPicture()

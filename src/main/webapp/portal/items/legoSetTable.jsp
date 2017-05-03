@@ -31,9 +31,9 @@
                 <td><input name="description_${item.itemNumber}" id="description_${item.itemNumber}" type="text" value="${item.itemDescription}"/></td>
                 <td><input name="price_${item.itemNumber}" id="price_${item.itemNumber}" type="text" value="${item.itemPrice}"/></td>
                 <td><input readonly=${true} type="text" value="${item.itemCode}"/></td>
-                <td><input name="artist_${item.itemNumber}" id="artist_${item.itemNumber}" type="text" value="${item.legoCode}"/></td>
-                <td><input name="albumTitle_${item.itemNumber}" id="albumTitle_${item.itemNumber}" type="text" value="${item.legoTheme}"/></td>
-                <td><input name="releaseYear_${item.itemNumber}" id="releaseYear_${item.itemNumber}" type="text" value="${item.numberOfPieces}"/></td>
+                <td><input name="legoCode_${item.itemNumber}" id="legoCode_${item.itemNumber}" type="text" value="${item.legoCode}"/></td>
+                <td><input name="theme_${item.itemNumber}" id="theme_${item.itemNumber}" type="text" value="${item.legoTheme}"/></td>
+                <td><input name="pieces_${item.itemNumber}" id="pieces_${item.itemNumber}" type="text" value="${item.numberOfPieces}"/></td>
                 <td><input name="releaseYear_${item.itemNumber}" id="releaseYear_${item.itemNumber}" type="text" value="${item.releaseYear}"/></td>
             </tr>
         </c:forEach>
