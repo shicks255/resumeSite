@@ -2,6 +2,7 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.Utilities.PasswordUtil;
+import com.steven.hicks.entities.store.Cart;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -36,6 +37,8 @@ public class User
     @Column
     private Integer avatarObjectId;
 
+
+//    ----Basics
     @Override
     public String toString()
     {
@@ -62,6 +65,8 @@ public class User
     {
         return userName.hashCode();
     }
+
+//    -----Data Access
 
     public static User getUser(String userName)
     {
@@ -102,6 +107,7 @@ public class User
         }
     }
 
+
     public UserAvatar getAvatar()
     {
         return UserAvatar.getAvatar(avatarObjectId);
@@ -111,6 +117,13 @@ public class User
     {
         return firstName + " " + lastName;
     }
+
+    public Cart getUserCart()
+    {
+        return Cart.getCartByUser(getUserName());
+    }
+
+//    -----Getters & Setters
 
     public String getUserName()
     {

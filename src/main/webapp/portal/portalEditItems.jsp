@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="itemTypes" type="java.util.List<com.steven.hicks.entities.StoreItems.StoreItemType>"   scope="request"/>
+<jsp:useBean id="itemTypes" type="java.util.List<com.steven.hicks.entities.store.StoreItemType>" scope="request"/>
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 

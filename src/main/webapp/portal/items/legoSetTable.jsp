@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.StoreItems.LegoSet>" scope="request"/>
+<jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.store.items.LegoSet>" scope="request"/>
 
 <form name="frmEditLegoSet" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editLegoSet">
     <table class="highlight striped centered">

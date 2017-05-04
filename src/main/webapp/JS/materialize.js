@@ -927,7 +927,7 @@ if (jQuery) {
           var $overlay = $('<div class="modal-overlay"></div>');
           lStack = (++_stack);
 
-          // Store a reference of the overlay
+          // store a reference of the overlay
           $overlay.attr('id', overlayID).css('z-index', 1000 + lStack * 2);
           $modal.data('overlay-id', overlayID).css('z-index', 1000 + lStack * 2 + 1);
           $modal.addClass('open');
@@ -5515,7 +5515,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
         $ELEMENT.
 
-            // Store the picker data by component name.
+            // store the picker data by component name.
             data(NAME, P).
 
             // Add the “input” class name.

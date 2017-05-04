@@ -2,18 +2,15 @@ package com.steven.hicks.Portal;
 
 
 import com.steven.hicks.Utilities.HibernateUtil;
-import com.steven.hicks.Utilities.StoreItemHelpers;
 import com.steven.hicks.entities.StoreItemGeneric;
-import com.steven.hicks.entities.StoreItems.LegoSet;
-import com.steven.hicks.entities.StoreItems.MusicAlbum;
-import com.steven.hicks.entities.StoreItems.StoreItemPicture;
-import com.steven.hicks.entities.StoreItems.StoreItemType;
-import com.sun.corba.se.impl.protocol.RequestDispatcherRegistryImpl;
+import com.steven.hicks.entities.store.items.LegoSet;
+import com.steven.hicks.entities.store.items.MusicAlbum;
+import com.steven.hicks.entities.store.StoreItemPicture;
+import com.steven.hicks.entities.store.StoreItemType;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +18,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -209,6 +205,40 @@ public class PortalItemHandler extends HttpServlet
             request.setAttribute("items", items);
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResultsInjected.jsp");
             dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("showItemPage"))
+        {
+            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
+            StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
+
+            if (item != null)
+            {
+                StoreItemType type = StoreItemType.getItemType(item.getItemType());
+
+                if (type != null)
+                {
+                    if (type.getItemTypeCode() == 113)
+                    {
+                        MusicAlbum album = (MusicAlbum)item;
+
+                        request.setAttribute("album", album);
+
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/itemPages/musicAlbum.jsp");
+                        dispatcher.forward(request, response);
+
+                    }
+                    if (type.getItemTypeCode() == 114)
+                    {
+                        LegoSet legoset = (LegoSet)item;
+                        request.setAttribute("legoSet", legoset);
+
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/itemPages/legoSet.jsp");
+                        dispatcher.forward(request, response);
+                    }
+                }
+
+            }
         }
 
     }

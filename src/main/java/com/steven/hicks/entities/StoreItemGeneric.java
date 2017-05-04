@@ -1,12 +1,9 @@
 package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
-import com.steven.hicks.entities.StoreItems.MusicAlbum;
-import com.steven.hicks.entities.StoreItems.StoreItemPicture;
-import com.steven.hicks.entities.StoreItems.StoreItemType;
+import com.steven.hicks.entities.store.StoreItemPicture;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -75,15 +72,19 @@ public abstract class StoreItemGeneric
         factory.close();
         session.close();
 
-//        List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
-//        StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
-
-//        Class clazz = Class.forName("com.steven.hicks.entities.StoreItems." + itemType);
-//        List<? extends StoreItemGeneric> itemsToReturn = new ArrayList<>();
-
-//        genericItems.forEach(clazz::cast);
-
         return genericItems;
+    }
+
+    public static StoreItemGeneric getItem(int itemNumber)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        StoreItemGeneric item = session.get(StoreItemGeneric.class, itemNumber);
+        factory.close();
+        session.close();
+
+        return item;
     }
 
     public StoreItemPicture getItemPicture()

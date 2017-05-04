@@ -1,4 +1,4 @@
-package com.steven.hicks.entities.StoreItems;
+package com.steven.hicks.entities.store;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;

@@ -1,6 +1,6 @@
 package com.steven.hicks.Utilities;
 
-import com.steven.hicks.entities.StoreItems.MusicAlbum;
+import com.steven.hicks.entities.store.items.MusicAlbum;
 
 public class StoreItemHelpers
 {

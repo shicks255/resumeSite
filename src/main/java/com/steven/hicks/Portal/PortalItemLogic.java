@@ -3,10 +3,10 @@ package com.steven.hicks.Portal;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.FileRequest;
-import com.steven.hicks.entities.StoreItems.LegoSet;
-import com.steven.hicks.entities.StoreItems.MusicAlbum;
-import com.steven.hicks.entities.StoreItems.StoreItemPicture;
-import com.steven.hicks.entities.StoreItems.StoreItemType;
+import com.steven.hicks.entities.store.items.LegoSet;
+import com.steven.hicks.entities.store.items.MusicAlbum;
+import com.steven.hicks.entities.store.StoreItemPicture;
+import com.steven.hicks.entities.store.StoreItemType;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;

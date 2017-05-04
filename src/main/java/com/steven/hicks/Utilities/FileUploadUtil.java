@@ -93,7 +93,7 @@ public class FileUploadUtil extends HttpServlet
                     if (filename.contains("."))
                         extension = filename.substring(filename.lastIndexOf('.') + 1);
 
-                    // Store in the temporary directory
+                    // store in the temporary directory
                     tempFile = File.createTempFile("temp", "." + extension, new File(System.getProperty("java.io.tmpdir")));
                     item.write(tempFile);
                     item.delete();

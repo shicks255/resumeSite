@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
-<jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.StoreItems.MusicAlbum>" scope="request"/>
+<jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.store.items.MusicAlbum>" scope="request"/>
 
 <form name="frmEditMusicAlbum" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editMusicAlbums">
     <table class="highlight striped centered">

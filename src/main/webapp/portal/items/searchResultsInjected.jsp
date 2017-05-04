@@ -24,7 +24,7 @@
     <c:forEach var="item" items="${items}">
         <tr style="background-color : green;">
             <td>
-                <a href="#"><c:out value="${item.itemName}"/></a>
+                <a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemObjectId=${item.itemNumber}"><c:out value="${item.itemName}"/></a>
             </td>
         </tr>
     </c:forEach>

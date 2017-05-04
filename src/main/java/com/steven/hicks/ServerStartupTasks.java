@@ -2,7 +2,7 @@ package com.steven.hicks;
 
 
 import com.steven.hicks.Utilities.HibernateUtil;
-import com.steven.hicks.entities.StoreItems.StoreItemType;
+import com.steven.hicks.entities.store.StoreItemType;
 
 import java.util.ArrayList;
 import java.util.List;

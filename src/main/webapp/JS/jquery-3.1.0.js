@@ -6818,7 +6818,7 @@
                     dataShow = dataPriv.access( elem, "fxshow", { display: restoreDisplay } );
                 }
 
-                // Store hidden/visible for toggle so `.stop().toggle()` "reverses"
+                // store hidden/visible for toggle so `.stop().toggle()` "reverses"
                 if ( toggle ) {
                     dataShow.hidden = !hidden;
                 }
@@ -7715,7 +7715,7 @@
                     className = getClass( this );
                     if ( className ) {
 
-                        // Store className if set
+                        // store className if set
                         dataPriv.set( this, "__className__", className );
                     }
 

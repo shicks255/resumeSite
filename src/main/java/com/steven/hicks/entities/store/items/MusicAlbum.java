@@ -1,5 +1,6 @@
-package com.steven.hicks.entities.StoreItems;
+package com.steven.hicks.entities.store.items;
 
+import com.steven.hicks.entities.store.StoreItemType;
 import com.steven.hicks.entities.StoreItemGeneric;
 
 import javax.persistence.*;

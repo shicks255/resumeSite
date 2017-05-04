@@ -7,6 +7,7 @@ import com.steven.hicks.entities.FileRequest;
 import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.UserAvatar;
+import com.steven.hicks.entities.store.Cart;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,6 +45,15 @@ public class PortalHandler extends HttpServlet
 
             List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
             session.setAttribute("allItems", allItems);
+
+            Cart cart = Cart.getCartByUser(user.getUserName());
+            if (cart == null)
+            {
+                cart = new Cart();
+                cart.setUserNameOfCart(user.getUserName());
+                HibernateUtil.createItem(cart);
+            }
+            session.setAttribute("cart", cart);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalHome.jsp");
             dispatcher.forward(request, response);
@@ -120,7 +130,6 @@ public class PortalHandler extends HttpServlet
 //        -----My Cart
         if (action.equalsIgnoreCase("portalCart"))
         {
-
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalCart.jsp");
             dispatcher.forward(request, response);
         }
