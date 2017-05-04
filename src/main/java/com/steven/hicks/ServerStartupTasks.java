@@ -20,6 +20,7 @@ public class ServerStartupTasks
         {
             StoreItemType itemTypeObject = StoreItemType.getItemTypeByName(itemType);
 
+            int firstItemCode = 113;
             if (itemTypeObject == null)
             {
                 itemTypeObject = new StoreItemType();

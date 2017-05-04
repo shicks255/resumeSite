@@ -28,8 +28,8 @@
     <br/>
     <br/>
 
-    Add admin portal account
-    <a class="waves-effect waves-light btn" name="addAdminUserButton" id="addAdminUserButton" onclick="showAddAdminDialog();" value="Edit">here</a>
+    <%--Add admin portal account--%>
+    <%--<a class="waves-effect waves-light btn" name="addAdminUserButton" id="addAdminUserButton" onclick="showAddAdminDialog();" value="Edit">here</a>--%>
 
 
 
