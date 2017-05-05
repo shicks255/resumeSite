@@ -12,7 +12,10 @@
 
     <c:set var="itemsInCart" value="${cart.itemsInCart}"/>
     <c:forEach var="item" items="${itemsInCart}">
-        HiHIHilakjfaldsf
+        <br/>
+        <c:out value="${item.storeItem.itemName}"/>
+        <c:out value="${item.storeItem.itemNumber}"/>
+        <c:out value="${item.storeItem.itemPrice}"/>
     </c:forEach>
 
 </div>

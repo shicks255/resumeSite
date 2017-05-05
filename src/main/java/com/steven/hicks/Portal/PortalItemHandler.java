@@ -3,6 +3,9 @@ package com.steven.hicks.Portal;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
+import com.steven.hicks.entities.User;
+import com.steven.hicks.entities.store.Cart;
+import com.steven.hicks.entities.store.CartItem;
 import com.steven.hicks.entities.store.items.LegoSet;
 import com.steven.hicks.entities.store.items.MusicAlbum;
 import com.steven.hicks.entities.store.StoreItemPicture;
@@ -17,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -239,6 +243,23 @@ public class PortalItemHandler extends HttpServlet
                 }
 
             }
+        }
+
+        if (action.equalsIgnoreCase("addItemToCart"))
+        {
+            int itemObjectId = Integer.valueOf(request.getParameter("itemObjectId"));
+            StoreItemGeneric item = StoreItemGeneric.getItem(itemObjectId);
+
+            HttpSession session = request.getSession();
+            User user = (User)session.getAttribute("user");
+
+            Cart userCart = user.getUserCart();
+
+            CartItem cartItem = new CartItem();
+            cartItem.setCartObjectId(userCart.getObjectId());
+            cartItem.setItemObjectIt(item.getItemNumber());
+
+            HibernateUtil.createItem(cartItem);
         }
 
     }

@@ -12,7 +12,6 @@ import java.util.List;
 public class StoreItemType
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     public int itemTypeCode;
 
     @Column
