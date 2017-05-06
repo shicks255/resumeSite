@@ -6,6 +6,14 @@
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
+<%--<link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">--%>
+<%--<link href="${pageContext.request.contextPath}/CSS/jquery-ui.min.css" rel="stylesheet" type="text/css"/>--%>
+<%--<link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">--%>
+<%----%>
+<%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>--%>
+<%--<script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>--%>
+<%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>--%>
+
 <script>
     function addToCart(itemObjectId)
     {
@@ -15,8 +23,8 @@
                 alert("Item added to your cart");
             });
     }
-</script>
 
+</script>
 
 <div class="container">
 

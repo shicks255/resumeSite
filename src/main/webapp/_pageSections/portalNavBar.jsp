@@ -11,8 +11,12 @@
     <title>Steven M Hicks | Java Developer</title>
 
     <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
-    <link href="${pageContext.request.contextPath}/CSS/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+    <%--<link href="${pageContext.request.contextPath}/CSS/jquery-ui.min.css" rel="stylesheet" type="text/css"/>--%>
     <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
+    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>--%>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -20,31 +24,53 @@
     <meta name="description" content="Steven M. Hicks - New Jersey based Website Developer and Computer Programmer, currelty using Java and Tomcat with various front end libraries...JQuery/Jquery UI, Materialize CSS, ajax & json,."/>
     <meta name="keywords" content="Steven Hicks, Steven M Hicks, Steven M. Hicks, shicks, shicks255, New Jersey, NJ, Hunterdon County, java, forge-tech, forge tech, web developer, software developer, computer programmer, programming"/>
 
-    <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>
 
     <script>
         $(document).ready(function()
         {
-            $( document ).click(function (event)
-            {
-                $( '#searchResults' ).html('');
-            });
 
-            $( '#search' ).focus(function (event)
-            {
-                var searchTerms = $( '#search' ).val();
-                doASearch(searchTerms);
-            });
+            var items = [
+                <c:forEach var="item" items="${allItems}" varStatus="loop">
+                {"${item.itemName}": null}
+                <c:if test="${!loop.last}">,</c:if>
+                </c:forEach>
+            ];
+
+//            $( "#search" ).autocomplete({
+//                source: items,
+//                minLength: 2
+//            });
+
+            $( '#search' ).autocomplete(
+                {
+                    data: {
+                            <c:forEach var="item" items="${allItems}" varStatus="loop">
+                        "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.pictureObjectId}'<c:if test="${!loop.last}">,</c:if>
+                        </c:forEach>
+                    },
+                    limit: 20,
+                    minLength: 1
+                });
+
+
+//            $( document ).click(function (event)
+//            {
+//                $( '#searchResults' ).html('');
+//            });
+
+//            $( '#search' ).focus(function (event)
+//            {
+//                var searchTerms = $( '#search' ).val();
+//                doASearch(searchTerms);
+//            });
 
             $(".button-collapse").sideNav();
 
-            $( '#search' ).keyup(function( event )
-            {
-                var searchInput = $( '#search' ).val();
-                doASearch(searchInput);
-            });
+//            $( '#search' ).keyup(function( event )
+//            {
+//                var searchInput = $( '#search' ).val();
+//                doASearch(searchInput);
+//            });
 
             $(document.body).keyup(function(event)
             {
@@ -56,18 +82,30 @@
                     });
                 }
             });
+
+            $( '#search' ).bind("enterKey", function(e)
+            {
+                console.log("hihihi");
+            });
+            $( '#search' ).keyup(function(e)
+            {
+                if (e.keyCode == 13)
+                {
+                    $(this).trigger("enterKey");
+                }
+            })
         });
 
-        function doASearch(searchInput)
-        {
-            if (searchInput.length == 0)
-                $( '#searchResults' ).html('');
-            $.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetSearchResults&searchInput=' + searchInput,
-                function(data)
-                {
-                    $( '#searchResults' ).html(data);
-                });
-        }
+//        function doASearch(searchInput)
+//        {
+//            if (searchInput.length == 0)
+//                $( '#searchResults' ).html('');
+            <%--$.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetSearchResults&searchInput=' + searchInput,--%>
+//                function(data)
+//                {
+//                    $( '#searchResults' ).html(data);
+//                });
+//        }
 
         function dialogEditProfile()
         {
@@ -137,7 +175,7 @@
                 <a href="${pageContext.request.contextPath}/portal?action=form"> Portal Search</a>
             </li>
             <li id="searchBar">
-                <input type="text" id="search" name="search" placeholder="Search for an item">
+                <input type="text" onclick="fetchResults();" id="search" name="search" placeholder="Search for an item">
                 <div style="background-color : red;" id="searchResults" name="searchResults">
                 </div>
             </li>
