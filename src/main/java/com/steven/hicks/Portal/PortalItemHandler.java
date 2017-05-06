@@ -213,8 +213,9 @@ public class PortalItemHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("showItemPage"))
         {
-            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
-            StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
+//            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
+            String itemName = request.getParameter("itemName");
+            StoreItemGeneric item = StoreItemGeneric.getItemByName(itemName);
 
             if (item != null)
             {

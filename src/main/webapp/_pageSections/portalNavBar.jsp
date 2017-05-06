@@ -29,18 +29,6 @@
         $(document).ready(function()
         {
 
-            var items = [
-                <c:forEach var="item" items="${allItems}" varStatus="loop">
-                {"${item.itemName}": null}
-                <c:if test="${!loop.last}">,</c:if>
-                </c:forEach>
-            ];
-
-//            $( "#search" ).autocomplete({
-//                source: items,
-//                minLength: 2
-//            });
-
             $( '#search' ).autocomplete(
                 {
                     data: {
@@ -49,28 +37,16 @@
                         </c:forEach>
                     },
                     limit: 20,
-                    minLength: 1
+                    minLength: 1,
+                    onAutocomplete: function(val)
+                    {
+                        console.log(val);
+                        window.open("${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=" + val, "_self");
+                    }
                 });
 
 
-//            $( document ).click(function (event)
-//            {
-//                $( '#searchResults' ).html('');
-//            });
-
-//            $( '#search' ).focus(function (event)
-//            {
-//                var searchTerms = $( '#search' ).val();
-//                doASearch(searchTerms);
-//            });
-
             $(".button-collapse").sideNav();
-
-//            $( '#search' ).keyup(function( event )
-//            {
-//                var searchInput = $( '#search' ).val();
-//                doASearch(searchInput);
-//            });
 
             $(document.body).keyup(function(event)
             {
@@ -96,17 +72,6 @@
             })
         });
 
-//        function doASearch(searchInput)
-//        {
-//            if (searchInput.length == 0)
-//                $( '#searchResults' ).html('');
-            <%--$.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetSearchResults&searchInput=' + searchInput,--%>
-//                function(data)
-//                {
-//                    $( '#searchResults' ).html(data);
-//                });
-//        }
-
         function dialogEditProfile()
         {
             $( '#editProfileDialog' ).removeClass('hiddenDiv').addClass('popup');
@@ -121,6 +86,8 @@
         {
             var searchinput = $( '#search' ).val();
             console.log(searchinput);
+            <%--href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemObjectId=${item.itemNumber}";--%>
+
         }
 
     </script>
@@ -175,7 +142,7 @@
                 <a href="${pageContext.request.contextPath}/portal?action=form"> Portal Search</a>
             </li>
             <li id="searchBar">
-                <input type="text" onclick="fetchResults();" id="search" name="search" placeholder="Search for an item">
+                <input type="text" id="search" name="search" placeholder="Search for an item">
                 <div style="background-color : red;" id="searchResults" name="searchResults">
                 </div>
             </li>

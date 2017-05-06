@@ -4,6 +4,7 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -85,6 +86,21 @@ public abstract class StoreItemGeneric
         session.close();
 
         return item;
+    }
+
+    public static StoreItemGeneric getItemByName(String name)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric where itemName = '" + name + "\'");
+        List<StoreItemGeneric> items = query.list();
+
+        session.close();
+        factory.close();
+
+        return items.get(0);
+
     }
 
     public StoreItemPicture getItemPicture()
