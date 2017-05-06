@@ -11,12 +11,38 @@
     <h3>Your Cart:</h3>
 
     <c:set var="itemsInCart" value="${cart.itemsInCart}"/>
-    <c:forEach var="item" items="${itemsInCart}">
-        <br/>
-        <c:out value="${item.storeItem.itemName}"/>
-        <c:out value="${item.storeItem.itemNumber}"/>
-        <c:out value="${item.storeItem.itemPrice}"/>
-    </c:forEach>
+    <table>
+        <thead>
+        <tr>
+            <th></th>
+            <th>Item</th>
+            <th>Number</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+
+        <c:forEach var="item" items="${itemsInCart}">
+        <tr>
+            <td>
+                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.storeItem.pictureObjectId}"/>
+            </td>
+            <td>
+                <c:out value="${item.storeItem.itemName}"/>
+            </td>
+            <td>
+                <c:out value="${item.storeItem.itemNumber}"/>
+            </td>
+            <td>
+                <c:out value="${item.storeItem.itemPrice}"/>
+            </td>
+            <td>
+                0
+            </td>
+
+        </tr>
+        </c:forEach>
+    </table>
 
 </div>
 

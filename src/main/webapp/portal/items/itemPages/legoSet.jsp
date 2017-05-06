@@ -14,7 +14,6 @@
             function(data)
             {
                 alert("Item added to your cart");
-
             });
     }
 

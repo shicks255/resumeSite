@@ -21,6 +21,9 @@ public class CartItem
     @Column
     private int itemObjectIt;
 
+    @Column
+    private int quantity;
+
 //    --------Basics
 
 
@@ -94,5 +97,15 @@ public class CartItem
     public void setItemObjectIt(int itemObjectIt)
     {
         this.itemObjectIt = itemObjectIt;
+    }
+
+    public int getQuantity()
+    {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity)
+    {
+        this.quantity = quantity;
     }
 }
