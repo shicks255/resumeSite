@@ -5,6 +5,7 @@ import com.steven.hicks.entities.store.StoreItemPicture;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.*;
+import org.hibernate.query.Query;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -93,14 +94,31 @@ public abstract class StoreItemGeneric
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session session = factory.openSession();
 
-        org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric where itemName = '" + name + "\'");
+        String queryString = "from StoreItemGeneric where itemName=:title";
+        org.hibernate.query.Query query = session.createQuery(queryString)
+                .setParameter("title", name);
         List<StoreItemGeneric> items = query.list();
 
         session.close();
         factory.close();
 
         return items.get(0);
+    }
 
+    public static List<StoreItemGeneric> searchForItems(String searchTerms)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        String queryString = "from StoreItemGeneric where itemDescription like :terms or itemName like :terms";
+        Query query = session.createQuery(queryString)
+                .setParameter("terms", "%" + searchTerms + "%");
+        List<StoreItemGeneric> items = query.list();
+
+        session.close();
+        factory.close();
+
+        return items;
     }
 
     public StoreItemPicture getItemPicture()

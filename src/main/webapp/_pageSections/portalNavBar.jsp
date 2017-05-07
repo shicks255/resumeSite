@@ -61,7 +61,7 @@
 
             $( '#search' ).bind("enterKey", function(e)
             {
-                console.log("hihihi");
+                doSearch();
             });
             $( '#search' ).keyup(function(e)
             {
@@ -72,6 +72,12 @@
             })
         });
 
+        function doSearch()
+        {
+            var searchTerms = $( '#search' ).val();
+            window.open("${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=" + searchTerms, "_self");
+        }
+
         function dialogEditProfile()
         {
             $( '#editProfileDialog' ).removeClass('hiddenDiv').addClass('popup');
@@ -80,14 +86,6 @@
         function closeEditProfile()
         {
             $( '#editProfileDialog' ).removeClass('popup').addClass('hiddenDiv');
-        }
-
-        function fetchResults()
-        {
-            var searchinput = $( '#search' ).val();
-            console.log(searchinput);
-            <%--href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemObjectId=${item.itemNumber}";--%>
-
         }
 
     </script>
@@ -147,7 +145,7 @@
                 </div>
             </li>
             <li id="searchIcon">
-                <a href="#" ><i class="material-icons">search</i></a>
+                <a href="#" onclick="doSearch();" ><i class="material-icons">search</i></a>
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>

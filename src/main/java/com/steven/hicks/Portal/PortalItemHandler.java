@@ -246,6 +246,18 @@ public class PortalItemHandler extends HttpServlet
             }
         }
 
+        if (action.equalsIgnoreCase("searchForItems"))
+        {
+            String searchTerms = request.getParameter("searchTerms");
+            List<StoreItemGeneric> itemSearchResults = StoreItemGeneric.searchForItems(searchTerms);
+
+            request.setAttribute("items", itemSearchResults);
+
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResults.jsp");
+            dispatcher.forward(request, response);
+        }
+
         if (action.equalsIgnoreCase("addItemToCart"))
         {
             int itemObjectId = Integer.valueOf(request.getParameter("itemObjectId"));
