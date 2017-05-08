@@ -55,6 +55,20 @@ public class CartItem
     }
 
 //    --------Data
+
+    public static CartItem getCartItem(int objectId)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        CartItem cartItem = session.get(CartItem.class, objectId);
+
+        session.close();
+        factory.close();
+
+        return cartItem;
+    }
+
     public StoreItemGeneric getStoreItem()
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();

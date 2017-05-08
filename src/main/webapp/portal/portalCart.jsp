@@ -6,6 +6,26 @@
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
+<script>
+
+    function updateQty(itemObjectId)
+    {
+        var itemGetter = '#qty_' + itemObjectId;
+        var qty = $( itemGetter ).val();
+        window.open('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty, "_self");
+    }
+
+    function removeItem(itemObjectId)
+    {
+        var itemGetter = '#qty_' + itemObjectId;
+        var qty = $( itemGetter ).val();
+        window.open('${pageContext.request.contextPath}/portalItemHandler?action=removeItemFromCart&itemObjectId=' + itemObjectId);
+
+        location.reload();
+    }
+
+</script>
+
 <div class="container">
 
     <h3>Your Cart:</h3>
@@ -37,7 +57,8 @@
                 <c:out value="${item.storeItem.itemPrice}"/>
             </td>
             <td>
-                0
+                <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" onclick="updateQty('${item.objectId}');">Update</button>
+                <button style="display:inline-block" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');">Remove</button>
             </td>
 
         </tr>

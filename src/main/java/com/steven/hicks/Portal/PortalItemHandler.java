@@ -260,21 +260,53 @@ public class PortalItemHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("addItemToCart"))
         {
-            int itemObjectId = Integer.valueOf(request.getParameter("itemObjectId"));
-            StoreItemGeneric item = StoreItemGeneric.getItem(itemObjectId);
+            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
+            StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
 
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("user");
 
             Cart userCart = user.getUserCart();
 
-            CartItem cartItem = new CartItem();
-            cartItem.setCartObjectId(userCart.getObjectId());
-            cartItem.setItemObjectIt(item.getItemNumber());
+            List<CartItem> cartItems = userCart.getItemsInCart();
 
-            HibernateUtil.createItem(cartItem);
+
+            CartItem cartItem;
+
+            if (userCart.getItemFromCart(itemNumber) != null)
+            {
+                cartItem = userCart.getItemFromCart(itemNumber);
+                cartItem.setQuantity(cartItem.getQuantity() + 1);
+                HibernateUtil.updateItem(cartItem);
+            }
+            else
+            {
+                cartItem = new CartItem();
+                cartItem.setCartObjectId(userCart.getObjectId());
+                cartItem.setItemObjectIt(item.getItemNumber());
+                cartItem.setQuantity(1);
+                HibernateUtil.createItem(cartItem);
+            }
         }
 
+        if (action.equalsIgnoreCase("updateCartQty"))
+        {
+            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
+            int quantity = Integer.valueOf(request.getParameter("newQuantity"));
+
+            CartItem cartItem = CartItem.getCartItem(itemNumber);
+            cartItem.setQuantity(quantity);
+            HibernateUtil.updateItem(cartItem);
+            response.sendRedirect("portal?action=portalCart");
+        }
+
+        if (action.equalsIgnoreCase("removeItemFromCart"))
+        {
+            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
+
+            CartItem cartItem = CartItem.getCartItem(itemNumber);
+            HibernateUtil.deleteItem(cartItem);
+        }
     }
 
     @Override

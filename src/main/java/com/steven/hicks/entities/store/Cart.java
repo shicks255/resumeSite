@@ -102,6 +102,32 @@ public class Cart
         return itemsInCart;
     }
 
+    public boolean itemAlreadyInCart(int itemNumber)
+    {
+        List<CartItem> items = this.getItemsInCart();
+
+        for (CartItem item : items)
+        {
+            if (item.getStoreItem().getItemNumber() == itemNumber)
+                return true;
+        }
+
+        return false;
+    }
+
+    public CartItem getItemFromCart( int itemNumber)
+    {
+        List<CartItem> items = this.getItemsInCart();
+
+        for (CartItem item : items)
+        {
+            if (item.getItemObjectIt() == itemNumber)
+                return item;
+        }
+
+        return null;
+    }
+
 //    -----Getters & Setters
 
 
