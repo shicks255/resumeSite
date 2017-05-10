@@ -306,6 +306,8 @@ public class PortalItemHandler extends HttpServlet
 
             CartItem cartItem = CartItem.getCartItem(itemNumber);
             HibernateUtil.deleteItem(cartItem);
+
+            response.sendRedirect("portal?action=portalCart");
         }
     }
 

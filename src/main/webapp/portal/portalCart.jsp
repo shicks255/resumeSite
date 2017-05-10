@@ -8,20 +8,36 @@
 
 <script>
 
+    $(document).ready(function()
+    {
+        $( '#test' ).on( "click", function(e)
+        {
+            e.preventDefault();
+            $(this).blur();
+        });
+    });
+
     function updateQty(itemObjectId)
     {
+        $( '#updateQtyBtn' ).blur();
         var itemGetter = '#qty_' + itemObjectId;
         var qty = $( itemGetter ).val();
-        window.open('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty, "_self");
+        $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
+            function(data)
+            {
+                $( '#updateDiv' ).fadeIn().delay(1000).fadeOut( 500 );
+            });
     }
 
     function removeItem(itemObjectId)
     {
-        var itemGetter = '#qty_' + itemObjectId;
-        var qty = $( itemGetter ).val();
-        window.open('${pageContext.request.contextPath}/portalItemHandler?action=removeItemFromCart&itemObjectId=' + itemObjectId);
-
-        location.reload();
+        $.post('${pageContext.request.contextPath}/portalItemHandler?action=removeItemFromCart&itemObjectId=' + itemObjectId,
+            function(data)
+            {
+                location.reload();
+//                $( '#deleteDiv' ).fadeIn().delay(1000).fadeOut(500);
+//                $( '#removeItemBtn' ).removeClass('btn:focus');
+            });
     }
 
 </script>
@@ -57,8 +73,8 @@
                 <c:out value="${item.storeItem.itemPrice}"/>
             </td>
             <td>
-                <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" onclick="updateQty('${item.objectId}');">Update</button>
-                <button style="display:inline-block" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');">Remove</button>
+                <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">Update</button>
+                <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
             </td>
 
         </tr>
@@ -67,5 +83,16 @@
 
 </div>
 
+<div id="updateDiv" class="popup" style="display:none">
+    <div class="popupContent">
+        Quantity updated
+    </div>/
+</div>
+
+<div id="deleteDiv" class="popup" style="display: none">
+    <div class="popupContent">
+        Item removed from cart
+    </div>/
+</div>
 
 <jsp:include page="/_pageSections/portalFooter.jsp" />

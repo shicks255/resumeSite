@@ -10,6 +10,7 @@
 
     function addToCart(itemObjectId)
     {
+        $( '#addToCart' ).blur();
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
@@ -60,7 +61,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <button class="btn waves-effect waves-light" onclick="addToCart('${legoSet.itemNumber}');" type="submit" name="action">Add To Cart
+                        <button id="addToCart" class="btn waves-effect waves-light" onclick="addToCart('${legoSet.itemNumber}');" type="submit" name="action">Add To Cart
                             <i class="material-icons right">add_shopping_cart</i>
                         </button>
                     </td>
