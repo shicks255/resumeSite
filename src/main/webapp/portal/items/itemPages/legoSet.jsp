@@ -14,7 +14,7 @@
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
-                alert("Item added to your cart");
+                $( '#addToCartDiv' ).fadeIn().delay(1250).fadeOut( 500 );
             });
     }
 
@@ -71,6 +71,12 @@
 
         </div>
     </div>
+
+<div id="addToCartDiv" class="popupAlert" style="display:none" >
+    <div class="popupContentAlert">
+        Item added to cart
+    </div>/
+</div>
 
 </div>
 

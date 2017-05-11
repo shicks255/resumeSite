@@ -3,6 +3,7 @@
 
 <jsp:useBean id="user" type="com.steven.hicks.entities.User" scope="session"/>
 <jsp:useBean id="allItems" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="session"/>
+<jsp:useBean id="cart"  type="com.steven.hicks.entities.store.Cart" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -125,7 +126,14 @@
     }
     #cartIcon {
         position : absolute;
-        right : 2.5%;
+        right : 4.5%;
+        width : 7.5%;
+    }
+    #test {
+        /*display:inline-block;*/
+        position : absolute;
+        top : 0;
+        right : 1%;
     }
 
 </style>
@@ -149,6 +157,7 @@
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
+                <div class="hide-on-small-and-down" id="test">(<c:out value="${cart.itemsInCart.size()}"/>)</div>
             </li>
         </ul>
     </div>

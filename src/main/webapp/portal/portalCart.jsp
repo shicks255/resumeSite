@@ -25,7 +25,7 @@
         $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
             function(data)
             {
-                $( '#updateDiv' ).fadeIn().delay(1000).fadeOut( 500 );
+                $( '#updateDiv' ).fadeIn().delay(1250).fadeOut( 500 );
             });
     }
 
@@ -81,18 +81,18 @@
         </c:forEach>
     </table>
 
-</div>
 
-<div id="updateDiv" class="popup" style="display:none">
-    <div class="popupContent">
+<div id="updateDiv" class="popupAlert" style="display:none" >
+    <div class="popupContentAlert">
         Quantity updated
     </div>/
 </div>
 
-<div id="deleteDiv" class="popup" style="display: none">
-    <div class="popupContent">
+<div id="deleteDiv" class="popupAlert" style="display: none">
+    <div class="popupContentAlert">
         Item removed from cart
     </div>/
+</div>
 </div>
 
 <jsp:include page="/_pageSections/portalFooter.jsp" />
