@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -100,6 +101,25 @@ public class Cart
         factory.close();
 
         return itemsInCart;
+    }
+
+    public BigDecimal getSubTotal()
+    {
+        List<CartItem> items = getItemsInCart();
+        BigDecimal subTotal = new BigDecimal("0.0");
+
+        for (CartItem item : items)
+            subTotal = subTotal.add(item.getStoreItem().getItemPrice());
+
+        return subTotal;
+    }
+
+    public BigDecimal getTotal()
+    {
+        BigDecimal subTotal = getSubTotal();
+        BigDecimal total = subTotal.multiply(new BigDecimal("1.07"));
+
+        return total;
     }
 
     public boolean itemAlreadyInCart(int itemNumber)

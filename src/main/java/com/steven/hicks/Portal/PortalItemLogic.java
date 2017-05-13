@@ -11,6 +11,7 @@ import com.steven.hicks.entities.store.StoreItemType;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class PortalItemLogic
@@ -21,7 +22,7 @@ public class PortalItemLogic
         Map<String, String> params = fr.getParameters();
 
         String productDescription = params.get("productDescriptionMusicAlbum");
-        String productPrice = params.get("productPriceMusicAlbum");
+        BigDecimal productPrice = new BigDecimal(params.get("productPriceMusicAlbum"));
         String artistName = params.get("artistName");
         String albumTitle = params.get("albumTitle");
         String releaseYear = params.get("releaseYear");
@@ -64,7 +65,7 @@ public class PortalItemLogic
         Map<String, String> params = fr.getParameters();
 
         String productDescription = params.get("productDescriptionLego");
-        String productPrice = params.get("productPriceLego");
+        BigDecimal productPrice = new BigDecimal(params.get("productPriceLego"));
         String productName = params.get("productNameLego");
         String legoCode = params.get("legoCode");
         String legoTheme = params.get("legoTheme");

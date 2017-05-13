@@ -47,7 +47,7 @@
     <h3>Your Cart:</h3>
 
     <c:set var="itemsInCart" value="${cart.itemsInCart}"/>
-    <table>
+    <table border="1">
         <thead>
         <tr>
             <th></th>
@@ -70,7 +70,7 @@
                 <c:out value="${item.storeItem.itemNumber}"/>
             </td>
             <td>
-                <c:out value="${item.storeItem.itemPrice}"/>
+                $ <c:out value="${item.storeItem.itemPrice}"/>
             </td>
             <td>
                 <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">Update</button>
@@ -79,6 +79,12 @@
 
         </tr>
         </c:forEach>
+
+        <tr>
+            <td colspan="3"></td>
+            <td> $ <c:out value="${cart.subTotal}"/></td>
+            <td></td>
+        </tr>
     </table>
 
 

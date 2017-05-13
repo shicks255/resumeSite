@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -78,7 +79,7 @@ public class PortalItemHandler extends HttpServlet
             {
                 String newName = request.getParameter("name_" + album.getItemNumber());
                 String newDescription = request.getParameter("description_" + album.getItemNumber());
-                String newPrice = request.getParameter("price_" + album.getItemNumber());
+                BigDecimal newPrice = new BigDecimal(request.getParameter("price_" + album.getItemNumber()));
                 String newArtistName = request.getParameter("artist_" + album.getItemNumber());
                 String newAlbumTitle = request.getParameter("albumTitle_" + album.getItemNumber());
                 String newReleaseYear = request.getParameter("releaseYear_" + album.getItemNumber());
@@ -87,7 +88,7 @@ public class PortalItemHandler extends HttpServlet
                     album.setItemName(newName);
                 if (newDescription.length() > 0)
                     album.setItemDescription(newDescription);
-                if (newPrice.length() > 0)
+                if (newPrice != null)
                     album.setItemPrice(newPrice);
                 if (newArtistName.length() > 0)
                     album.setArtist(newArtistName);
@@ -116,7 +117,7 @@ public class PortalItemHandler extends HttpServlet
             {
                 String newName = request.getParameter("name_" + legoSet.getItemNumber());
                 String newDescription = request.getParameter("description_" + legoSet.getItemNumber());
-                String newPrice = request.getParameter("price_" + legoSet.getItemNumber());
+                BigDecimal newPrice = new BigDecimal(request.getParameter("price_" + legoSet.getItemNumber()));
                 String newLegoCode = request.getParameter("legoCode_" + legoSet.getItemNumber());
                 String newTheme = request.getParameter("theme_" + legoSet.getItemNumber());
                 String newPieces = request.getParameter("pieces_" + legoSet.getItemNumber());
@@ -126,7 +127,7 @@ public class PortalItemHandler extends HttpServlet
                     legoSet.setItemName(newName);
                 if (newDescription.length() > 0)
                     legoSet.setItemDescription(newDescription);
-                if (newPrice.length() > 0)
+                if (newPrice != null)
                     legoSet.setItemPrice(newPrice);
                 if (newLegoCode.length() > 0)
                     legoSet.setLegoCode(newLegoCode);

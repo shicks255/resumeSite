@@ -173,7 +173,7 @@
     <li>
         <div class="userView">
             <div class="background">
-                <img src="${pageContext.request.contextPath}/backgrounds/cartoon-background-with-stars_1110-892.jpg">
+                <%--<img src="${pageContext.request.contextPath}/backgrounds/cartoon-background-with-stars_1110-892.jpg">--%>
             </div>
             <span class="white-text name">Your Profile<a style="display: inline-block;color : white;" onclick="dialogEditProfile();"><i class="material-icons">edit</i></a></span>
             <span class="white-text"><c:out value="${user.userName}"/> </span>

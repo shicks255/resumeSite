@@ -8,6 +8,7 @@ import org.hibernate.query.*;
 import org.hibernate.query.Query;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public abstract class StoreItemGeneric
     @Column
     private int itemType;
     @Column
-    private String itemPrice;
+    private BigDecimal itemPrice;
     @Column
     private int pictureObjectId;
 
@@ -166,12 +167,12 @@ public abstract class StoreItemGeneric
         this.itemType = itemType;
     }
 
-    public String getItemPrice()
+    public BigDecimal getItemPrice()
     {
         return itemPrice;
     }
 
-    public void setItemPrice(String itemPrice)
+    public void setItemPrice(BigDecimal itemPrice)
     {
         this.itemPrice = itemPrice;
     }
