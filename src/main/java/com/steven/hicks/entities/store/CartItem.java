@@ -24,6 +24,12 @@ public class CartItem
     @Column
     private int quantity;
 
+//    @ManyToOne(CascadeType.ALL)
+//    public Cart getCart()
+//    {
+//        return Cart;
+//    }
+
 //    --------Basics
 
 

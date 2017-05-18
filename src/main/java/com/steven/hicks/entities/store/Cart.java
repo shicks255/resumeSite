@@ -109,7 +109,7 @@ public class Cart
         BigDecimal subTotal = new BigDecimal("0.0");
 
         for (CartItem item : items)
-            subTotal = subTotal.add(item.getStoreItem().getItemPrice());
+            subTotal = subTotal.add(item.getStoreItem().getItemPrice().multiply(new BigDecimal("" + item.getQuantity())));
 
         return subTotal;
     }

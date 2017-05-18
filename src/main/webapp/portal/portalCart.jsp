@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="session"/>
@@ -81,8 +82,13 @@
         </c:forEach>
 
         <tr>
-            <td colspan="3"></td>
+            <td colspan="3" style="text-align: right;">Sub-total:</td>
             <td> $ <c:out value="${cart.subTotal}"/></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: right;">Total:</td>
+            <td> $ <fmt:formatNumber value="${cart.total}" pattern="#.00"/></td>
             <td></td>
         </tr>
     </table>
