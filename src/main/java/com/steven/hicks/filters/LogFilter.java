@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebFilter(urlPatterns = "/*")
 public class LogFilter implements Filter
@@ -29,9 +31,25 @@ public class LogFilter implements Filter
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         ServletContext sc = filterConfig.getServletContext();
 
-        log.info(httpRequest.getRequestURI());
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
+        String dateTimeFormatted = dateTime.format(dateTimeFormatter);
+
+        String requestUri = httpRequest.getRequestURI();
+
+        if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons"))
+            log.info(httpRequest.getRequestURI() + " - Starting at " + dateTimeFormatted);
 
         chain.doFilter(httpRequest, httpResponse);
+
+        if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons"))
+        {
+            LocalDateTime endTime = LocalDateTime.now();
+            String endTimeFormatted = endTime.format(dateTimeFormatter);
+
+            log.info(httpRequest.getRequestURI() + " - Ending at " + endTimeFormatted);
+        }
+
     }
 
     @Override

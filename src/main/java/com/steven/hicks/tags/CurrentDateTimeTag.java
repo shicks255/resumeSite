@@ -13,7 +13,7 @@ public class CurrentDateTimeTag extends TagSupport
     public int doStartTag() throws JspException
     {
         LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyy  -   HH:mm:ss");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd-yyy  -   HH:mm:ss:SS");
         String dateTimeFormatted = dateTime.format(dateTimeFormatter);
 
         try

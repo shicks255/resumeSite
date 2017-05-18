@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sh" uri="/WEB-INF/taglib.tld" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="courseList" type="java.util.List<com.steven.hicks.entities.AcademicCourse>" scope="request"/>
 
@@ -67,6 +68,7 @@
     </script>
 
 <div class="container">
+    <sh:currentDateTime/>
 
 <h1 style="text-align:center;">Course History:</h1>
 
@@ -121,6 +123,8 @@
         </tbody>
     </table>
 </div>
+
+    hi<sh:currentDateTime/>
 </div>
 
 <br/><br/>
@@ -221,5 +225,6 @@
         </form>
     </div>
 </div>
+
 
 <jsp:include page="_pageSections/footer.jsp" />
