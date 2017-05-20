@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,9 @@ public class Cart
 
     @Column
     private String userNameOfCart;
+
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
+    private List<CartItem> itemsInCart = new ArrayList<>();
 
 //    -----Basics
 
@@ -89,23 +93,23 @@ public class Cart
         return cart;
     }
 
-    public List<CartItem> getItemsInCart()
-    {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
-
-        org.hibernate.query.Query query = session.createQuery("from CartItem where cartObjectId = " + getObjectId());
-        List<CartItem> itemsInCart = query.list();
-
-        session.close();
-        factory.close();
-
-        return itemsInCart;
-    }
+//    public List<CartItem> getItemsInCart()
+//    {
+//        SessionFactory factory = HibernateUtil.getSessionFactory();
+//        Session session = factory.openSession();
+//
+//        org.hibernate.query.Query query = session.createQuery("from CartItem where cartObjectId = " + getObjectId());
+//        List<CartItem> itemsInCart = query.list();
+//
+//        session.close();
+//        factory.close();
+//
+//        return itemsInCart;
+//    }
 
     public BigDecimal getSubTotal()
     {
-        List<CartItem> items = getItemsInCart();
+        List<CartItem> items = itemsInCart;
         BigDecimal subTotal = new BigDecimal("0.0");
 
         for (CartItem item : items)
@@ -124,7 +128,7 @@ public class Cart
 
     public boolean itemAlreadyInCart(int itemNumber)
     {
-        List<CartItem> items = this.getItemsInCart();
+        List<CartItem> items = itemsInCart;
 
         for (CartItem item : items)
         {
@@ -137,7 +141,7 @@ public class Cart
 
     public CartItem getItemFromCart( int itemNumber)
     {
-        List<CartItem> items = this.getItemsInCart();
+        List<CartItem> items = itemsInCart;
 
         for (CartItem item : items)
         {
@@ -169,5 +173,15 @@ public class Cart
     public void setUserNameOfCart(String userNameOfCart)
     {
         this.userNameOfCart = userNameOfCart;
+    }
+
+    public List<CartItem> getItemsInCart()
+    {
+        return itemsInCart;
+    }
+
+    public void setItemsInCart(List<CartItem> itemsInCart)
+    {
+        this.itemsInCart = itemsInCart;
     }
 }

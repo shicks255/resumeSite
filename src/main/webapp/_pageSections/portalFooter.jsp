@@ -21,6 +21,7 @@
 <footer class="page-footer">
 
     <div class="container">
+        <sh:currentDateTime/>
     </div>
 </footer>
 

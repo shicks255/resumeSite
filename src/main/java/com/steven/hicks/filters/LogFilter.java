@@ -32,17 +32,17 @@ public class LogFilter implements Filter
         ServletContext sc = filterConfig.getServletContext();
 
         LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss:SS");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
         String dateTimeFormatted = dateTime.format(dateTimeFormatter);
 
         String requestUri = httpRequest.getRequestURI();
 
-        if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons"))
+        if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons") && !requestUri.contains("images"))
             log.info(httpRequest.getRequestURI() + " - Starting at " + dateTimeFormatted);
 
         chain.doFilter(httpRequest, httpResponse);
 
-        if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons"))
+        if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons") && !requestUri.contains("images"))
         {
             LocalDateTime endTime = LocalDateTime.now();
             String endTimeFormatted = endTime.format(dateTimeFormatter);

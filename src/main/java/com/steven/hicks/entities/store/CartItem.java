@@ -15,7 +15,7 @@ public class CartItem
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int objectId;
 
-    @Column
+    @Column(name= "cartObjectId", insertable = false, updatable = false)
     private int cartObjectId;
 
     @Column
@@ -24,13 +24,9 @@ public class CartItem
     @Column
     private int quantity;
 
-//    @ManyToOne(CascadeType.ALL)
-//    public Cart getCart()
-//    {
-//        return Cart;
-//    }
-
-//    --------Basics
+    @ManyToOne
+    @JoinColumn(name="cartObjectId")
+    private Cart cart;
 
 
     @Override
@@ -127,5 +123,15 @@ public class CartItem
     public void setQuantity(int quantity)
     {
         this.quantity = quantity;
+    }
+
+    public Cart getCart()
+    {
+        return cart;
+    }
+
+    public void setCart(Cart cart)
+    {
+        this.cart = cart;
     }
 }
