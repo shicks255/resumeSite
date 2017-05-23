@@ -35,7 +35,6 @@ public class AcademicLogic
         course.setCollege(collegeName);
         course.setGradeReceived(courseGrade);
         course.setSemester(semester);
-        course.setCountOfCourseworks(0);
 
         course.setSemesterTrackingNumber(AcademicLogic.getSemesterNumberForSemester(semester));
 
@@ -94,7 +93,7 @@ public class AcademicLogic
         String semester = course.getSemester().substring(4);
         coursework.setYear(year);
         coursework.setSemester(semester);
-        coursework.setCourseId(course.getObjectId());
+        coursework.setAcademicCourse(course);
 
         byte[] bytes = new byte[(int) file.length()];
 
@@ -110,9 +109,9 @@ public class AcademicLogic
         }
 
         coursework.setFile(bytes);
+        course.getCourseworks().add(coursework);
 
         HibernateUtil.createItem(coursework);
-        course.setCountOfCourseworks(course.getCountOfCourseworks()+1);
         HibernateUtil.updateItem(course);
 
         File tempFile = file.getAbsoluteFile();
@@ -124,19 +123,19 @@ public class AcademicLogic
 
     public static String deleteCoursework(String fileName)
     {
-        Coursework coursework = AcademicLogic.getCourseworkByFileName(fileName);
+        Coursework coursework = Coursework.getCourseworkByFileName(fileName);
 
         String errorMessage = "";
         if (coursework != null)
         {
             HibernateUtil.deleteItem(coursework);
 
-            AcademicCourse course = AcademicCourse.getCourse(coursework.getCourseId());
-            if (course != null)
-            {
-                course.setCountOfCourseworks(course.getCountOfCourseworks() > 0 ? course.getCountOfCourseworks() - 1 : 0);
-                HibernateUtil.updateItem(course);
-            }
+//            AcademicCourse course = coursework.getAcademicCourse();
+//            if (course != null)
+//            {
+//                course.setCountOfCourseworks(course.getCountOfCourseworks() > 0 ? course.getCountOfCourseworks() - 1 : 0);
+//                HibernateUtil.updateItem(course);
+//            }
         }
         if (coursework == null)
             errorMessage = "Error...coursework not found.";
@@ -147,7 +146,7 @@ public class AcademicLogic
     public static void printCoursework(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
         String courseworkName = request.getParameter("courseworkName");
-        Coursework coursework = AcademicLogic.getCourseworkByFileName(courseworkName);
+        Coursework coursework = Coursework.getCourseworkByFileName(courseworkName);
 
         String fileName = coursework.getFileName();
         String prefix = fileName.substring(0, fileName.lastIndexOf("."));
@@ -178,26 +177,6 @@ public class AcademicLogic
         }
 
         tempFile.delete();
-    }
-
-    public static List<Coursework> getCoursework(AcademicCourse course)
-    {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Query query = session.createQuery("from Coursework  where course = :course ");
-        query.setParameter("course", course.getCourseName());
-        List courseWork = query.list();
-
-        session.close();
-        sessionFactory.close();
-
-        return courseWork;
-    }
-
-    public static Coursework getCourseworkByFileName(String fileName)
-    {
-        return Coursework.getCourseworkByFileName(fileName);
     }
 
     public static int getSemesterNumberForSemester(String semester)

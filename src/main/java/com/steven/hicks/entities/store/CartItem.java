@@ -15,8 +15,8 @@ public class CartItem
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int objectId;
 
-    @Column(name= "cartObjectId", insertable = false, updatable = false)
-    private int cartObjectId;
+//    @Column
+//    private int cartObjectId;
 
     @Column
     private int itemObjectIt;
@@ -28,13 +28,12 @@ public class CartItem
     @JoinColumn(name="cartObjectId")
     private Cart cart;
 
-
     @Override
     public String toString()
     {
         return "CartItem{" +
                 "objectId=" + objectId +
-                ", cartObjectId=" + cartObjectId +
+                ", cartObjectId=" + cart.getObjectId() +
                 ", itemObjectIt=" + itemObjectIt +
                 '}';
     }
@@ -95,16 +94,16 @@ public class CartItem
         this.objectId = objectId;
     }
 
-    public int getCartObjectId()
-    {
-        return cartObjectId;
-    }
-
-    public void setCartObjectId(int cartObjectId)
-    {
-        this.cartObjectId = cartObjectId;
-    }
-
+//    public int getCartObjectId()
+//    {
+//        return cartObjectId;
+//    }
+//
+//    public void setCartObjectId(int cartObjectId)
+//    {
+//        this.cartObjectId = cartObjectId;
+//    }
+//
     public int getItemObjectIt()
     {
         return itemObjectIt;

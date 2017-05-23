@@ -62,7 +62,7 @@
         <c:forEach var="item" items="${itemsInCart}">
         <tr>
             <td>
-                <%--<img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.storeItem.pictureObjectId}"/>--%>
+                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemNumber=${item.storeItem.itemNumber}"/>
             </td>
             <td>
                 <c:out value="${item.storeItem.itemName}"/>

@@ -4,7 +4,6 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.*;
 import org.hibernate.query.Query;
 
 import javax.persistence.*;
@@ -14,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "ITEM_TYPE",discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorColumn()
 public abstract class StoreItemGeneric
 {
@@ -30,8 +28,9 @@ public abstract class StoreItemGeneric
     private int itemType;
     @Column
     private BigDecimal itemPrice;
-    @Column
-    private int pictureObjectId;
+
+    @OneToMany(mappedBy = "storeItemGeneric", fetch = FetchType.EAGER)
+    private List<StoreItemPicture> itemPictures = new ArrayList<>();
 
     @Override
     public boolean equals(Object o)
@@ -122,10 +121,6 @@ public abstract class StoreItemGeneric
         return items;
     }
 
-    public StoreItemPicture getItemPicture()
-    {
-        return StoreItemPicture.getItemPicture(getPictureObjectId());
-    }
 
     public String getItemName()
     {
@@ -177,13 +172,13 @@ public abstract class StoreItemGeneric
         this.itemPrice = itemPrice;
     }
 
-    public int getPictureObjectId()
+    public List<StoreItemPicture> getItemPictures()
     {
-        return pictureObjectId;
+        return itemPictures;
     }
 
-    public void setPictureObjectId(int pictureObjectId)
+    public void setItemPictures(List<StoreItemPicture> itemPictures)
     {
-        this.pictureObjectId = pictureObjectId;
+        this.itemPictures = itemPictures;
     }
 }

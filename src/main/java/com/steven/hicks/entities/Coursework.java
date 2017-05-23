@@ -4,12 +4,11 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
+@Cacheable
+@Table(indexes = { @Index(name = "COURSE_ID_INDX", columnList = "courseId", unique = true) })
 public class Coursework
 {
     @Id
@@ -25,13 +24,14 @@ public class Coursework
     private String additionalNotes = "";
     @Column
     private String grade = "";
-    @Column
-    private int courseId;
+
+    @ManyToOne
+    @JoinColumn(name = "courseId")
+    private AcademicCourse academicCourse;
 
     @Column
     @Lob
     private byte[] file;
-
 
     @Override
     public String toString()
@@ -141,13 +141,13 @@ public class Coursework
         this.file = file;
     }
 
-    public int getCourseId()
+    public AcademicCourse getAcademicCourse()
     {
-        return courseId;
+        return academicCourse;
     }
 
-    public void setCourseId(int courseId)
+    public void setAcademicCourse(AcademicCourse academicCourse)
     {
-        this.courseId = courseId;
+        this.academicCourse = academicCourse;
     }
 }

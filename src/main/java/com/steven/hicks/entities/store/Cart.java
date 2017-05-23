@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(indexes = { @Index(name = "USER_NAME_OF_CART_INDX", columnList = "userNameOfCart", unique = true) })
 public class Cart
 {
 

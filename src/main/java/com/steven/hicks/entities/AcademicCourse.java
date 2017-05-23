@@ -1,14 +1,15 @@
 package com.steven.hicks.entities;
 
-import com.steven.hicks.AcademicHandling.AcademicLogic;
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(indexes = { @Index(name = "SEMESTER_TRACKING_NUMBER_INDX", columnList = "semesterTrackingNumber") })
 public class AcademicCourse
 {
     @Id
@@ -27,8 +28,9 @@ public class AcademicCourse
     private int semesterTrackingNumber;
     @Column
     private String gradeReceived = "";
-    @Column
-    private int countOfCourseworks;
+
+    @OneToMany(mappedBy = "academicCourse", fetch = FetchType.EAGER)
+    private List<Coursework> courseworks = new ArrayList<>();
 
     public AcademicCourse()
     {}
@@ -60,11 +62,6 @@ public class AcademicCourse
         return objectId;
     }
 
-    public List<Coursework> getCoursework()
-    {
-        return AcademicLogic.getCoursework(this);
-    }
-
     public static AcademicCourse getCourse(int courseId)
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();
@@ -74,6 +71,11 @@ public class AcademicCourse
         session.close();
         factory.close();
         return course;
+    }
+
+    public int countOfCoursework()
+    {
+        return courseworks.size();
     }
 
     //    ----------Getters & Setters
@@ -149,13 +151,13 @@ public class AcademicCourse
         this.gradeReceived = gradeReceived;
     }
 
-    public int getCountOfCourseworks()
+    public List<Coursework> getCourseworks()
     {
-        return countOfCourseworks;
+        return courseworks;
     }
 
-    public void setCountOfCourseworks(int countOfCourseworks)
+    public void setCourseworks(List<Coursework> courseworks)
     {
-        this.countOfCourseworks = countOfCourseworks;
+        this.courseworks = courseworks;
     }
 }

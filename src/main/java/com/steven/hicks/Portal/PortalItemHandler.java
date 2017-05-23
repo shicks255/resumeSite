@@ -146,13 +146,21 @@ public class PortalItemHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("getItemPicture"))
         {
-            Integer itemPictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
-            StoreItemPicture picture = StoreItemPicture.getItemPicture(itemPictureObjectId);
+            Integer itemNumber = Integer.valueOf(request.getParameter("itemNumber"));
+            StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
 
-            response.setContentType("image/jpg");
-            response.setContentLengthLong(picture.getImage().length);
+            if (item != null && item.getItemPictures().size() > 0)
+            {
+                StoreItemPicture picture = item.getItemPictures().get(0);
 
-            response.getOutputStream().write(picture.getImage());
+//            Integer itemPictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
+//            StoreItemPicture picture = StoreItemPicture.getItemPicture(itemPictureObjectId);
+
+                response.setContentType("image/jpg");
+                response.setContentLengthLong(picture.getImage().length);
+
+                response.getOutputStream().write(picture.getImage());
+            }
         }
 
         if (action.equalsIgnoreCase("ajaxGetItems"))
@@ -283,9 +291,10 @@ public class PortalItemHandler extends HttpServlet
             else
             {
                 cartItem = new CartItem();
-                cartItem.setCartObjectId(userCart.getObjectId());
+//                cartItem.setCartObjectId(userCart.getObjectId());
                 cartItem.setItemObjectIt(item.getItemNumber());
                 cartItem.setQuantity(1);
+                cartItem.setCart(userCart);
                 HibernateUtil.createItem(cartItem);
             }
         }

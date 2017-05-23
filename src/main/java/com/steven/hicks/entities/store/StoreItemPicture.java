@@ -1,6 +1,7 @@
 package com.steven.hicks.entities.store;
 
 import com.steven.hicks.Utilities.HibernateUtil;
+import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,6 +18,10 @@ public class StoreItemPicture
     @Column
     @Lob
     private byte[] image;
+
+    @ManyToOne
+    @JoinColumn(name = "itemNumber")
+    private StoreItemGeneric storeItemGeneric;
 
     @Override
     public String toString()
@@ -76,5 +81,15 @@ public class StoreItemPicture
     public void setImage(byte[] image)
     {
         this.image = image;
+    }
+
+    public StoreItemGeneric getStoreItemGeneric()
+    {
+        return storeItemGeneric;
+    }
+
+    public void setStoreItemGeneric(StoreItemGeneric storeItemGeneric)
+    {
+        this.storeItemGeneric = storeItemGeneric;
     }
 }

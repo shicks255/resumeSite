@@ -104,7 +104,7 @@ public class AcademicHandler extends HttpServlet
 
             if (course != null)
             {
-                List<Coursework> courseworks = course.getCoursework();
+                List<Coursework> courseworks = course.getCourseworks();
                 request.setAttribute("courseWorkList", courseworks);
             }
 

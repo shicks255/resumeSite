@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class PortalItemLogic
@@ -54,7 +56,7 @@ public class PortalItemLogic
 
             picture.setImage(bytes);
             HibernateUtil.createItem(picture);
-            musicAlbum.setPictureObjectId(picture.getObjectId());
+            musicAlbum.getItemPictures().add(picture);
         }
         HibernateUtil.createItem(musicAlbum);
     }
@@ -100,7 +102,7 @@ public class PortalItemLogic
 
             picture.setImage(bytes);
             HibernateUtil.createItem(picture);
-            legoSet.setPictureObjectId(picture.getObjectId());
+            legoSet.getItemPictures().add(picture);
         }
         HibernateUtil.createItem(legoSet);
     }

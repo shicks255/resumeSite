@@ -34,7 +34,7 @@
                 {
                     data: {
                             <c:forEach var="item" items="${allItems}" varStatus="loop">
-                        "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.pictureObjectId}'<c:if test="${!loop.last}">,</c:if>
+                        "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.itemPictures.get(0)}'<c:if test="${!loop.last}">,</c:if>
                         </c:forEach>
                     },
                     limit: 20,

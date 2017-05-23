@@ -116,7 +116,7 @@
                         <a class="waves-effect waves-light btn" name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</a>
                         <a class="waves-effect waves-light btn" name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</a>
                     </c:if>
-                    <a class="waves-effect waves-light btn" name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">Coursework (${course.countOfCourseworks})</a>
+                    <a class="waves-effect waves-light btn" name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">Coursework (${course.countOfCoursework()})</a>
                 </td>
             </tr>
         </c:forEach>
