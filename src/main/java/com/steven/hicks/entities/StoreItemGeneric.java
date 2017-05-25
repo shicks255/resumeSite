@@ -49,6 +49,15 @@ public abstract class StoreItemGeneric
         return itemNumber;
     }
 
+    public Integer getFirstPictureId()
+    {
+        Integer id = null;
+        if (itemPictures.size() > 0)
+            id = itemPictures.get(0).getObjectId();
+
+        return id;
+    }
+
     public static List<StoreItemGeneric> getAllItems()
     {
         SessionFactory factory = HibernateUtil.getSessionFactory();
