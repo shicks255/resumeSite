@@ -326,7 +326,18 @@ public class PortalItemHandler extends HttpServlet
 
             StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
             if (item != null)
-                HibernateUtil.deleteItem(item);
+            {
+                List<StoreItemPicture> itemPictures = item.getItemPictures();
+
+                SessionFactory factory = HibernateUtil.getSessionFactory();
+                Session session = factory.openSession();
+                session.beginTransaction();
+                session.delete(item);
+                itemPictures.forEach(itemPicture -> session.delete(itemPicture));
+                session.getTransaction().commit();
+                session.close();
+                factory.close();
+            }
         }
     }
 
