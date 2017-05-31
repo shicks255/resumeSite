@@ -42,7 +42,7 @@ public class PortalLogic
 
         session.save(avatar);
 
-        user.setAvatarObjectId(avatar.getObjectId());
+        user.setAvatar(avatar);
         session.update(user);
 
         session.getTransaction().commit();

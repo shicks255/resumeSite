@@ -68,7 +68,6 @@
     </script>
 
 <div class="container">
-    <sh:currentDateTime/>
 
 <h1 style="text-align:center;">Course History:</h1>
 
@@ -79,52 +78,51 @@
 <div id="editCourseDiv" class="hiddenDiv">
 </div>
 
-<div id="showCourseworkDiv" class="hiddenDiv">
-</div>
+    <div id="showCourseworkDiv" class="hiddenDiv">
+    </div>
 
-<br/>
-<br/>
+    <br/>
+    <br/>
 
-<div id="courseList" class="">
-    <table border="1" class="highlight responsive-table">
-        <thead>
-        <tr>
-            <th>#:</th>
-            <th>Semester:</th>
-            <th>College:</th>
-            <th>Code:</th>
-            <th>Course:</th>
-            <th>Grade:</th>
-            <th class="rightAlign">Actions:</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <c:set var="index" value="${0}"/>
-        <c:forEach var="course" items="${courseList}">
-            <c:set var="index" value="${index + 1}"/>
+    <div id="courseList" class="">
+        <table border="1" class="highlight responsive-table">
+            <thead>
             <tr>
-                <td><c:out value="${index}"/></td>
-                <td><c:out value="${course.semester}"/></td>
-                <td><c:out value="${course.college}"/></td>
-                <td><c:out value="${course.courseCode}"/></td>
-                <td><c:out value="${course.courseName}"/></td>
-                <td><c:out value="${course.gradeReceived}"/></td>
-                <td>
-                    <c:if test="${!empty adminComputer}">
-                        <a class="waves-effect waves-light btn" name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="showUploadDialog('${course.objectId}');">Upload Coursework</a>
-                        <a class="waves-effect waves-light btn" name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</a>
-                        <a class="waves-effect waves-light btn" name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</a>
-                    </c:if>
-                    <a class="waves-effect waves-light btn" name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">Coursework (${course.countOfCoursework()})</a>
-                </td>
+                <th>#:</th>
+                <th>Semester:</th>
+                <th>College:</th>
+                <th>Code:</th>
+                <th>Course:</th>
+                <th>Grade:</th>
+                <th class="rightAlign">Actions:</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+            </thead>
 
-    hi<sh:currentDateTime/>
+            <tbody>
+            <c:set var="index" value="${0}"/>
+            <c:forEach var="course" items="${courseList}">
+                <c:set var="index" value="${index + 1}"/>
+                <tr>
+                    <td><c:out value="${index}"/></td>
+                    <td><c:out value="${course.semester}"/></td>
+                    <td><c:out value="${course.college}"/></td>
+                    <td><c:out value="${course.courseCode}"/></td>
+                    <td><c:out value="${course.courseName}"/></td>
+                    <td><c:out value="${course.gradeReceived}"/></td>
+                    <td>
+                        <c:if test="${!empty adminComputer}">
+                            <a class="waves-effect waves-light btn" name="addCoursework" id="addCoursework" value="Upload Coursework" onclick="showUploadDialog('${course.objectId}');">Upload Coursework</a>
+                            <a class="waves-effect waves-light btn" name="editCourse" id="editCourse" onclick="editCourse('${course.objectId}');" value="Edit">Edit</a>
+                            <a class="waves-effect waves-light btn" name="deleteCourse" id="deleteCourse" onclick="deleteACourse('${course.objectId}');">Delete</a>
+                        </c:if>
+                        <a class="waves-effect waves-light btn" name="viewCoursework" id="viewCoursework" value="View Coursework" onclick="showCoursework('${course.objectId}');">Coursework (${course.countOfCoursework()})</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <br/><br/>

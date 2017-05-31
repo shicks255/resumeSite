@@ -12,12 +12,10 @@
     <title>Steven M Hicks | Java Developer</title>
 
     <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
-    <%--<link href="${pageContext.request.contextPath}/CSS/jquery-ui.min.css" rel="stylesheet" type="text/css"/>--%>
     <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
-    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>--%>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -35,7 +33,7 @@
                     data: {
                         <c:forEach var="item" items="${allItems}" varStatus="loop">
                         <%--<c:set var="itemPictureId" value="${item.itemPictures.size() > 0 ? item.itemPictures.get(0) : null}"/>--%>
-                        "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}'<c:if test="${!loop.last}">,</c:if>
+                        "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemNumber=${item.itemNumber}'<c:if test="${!loop.last}">,</c:if>
                         </c:forEach>
                     },
                     limit: 20,

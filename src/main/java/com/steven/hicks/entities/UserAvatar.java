@@ -17,6 +17,9 @@ public class UserAvatar
     @Lob
     private byte[] picture;
 
+    @OneToOne(mappedBy = "avatar")
+    private User user;
+
     @Override
     public String toString()
     {
@@ -77,5 +80,15 @@ public class UserAvatar
     public void setPicture(byte[] picture)
     {
         this.picture = picture;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 }

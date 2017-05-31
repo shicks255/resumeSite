@@ -88,7 +88,7 @@ public class PortalHandler extends HttpServlet
             if (avatar != null)
                 HibernateUtil.deleteItem(avatar);
 
-            user.setAvatarObjectId(null);
+            user.setAvatar(null);
             HibernateUtil.updateItem(user);
 
             FileRequest fr = FileUploadUtil.getFileRequest(request);

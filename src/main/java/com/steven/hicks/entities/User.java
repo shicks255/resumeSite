@@ -6,9 +6,7 @@ import com.steven.hicks.entities.store.Cart;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User
@@ -34,8 +32,9 @@ public class User
     @Column
     private String role  ="";
 
-    @Column
-    private Integer avatarObjectId;
+    @OneToOne
+    @JoinColumn
+    private UserAvatar avatar;
 
 
 //    ----Basics
@@ -107,11 +106,6 @@ public class User
         }
     }
 
-
-    public UserAvatar getAvatar()
-    {
-        return UserAvatar.getAvatar(avatarObjectId);
-    }
 
     public String getFirstAndLastName()
     {
@@ -195,13 +189,13 @@ public class User
         this.role = role;
     }
 
-    public Integer getAvatarObjectId()
+    public void setAvatar(UserAvatar avatar)
     {
-        return avatarObjectId;
+        this.avatar = avatar;
     }
 
-    public void setAvatarObjectId(Integer avatarObjectId)
+    public UserAvatar getAvatar()
     {
-        this.avatarObjectId = avatarObjectId;
+        return avatar;
     }
 }
