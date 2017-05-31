@@ -35,7 +35,7 @@
                                     float : left;
                                     border : 1px solid red;
                                     ">
-            <img alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.pictureObjectId}"/>
+            <img alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.firstPictureId}"/>
         </div>
 
         <div id="infoDiv" style="float: right; margin-left : 5px; border : 1px solid blue;">

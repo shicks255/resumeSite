@@ -4,7 +4,6 @@
 
 <jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="request"/>
 
-
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
 <script>
@@ -25,7 +24,7 @@
         <table>
             <c:forEach var="item" items="${items}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><img height="250"  alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.pictureObjectId}"/> </a></td>
+                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><img height="250"  alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}"/> </a></td>
                     <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><c:out value="${item.itemName}"/>   </a></td>
                     <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><c:out value="${item.itemNumber}"/> </a></td>
                     <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><c:out value="${item.itemPrice}"/>  </a></td>

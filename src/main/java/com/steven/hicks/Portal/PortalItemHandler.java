@@ -146,19 +146,13 @@ public class PortalItemHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("getItemPicture"))
         {
-            Integer itemNumber = Integer.valueOf(request.getParameter("itemNumber"));
-            StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
+            Integer pictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
+            StoreItemPicture picture = StoreItemPicture.getItemPicture(pictureObjectId);
 
-            if (item != null && item.getItemPictures().size() > 0)
+            if (picture != null)
             {
-                StoreItemPicture picture = item.getItemPictures().get(0);
-
-//            Integer itemPictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
-//            StoreItemPicture picture = StoreItemPicture.getItemPicture(itemPictureObjectId);
-
                 response.setContentType("image/jpg");
                 response.setContentLengthLong(picture.getImage().length);
-
                 response.getOutputStream().write(picture.getImage());
             }
         }
