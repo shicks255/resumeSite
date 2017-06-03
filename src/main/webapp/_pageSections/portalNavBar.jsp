@@ -30,17 +30,17 @@
 
             $( '#search' ).autocomplete(
                 {
-                    data: {
-                        <c:forEach var="item" items="${allItems}" varStatus="loop">
-                        <%--<c:set var="itemPictureId" value="${item.itemPictures.size() > 0 ? item.itemPictures.get(0) : null}"/>--%>
-                        "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemNumber=${item.itemNumber}'<c:if test="${!loop.last}">,</c:if>
-                        </c:forEach>
-                    },
+                    data:
+                        {
+                            <c:forEach var="item" items="${allItems}" varStatus="loop">
+                            <c:set var="itemPictureId" value="${item.itemPictures.size() > 0 ? item.itemPictures.get(0) : null}"/>
+                            "${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}'<c:if test="${!loop.last}">,</c:if>
+                            </c:forEach>
+                        },
                     limit: 20,
-                    minLength: 1,
+                    minLength: 3,
                     onAutocomplete: function(val)
                     {
-                        console.log(val);
                         window.open("${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=" + val, "_self");
                     }
                 });
