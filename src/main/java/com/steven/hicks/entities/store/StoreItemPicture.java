@@ -4,6 +4,7 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -22,6 +23,9 @@ public class StoreItemPicture
     @ManyToOne
     @JoinColumn(name = "itemNumber")
     private StoreItemGeneric storeItemGeneric;
+
+    @Column
+    private String pictureCaption = "";
 
     @Override
     public String toString()
@@ -81,6 +85,16 @@ public class StoreItemPicture
     public void setImage(byte[] image)
     {
         this.image = image;
+    }
+
+    public String getPictureCaption()
+    {
+        return pictureCaption;
+    }
+
+    public void setPictureCaption(String pictureCaption)
+    {
+        this.pictureCaption = pictureCaption;
     }
 
     public StoreItemGeneric getStoreItemGeneric()

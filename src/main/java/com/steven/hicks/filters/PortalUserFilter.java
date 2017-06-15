@@ -34,7 +34,6 @@ public class PortalUserFilter implements Filter
     {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        ServletContext sc = filterConfig.getServletContext();
 
         String requestUri = httpRequest.getRequestURI();
 

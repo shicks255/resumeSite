@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,7 +30,6 @@ public class PicturesLogic
                     .map(Path::toFile)
                     .filter(file -> !file.getName().contains("_small"))
                     .collect(Collectors.toList());
-            List<BufferedImage> images = new ArrayList<>();
 
             Map<File, BufferedImage> imageMap = new HashMap<>();
 
@@ -36,24 +37,19 @@ public class PicturesLogic
             {
                 BufferedImage image = ImageIO.read(file);
 
-//                int scaledWidth = (int) (image.getWidth() * 0.15);
-//                int scaledHeight = (int) (image.getHeight() * 0.15);
                 int scaledWidth = (450);
                 int scaledHeight = (300);
                 BufferedImage resizedImage = new BufferedImage(scaledWidth, scaledHeight, image.getType());
 
                 Graphics2D g2d = resizedImage.createGraphics();
-//                g2d.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
                 g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
                 g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
 
                 g2d.drawImage(image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH), 0, 0, scaledWidth, scaledHeight, null);
                 g2d.dispose();
 
-//                images.add(resizedImage);
                 imageMap.put(file, resizedImage);
             }
-
 
             for (Map.Entry<File, BufferedImage> entry : imageMap.entrySet())
             {
@@ -71,8 +67,6 @@ public class PicturesLogic
                     File resizedImageFile = new File(path1 + resizedFileName);
                     ImageIO.write(entry.getValue(), fileNameParts[1], resizedImageFile);
                 }
-
-                String balls = "balls";
             }
         }
         catch (IOException e)
@@ -80,8 +74,36 @@ public class PicturesLogic
             System.out.println(e);
         }
 
-
     }
 
+    public static byte[] resizePictureForThumbnail(byte[] picture)
+    {
+        ByteArrayInputStream in = new ByteArrayInputStream(picture);
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        try
+        {
+            BufferedImage image = ImageIO.read(in);
+            int scaledWidth = (200);
+            int scaledHeight = (150);
+
+            BufferedImage resizedImage = new BufferedImage(scaledWidth, scaledHeight, image.getType());
+
+            Graphics2D g2d = resizedImage.createGraphics();
+            g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+            g2d.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+
+            g2d.drawImage(image.getScaledInstance(scaledWidth, scaledHeight, Image.SCALE_SMOOTH), 0, 0, scaledWidth, scaledHeight, null);
+            g2d.dispose();
+
+            ImageIO.write(resizedImage, "jpg", buffer);
+
+        }
+        catch (IOException e)
+        {
+            System.out.println(e);
+        }
+        return buffer.toByteArray();
+    }
 
 }

@@ -8,6 +8,11 @@
 
 <script>
 
+    $(document).ready(function()
+    {
+        $( '#productType' ).val('');
+    });
+
     function filterItemAdds()
     {
         var itemType = $( '#productType' ).val();

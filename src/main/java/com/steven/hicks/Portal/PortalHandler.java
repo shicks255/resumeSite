@@ -37,24 +37,6 @@ public class PortalHandler extends HttpServlet
 //        -----Home Page
         if (action.equalsIgnoreCase("form"))
         {
-//            Principal principal = request.getUserPrincipal();
-//            User user = User.getUser(principal.getName());
-
-//            HttpSession session = request.getSession();
-//            session.setAttribute("user", user);
-
-//            List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
-//            session.setAttribute("allItems", allItems);
-
-//            Cart cart = Cart.getCartByUser(user.getUserName());
-//            if (cart == null)
-//            {
-//                cart = new Cart();
-//                cart.setUserNameOfCart(user.getUserName());
-//                HibernateUtil.createItem(cart);
-//            }
-//            session.setAttribute("cart", cart);
-
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalHome.jsp");
             dispatcher.forward(request, response);
         }

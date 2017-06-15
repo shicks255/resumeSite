@@ -1,5 +1,6 @@
 package com.steven.hicks.Portal;
 
+import com.steven.hicks.PicturesLogic;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.FileRequest;
@@ -60,15 +61,26 @@ public class PortalItemLogic
 
             picture.setImage(bytes);
             picture.setStoreItemGeneric(musicAlbum);
+            picture.setPictureCaption(musicAlbum.getAlbumTitle());
 
             session.beginTransaction();
-//            HibernateUtil.createItem(picture);
             session.save(picture);
             musicAlbum.getItemPictures().add(picture);
+
+            StoreItemPicture smallPicture = new StoreItemPicture();
+            byte[] resizedBytes = PicturesLogic.resizePictureForThumbnail(bytes);
+            if (resizedBytes != null)
+            {
+                smallPicture.setImage(resizedBytes);
+                smallPicture.setStoreItemGeneric(musicAlbum);
+                smallPicture.setPictureCaption(musicAlbum.getAlbumTitle() + "_small");
+                session.save(smallPicture);
+                musicAlbum.getItemPictures().add(smallPicture);
+            }
+
         }
         session.save(musicAlbum);
         session.getTransaction().commit();
-//        HibernateUtil.createItem(musicAlbum);
         session.close();
         factory.close();
     }

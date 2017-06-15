@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
@@ -55,6 +56,20 @@ public abstract class StoreItemGeneric
         if (itemPictures.size() > 0)
             id = itemPictures.get(0).getObjectId();
 
+        return id;
+    }
+
+    public Integer getSmallPictureId()
+    {
+        Integer id = null;
+        if (itemPictures.size() > 0)
+        {
+            List<StoreItemPicture> pictureToUse = itemPictures.stream()
+                    .filter(pic -> pic.getPictureCaption().contains("_small"))
+                    .collect(Collectors.toList());
+
+            id = pictureToUse.get(0).getObjectId();
+        }
         return id;
     }
 

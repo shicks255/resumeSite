@@ -25,7 +25,7 @@
         <tbody>
         <c:forEach var="item" items="${items}">
             <tr>
-                <td><img class="" alt="no good" height="175" width="200" id="itemPic_${item.itemNumber}" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.pictureObjectId}"></td>
+                <td><img class="" alt="no good" height="175" width="200" id="itemPic_${item.itemNumber}" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}"></td>
                 <td><input readonly="${true}" type="text" value="${item.itemNumber}"/></td>
                 <td><input name="name_${item.itemNumber}" id="name_${item.itemNumber}" type="text" value="${item.itemName}"/></td>
                 <td><input name="description_${item.itemNumber}" id="description_${item.itemNumber}" type="text" value="${item.itemDescription}"/></td>

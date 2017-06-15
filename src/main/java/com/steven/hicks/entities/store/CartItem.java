@@ -6,9 +6,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.query.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.util.List;
 
 @Entity
 public class CartItem
@@ -81,6 +83,20 @@ public class CartItem
         factory.close();
 
         return item;
+    }
+
+    public static List<CartItem> getAllCartItems()
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
+        org.hibernate.query.Query query = session.createQuery("from CartItem ");
+        List<CartItem> list = query.list();
+
+        session.close();
+        factory.close();
+
+        return list;
     }
 
     //    --------Getters & Stters

@@ -326,6 +326,12 @@ public class PortalItemHandler extends HttpServlet
             if (item != null)
             {
                 List<StoreItemPicture> itemPictures = item.getItemPictures();
+                List<CartItem> cartItems = CartItem.getAllCartItems();
+                cartItems.forEach(cartItem ->
+                {
+                    if (cartItem.getStoreItem().getItemType() == itemNumber)
+                        HibernateUtil.deleteItem(cartItem);
+                });
 
                 SessionFactory factory = HibernateUtil.getSessionFactory();
                 Session session = factory.openSession();

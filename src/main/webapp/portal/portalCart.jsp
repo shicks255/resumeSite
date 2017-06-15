@@ -27,6 +27,7 @@
             function(data)
             {
                 $( '#updateDiv' ).fadeIn().delay(1250).fadeOut( 500 );
+                location.reload();
             });
     }
 
@@ -62,7 +63,7 @@
         <c:forEach var="item" items="${itemsInCart}">
         <tr>
             <td>
-                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.storeItem.firstPictureId}"/>
+                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.storeItem.smallPictureId}"/>
             </td>
             <td>
                 <c:out value="${item.storeItem.itemName}"/>
