@@ -268,11 +268,7 @@ public class PortalItemHandler extends HttpServlet
 
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("user");
-
             Cart userCart = user.getUserCart();
-
-            List<CartItem> cartItems = userCart.getItemsInCart();
-
 
             CartItem cartItem;
 
@@ -281,16 +277,18 @@ public class PortalItemHandler extends HttpServlet
                 cartItem = userCart.getItemFromCart(itemNumber);
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 HibernateUtil.updateItem(cartItem);
+                request.getSession().setAttribute("cart", cartItem.getCart());
             }
             else
             {
                 cartItem = new CartItem();
-//                cartItem.setCartObjectId(userCart.getObjectId());
                 cartItem.setItemObjectIt(item.getItemNumber());
                 cartItem.setQuantity(1);
                 cartItem.setCart(userCart);
                 HibernateUtil.createItem(cartItem);
+                request.getSession().setAttribute("cart", cartItem.getCart());
             }
+            HibernateUtil.refreshItem(userCart);
         }
 
         if (action.equalsIgnoreCase("updateCartQty"))
@@ -300,7 +298,11 @@ public class PortalItemHandler extends HttpServlet
 
             CartItem cartItem = CartItem.getCartItem(itemNumber);
             cartItem.setQuantity(quantity);
+            Cart cart = cartItem.getCart();
             HibernateUtil.updateItem(cartItem);
+            HibernateUtil.refreshItem(cart);
+            HibernateUtil.mergeItem(cartItem);
+
             response.sendRedirect("portal?action=portalCart");
         }
 
@@ -309,7 +311,9 @@ public class PortalItemHandler extends HttpServlet
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
 
             CartItem cartItem = CartItem.getCartItem(itemNumber);
+            Cart cart = cartItem.getCart();
             HibernateUtil.deleteItem(cartItem);
+            HibernateUtil.refreshItem(cart);
 
             response.sendRedirect("portal?action=portalCart");
         }

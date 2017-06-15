@@ -4,8 +4,11 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 public class CartItem
@@ -14,9 +17,6 @@ public class CartItem
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int objectId;
-
-//    @Column
-//    private int cartObjectId;
 
     @Column
     private int itemObjectIt;
@@ -94,16 +94,6 @@ public class CartItem
         this.objectId = objectId;
     }
 
-//    public int getCartObjectId()
-//    {
-//        return cartObjectId;
-//    }
-//
-//    public void setCartObjectId(int cartObjectId)
-//    {
-//        this.cartObjectId = cartObjectId;
-//    }
-//
     public int getItemObjectIt()
     {
         return itemObjectIt;

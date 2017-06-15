@@ -3,8 +3,13 @@ package com.steven.hicks.entities.store;
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -94,19 +99,6 @@ public class Cart
         return cart;
     }
 
-//    public List<CartItem> getItemsInCart()
-//    {
-//        SessionFactory factory = HibernateUtil.getSessionFactory();
-//        Session session = factory.openSession();
-//
-//        org.hibernate.query.Query query = session.createQuery("from CartItem where cartObjectId = " + getObjectId());
-//        List<CartItem> itemsInCart = query.list();
-//
-//        session.close();
-//        factory.close();
-//
-//        return itemsInCart;
-//    }
 
     public BigDecimal getSubTotal()
     {

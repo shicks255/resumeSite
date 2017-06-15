@@ -56,4 +56,28 @@ public class HibernateUtil
         factory.close();
     }
 
+    public static void refreshItem(Object o)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.refresh(o);
+
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
+    }
+
+    public static void mergeItem(Object o)
+    {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+        session.beginTransaction();
+        session.merge(o);
+
+        session.getTransaction().commit();
+        session.close();
+        factory.close();
+    }
+
 }

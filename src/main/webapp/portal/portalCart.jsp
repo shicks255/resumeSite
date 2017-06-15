@@ -47,7 +47,7 @@
 
     <h3>Your Cart:</h3>
 
-    <c:set var="itemsInCart" value="${cart.itemsInCart}"/>
+    <c:set var="itemsInCart" value="${sessionScope.cart.itemsInCart}"/>
     <table border="1">
         <thead>
         <tr>
@@ -83,12 +83,12 @@
 
         <tr>
             <td colspan="3" style="text-align: right;">Sub-total:</td>
-            <td> $ <c:out value="${cart.subTotal}"/></td>
+            <td> $ <c:out value="${sessionScope.cart.subTotal}"/></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: right;">Total:</td>
-            <td> $ <fmt:formatNumber value="${cart.total}" pattern="#.00"/></td>
+            <td> $ <fmt:formatNumber value="${sessionScope.cart.total}" pattern="#.00"/></td>
             <td></td>
         </tr>
     </table>
