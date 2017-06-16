@@ -35,6 +35,7 @@ public class PortalItemHandler extends HttpServlet
     {
         String action = request.getParameter("action");
 
+//        ADD AND ITEM
         if (action.equalsIgnoreCase("form"))
         {
             List<StoreItemType> itemTypes = StoreItemType.getItemTypes();
@@ -44,6 +45,7 @@ public class PortalItemHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        EDIT AN ITEM
         if (action.equalsIgnoreCase("editItems"))
         {
             List<StoreItemType> itemTypes = StoreItemType.getItemTypes();
@@ -53,18 +55,21 @@ public class PortalItemHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        ADD MUSIC ALBUM
         if (action.equalsIgnoreCase("addMusicAlbum"))
         {
            PortalItemLogic.addMusicAlbum(request);
            response.sendRedirect("portalItemHandler?action=form");
         }
 
+//        ADD LEGO SET
         if (action.equalsIgnoreCase("addLegoSet"))
         {
             PortalItemLogic.addLegoSet(request);
             response.sendRedirect("portalItemHandler?action=form");
         }
 
+//        EDIT MUSIC ALBUM
         if (action.equalsIgnoreCase("editMusicAlbums"))
         {
             List<StoreItemGeneric> musicAlbums = StoreItemGeneric.getItemsOfType("MusicAlbum");
@@ -103,6 +108,7 @@ public class PortalItemHandler extends HttpServlet
             response.sendRedirect("portalItemHandler?action=editItems");
         }
 
+//        EDIT LEGO SET
         if (action.equalsIgnoreCase("editLegoSet"))
         {
             List<StoreItemGeneric> genericItems = StoreItemGeneric.getItemsOfType("LegoSet");
@@ -144,6 +150,7 @@ public class PortalItemHandler extends HttpServlet
             response.sendRedirect("portalItemHandler?action=editItems");
         }
 
+//        GET AN ITEMS PICTURE
         if (action.equalsIgnoreCase("getItemPicture"))
         {
             Integer pictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
@@ -157,7 +164,8 @@ public class PortalItemHandler extends HttpServlet
             }
         }
 
-        if (action.equalsIgnoreCase("ajaxGetItems"))
+//        GET ITEMS OF A TYPE
+        if (action.equalsIgnoreCase("ajaxGetItemsByType"))
         {
             String itemType = request.getParameter("itemType");
             StoreItemType storeItemType = StoreItemType.getItemTypeByName(itemType);
@@ -189,31 +197,7 @@ public class PortalItemHandler extends HttpServlet
 
         }
 
-        if (action.equalsIgnoreCase("ajaxGetSearchResults"))
-        {
-            String searchInput = request.getParameter("searchInput").toLowerCase();
-            String[] searchTerms = searchInput.split("\\s+");
-
-            List<StoreItemGeneric> items = StoreItemGeneric.getAllItems();
-            items.removeIf(item ->
-            {
-                for (String searchTerm : searchTerms)
-                {
-                    if (!item.getItemName().toLowerCase().contains(searchTerm.toLowerCase()))
-                        return true;
-                }
-                return false;
-            });
-
-            int size = items.size();
-            if (size > 10)
-                items.subList(10, size).clear();
-
-            request.setAttribute("items", items);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResultsInjected.jsp");
-            dispatcher.forward(request, response);
-        }
-
+//        SHOW ITEM PAGE
         if (action.equalsIgnoreCase("showItemPage"))
         {
 //            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
@@ -249,6 +233,7 @@ public class PortalItemHandler extends HttpServlet
             }
         }
 
+//        NAV BAR ITEM SEARCH
         if (action.equalsIgnoreCase("searchForItems"))
         {
             String searchTerms = request.getParameter("searchTerms");
@@ -256,11 +241,11 @@ public class PortalItemHandler extends HttpServlet
 
             request.setAttribute("items", itemSearchResults);
 
-
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResults.jsp");
             dispatcher.forward(request, response);
         }
 
+//        ADD ITEM TO CART
         if (action.equalsIgnoreCase("addItemToCart"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
@@ -291,6 +276,7 @@ public class PortalItemHandler extends HttpServlet
             HibernateUtil.refreshItem(userCart);
         }
 
+//        UPDATE CART QUANTITY
         if (action.equalsIgnoreCase("updateCartQty"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
@@ -306,6 +292,7 @@ public class PortalItemHandler extends HttpServlet
             response.sendRedirect("portal?action=portalCart");
         }
 
+//        REMOVE ITEM FROM CART
         if (action.equalsIgnoreCase("removeItemFromCart"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
@@ -318,6 +305,7 @@ public class PortalItemHandler extends HttpServlet
             response.sendRedirect("portal?action=portalCart");
         }
 
+//        DELETE ITEM FROM DATABASE
         if (action.equalsIgnoreCase("deleteItem"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemNumber"));
@@ -337,7 +325,7 @@ public class PortalItemHandler extends HttpServlet
                 Session session = factory.openSession();
                 session.beginTransaction();
                 session.delete(item);
-                itemPictures.forEach(itemPicture -> session.delete(itemPicture));
+//                itemPictures.forEach(itemPicture -> session.delete(itemPicture));
                 session.getTransaction().commit();
                 session.close();
                 factory.close();

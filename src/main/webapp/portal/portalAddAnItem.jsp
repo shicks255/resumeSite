@@ -8,6 +8,49 @@
 
 <script>
 
+    $(document).ready(function()
+    {
+       $( '#productType' ).val('');
+
+       $( '#productPriceMusicAlbum' ).focusout(function(event)
+       {
+          var enteredPrice = $( '#productPriceMusicAlbum' ).val();
+          if (isNaN(enteredPrice))
+           {
+               $( '#submitAlbum' ).
+           }
+       });
+
+       $( '#releaseYear' ).focusout(function(event)
+       {
+          var releaseYear = $( '#releaseYear' ).val();
+          if (isNaN(releaseYear))
+              df
+       });
+
+       $( '#productPriceLego' ).focusout(function(event)
+       {
+          var enteredPrice = $( '#productPriceLego' ).val();
+          if (isNaN(enteredPrice))
+              df
+       });
+
+       $( '#numberOfPieces' ).focusout(function(event)
+       {
+          var numberOfPrices = $( '#numberOfPieces' ).val();
+          if (isNaN(numberOfPrices))
+              df
+       });
+
+       $( '#releaseYearLego' ).focusout(function(event)
+       {
+          var releaseYear = $( '#releaseYearLego' ).val();
+          if (isNaN(releaseYear))
+              df
+       });
+
+    });
+
     function filterItemAdds()
     {
         $( '.addingItemDiv' ).css('display', 'none');
@@ -16,6 +59,11 @@
             $( '#addMusicAlbum' ).css('display', 'inline');
         if (itemType == 'LegoSet')
             $( '#addLegoSet' ).css('display', 'inline');
+    }
+
+    function badDataMessage()
+    {
+
     }
 
 </script>
@@ -75,7 +123,7 @@
                     </td>
                 </tr>
             </table>
-            <button class="waves-effect waves-light btn" type="submit">
+            <button id="submitAlbum" class="waves-effect waves-light btn" type="submit">
                 Add
             </button>
         </form>

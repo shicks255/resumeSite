@@ -5,6 +5,14 @@
 
 <jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.store.items.LegoSet>" scope="request"/>
 
+<script>
+    function deleteItem(itemNumber)
+    {
+        $.post("${pageContext.request.contextPath}/portalItemHandler?action=deleteItem&itemNumber=" + itemNumber);
+        location.reload();
+    }
+</script>
+
 <form name="frmEditLegoSet" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editLegoSet">
     <table class="highlight striped centered">
         <thead>
@@ -19,6 +27,7 @@
             <th>Theme</th>
             <th>Pieces</th>
             <th>Release Year</th>
+            <th></th>
         </tr>
         </thead>
 
@@ -35,6 +44,11 @@
                 <td><input name="theme_${item.itemNumber}" id="theme_${item.itemNumber}" type="text" value="${item.legoTheme}"/></td>
                 <td><input name="pieces_${item.itemNumber}" id="pieces_${item.itemNumber}" type="text" value="${item.numberOfPieces}"/></td>
                 <td><input name="releaseYear_${item.itemNumber}" id="releaseYear_${item.itemNumber}" type="text" value="${item.releaseYear}"/></td>
+                <td>
+                    <button class="btn waves-effect waves-light" onclick="deleteItem('${item.itemNumber}');" type="submit" name="action">Delete
+                        <i class="material-icons right">send</i>
+                    </button>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

@@ -110,6 +110,8 @@ public class PortalItemLogic
 
         File file = fr.getUploadedFile();
 
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
         if (file != null && file.isFile())
         {
             StoreItemPicture picture = new StoreItemPicture();
@@ -125,8 +127,28 @@ public class PortalItemLogic
             }
 
             picture.setImage(bytes);
-            HibernateUtil.createItem(picture);
+            picture.setStoreItemGeneric(legoSet);
+            picture.setPictureCaption(legoSet.getItemName());
+
+            session.beginTransaction();
+            session.save(picture);
             legoSet.getItemPictures().add(picture);
+
+            StoreItemPicture smallPicture = new StoreItemPicture();
+            byte[] resizedBytes = PicturesLogic.resizePictureForThumbnail(bytes);
+            if (resizedBytes != null)
+            {
+                smallPicture.setImage(resizedBytes);
+                smallPicture.setStoreItemGeneric(legoSet);
+                smallPicture.setPictureCaption(legoSet.getItemName() + "_small");
+                session.save(smallPicture);
+                legoSet.getItemPictures().add(smallPicture);
+            }
+
+            session.save(legoSet);
+            session.getTransaction().commit();
+            session.close();
+            factory.close();
         }
         HibernateUtil.createItem(legoSet);
     }

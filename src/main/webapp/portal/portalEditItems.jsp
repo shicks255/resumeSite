@@ -21,7 +21,7 @@
             $( '#editItemsList' ).html('');
         else
         {
-            $.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetItems&itemType=' + itemType,
+            $.get('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetItemsByType&itemType=' + itemType,
                 function(data)
                 {
                     $( '#editItemsList' ).html(data);
