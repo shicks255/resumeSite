@@ -10,18 +10,23 @@ import com.steven.hicks.entities.store.items.LegoSet;
 import com.steven.hicks.entities.store.items.MusicAlbum;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import com.steven.hicks.entities.store.StoreItemType;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -243,6 +248,54 @@ public class PortalItemHandler extends HttpServlet
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResults.jsp");
             dispatcher.forward(request, response);
+        }
+
+//        GET ALL ITEMS
+        if (action.equalsIgnoreCase("getAllItemsJSON"))
+        {
+            List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
+
+            String jsonString = "[";
+
+            for (StoreItemGeneric item : allItems)
+            {
+                jsonString += "{\"" + item.getItemName() + "\": " + "\"" + item.getFirstPictureId() + "\"}";
+                if (!allItems.get(allItems.size()-1).equals(item))
+                    jsonString += ",";
+            }
+
+//            String jsonStringToWriteBack = "[{\"testKey\": \"testValue\"}, {\"testKey\": \"testvalue2\"}]";
+
+
+
+
+//            JSONFunctions
+
+            PrintWriter out = response.getWriter();
+//            response.setContentType("text");
+            response.setContentType("application/json");
+//            response.setHeader("Cache-control", "no-cache, no store");
+//            response.setHeader("Pragma", "no-cache");
+//            response.setHeader("Expires", "-1");
+
+            out.println(jsonString);
+            out.flush();
+            out.close();
+
+//            byte[] bytes = jsonStringToWriteBack.getBytes();
+//            response.setHeader("Content-Length", "" + (bytes.length));
+
+
+            // Write the file back to the client
+//            byte[] buffer = new byte[32_000];
+//
+//            try(ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+//                ServletOutputStream outputStream = response.getOutputStream())
+//            {
+//                for( int bytesRead = inputStream.read(buffer); bytesRead>=0; bytesRead = inputStream.read(buffer) )
+//                    outputStream.write(buffer,0,bytesRead);
+//                outputStream.flush();
+//            }
         }
 
 //        ADD ITEM TO CART

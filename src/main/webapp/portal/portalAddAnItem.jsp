@@ -14,11 +14,11 @@
 
        $( '#productPriceMusicAlbum' ).focusout(function(event)
        {
-          var enteredPrice = $( '#productPriceMusicAlbum' ).val();
-          if (isNaN(enteredPrice))
-           {
-               $( '#submitAlbum' ).
-           }
+           var enteredPrice = $( '#productPriceMusicAlbum' ).val();
+           if (isNaN(enteredPrice))
+               $( '#submitAlbum' ).addClass('disabled');
+           else
+               $( '#submitAlbum' ).removeClass('disabled');
        });
 
        $( '#releaseYear' ).focusout(function(event)

@@ -28,22 +28,42 @@
         $(document).ready(function()
         {
 
-            <%--$( '#search' ).autocomplete(--%>
-                <%--{--%>
-                    <%--data:--%>
-                        <%--{--%>
-                            <%--<c:forEach var="item" items="${allItems}" varStatus="loop">--%>
-                            <%--<c:set var="itemPictureId" value="${item.itemPictures.size() > 0 ? item.itemPictures.get(0) : null}"/>--%>
-                            <%--"${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.smallPictureId}'<c:if test="${!loop.last}">,</c:if>--%>
-                            <%--</c:forEach>--%>
-                        <%--},--%>
-                    <%--limit: 20,--%>
-                    <%--minLength: 3,--%>
-                    <%--onAutocomplete: function(val)--%>
-                    <%--{--%>
-                        <%--window.open("${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=" + val, "_self");--%>
-                    <%--}--%>
-                <%--});--%>
+            $(function()
+            {
+                console.log('before ajax');
+                $.ajax({
+                    type: 'GET',
+                    url: '${pageContext.request.contextPath}/portalItemHandler?action=getAllItemsJSON',
+                    success: function(response)
+                    {
+                        var dataArray = response;
+                        console.log(dataArray);
+                        var data = {};
+                        console.log(dataArray.length);
+                        for (var i = 0; i < dataArray.length; i++)
+                        {
+                            data[dataArray[i].testKey] = dataArray[i];
+                            console.log(dataArray[i].testKey);
+                        }
+                        $( '#search' ).autocomplete(
+                            {
+                                data: data,
+//                                    {
+                                        <%--<c:forEach var="item" items="${allItems}" varStatus="loop">--%>
+                                        <%--<c:set var="itemPictureId" value="${item.itemPictures.size() > 0 ? item.itemPictures.get(0) : null}"/>--%>
+                                        <%--"${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.smallPictureId}'<c:if test="${!loop.last}">,</c:if>--%>
+                                        <%--</c:forEach>--%>
+//                                    },
+                                limit: 20,
+                                minLength: 3,
+                                onAutocomplete: function(val)
+                                {
+                                    window.open("${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=" + val, "_self");
+                                }
+                            });
+                    }
+                });
+            });
 
 
             $(".button-collapse").sideNav();
