@@ -6,25 +6,21 @@ import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.store.Cart;
 import com.steven.hicks.entities.store.CartItem;
-import com.steven.hicks.entities.store.items.LegoSet;
-import com.steven.hicks.entities.store.items.MusicAlbum;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import com.steven.hicks.entities.store.StoreItemType;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import jdk.nashorn.internal.runtime.JSONFunctions;
+import com.steven.hicks.entities.store.items.LegoSet;
+import com.steven.hicks.entities.store.items.MusicAlbum;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -40,7 +36,7 @@ public class PortalItemHandler extends HttpServlet
     {
         String action = request.getParameter("action");
 
-//        ADD AND ITEM
+//        NAVIGATE TO ADD AND ITEM
         if (action.equalsIgnoreCase("form"))
         {
             List<StoreItemType> itemTypes = StoreItemType.getItemTypes();
@@ -50,7 +46,7 @@ public class PortalItemHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
-//        EDIT AN ITEM
+//        NAVIGATE TO EDIT AN ITEM
         if (action.equalsIgnoreCase("editItems"))
         {
             List<StoreItemType> itemTypes = StoreItemType.getItemTypes();
@@ -202,7 +198,7 @@ public class PortalItemHandler extends HttpServlet
 
         }
 
-//        SHOW ITEM PAGE
+//        NAVIGATE TO SHOW ITEM PAGE
         if (action.equalsIgnoreCase("showItemPage"))
         {
 //            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
@@ -263,23 +259,20 @@ public class PortalItemHandler extends HttpServlet
                 if (!allItems.get(allItems.size()-1).equals(item))
                     jsonString += ",";
             }
+            jsonString += "]";
 
 //            String jsonStringToWriteBack = "[{\"testKey\": \"testValue\"}, {\"testKey\": \"testvalue2\"}]";
 
 
-
-
-//            JSONFunctions
-
             PrintWriter out = response.getWriter();
-//            response.setContentType("text");
-            response.setContentType("application/json");
+            response.setContentType("text");
+//            response.setContentType("application/json");
 //            response.setHeader("Cache-control", "no-cache, no store");
 //            response.setHeader("Pragma", "no-cache");
 //            response.setHeader("Expires", "-1");
 
             out.println(jsonString);
-            out.flush();
+//            out.flush();
             out.close();
 
 //            byte[] bytes = jsonStringToWriteBack.getBytes();
@@ -306,15 +299,16 @@ public class PortalItemHandler extends HttpServlet
 
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("user");
-            Cart userCart = user.getUserCart();
+            Cart cart = user.getUserCart();
 
             CartItem cartItem;
 
-            if (userCart.getItemFromCart(itemNumber) != null)
+            if (cart.getItemFromCart(itemNumber) != null)
             {
-                cartItem = userCart.getItemFromCart(itemNumber);
+                cartItem = cart.getItemFromCart(itemNumber);
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 HibernateUtil.updateItem(cartItem);
+//                HibernateUtil.mergeItem(userCart);
                 request.getSession().setAttribute("cart", cartItem.getCart());
             }
             else
@@ -322,11 +316,13 @@ public class PortalItemHandler extends HttpServlet
                 cartItem = new CartItem();
                 cartItem.setItemObjectIt(item.getItemNumber());
                 cartItem.setQuantity(1);
-                cartItem.setCart(userCart);
+                cartItem.setCart(cart);
                 HibernateUtil.createItem(cartItem);
+//                HibernateUtil.mergeItem(userCart);
                 request.getSession().setAttribute("cart", cartItem.getCart());
+
             }
-            HibernateUtil.refreshItem(userCart);
+            HibernateUtil.refreshItem(cart);
         }
 
 //        UPDATE CART QUANTITY
@@ -335,12 +331,29 @@ public class PortalItemHandler extends HttpServlet
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
             int quantity = Integer.valueOf(request.getParameter("newQuantity"));
 
+//            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//            Session session = sessionFactory.openSession();
+//            session.beginTransaction();
+
+//            CartItem cartItem = session.get(CartItem.class, itemNumber);
             CartItem cartItem = CartItem.getCartItem(itemNumber);
-            cartItem.setQuantity(quantity);
             Cart cart = cartItem.getCart();
+
+            cartItem.setQuantity(quantity);
+
+//            session.update(cartItem);
+//            session.update(cart);
+//
+//            session.getTransaction().commit();
+//
+//            session.close();
+//            sessionFactory.close();
+
+            cartItem.setQuantity(quantity);
+//            Cart cart = cartItem.getCart();
             HibernateUtil.updateItem(cartItem);
-            HibernateUtil.refreshItem(cart);
-            HibernateUtil.mergeItem(cartItem);
+//            HibernateUtil.refreshItem(cart);
+//            HibernateUtil.mergeItem(cartItem);
 
             response.sendRedirect("portal?action=portalCart");
         }
@@ -352,8 +365,21 @@ public class PortalItemHandler extends HttpServlet
 
             CartItem cartItem = CartItem.getCartItem(itemNumber);
             Cart cart = cartItem.getCart();
+
+//            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//            Session session = sessionFactory.openSession();
+//
+//            session.beginTransaction();
+//
+//            session.delete(cartItem);
+//            session.update(cart);
+//
+//            session.getTransaction().commit();
+//            session.close();
+//            sessionFactory.close();
+
             HibernateUtil.deleteItem(cartItem);
-            HibernateUtil.refreshItem(cart);
+//            HibernateUtil.re(cart);
 
             response.sendRedirect("portal?action=portalCart");
         }

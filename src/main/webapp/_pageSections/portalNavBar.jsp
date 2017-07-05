@@ -27,7 +27,6 @@
     <script>
         $(document).ready(function()
         {
-
             $(function()
             {
                 console.log('before ajax');
@@ -36,15 +35,22 @@
                     url: '${pageContext.request.contextPath}/portalItemHandler?action=getAllItemsJSON',
                     success: function(response)
                     {
+                        response = JSON.parse(response);
                         var dataArray = response;
-                        console.log(dataArray);
                         var data = {};
+                        console.log(dataArray);
                         console.log(dataArray.length);
                         for (var i = 0; i < dataArray.length; i++)
                         {
-                            data[dataArray[i].testKey] = dataArray[i];
-                            console.log(dataArray[i].testKey);
+                            var key = Object.keys(dataArray[i]);
+                            var value = dataArray[i][key];
+
+                            data[key] = '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=' + value;
+
+//                            data[Object.keys(dataArray[i])] = dataArray[Object.keys(dataArray[i])];
+//                            console.log(dataArray[i].testKey);
                         }
+                        console.log(data);
                         $( '#search' ).autocomplete(
                             {
                                 data: data,

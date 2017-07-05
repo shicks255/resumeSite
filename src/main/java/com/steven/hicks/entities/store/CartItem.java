@@ -28,6 +28,7 @@ public class CartItem
 
     @ManyToOne
     @JoinColumn(name="cartObjectId")
+    @Cascade(CascadeType.MERGE)
     private Cart cart;
 
     @Override

@@ -14,6 +14,7 @@
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
+                location.reload();
                 $( '#addToCartDiv' ).fadeIn().delay(1250).fadeOut( 500 );
             });
     }
@@ -29,7 +30,7 @@
                                     float : left;
                                     border : 1px solid red;
                                     ">
-            <img alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${legoSet.pictureObjectId}"/>
+            <img alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${legoSet.smallPictureId}"/>
         </div>
 
         <div id="infoDiv" style="float: right; margin-left : 5px; border : 1px solid blue;">

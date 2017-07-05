@@ -15,12 +15,24 @@
 <%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>--%>
 
 <script>
+//    function addToCart(itemObjectId)
+//    {
+        <%--$.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,--%>
+//            function(data)
+//            {
+//                location.reload();
+//                alert("Item added to your cart");
+//            });
+//    }
+
     function addToCart(itemObjectId)
     {
+        $( '#addToCart' ).blur();
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
-                alert("Item added to your cart");
+                location.reload();
+                $( '#addToCartDiv' ).fadeIn().delay(1250).fadeOut( 500 );
             });
     }
 
@@ -76,6 +88,12 @@
             </table>
 
         </div>
+    </div>
+
+    <div id="addToCartDiv" class="popupAlert" style="display:none" >
+        <div class="popupContentAlert">
+            Item added to cart
+        </div>/
     </div>
 
 </div>
