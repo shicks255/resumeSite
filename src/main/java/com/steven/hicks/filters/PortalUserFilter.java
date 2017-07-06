@@ -40,22 +40,32 @@ public class PortalUserFilter implements Filter
         if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons") && !requestUri.contains("images"))
         {
             Principal principal = ((HttpServletRequest) request).getUserPrincipal();
-            User user = User.getUser(principal.getName());
-
             HttpSession session = ((HttpServletRequest) request).getSession();
-            session.setAttribute("user", user);
 
-            List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
-            session.setAttribute("allItems", allItems);
+            User user = (User)session.getAttribute("user");
 
-            Cart cart = Cart.getCartByUser(user.getUserName());
-            if (cart == null)
+            if (user == null)
             {
-                cart = new Cart();
-                cart.setUserNameOfCart(user.getUserName());
-                HibernateUtil.createItem(cart);
+                user = User.getUser(principal.getName());
+                session.setAttribute("user", user);
             }
-            session.setAttribute("cart", cart);
+
+
+//            List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
+//            session.setAttribute("allItems", allItems);
+
+//            Cart cart =
+//            if (session.getAttribute("cart") == null)
+//            {
+//                Cart cart = Cart.getCartByUser(user.getUserName());
+//                if (cart == null)
+//                {
+//                    cart = new Cart();
+//                    cart.setUserNameOfCart(user.getUserName());
+//                    HibernateUtil.createItem(cart);
+//                }
+//                session.setAttribute("cart", cart);
+//            }
         }
 
         chain.doFilter(httpRequest, httpResponse);

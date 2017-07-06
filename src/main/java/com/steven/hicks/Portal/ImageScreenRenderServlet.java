@@ -1,6 +1,7 @@
 package com.steven.hicks.Portal;
 
 import com.steven.hicks.entities.User;
+import com.steven.hicks.entities.UserAvatar;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,13 +23,17 @@ public class ImageScreenRenderServlet extends HttpServlet
 
         if (action.equalsIgnoreCase("form"))
         {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
+//            HttpSession session = request.getSession();
+//            User user = (User) session.getAttribute("user");
+
+            int avatarId = Integer.valueOf(request.getParameter("avatarId"));
+
+            UserAvatar avatar = UserAvatar.getAvatar(avatarId);
 
             response.setContentType("image/jpg");
-            response.setContentLengthLong(user.getAvatar().getPicture().length);
+            response.setContentLengthLong(avatar.getPicture().length);
 
-            response.getOutputStream().write(user.getAvatar().getPicture());
+            response.getOutputStream().write(avatar.getPicture());
         }
     }
 

@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:useBean id="user" type="com.steven.hicks.entities.User" scope="session"/>
-<jsp:useBean id="allItems" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="session"/>
-<jsp:useBean id="cart"  type="com.steven.hicks.entities.store.Cart" scope="session"/>
+<%--<jsp:useBean id="allItems" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="session"/>--%>
+<%--<jsp:useBean id="cart"  type="com.steven.hicks.entities.store.Cart" scope="session"/>--%>
 
 <!DOCTYPE html>
 <html>
@@ -182,7 +182,7 @@
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
-                <div class="hide-on-small-and-down" id="test">(<c:out value="${cart.itemsInCart.size()}"/>)</div>
+                <div class="hide-on-small-and-down" id="test">(<c:out value="${user.userCart.itemsInCart.size()}"/>)</div>
             </li>
         </ul>
     </div>
@@ -203,7 +203,7 @@
             <span class="white-text name">Your Profile<a style="display: inline-block;color : white;" onclick="dialogEditProfile();"><i class="material-icons">edit</i></a></span>
             <span class="white-text"><c:out value="${user.userName}"/> </span>
             <c:if test="${!empty user.avatar}">
-                <img class="circle" alt="no good" id="avatarPic" src="${pageContext.request.contextPath}/imageScreenRenderServlet?action=form">
+                <img class="circle" alt="no good" id="avatarPic" src="${pageContext.request.contextPath}/imageScreenRenderServlet?action=form&avatarId=${user.avatar.objectId}">
             </c:if>
             <c:if test="${empty user.avatar}">
                 <i class="material-icons circle medium">account_circle</i>

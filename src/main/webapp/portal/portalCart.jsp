@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="session"/>
+<%--<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="session"/>--%>
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
@@ -48,7 +48,7 @@
 
     <h3>Your Cart:</h3>
 
-    <c:set var="itemsInCart" value="${sessionScope.cart.itemsInCart}"/>
+    <c:set var="itemsInCart" value="${sessionScope.user.userCart.itemsInCart}"/>
     <table border="1">
         <thead>
         <tr>

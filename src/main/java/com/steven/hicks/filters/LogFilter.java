@@ -38,7 +38,7 @@ public class LogFilter implements Filter
         String requestUri = httpRequest.getRequestURI();
 
         if (!requestUri.contains("CSS") && !requestUri.contains("fonts") && !requestUri.contains("JS") && !requestUri.contains("icons") && !requestUri.contains("images"))
-            log.info(httpRequest.getRequestURI() + " - Starting at " + dateTimeFormatted);
+            log.info(httpRequest.getRequestURI() + " - Starting at " + dateTimeFormatted + " from log filter");
 
         chain.doFilter(httpRequest, httpResponse);
 
@@ -47,7 +47,7 @@ public class LogFilter implements Filter
             LocalDateTime endTime = LocalDateTime.now();
             String endTimeFormatted = endTime.format(dateTimeFormatter);
 
-            log.info(httpRequest.getRequestURI() + " - Ending at " + endTimeFormatted);
+            log.info(httpRequest.getRequestURI() + " - Ending at " + endTimeFormatted + " from log filter");
         }
 
     }
