@@ -21,15 +21,18 @@
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
-//                location.reload();
+                location.reload();
+                $( '#addToCartDiv' ).fadeIn();
+                $( '#addToCartDiv' ).fadeOut();
 //                window.setTimeout(showAddedToCartMessage, 5000);
             });
     }
 
-//    function showAddedToCartMessage()
-//    {
-//        $( '#addToCartDiv' ).fadeIn().delay(1250).fadeOut( 500 );
-//    }
+    function showAddedToCartMessage()
+    {
+        $( '#addToCartDiv' );
+//            .delay(1250).fadeOut( 500 );
+    }
 
 </script>
 
