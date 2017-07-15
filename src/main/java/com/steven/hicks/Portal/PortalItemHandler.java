@@ -287,9 +287,9 @@ public class PortalItemHandler extends HttpServlet
 
             CartItem cartItem;
 
-            if (cart.getItemFromCart(itemNumber) != null)
+            if (cart.getItemFromCartByItemNumber(itemNumber) != null)
             {
-                cartItem = cart.getItemFromCart(itemNumber);
+                cartItem = cart.getItemFromCartByItemNumber(itemNumber);
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 HibernateUtil.updateItem(cartItem);
 //                HibernateUtil.mergeItem(userCart);
@@ -354,8 +354,8 @@ public class PortalItemHandler extends HttpServlet
                 SessionFactory factory = HibernateUtil.getSessionFactory();
                 Session session = factory.openSession();
                 session.beginTransaction();
+//                itemPictures.forEach(itemPicture -> HibernateUtil.deleteItem(itemPicture));
                 session.delete(item);
-//                itemPictures.forEach(itemPicture -> session.delete(itemPicture));
                 session.getTransaction().commit();
                 session.close();
                 factory.close();

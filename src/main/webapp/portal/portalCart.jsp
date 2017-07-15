@@ -18,17 +18,21 @@
         });
     });
 
-    function updateQty(itemObjectId)
+    function updateQty(itemObjectId, currentQty)
     {
         $( '#updateQtyBtn' ).blur();
         var itemGetter = '#qty_' + itemObjectId;
         var qty = $( itemGetter ).val();
-        $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
-            function(data)
-            {
-                $( '#updateDiv' ).fadeIn().delay(1250).fadeOut( 500 );
-                location.reload();
-            });
+
+        if (qty !== currentQty)
+        {
+            $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
+                function(data)
+                {
+                    $( '#updateDiv' ).fadeIn().delay(1250).fadeOut( 500 );
+                    location.reload();
+                });
+        }
     }
 
     function removeItem(itemObjectId)
@@ -75,7 +79,7 @@
                 $ <c:out value="${item.storeItem.itemPrice}"/>
             </td>
             <td>
-                <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">Update</button>
+                <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>
                 <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
             </td>
 
@@ -84,12 +88,12 @@
 
         <tr>
             <td colspan="3" style="text-align: right;">Sub-total:</td>
-            <td> $ <c:out value="${sessionScope.cart.subTotal}"/></td>
+            <td> $ <c:out value="${sessionScope.user.userCart.subTotal}"/></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: right;">Total:</td>
-            <td> $ <fmt:formatNumber value="${sessionScope.cart.total}" pattern="#.00"/></td>
+            <td> $ <fmt:formatNumber value="${sessionScope.user.userCart.total}" pattern="#.00"/></td>
             <td></td>
         </tr>
     </table>

@@ -15,7 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(indexes = { @Index(name = "USER_NAME_OF_CART_INDX", columnList = "userNameOfCart", unique = true) })
+@Table(
+        indexes =
+                {
+                        @Index(name = "USER_NAME_OF_CART_INDX", columnList = "userNameOfCart", unique = true)
+                })
 public class Cart
 {
 
@@ -119,7 +123,7 @@ public class Cart
         return total;
     }
 
-    public boolean itemAlreadyInCart(int itemNumber)
+    public boolean isItemAlreadyInCartByItemNumber(int itemNumber)
     {
         List<CartItem> items = itemsInCart;
 
@@ -132,7 +136,7 @@ public class Cart
         return false;
     }
 
-    public CartItem getItemFromCart( int itemNumber)
+    public CartItem getItemFromCartByItemNumber(int itemNumber)
     {
         List<CartItem> items = itemsInCart;
 

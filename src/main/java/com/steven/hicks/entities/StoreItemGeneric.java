@@ -30,7 +30,7 @@ public abstract class StoreItemGeneric
     @Column
     private BigDecimal itemPrice;
 
-    @OneToMany(mappedBy = "storeItemGeneric", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "storeItemGeneric", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<StoreItemPicture> itemPictures = new ArrayList<>();
 
     @Override

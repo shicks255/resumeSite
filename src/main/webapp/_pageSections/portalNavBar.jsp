@@ -23,13 +23,12 @@
     <meta name="description" content="Steven M. Hicks - New Jersey based Website Developer and Computer Programmer, currelty using Java and Tomcat with various front end libraries...JQuery/Jquery UI, Materialize CSS, ajax & json,."/>
     <meta name="keywords" content="Steven Hicks, Steven M Hicks, Steven M. Hicks, shicks, shicks255, New Jersey, NJ, Hunterdon County, java, forge-tech, forge tech, web developer, software developer, computer programmer, programming"/>
 
-
     <script>
+        var searchTerms = '';
         $(document).ready(function()
         {
             $(function()
             {
-                console.log('before ajax');
                 $.ajax({
                     type: 'GET',
                     url: '${pageContext.request.contextPath}/portalItemHandler?action=getAllItemsJSON',
@@ -38,35 +37,19 @@
                         response = JSON.parse(response);
                         var dataArray = response;
                         var data = {};
-                        console.log(dataArray);
-                        console.log(dataArray.length);
                         for (var i = 0; i < dataArray.length; i++)
                         {
+
                             var key = Object.keys(dataArray[i]);
                             var value = dataArray[i][key];
 
-                            data[key] = '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=' + value;
+                            console.log(value);
+                            var cleanKey = key.toString().replace(/'/g, '&apos;');
+//                            var cleanKey = key.toString().replace(/([^a-z0-9 ._-]+)/gi, '');
+                            $( '#items' ).append("<option value='" + cleanKey + "'>");
 
-//                            data[Object.keys(dataArray[i])] = dataArray[Object.keys(dataArray[i])];
-//                            console.log(dataArray[i].testKey);
+                            data[key] = '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=' + value;
                         }
-                        console.log(data);
-                        $( '#search' ).autocomplete(
-                            {
-                                data: data,
-//                                    {
-                                        <%--<c:forEach var="item" items="${allItems}" varStatus="loop">--%>
-                                        <%--<c:set var="itemPictureId" value="${item.itemPictures.size() > 0 ? item.itemPictures.get(0) : null}"/>--%>
-                                        <%--"${item.itemName}": '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.smallPictureId}'<c:if test="${!loop.last}">,</c:if>--%>
-                                        <%--</c:forEach>--%>
-//                                    },
-                                limit: 20,
-                                minLength: 3,
-                                onAutocomplete: function(val)
-                                {
-                                    window.open("${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=" + val, "_self");
-                                }
-                            });
                     }
                 });
             });
@@ -80,27 +63,22 @@
                 {
                     $( '.popup' ).each(function(i, obj){
                         $( this ).removeClass('popup').addClass('hiddenDiv');
-//                        obj.removeClass('popup').addClass('hiddenDiv');
                     });
                 }
             });
 
-            $( '#search' ).bind("enterKey", function(e)
-            {
-                doSearch();
-            });
             $( '#search' ).keyup(function(e)
             {
                 if (e.keyCode == 13)
                 {
-                    $(this).trigger("enterKey");
+                    doSearch();
                 }
             })
         });
 
         function doSearch()
         {
-            var searchTerms = $( '#search' ).val();
+            searchTerms = $( '#search' ).val();
             window.open("${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=" + searchTerms, "_self");
         }
 
@@ -119,7 +97,14 @@
 </head>
 <body>
 
+<datalist id="items">
+</datalist>
+
 <style>
+    input::-webkit-calendar-picker-indicator {
+        display: none;
+}
+
     nav ul {
         /*display :absolute;*/
         width: 100%;
@@ -173,16 +158,14 @@
                 <a href="${pageContext.request.contextPath}/portal?action=form"> Portal Search</a>
             </li>
             <li id="searchBar">
-                <input type="text" id="search" name="search" placeholder="Search for an item">
-                <div style="background-color : red;" id="searchResults" name="searchResults">
-                </div>
+                <input type="text" id="search" name="search" list="items" placeholder="Search for an item">
             </li>
             <li id="searchIcon">
                 <a href="#" onclick="doSearch();" ><i class="material-icons">search</i></a>
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
-                <div class="hide-on-small-and-down" id="test">(<c:out value="${user.userCart.itemsInCart.size()}"/>)</div>
+                <div class="hide-on-small-and-down" id="test">(<c:out value="${sessionScope.user.userCart.itemsInCart.size()}"/>)</div>
             </li>
         </ul>
     </div>
