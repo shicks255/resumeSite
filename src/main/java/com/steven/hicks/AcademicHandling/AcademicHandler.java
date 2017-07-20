@@ -1,5 +1,6 @@
 package com.steven.hicks.AcademicHandling;
 
+import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.entities.AcademicCourse;
 import com.steven.hicks.entities.Coursework;
@@ -29,11 +30,8 @@ public class AcademicHandler extends HttpServlet
             List<AcademicCourse> academicCourseList = AcademicLogic.getCourseList();
             request.setAttribute("courseList", academicCourseList);
 
-            String visitingIPAddress = request.getRemoteHost();
-            if (visitingIPAddress.equals("67.87.211.190"))
+            if (CommonUtils.isAdminVisitor(request))
                 request.setAttribute("adminComputer", "adminComputer");
-
-            System.out.println(visitingIPAddress);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/education.jsp");
             dispatcher.forward(request, response);

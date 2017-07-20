@@ -12,21 +12,18 @@
             $( '#semesterEdit' ).val('${course.semester}');
         });
 
-        function closePopup()
-        {
-            $( '#editCourseDiv' ).removeClass('popup').addClass('hiddenDiv');
-            location.reload();
-        }
-
     </script>
 
 </head>
 <body>
 
 <div class="popupContent">
-    <a class="waves-effect waves-light btn" value="Cancel" onclick="closePopup();">Close</a>
+    <button class="waves-effect waves-light btn" value="Cancel" onclick="closePopups();">
+        Close
+        <i class="material-icons right">close</i>
+    </button>
 <form name="frmEditACourse" id="frmEditACourse" action="${pageContext.request.contextPath}\academic?&action=editACourse&courseId=${course.objectId}" method="post">
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <button class="btn waves-effect waves-light" type="submit" name="action">Update
         <i class="material-icons right">send</i>
     </button>
     <table>

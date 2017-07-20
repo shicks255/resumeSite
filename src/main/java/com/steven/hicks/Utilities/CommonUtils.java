@@ -1,10 +1,64 @@
 package com.steven.hicks.Utilities;
 
-import javax.servlet.ServletContext;
+import com.steven.hicks.ServerStart;
+import com.steven.hicks.entities.Visitor;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 public final class CommonUtils
 {
+    private static final Logger log = Logger.getLogger(ServerStart.class.getName());
+
+    public static boolean isAdminVisitor(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession();
+        if (session != null)
+        {
+            String visitorIpAddress = request.getRemoteHost();
+            if (visitorIpAddress != null && visitorIpAddress.length() > 0)
+            {
+                if (visitorIpAddress.equals("67.87.211.190") ||
+                        visitorIpAddress.equals("127.0.0.1") ||
+                        visitorIpAddress.equalsIgnoreCase("0:0:0:0:0:0:0:1"))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void increaseVisitorCountIfNewSession(HttpServletRequest request)
+    {
+        String visitorIPAddress = request.getRemoteAddr();
+        if (request.getHeader("x-forwarded-for")!=null)
+            visitorIPAddress = request.getHeader("x-forwarded-for");
+
+        if (request.getSession(false) == null)
+        {
+            Visitor visitor;
+            if (Visitor.getVisitor(visitorIPAddress) != null)
+            {
+                visitor = Visitor.getVisitor(visitorIPAddress);
+                visitor.setCountOfVisits(visitor.getCountOfVisits() + 1);
+
+                HibernateUtil.updateItem(visitor);
+                log.info("Visitor returning " + visitor.toString());
+            }
+            else
+            {
+                visitor = new Visitor();
+                visitor.setIpAddress(visitorIPAddress);
+                visitor.setCountOfVisits(1);
+
+                HibernateUtil.createItem(visitor);
+                log.info("New visited logged " + visitor.toString());
+            }
+        }
+    }
+
     public static void sleep(int millis)
     {
         try

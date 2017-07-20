@@ -140,6 +140,8 @@ input[type=submit]:hover {color : red;}
 
 .btn {
     border-radius : 100px;
+    padding-top : 22px;
+    padding-bottom : 22px;
 }
 
 input,

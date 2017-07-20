@@ -10,6 +10,7 @@
 
     <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/CSS/materializeOverrides.css" rel="stylesheet" type="text/css">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -32,12 +33,18 @@
                 {
                     $( '.popup' ).each(function(i, obj){
                         $( this ).removeClass('popup').addClass('hiddenDiv');
-//                        obj.removeClass('popup').addClass('hiddenDiv');
                     });
                 }
             });
 
         });
+
+        function closePopups()
+        {
+            $( '.popup' ).each(function(i, obj){
+                $( this ).removeClass('popup').addClass('hiddenDiv');
+            });
+        }
 
         function doDropdown()
         {
