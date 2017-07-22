@@ -62,7 +62,10 @@
 <h1 style="text-align:center;">Course History:</h1>
 
 <c:if test="${!empty adminComputer}">
-    <a class="waves-effect waves-light btn" value="Add A Course" onclick="buttonAddACourse();">Add A Course</a>
+    <button class="waves-effect waves-light btn" value="Add A Course" onclick="buttonAddACourse();">
+        Add A Course
+        <i class="material-icons right">add</i>
+    </button>
 </c:if>
 
 <%--ajax injected page editCoursePopup.jsp--%>
