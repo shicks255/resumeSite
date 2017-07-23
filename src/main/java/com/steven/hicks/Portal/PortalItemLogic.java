@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class PortalItemLogic
@@ -68,7 +66,7 @@ public class PortalItemLogic
             musicAlbum.getItemPictures().add(picture);
 
             StoreItemPicture smallPicture = new StoreItemPicture();
-            byte[] resizedBytes = PicturesLogic.resizePictureForThumbnail(bytes);
+            byte[] resizedBytes = PicturesLogic.resizePicturesForThumbnailGallery(bytes);
             if (resizedBytes != null)
             {
                 smallPicture.setImage(resizedBytes);
@@ -135,7 +133,7 @@ public class PortalItemLogic
             legoSet.getItemPictures().add(picture);
 
             StoreItemPicture smallPicture = new StoreItemPicture();
-            byte[] resizedBytes = PicturesLogic.resizePictureForThumbnail(bytes);
+            byte[] resizedBytes = PicturesLogic.resizePicturesForThumbnailGallery(bytes);
             if (resizedBytes != null)
             {
                 smallPicture.setImage(resizedBytes);

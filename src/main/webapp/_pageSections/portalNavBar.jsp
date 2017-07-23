@@ -208,7 +208,10 @@
 
 <div id="editProfileDialog" class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
-        <a class="waves-effect waves-light btn" id="closeAddCourse" name="closeAddCourse" onclick="closeEditProfile();">Close</a>
+        <button class="waves-effect waves-light btn" id="closeAddCourse" name="closeAddCourse" onclick="closeEditProfile();">
+            Close
+            <i class="material-icons right">close</i>
+        </button>
         <form name="frmEditProfile" id="frmEditProfile" action="${pageContext.request.contextPath}/portal?action=editProfile" method="post">
             <table>
                 <tr>

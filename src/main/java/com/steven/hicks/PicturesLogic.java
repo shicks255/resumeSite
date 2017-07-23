@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class PicturesLogic
 {
-    public static void loadPictures(ServletContext sc)
+    public static void loadPicturesForGallery(ServletContext sc)
     {
         String path = sc.getRealPath("/");
 
@@ -76,7 +76,7 @@ public class PicturesLogic
 
     }
 
-    public static byte[] resizePictureForThumbnail(byte[] picture)
+    public static byte[] resizePicturesForThumbnailGallery(byte[] picture)
     {
         ByteArrayInputStream in = new ByteArrayInputStream(picture);
 

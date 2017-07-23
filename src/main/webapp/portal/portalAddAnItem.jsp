@@ -70,8 +70,14 @@
 
 <div class="container">
 
-    <a class="waves-effect waves-light btn" name="btnAddAnItem" id="btnAddAnItem" href="${pageContext.request.contextPath}/portalItemHandler?action=form">Add Items</a>
-    <a class="waves-effect waves-light btn" name="btnEditItems" id="btnEditItems" href="${pageContext.request.contextPath}/portalItemHandler?action=editItems">Edit Items</a>
+    <button class="waves-effect waves-light btn" name="btnAddAnItem" id="btnAddAnItem" href="${pageContext.request.contextPath}/portalItemHandler?action=form">
+        Add Items
+        <i class="material-icons right">add</i>
+    </button>
+    <button class="waves-effect waves-light btn" name="btnEditItems" id="btnEditItems" href="${pageContext.request.contextPath}/portalItemHandler?action=editItems">
+        Edit Items
+        <i class="material-icons right">mode_edit</i>
+    </button>
 
 <h3>Add And Item:</h3>
 

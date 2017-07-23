@@ -29,7 +29,6 @@ public class LogFilter implements Filter
     {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        ServletContext sc = filterConfig.getServletContext();
 
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss:SSS");
@@ -49,7 +48,6 @@ public class LogFilter implements Filter
 
             log.info(httpRequest.getRequestURI() + " - Ending at " + endTimeFormatted + " from log filter");
         }
-
     }
 
     @Override

@@ -10,10 +10,6 @@
     {
         $( '#dialog-emailPopup' ).removeClass('hiddenDiv').addClass('popup');
     }
-    function closeEmailPopup()
-    {
-        $( '#dialog-emailPopup' ).removeClass('popup').addClass('hiddenDiv');
-    }
 </script>
 
 <div class="container">
@@ -162,7 +158,7 @@
 
         <div id="dialog-emailPopup" class="hiddenDiv">
             <div class="popupContent">
-                <button class="waves-effect waves-light btn" id="closeEmail" name="closeEmail" onclick="closeEmailPopup();">Close</button>
+                <button class="waves-effect waves-light btn" id="closeEmail" name="closeEmail" onclick="closePopups();">Close</button>
                     <br/>
                     <br/>
                     <br/>

@@ -138,10 +138,6 @@ input[type=submit]:hover {color : red;}
     display : none;
 }
 
-.btn {
-    border-radius : 100px;
-}
-
 input,
 input::-webkit-input-placeholder {
     font-size: 20px;
