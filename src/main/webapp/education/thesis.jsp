@@ -36,11 +36,15 @@
 
             <h4 align = "center">Steven M. Hicks</h4><br/>
 
-            <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"><img id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"></img></a>
+                <div class="row">
+                    <div class="col s1 m3 l3">
+                        <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"><img id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"></img></a>
 
-            <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"><image id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"></img></a>
+                        <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"><image id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"></img></a>
 
-            <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"><img id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"></img></a>
+                        <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"><img id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"></img></a>
+                    </div>
+                </div>
 
             <br><br>
 
