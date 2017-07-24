@@ -253,11 +253,18 @@ public class PortalItemHandler extends HttpServlet
 
             String jsonString = "[";
 
+//            for (StoreItemGeneric item : allItems)
+//            {
+//                jsonString += "{\"" + item.getItemName() + "\": " + "\"" + item.getFirstPictureId() + "\"}";
+//                if (!allItems.get(allItems.size()-1).equals(item))
+//                    jsonString += ",";
+//            }
             for (StoreItemGeneric item : allItems)
             {
-                jsonString += "{\"" + item.getItemName() + "\": " + "\"" + item.getFirstPictureId() + "\"}";
+                jsonString += "{\"" + item.getItemName() + "\": " + "\"\"}";
                 if (!allItems.get(allItems.size()-1).equals(item))
                     jsonString += ",";
+
             }
             jsonString += "]";
 
