@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 
-@WebFilter(urlPatterns = "/portal*")
+@WebFilter(urlPatterns = "/portal")
 public class PortalUserFilter implements Filter
 {
     private FilterConfig filterConfig = null;
