@@ -4,10 +4,10 @@ package com.steven.hicks.Portal;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.FileRequest;
-import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.UserAvatar;
 import com.steven.hicks.entities.store.Cart;
+import com.steven.hicks.entities.store.CartItem;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet (urlPatterns = "/portal")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"user", "admin"} ))
@@ -109,6 +106,12 @@ public class PortalHandler extends HttpServlet
 //        -----My Cart
         if (action.equalsIgnoreCase("portalCart"))
         {
+            HttpSession userSession = request.getSession();
+
+            Cart userCart = (Cart)userSession.getAttribute("cart");
+            List<CartItem> cartItems = userCart.getItemsInCart();
+            request.setAttribute("cartItems", cartItems);
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalCart.jsp");
             dispatcher.forward(request, response);
         }

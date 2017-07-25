@@ -2,14 +2,13 @@ package com.steven.hicks.entities.store;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.query.*;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.util.List;
 
 @Entity
@@ -79,6 +78,7 @@ public class CartItem
         Session session = factory.openSession();
 
         StoreItemGeneric item = session.get(StoreItemGeneric.class, getItemObjectIt());
+        Hibernate.initialize(item.getItemPictures());
 
         session.close();
         factory.close();

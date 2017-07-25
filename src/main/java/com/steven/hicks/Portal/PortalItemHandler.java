@@ -240,6 +240,7 @@ public class PortalItemHandler extends HttpServlet
             String searchTerms = request.getParameter("searchTerms");
             List<StoreItemGeneric> itemSearchResults = StoreItemGeneric.searchForItems(searchTerms);
 
+
             request.setAttribute("items", itemSearchResults);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResults.jsp");
@@ -299,7 +300,6 @@ public class PortalItemHandler extends HttpServlet
                 cartItem = cart.getItemFromCartByItemNumber(itemNumber);
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
                 HibernateUtil.updateItem(cartItem);
-//                HibernateUtil.mergeItem(userCart);
                 request.getSession().setAttribute("cart", cartItem.getCart());
             }
             else
@@ -322,8 +322,6 @@ public class PortalItemHandler extends HttpServlet
             int quantity = Integer.valueOf(request.getParameter("newQuantity"));
 
             CartItem cartItem = CartItem.getCartItem(itemNumber);
-            Cart cart = cartItem.getCart();
-
             cartItem.setQuantity(quantity);
             HibernateUtil.updateItem(cartItem);
 
@@ -334,11 +332,9 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("removeItemFromCart"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
-
             CartItem cartItem = CartItem.getCartItem(itemNumber);
-            Cart cart = cartItem.getCart();
-
             HibernateUtil.deleteItem(cartItem);
+
             response.sendRedirect("portal?action=portalCart");
         }
 

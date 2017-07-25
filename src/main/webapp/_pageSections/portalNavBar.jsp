@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:useBean id="user" type="com.steven.hicks.entities.User" scope="session"/>
+<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart" scope="session"/>
 
 <!DOCTYPE html>
 <html>
@@ -23,32 +24,6 @@
 
     <script>
         var searchTerms = '';
-//        $(document).ready(function()
-//        {
-//            $(function()
-//            {
-//                $.ajax({
-//                    type: 'GET',
-                    <%--url: '${pageContext.request.contextPath}/portalItemHandler?action=getAllItemsJSON',--%>
-//                    success: function(response)
-//                    {
-//                        response = JSON.parse(response);
-//                        var dataArray = response;
-//                        var data = {};
-//                        for (var i = 0; i < dataArray.length; i++)
-//                        {
-//
-//                            var key = Object.keys(dataArray[i]);
-//                            var value = dataArray[i][key];
-//
-//                            var cleanKey = key.toString().replace(/'/g, '&apos;');
-//                            $( '#items' ).append("<option value='" + cleanKey + "'>");
-//
-                            <%--data[key] = '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=' + value;--%>
-//                        }
-//                    }
-//                });
-//            });
         $(document).ready(function()
         {
             $(function()
@@ -60,18 +35,13 @@
                     {
                         response = JSON.parse(response);
                         var dataArray = response;
-                        var data = {};
                         for (var i = 0; i < dataArray.length; i++)
                         {
 
                             var key = Object.keys(dataArray[i]);
-//                            var value = dataArray[i][key];
 
                             var cleanKey = key.toString().replace(/'/g, '&apos;');
-                            console.log(cleanKey);
                             $( '#items' ).append("<option value='" + cleanKey + "'>");
-
-                            <%--data[key] = '${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=' + value;--%>
                         }
                     }
                 });
@@ -87,6 +57,8 @@
                     $( '.popup' ).each(function(i, obj){
                         $( this ).removeClass('popup').addClass('hiddenDiv');
                     });
+
+                    $( '#sidenav-overlay' ).trigger("click");
                 }
             });
 
@@ -189,7 +161,7 @@
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
-                <div class="hide-on-small-and-down" id="test">(<c:out value="${sessionScope.user.userCart.itemsInCart.size()}"/>)</div>
+                <div class="hide-on-small-and-down" id="test">(<c:out value="${cart.itemsInCart.size()}"/>)</div>
             </li>
         </ul>
     </div>

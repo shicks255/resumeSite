@@ -3,12 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="session"/>--%>
+<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="session"/>
+<jsp:useBean id="cartItems" type="java.util.List<com.steven.hicks.entities.store.CartItem>" scope="request"/>
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
 <script>
 
+//    :todo what is this
     $(document).ready(function()
     {
         $( '#test' ).on( "click", function(e)
@@ -18,6 +20,7 @@
         });
     });
 
+    //:todo make a better popup thing to notify
     function updateQty(itemObjectId, currentQty)
     {
         $( '#updateQtyBtn' ).blur();
@@ -35,6 +38,7 @@
         }
     }
 
+    //:todo make a better popup to notify item removed
     function removeItem(itemObjectId)
     {
         $.post('${pageContext.request.contextPath}/portalItemHandler?action=removeItemFromCart&itemObjectId=' + itemObjectId,
@@ -52,8 +56,7 @@
 
     <h3>Your Cart:</h3>
 
-    <c:set var="itemsInCart" value="${sessionScope.user.userCart.itemsInCart}"/>
-    <table border="1">
+    <table>
         <thead>
         <tr>
             <th></th>
@@ -64,19 +67,20 @@
         </tr>
         </thead>
 
-        <c:forEach var="item" items="${itemsInCart}">
+        <c:forEach var="item" items="${cartItems}">
+            <c:set var="storeItem" value="${item.storeItem}"/>
         <tr>
             <td>
-                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.storeItem.smallPictureId}"/>
+                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${storeItem.smallPictureId}"/>
             </td>
             <td>
-                <c:out value="${item.storeItem.itemName}"/>
+                <c:out value="${storeItem.itemName}"/>
             </td>
             <td>
-                <c:out value="${item.storeItem.itemNumber}"/>
+                <c:out value="${storeItem.itemNumber}"/>
             </td>
             <td>
-                $ <c:out value="${item.storeItem.itemPrice}"/>
+                $ <c:out value="${storeItem.itemPrice}"/>
             </td>
             <td>
                 <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>
@@ -88,12 +92,12 @@
 
         <tr>
             <td colspan="3" style="text-align: right;">Sub-total:</td>
-            <td> $ <c:out value="${sessionScope.user.userCart.subTotal}"/></td>
+            <td> $ <c:out value="${cart.subTotal}"/></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: right;">Total:</td>
-            <td> $ <fmt:formatNumber value="${sessionScope.user.userCart.total}" pattern="#.00"/></td>
+            <td> $ <fmt:formatNumber value="${cart.total}" pattern="#.00"/></td>
             <td></td>
         </tr>
     </table>

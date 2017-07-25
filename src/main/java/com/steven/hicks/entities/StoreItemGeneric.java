@@ -2,6 +2,7 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.store.StoreItemPicture;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -30,7 +31,7 @@ public abstract class StoreItemGeneric
     @Column
     private BigDecimal itemPrice;
 
-    @OneToMany(mappedBy = "storeItemGeneric", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "storeItemGeneric", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<StoreItemPicture> itemPictures = new ArrayList<>();
 
     @Override
@@ -123,6 +124,8 @@ public abstract class StoreItemGeneric
                 .setParameter("title", name);
         List<StoreItemGeneric> items = query.list();
 
+        items.forEach(item -> Hibernate.initialize(item.getItemPictures()));
+
         session.close();
         factory.close();
 
@@ -138,6 +141,9 @@ public abstract class StoreItemGeneric
         Query query = session.createQuery(queryString)
                 .setParameter("terms", "%" + searchTerms + "%");
         List<StoreItemGeneric> items = query.list();
+
+        //To initialize the pics
+        items.forEach(item -> Hibernate.initialize(item.getItemPictures()));
 
         session.close();
         factory.close();
