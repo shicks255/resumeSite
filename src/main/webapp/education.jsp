@@ -66,6 +66,7 @@
         Add A Course
         <i class="material-icons right">add</i>
     </button>
+    <br/>
 </c:if>
 
 <%--ajax injected page editCoursePopup.jsp--%>
