@@ -272,13 +272,8 @@ public class PortalItemHandler extends HttpServlet
 
             PrintWriter out = response.getWriter();
             response.setContentType("text");
-//            response.setContentType("application/json");
-//            response.setHeader("Cache-control", "no-cache, no store");
-//            response.setHeader("Pragma", "no-cache");
-//            response.setHeader("Expires", "-1");
 
             out.println(jsonString);
-//            out.flush();
             out.close();
 
         }

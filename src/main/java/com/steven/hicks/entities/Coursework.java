@@ -7,8 +7,7 @@ import org.hibernate.SessionFactory;
 import javax.persistence.*;
 
 @Entity
-@Cacheable
-@Table(indexes = { @Index(name = "COURSE_ID_INDX", columnList = "courseId", unique = true) })
+@Table
 public class Coursework
 {
     @Id
@@ -26,7 +25,7 @@ public class Coursework
     private String grade = "";
 
     @ManyToOne
-    @JoinColumn(name = "courseId")
+    @JoinColumn(name = "course_fk")
     private AcademicCourse academicCourse;
 
     @Column
