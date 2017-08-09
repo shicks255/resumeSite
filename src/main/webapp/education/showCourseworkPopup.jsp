@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="courseWorkList" type="java.util.List<com.steven.hicks.entities.Coursework>" scope="request"/>
+<jsp:useBean id="course"         type="com.steven.hicks.entities.AcademicCourse" scope="request"/>
 
 <c:if test="${!empty adminComputer}">
     <jsp:useBean id="adminComputer" type="java.lang.String" scope="request"/>
@@ -30,10 +31,13 @@
 <body>
 
 <div class="popupContent">
+    Coursework for <b>${course.courseName}</b>
         <a class="waves-effect waves-light btn closeButton" value="Cancel" onclick="closePopups();">
             Close
             <i class="material-icons right">close</i>
         </a>
+    <br/><br/>
+    <br/><br/>
         <c:set var="index" value="${0}"/>
         <table>
             <thead>
@@ -57,6 +61,12 @@
                     </td>
                 </tr>
             </c:forEach>
+
+            <c:if test="${empty courseWorkList}">
+                <tr>
+                    <td colspan="3">No coursework uploaded for this class</td>
+                </tr>
+            </c:if>
         </table>
 </div>
 
