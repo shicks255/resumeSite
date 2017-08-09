@@ -3,3 +3,35 @@
     margin-top : 2px;
     margin-bottom : 2px;
 }
+
+.slimTable {
+    width : 80%;
+}
+
+.slimTable td, th{
+    padding : 0px 5px;
+    vertical-align: text-top;
+}
+
+.slimTable .rightCell{
+    text-align : right;
+}
+
+label{
+    font-size : 1rem;
+    color : #4a148c;
+}
+
+.popupContent{
+    width : 50%;
+}
+
+.closeButton{
+    float : right;
+}
+
+.submitButton{
+    margin : 0 auto;
+    width: auto;
+    display: block;
+}

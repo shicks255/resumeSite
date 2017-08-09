@@ -18,15 +18,12 @@
 <body>
 
 <div class="popupContent">
-    <button class="waves-effect waves-light btn" value="Cancel" onclick="closePopups();">
+    <button class="waves-effect waves-light btn closeButton" value="Cancel" onclick="closePopups();">
         Close
         <i class="material-icons right">close</i>
     </button>
 <form name="frmEditACourse" id="frmEditACourse" action="${pageContext.request.contextPath}\academic?&action=editACourse&courseId=${course.objectId}" method="post">
-    <button class="btn waves-effect waves-light" type="submit" name="action">Update
-        <i class="material-icons right">send</i>
-    </button>
-    <table>
+    <table class="slimTable">
         <tr>
             <td><label for="courseNameEdit">Course Name:</label></td>
             <td><input type="text" name="courseNameEdit" id="courseNameEdit" value="${course.courseName}"/></td>
@@ -83,6 +80,9 @@
             <td><input type="text" id="courseGradeEdit" name="courseGradeEdit" value="${course.gradeReceived}"/></td>
         </tr>
     </table>
+    <button class="btn waves-effect waves-light submitButton" type="submit" name="action">Update
+        <i class="material-icons right">send</i>
+    </button>
 </form>
 </div>
 

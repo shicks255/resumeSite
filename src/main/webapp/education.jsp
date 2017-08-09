@@ -80,7 +80,7 @@
     <br/>
 
     <div id="courseList" class="">
-        <table border="1" class="highlight responsive-table">
+        <table class="highlight responsive-table">
             <thead>
             <tr>
                 <th>#:</th>
@@ -124,7 +124,7 @@
 
 <div id="uploadFile" class="hiddenDiv">
     <div class="popupContent">
-        <button class="waves-effect waves-light btn" id="closeUpload" name="closeUpload" onclick="closePopups();">
+        <button class="waves-effect waves-light btn closeButton" id="closeUpload" name="closeUpload" onclick="closePopups();">
             Close
             <i class="material-icons right">clear</i>
         </button>
@@ -136,7 +136,7 @@
             <br/>
             <label for="courseworkNotes">Coursework notes:</label>
             <input type="text" name="courseworkNotes" id="courseworkNotes"/>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Upload
+            <button class="btn waves-effect waves-light submitButton" type="submit" name="action">Upload
                 <i class="material-icons right">send</i>
             </button>
         </form>
@@ -159,29 +159,25 @@
 
 <div id="addACourse"  class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
-        <button class="waves-effect waves-light btn" id="closeAddCourse" name="closeAddCourse" onclick="closePopups();">
+        <button class="waves-effect waves-light btn closeButton" id="closeAddCourse" name="closeAddCourse" onclick="closePopups();">
             Close
             <i class="material-icons right">clear</i>
         </button>
         <br/>
         <br/>
         <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
-            <button class="waves-effect waves-light btn" type="submit" value="Submit">
-                Submit
-                <i class="material-icons right">send</i>
-            </button>
 
-            <table>
+            <table class="slimTable">
                 <tr>
-                    <td><label for="courseName">Course Name:</label></td>
-                    <td><input type="text" name="courseName" id="courseName"/></td>
+                    <td class="rightCell"><label for="courseName">Course Name:</label></td>
+                    <td class="left-align"><input type="text" name="courseName" id="courseName"/></td>
                 </tr>
                 <tr>
-                    <td><label for="courseCode">Course Code:</label></td>
+                    <td class="rightCell"><label for="courseCode">Course Code:</label></td>
                     <td><input required="true" type="text" name="courseCode" id="courseCode"/></td>
                 </tr>
                 <tr>
-                    <td><label for="collegeName">College:</label></td>
+                    <td class="rightCell"><label for="collegeName">College:</label></td>
                     <td class="input-field col s12">
                         <select class="browser-default" required="true" id="collegeName" name="collegeName">
                             <option value="RVCC">RVCC</option>
@@ -190,7 +186,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="semester">Semester:</label></td>
+                    <td class="rightCell"><label for="semester">Semester:</label></td>
                     <td class="input-field col s12">
                         <select class="browser-default" required="true" name="semester" id="semester">
                             <option value="2007Fall">Fall 2007</option>
@@ -224,13 +220,23 @@
                         </select></td>
                 </tr>
                 <tr>
-                    <td><label for="courseGrade">Course Grade:</label></td>
+                    <td class="rightCell"><label for="courseGrade">Course Grade:</label></td>
                     <td><input type="text" id="courseGrade" name="courseGrade"/></td>
                 </tr>
                 <tr>
-                    <td><label for="relevantCourseWork">Relevant Course Work:</label></td>
+                    <td class="rightCell"><label for="relevantCourseWork">Relevant Course Work:</label></td>
                     <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="waves-effect waves-light btn submitButton" type="submit" value="Submit">
+                            Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </td>
+                </tr>
+
             </table>
         </form>
     </div>

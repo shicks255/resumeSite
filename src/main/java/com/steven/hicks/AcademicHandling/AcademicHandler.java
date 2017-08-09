@@ -106,6 +106,9 @@ public class AcademicHandler extends HttpServlet
                 request.setAttribute("courseWorkList", courseworks);
             }
 
+            if (CommonUtils.isAdminVisitor(request))
+                request.setAttribute("adminComputer", "adminComputer");
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("/education/showCourseworkPopup.jsp");
             dispatcher.forward(request, response);
         }
