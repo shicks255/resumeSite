@@ -6,32 +6,23 @@
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
-<%--<link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">--%>
-<%--<link href="${pageContext.request.contextPath}/CSS/jquery-ui.min.css" rel="stylesheet" type="text/css"/>--%>
-<%--<link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">--%>
-<%----%>
-<%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>--%>
-<%--<script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>--%>
-<%--<script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-ui.min.js"></script>--%>
-
 <script>
+
+    $(document).ready(function()
+    {
+        $(document).ready(function(){
+            $('.modal').modal();
+        });
+    });
+
     function addToCart(itemObjectId)
     {
         $( '#addToCart' ).blur();
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
-                location.reload();
-                $( '#addToCartDiv' ).fadeIn();
-                $( '#addToCartDiv' ).fadeOut();
-//                window.setTimeout(showAddedToCartMessage, 5000);
+                $('#modal').modal('open');
             });
-    }
-
-    function showAddedToCartMessage()
-    {
-        $( '#addToCartDiv' );
-//            .delay(1250).fadeOut( 500 );
     }
 
 </script>
@@ -40,6 +31,8 @@
 
     <div id="itemContainer" style="border : 1px solid black;
                                     margin : 10%;">
+
+        <a class="btn modal-trigger" href="#modal" style="visibility: collapse"></a>
 
         <div id="imageDiv" style="display : inline-block;
                                     float : left;
@@ -88,10 +81,11 @@
         </div>
     </div>
 
-    <div id="addToCartDiv" class="popupAlert" style="display:none" >
-        <div class="popupContentAlert">
-            Item added to cart
-        </div>/
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h4>Added to cart</h4>
+            <p>A bunch of text</p>
+        </div>
     </div>
 
 </div>

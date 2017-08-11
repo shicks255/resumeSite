@@ -41,3 +41,7 @@ label{
     height : 600px;
     padding-top: 50px;
 }
+
+.side-nav a:hover {
+    background-color: transparent;
+}

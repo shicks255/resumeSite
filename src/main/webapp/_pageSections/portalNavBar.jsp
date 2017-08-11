@@ -12,6 +12,7 @@
 
     <link href="${pageContext.request.contextPath}/CSS/materialize.min.css" rel="stylesheet" type="text/css">
     <link href="${pageContext.request.contextPath}/CSS/mainStyle.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/CSS/materializeOverrides.css" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
@@ -179,7 +180,7 @@
             <div class="background">
                 <img src="${pageContext.request.contextPath}/backgrounds/cartoon-background-with-stars_1110-892.jpg">
             </div>
-            <span class="white-text name">Your Profile<a style="display: inline-block;color : white;" onclick="dialogEditProfile();"><i class="material-icons">edit</i></a></span>
+            <span class="white-text name">Your Profile<a style="display: inline-block;color : white;cursor: pointer;" onclick="dialogEditProfile();"><i class="material-icons">edit</i></a></span>
             <span class="white-text"><c:out value="${user.userName}"/> </span>
             <c:if test="${!empty user.avatar}">
                 <img class="circle" alt="no good" id="avatarPic" src="${pageContext.request.contextPath}/imageScreenRenderServlet?action=form&avatarId=${user.avatar.objectId}">
@@ -204,7 +205,8 @@
 
 <div id="editProfileDialog" class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
-        <button class="waves-effect waves-light btn" id="closeAddCourse" name="closeAddCourse" onclick="closeEditProfile();">
+        <b>Edit Your Profile:</b>
+        <button class="waves-effect waves-light btn closeButton" id="closeAddCourse" name="closeAddCourse" onclick="closeEditProfile();">
             Close
             <i class="material-icons right">close</i>
         </button>
@@ -227,7 +229,7 @@
                     </td>
                 </tr>
             </table>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Update
+            <button class="btn waves-effect waves-light submitButton" type="submit" name="action">Update
                 <i class="material-icons right">send</i>
             </button>
         </form>
@@ -235,7 +237,7 @@
         <form enctype="multipart/form-data" name="frmEditAvatar" id="frmEditAvatar" action="${pageContext.request.contextPath}/portal?action=editAvatar" method="post">
             <label for="editAvatar">Select a new profile picture:</label>
             <input type="file" name="editAvatar" id="editAvatar" enctype="multipart/form-data">
-            <button class="btn waves-effect waves-light" type="submit" name="action">Select
+            <button class="btn waves-effect waves-light submitButton" type="submit" name="action">Select
                 <i class="material-icons right">send</i>
             </button>
         </form>
