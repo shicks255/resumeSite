@@ -229,7 +229,7 @@
                     <td><input type="text" id="courseGrade" name="courseGrade"/></td>
                 </tr>
                 <tr>
-                    <td class="rightCell"><label for="relevantCourseWork">Relevant Course Work:</label></td>
+                    <td class="rightCell"><label for="relevantCourseWork">Relevant <br/> Course Work:</label></td>
                     <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
                 </tr>
                 <tr>

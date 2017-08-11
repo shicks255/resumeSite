@@ -36,19 +36,15 @@
 
             <h4 align = "center">Steven M. Hicks</h4><br/>
 
-                <div class="row">
-                    <div class="col s1 m3 l3">
-                        <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"><img id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"></img></a>
-
-                        <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"><image id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"></img></a>
-
-                        <a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"><img id="thesispic" width="400" height="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"></img></a>
-                    </div>
+                <div>
+                    <a style="float:left;" href="/mapImages/cropped_IndianTrailsofNJfromLane.jpg"><img id="thesispic" width="400" class="materialboxed" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"></img></a>
+                    <a href="/mapImages/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"><image id="thesispic" class="materialboxed" width="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"></img></a>
+                    <%--<a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"><img id="thesispic" width="400" class="materialboxed" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"></img></a>--%>
                 </div>
 
             <br><br>
 
-            <p id="thesistextbox">
+            <p id="thesistextbox" style="clear:both;">
                 Thesis submitted in partial fulfillment of the requirements for the Bachelor of Arts degree in Historical Studies<br>
                 The Richard Stockton College of New Jersey
                 <br>

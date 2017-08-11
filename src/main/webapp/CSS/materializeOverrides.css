@@ -35,3 +35,9 @@ label{
     width: auto;
     display: block;
 }
+
+.carousel .carousel-item{
+    width : 600px;
+    height : 600px;
+    padding-top: 50px;
+}

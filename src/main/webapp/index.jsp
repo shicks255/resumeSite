@@ -158,7 +158,7 @@
 
         <div id="dialog-emailPopup" class="hiddenDiv">
             <div class="popupContent">
-                <button class="waves-effect waves-light btn" id="closeEmail" name="closeEmail" onclick="closePopups();">Close</button>
+                <button class="waves-effect waves-light btn closeButton" id="closeEmail" name="closeEmail" onclick="closePopups();">Close</button>
                     <br/>
                     <br/>
                     <br/>
@@ -167,7 +167,7 @@
                     <input type="text" name="emailSubject" id="emailSubject">
 
                     <label for="emailBody">Body:</label>
-                    <textarea placeholder="Enter your message here..." id="emailBody" id="emailBody"></textarea>
+                    <textarea style="overflow: hidden;" placeholder="Enter your message here..." id="emailBody" id="emailBody"></textarea>
                 </form>
             </div>
         </div>
