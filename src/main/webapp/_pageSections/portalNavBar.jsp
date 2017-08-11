@@ -177,7 +177,7 @@
 <ul id="slide-out" class="side-nav">
     <li>
         <div class="userView">
-            <div class="background">
+            <div class="background" style="">
                 <img src="${pageContext.request.contextPath}/backgrounds/cartoon-background-with-stars_1110-892.jpg">
             </div>
             <span class="white-text name">Your Profile<a style="display: inline-block;color : white;cursor: pointer;" onclick="dialogEditProfile();"><i class="material-icons">edit</i></a></span>

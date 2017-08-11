@@ -45,3 +45,20 @@ label{
 .side-nav a:hover {
     background-color: transparent;
 }
+
+#cartIcon :hover {
+    background-color : transparent;
+}
+
+.side-nav .userView{
+    padding: 2px 32px;
+}
+
+.side-nav .userView .name{
+    margin-top : 5px;
+}
+
+.background {
+    margin-top : -5px;
+    margin-left : -5px;
+}
