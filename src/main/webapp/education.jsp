@@ -80,6 +80,7 @@
     <br/>
     <br/>
 
+    <%--Main table displaying all courses--%>
     <div id="courseList" class="">
         <table class="highlight responsive-table">
             <thead>
@@ -123,6 +124,7 @@
 
 <br/><br/>
 
+<%--Upload coursework popup--%>
 <div id="uploadFile" class="hiddenDiv">
     <div class="popupContent">
         <button class="waves-effect waves-light btn closeButton" id="closeUpload" name="closeUpload" onclick="closePopups();">
@@ -144,6 +146,7 @@
     </div>
 </div>
 
+<%--Delete course popup--%>
 <div id="deletePrompt" class="hiddenDiv">
     <div class="popupContent">
         <h4>Are you sure you wanna delete this entry?</h4>
@@ -158,6 +161,7 @@
     </div>/
 </div>
 
+<%--Add a course popup--%>
 <div id="addACourse"  class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
         <button class="waves-effect waves-light btn closeButton" id="closeAddCourse" name="closeAddCourse" onclick="closePopups();">
