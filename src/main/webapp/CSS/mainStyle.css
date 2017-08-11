@@ -54,35 +54,6 @@ input[type=submit]:hover {color : red;}
     text-align : left;
 }
 
-/*.popup {*/
-    /*z-index: 10;*/
-    /*display : inline;*/
-    /*overflow: scroll;*/
-    /*!*min-width : 60%;*!*/
-    /*border : 1px solid black;*/
-    /*background-color : grey;*/
-    /*border-radius : 15px;*/
-    /*opacity: .95;*/
-    /*!*top : 35%;*!*/
-    /*!*bottom : 20%;*!*/
-    /*!*left : 25%;*!*/
-    /*!*right : 25%;*!*/
-    /*!*position : fixed;*!*/
-    /*height : auto;}*/
-
-/*.popup .popupContent{*/
-    /*!*min-width: 100%;*!*/
-    /*margin-left : 10%;*/
-    /*overflow : scroll;*/
-    /*margin-right : 25%;*/
-    /*margin-top : 5%;*/
-    /*position : fixed;*/
-    /*top : 35%;*/
-    /*bottom : 20%;*/
-    /*left : 25%;*/
-    /*right : 25%;*/
-/*}*/
-
 .popup{
     display : block;
     position : fixed;
@@ -126,10 +97,6 @@ input[type=submit]:hover {color : red;}
     border-radius : 10px;
 }
 
-.popup .popupContent table td{
-    /*border : 1px solid black;*/
-}
-
 .popup .rightAlign table td{
     text-align : right;
 }
@@ -150,7 +117,38 @@ input::-moz-placeholder {
 }
 
 
+.slimTable {
+    width : 80%;
+}
 
-/*.popup table {*/
-        /*!*padding : 175px;*!*/
-        /*margin : 10%}*/
+.slimTable td, th{
+    padding : 0px 5px;
+    vertical-align: text-top;
+}
+
+.slimTable .rightCell{
+    text-align : right;
+}
+
+label{
+    font-size : 1rem;
+    color : #4a148c;
+}
+
+.popupContent{
+    width : 50%;
+}
+
+.closeButton{
+    float : right;
+}
+
+.submitButton{
+    margin : 0 auto;
+    width: auto;
+    display: block;
+}
+
+#cartIcon :hover {
+    background-color : transparent;
+}

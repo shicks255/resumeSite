@@ -211,7 +211,7 @@
             <i class="material-icons right">close</i>
         </button>
         <form name="frmEditProfile" id="frmEditProfile" action="${pageContext.request.contextPath}/portal?action=editProfile" method="post">
-            <table>
+            <table class="slimTable">
                 <tr>
                     <td>
                         <label for="editFirstName">First Name:</label>

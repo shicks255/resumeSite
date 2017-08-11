@@ -159,9 +159,11 @@ public class PortalItemHandler extends HttpServlet
 
             if (picture != null)
             {
-                response.setContentType("image/jpg");
+                response.setContentType("image/png");
                 response.setContentLengthLong(picture.getImage().length);
+                response.addHeader("Content-Disposition", "inline");
                 response.getOutputStream().write(picture.getImage());
+                response.getOutputStream().close();
             }
         }
 

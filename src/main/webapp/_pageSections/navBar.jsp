@@ -110,20 +110,20 @@
     </ul>
 
     <ul id="dropdown5" class="dropdown-content cyan right">
-        <li><a href="https://www.linkedin.com/in/steven-hicks-03390093/"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a></li>
-        <li><a href="https://www.facebook.com/steven.hix.9"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a></li>
-        <li><a href="https://stackoverflow.com/users/8138169/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a></li>
-        <li><a href="https://github.com/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a></li>
+        <li><a target="_blank" href="https://www.linkedin.com/in/steven-hicks-03390093/"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a></li>
+        <li><a target="_blank" href="https://www.facebook.com/steven.hix.9"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a></li>
+        <li><a target="_blank" href="https://stackoverflow.com/users/8138169/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a></li>
+        <li><a target="_blank" href="https://github.com/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a></li>
     </ul>
 
     <nav>
         <div class="nav-wrapper cyan">
             <%--Icons--%>
             <div class="brand-logo right cyan" style="min-width: 115px;">
-                <a href="https://www.linkedin.com/in/steven-hicks-03390093/" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a>
-                <a href="https://www.facebook.com/steven.hix.9" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a>
-                <a href="https://stackoverflow.com/users/8138169/shicks255" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a>
-                <a href="https://github.com/shicks255" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/steven-hicks-03390093/" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a>
+                <a target="_blank" href="https://www.facebook.com/steven.hix.9" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a>
+                <a target="_blank" href="https://stackoverflow.com/users/8138169/shicks255" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a>
+                <a target="_blank" href="https://github.com/shicks255" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a>
                 <a href="${pageContext.request.contextPath}/" class="hide-on-med-and-down cyan">STEVEN HICKS</a>
                 <ul id="nav-mobile2" class="right hide-on-large-only cyan">
                     <li><a href="${pageContext.request.contextPath}/" class="dropdown-button cyan" data-activates="dropdown5">S. HICKS</a></li>

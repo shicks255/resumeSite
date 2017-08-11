@@ -13,6 +13,7 @@
 //    :todo what is this
     $(document).ready(function()
     {
+        $('.modal').modal();
         $( '#test' ).on( "click", function(e)
         {
             e.preventDefault();
@@ -29,12 +30,9 @@
 
         if (qty !== currentQty)
         {
-            $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
-                function(data)
-                {
-                    $( '#updateDiv' ).fadeIn().delay(1250).fadeOut( 500 );
-                    location.reload();
-                });
+            <%--$.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,--%>
+            $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty, '');
+            $( '#updateModal' ).modal('open');
         }
     }
 
@@ -114,6 +112,14 @@
         Item removed from cart
     </div>/
 </div>
+
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <h4>Quantity updated</h4>
+            <p>A bunch of text</p>
+        </div>
+    </div>
+
 </div>
 
 <jsp:include page="/_pageSections/portalFooter.jsp" />
