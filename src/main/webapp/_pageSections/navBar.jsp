@@ -109,15 +109,12 @@
         <li><a class="white-text " href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a></li>
     </ul>
 
-
-    <%--<div class="right hide-on-med-and-up">--%>
     <ul id="dropdown5" class="dropdown-content cyan right">
         <li><a href="https://www.linkedin.com/in/steven-hicks-03390093/"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a></li>
         <li><a href="https://www.facebook.com/steven.hix.9"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a></li>
         <li><a href="https://stackoverflow.com/users/8138169/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a></li>
         <li><a href="https://github.com/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a></li>
     </ul>
-    <%--</div>--%>
 
     <nav>
         <div class="nav-wrapper cyan">
@@ -141,7 +138,6 @@
                 <li><a href="${pageContext.request.contextPath}/pictures?action=form">Galleries</a></li>
             </ul>
 
-            <%--<a href="${pageContext.request.contextPath}/" class="brand-logo hide-on-large-and-up right cyan">S. HICKS</a>--%>
                 <%--NavBar small screen--%>
             <ul id="nav-mobile1" class="left hide-on-med-and-up cyan" style="min-width: 115px;">
                 <li><a href="${pageContext.request.contextPath}/"><i class="material-icons">home</i></a></li>

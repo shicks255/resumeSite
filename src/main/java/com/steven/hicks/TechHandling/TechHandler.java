@@ -71,7 +71,7 @@ public class TechHandler extends HttpServlet
         {
             HttpSession session = request.getSession();
             session.invalidate();
-            response.sendRedirect("/techPractice?action=sessionPractice");
+            response.sendRedirect(request.getContextPath() + "/techPractice?action=sessionPractice");
         }
 
 //        -----DO STEAM API

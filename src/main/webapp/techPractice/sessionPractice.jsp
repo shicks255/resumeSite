@@ -53,7 +53,7 @@ ${pageContext.response}
 <br/><br/>
     <%--Click <a onclick="resetURL();" href="${pageContext.request.contextPath}/techPractice?action=sessionPractice&invalidate=true">here</a> to clear out your session--%>
     Click
-    <button class="waves-effect waves-teal btn-flat" onclick="resetURL()" >here</button>
+    <button class="waves-effect waves-light btn" onclick="resetURL()" >here</button>
     to clear out your session
 
 </div>
