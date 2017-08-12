@@ -4,10 +4,15 @@ package com.steven.hicks.Portal;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.FileRequest;
+import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.UserAvatar;
 import com.steven.hicks.entities.store.Cart;
 import com.steven.hicks.entities.store.CartItem;
+import com.steven.hicks.entities.store.StoreItemPicture;
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 @WebServlet (urlPatterns = "/portal")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"user", "admin"} ))
@@ -106,14 +111,57 @@ public class PortalHandler extends HttpServlet
 //        -----My Cart
         if (action.equalsIgnoreCase("portalCart"))
         {
+            long time = System.currentTimeMillis();
+            System.out.println(time);
+
             HttpSession userSession = request.getSession();
 
             Cart userCart = (Cart)userSession.getAttribute("cart");
             List<CartItem> cartItems = userCart.getItemsInCart();
+
+            List<StoreItemPicture> itemPictures = new ArrayList<>();
+            List<StoreItemGeneric> storeItems = new ArrayList<>();
+
+            Map<StoreItemGeneric, CartItem> itemsToCartItems = new HashMap<>();
+            Map<StoreItemGeneric, StoreItemPicture> itemsToPicture = new HashMap<>();
+
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.openSession();
+
+
+            for (CartItem cartItem : cartItems)
+            {
+                StoreItemGeneric item = session.get(StoreItemGeneric.class, cartItem.getItemObjectIt());
+                Hibernate.initialize(item.getItemPictures());
+//                StoreItemGeneric item = cartItem.getStoreItem();
+                storeItems.add(item);
+
+
+                StoreItemPicture picture = session.get(StoreItemPicture.class, item.getFirstPictureId());
+//                itemPictures.add(item.getItemPictures().get(0));
+                itemPictures.add(picture);
+
+                itemsToCartItems.put(item, cartItem);
+
+                itemsToPicture.put(item, picture);
+            }
+
+            session.close();
+            factory.close();
+
+            long timnewTimee = System.currentTimeMillis();
+            System.out.println("fuck" + (timnewTimee - time));
+
+            request.setAttribute("storeItems", storeItems);
+            request.setAttribute("itemPictures", itemPictures);
             request.setAttribute("cartItems", cartItems);
+
+            request.setAttribute("map", itemsToCartItems);
+            request.setAttribute("itemsToPicture", itemsToPicture);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalCart.jsp");
             dispatcher.forward(request, response);
+
         }
     }
 

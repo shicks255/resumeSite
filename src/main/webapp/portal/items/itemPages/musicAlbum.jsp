@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="album" type="com.steven.hicks.entities.store.items.MusicAlbum" scope="request"/>
+<jsp:useBean id="picture" type="com.steven.hicks.entities.store.StoreItemPicture" scope="request"/>
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
@@ -10,14 +11,11 @@
 
     $(document).ready(function()
     {
-        $(document).ready(function(){
-            $('.modal').modal();
-        });
+        $('.modal').modal();
     });
 
     function addToCart(itemObjectId)
     {
-        $( '#addToCart' ).blur();
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
@@ -38,7 +36,7 @@
                                     float : left;
                                     border : 1px solid red;
                                     ">
-            <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.smallPictureId}"/>
+            <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${picture.objectId}"/>
         </div>
 
         <div id="infoDiv" style="float: right; margin-left : 5px; border : 1px solid blue;">

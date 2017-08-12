@@ -6,6 +6,7 @@ import com.steven.hicks.entities.store.Cart;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.List;
 
 @WebFilter(urlPatterns = "/portal")
 public class PortalUserFilter implements Filter
@@ -40,11 +42,16 @@ public class PortalUserFilter implements Filter
             Principal principal = ((HttpServletRequest) request).getUserPrincipal();
             HttpSession session = ((HttpServletRequest) request).getSession();
 
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session hSession = sessionFactory.openSession();
+            hSession.beginTransaction();
+
             User user = (User)session.getAttribute("user");
 
             if (user == null)
             {
-                user = User.getUser(principal.getName());
+                user = hSession.get(User.class, principal.getName());
+//                user = User.getUser(principal.getName());
                 session.setAttribute("user", user);
             }
 
@@ -52,19 +59,26 @@ public class PortalUserFilter implements Filter
 
             if (cart == null)
             {
-                cart = Cart.getCartByUser(user.getUserName());
+
+                Query query = hSession.createQuery("from Cart where userNameOfCart = \'" + principal.getName() + "\'");
+                List<Cart> carts = query.list();
+
+                Cart userCart = null;
+
+                if (carts.size() > 0)
+                    userCart = carts.get(0);
+
+//                cart = Cart.getCartByUser(user.getUserName());
                 if (cart == null)
                 {
                     cart = new Cart();
                     cart.setUserNameOfCart(user.getUserName());
-                    HibernateUtil.createItem(cart);
+                    hSession.save(cart);
+//                    HibernateUtil.createItem(cart);
                 }
             }
 
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session hSession = sessionFactory.openSession();
 
-            hSession.beginTransaction();
             hSession.refresh(cart);
             hSession.getTransaction().commit();
             hSession.close();

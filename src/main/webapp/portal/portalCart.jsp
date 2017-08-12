@@ -5,6 +5,8 @@
 
 <jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="session"/>
 <jsp:useBean id="cartItems" type="java.util.List<com.steven.hicks.entities.store.CartItem>" scope="request"/>
+<jsp:useBean id="storeItems" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="request"/>
+<jsp:useBean id="itemPictures" type="java.util.List<com.steven.hicks.entities.store.StoreItemPicture>" scope="request"/>
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
@@ -14,11 +16,6 @@
     $(document).ready(function()
     {
         $('.modal').modal();
-        $( '#test' ).on( "click", function(e)
-        {
-            e.preventDefault();
-            $(this).blur();
-        });
     });
 
     //:todo make a better popup thing to notify
@@ -30,7 +27,6 @@
 
         if (qty !== currentQty)
         {
-            <%--$.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,--%>
             $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty, '');
             $( '#updateModal' ).modal('open');
         }
@@ -43,8 +39,8 @@
             function(data)
             {
                 location.reload();
-//                $( '#deleteDiv' ).fadeIn().delay(1000).fadeOut(500);
-//                $( '#removeItemBtn' ).removeClass('btn:focus');
+
+                $( '#removeModal' ).modal('open');
             });
     }
 
@@ -65,11 +61,13 @@
         </tr>
         </thead>
 
-        <c:forEach var="item" items="${cartItems}">
-            <c:set var="storeItem" value="${item.storeItem}"/>
+        <%--<c:forEach var="item" items="${cartItems}">--%>
+            <%--<c:set var="storeItem" value="${item.storeItem}"/>--%>
+        <c:forEach var="storeItem" items="${storeItems}">
+            <c:set var="item" value="${map[storeItem]}"/>
         <tr>
             <td>
-                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${storeItem.smallPictureId}"/>
+                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${itemsToPicture[storeItem].objectId}"/>
             </td>
             <td>
                 <c:out value="${storeItem.itemName}"/>
@@ -101,21 +99,16 @@
     </table>
 
 
-<div id="updateDiv" class="popupAlert" style="display:none" >
-    <div class="popupContentAlert">
-        Quantity updated
-    </div>/
-</div>
-
-<div id="deleteDiv" class="popupAlert" style="display: none">
-    <div class="popupContentAlert">
-        Item removed from cart
-    </div>/
-</div>
-
     <div id="updateModal" class="modal">
         <div class="modal-content">
             <h4>Quantity updated</h4>
+            <p>A bunch of text</p>
+        </div>
+    </div>
+
+    <div id="removeModal" class="modal">
+        <div class="modal-content">
+            <h4>Item removed</h4>
             <p>A bunch of text</p>
         </div>
     </div>

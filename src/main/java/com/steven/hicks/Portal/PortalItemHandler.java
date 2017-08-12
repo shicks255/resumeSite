@@ -13,6 +13,7 @@ import com.steven.hicks.entities.store.items.MusicAlbum;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import sun.security.ssl.HandshakeInStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,7 +37,7 @@ public class PortalItemHandler extends HttpServlet
     {
         String action = request.getParameter("action");
 
-//        NAVIGATE TO ADD AND ITEM
+//        NAVIGATE TO ADD AN ITEM
         if (action.equalsIgnoreCase("form"))
         {
             List<StoreItemType> itemTypes = StoreItemType.getItemTypes();
@@ -155,7 +156,11 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("getItemPicture"))
         {
             Integer pictureObjectId = Integer.valueOf(request.getParameter("itemPictureObjectId"));
-            StoreItemPicture picture = StoreItemPicture.getItemPicture(pictureObjectId);
+
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session session = factory.openSession();
+
+            StoreItemPicture picture = session.get(StoreItemPicture.class, pictureObjectId);
 
             if (picture != null)
             {
@@ -165,6 +170,9 @@ public class PortalItemHandler extends HttpServlet
                 response.getOutputStream().write(picture.getImage());
                 response.getOutputStream().close();
             }
+
+            session.close();
+            factory.close();
         }
 
 //        GET ITEMS OF A TYPE
@@ -203,9 +211,17 @@ public class PortalItemHandler extends HttpServlet
 //        NAVIGATE TO SHOW ITEM PAGE
         if (action.equalsIgnoreCase("showItemPage"))
         {
-//            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
             String itemName = request.getParameter("itemName");
-            StoreItemGeneric item = StoreItemGeneric.getItemByName(itemName);
+
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+
+            String queryString = "from StoreItemGeneric where itemName=:title";
+            Query query = session.createQuery(queryString).setParameter("title", itemName);
+            List<StoreItemGeneric> items = query.list();
+            StoreItemGeneric item = items.get(0);
+
+            List<StoreItemPicture> pictures = item.getItemPictures();
 
             if (item != null)
             {
@@ -218,6 +234,7 @@ public class PortalItemHandler extends HttpServlet
                         MusicAlbum album = (MusicAlbum)item;
 
                         request.setAttribute("album", album);
+                        request.setAttribute("picture", pictures.get(0));
 
                         RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/itemPages/musicAlbum.jsp");
                         dispatcher.forward(request, response);
@@ -227,6 +244,7 @@ public class PortalItemHandler extends HttpServlet
                     {
                         LegoSet legoset = (LegoSet)item;
                         request.setAttribute("legoSet", legoset);
+                        request.setAttribute("picture", pictures.get(0));
 
                         RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/itemPages/legoSet.jsp");
                         dispatcher.forward(request, response);
@@ -234,6 +252,9 @@ public class PortalItemHandler extends HttpServlet
                 }
 
             }
+
+            session.close();
+            sessionFactory.close();
         }
 
 //        NAV BAR ITEM SEARCH
@@ -284,11 +305,21 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("addItemToCart"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
-            StoreItemGeneric item = StoreItemGeneric.getItem(itemNumber);
+
+            SessionFactory factory = HibernateUtil.getSessionFactory();
+            Session hibernateSession = factory.openSession();
+            hibernateSession.beginTransaction();
+
+            StoreItemGeneric item = hibernateSession.get(StoreItemGeneric.class, itemNumber);
 
             HttpSession session = request.getSession();
             User user = (User)session.getAttribute("user");
-            Cart cart = user.getUserCart();
+            Cart cart = null;
+
+            org.hibernate.query.Query query = hibernateSession.createQuery("from Cart where userNameOfCart = \'" + user.getUserName() + "\'");
+            List<Cart> carts = query.list();
+            if (carts.size() > 0)
+                cart = carts.get(0);
 
             CartItem cartItem;
 
@@ -296,7 +327,7 @@ public class PortalItemHandler extends HttpServlet
             {
                 cartItem = cart.getItemFromCartByItemNumber(itemNumber);
                 cartItem.setQuantity(cartItem.getQuantity() + 1);
-                HibernateUtil.updateItem(cartItem);
+                hibernateSession.update(cartItem);
                 request.getSession().setAttribute("cart", cartItem.getCart());
             }
             else
@@ -305,11 +336,14 @@ public class PortalItemHandler extends HttpServlet
                 cartItem.setItemObjectIt(item.getItemNumber());
                 cartItem.setQuantity(1);
                 cartItem.setCart(cart);
-                HibernateUtil.createItem(cartItem);
+                hibernateSession.save(cartItem);
                 request.getSession().setAttribute("cart", cartItem.getCart());
-
             }
-            HibernateUtil.refreshItem(cart);
+            hibernateSession.refresh(cart);
+            hibernateSession.getTransaction().commit();
+
+            hibernateSession.close();
+            factory.close();
         }
 
 //        UPDATE CART QUANTITY
@@ -318,9 +352,17 @@ public class PortalItemHandler extends HttpServlet
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
             int quantity = Integer.valueOf(request.getParameter("newQuantity"));
 
-            CartItem cartItem = CartItem.getCartItem(itemNumber);
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            CartItem cartItem = session.get(CartItem.class, itemNumber);
             cartItem.setQuantity(quantity);
-            HibernateUtil.updateItem(cartItem);
+
+            session.getTransaction().commit();
+
+            session.close();
+            sessionFactory.close();
 
             response.sendRedirect("portal?action=portalCart");
         }
@@ -329,8 +371,18 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("removeItemFromCart"))
         {
             int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
-            CartItem cartItem = CartItem.getCartItem(itemNumber);
-            HibernateUtil.deleteItem(cartItem);
+
+            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            session.beginTransaction();
+
+            CartItem cartItem = session.get(CartItem.class, itemNumber);
+            session.delete(cartItem);
+
+            session.getTransaction().commit();
+
+            session.close();
+            sessionFactory.close();
 
             response.sendRedirect("portal?action=portalCart");
         }

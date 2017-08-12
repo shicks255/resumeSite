@@ -1,6 +1,7 @@
 package com.steven.hicks.entities.store;
 
 import com.steven.hicks.Utilities.HibernateUtil;
+import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.annotations.*;
@@ -109,8 +110,19 @@ public class Cart
         List<CartItem> items = itemsInCart;
         BigDecimal subTotal = new BigDecimal("0.0");
 
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session session = factory.openSession();
+
         for (CartItem item : items)
-            subTotal = subTotal.add(item.getStoreItem().getItemPrice().multiply(new BigDecimal("" + item.getQuantity())));
+        {
+            StoreItemGeneric storeItem = session.get(StoreItemGeneric.class, item.getItemObjectIt());
+            subTotal = subTotal.add(storeItem.getItemPrice().multiply(new BigDecimal("" + item.getQuantity())));
+
+//            subTotal = subTotal.add(item.getStoreItem().getItemPrice().multiply(new BigDecimal("" + item.getQuantity())));
+        }
+
+        session.close();
+        factory.close();
 
         return subTotal;
     }
