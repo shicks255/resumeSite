@@ -5,7 +5,6 @@ import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.store.Cart;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import javax.servlet.*;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
-@WebFilter(urlPatterns = "/portal")
+@WebFilter(urlPatterns = {"/portal", "/portalItemHandler"})
 public class PortalUserFilter implements Filter
 {
     private FilterConfig filterConfig = null;
@@ -42,8 +41,7 @@ public class PortalUserFilter implements Filter
             Principal principal = ((HttpServletRequest) request).getUserPrincipal();
             HttpSession session = ((HttpServletRequest) request).getSession();
 
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session hSession = sessionFactory.openSession();
+            Session hSession = HibernateUtil.sessionFactory.openSession();
             hSession.beginTransaction();
 
             User user = (User)session.getAttribute("user");
@@ -63,10 +61,8 @@ public class PortalUserFilter implements Filter
                 Query query = hSession.createQuery("from Cart where userNameOfCart = \'" + principal.getName() + "\'");
                 List<Cart> carts = query.list();
 
-                Cart userCart = null;
-
                 if (carts.size() > 0)
-                    userCart = carts.get(0);
+                    cart = carts.get(0);
 
 //                cart = Cart.getCartByUser(user.getUserName());
                 if (cart == null)
@@ -80,9 +76,9 @@ public class PortalUserFilter implements Filter
 
 
             hSession.refresh(cart);
+//            hSession.load(Cart.class, cart);
             hSession.getTransaction().commit();
             hSession.close();
-            sessionFactory.close();
 
             session.setAttribute("cart", cart);
         }

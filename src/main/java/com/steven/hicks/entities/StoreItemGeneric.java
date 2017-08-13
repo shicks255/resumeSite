@@ -4,7 +4,6 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import javax.persistence.*;
@@ -76,13 +75,11 @@ public abstract class StoreItemGeneric
 
     public static List<StoreItemGeneric> getAllItems()
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric ");
         List<StoreItemGeneric> list = query.list();
 
-        factory.close();
         session.close();
 
         return list;
@@ -92,11 +89,9 @@ public abstract class StoreItemGeneric
     {
         List<T> genericItems = new ArrayList<>();
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
         org.hibernate.query.Query query = session.createQuery("from StoreItemGeneric");
         genericItems = query.list();
-        factory.close();
         session.close();
 
         return genericItems;
@@ -104,11 +99,9 @@ public abstract class StoreItemGeneric
 
     public static StoreItemGeneric getItem(int itemNumber)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         StoreItemGeneric item = session.get(StoreItemGeneric.class, itemNumber);
-        factory.close();
         session.close();
 
         return item;
@@ -116,8 +109,7 @@ public abstract class StoreItemGeneric
 
     public static StoreItemGeneric getItemByName(String name)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         String queryString = "from StoreItemGeneric where itemName=:title";
         org.hibernate.query.Query query = session.createQuery(queryString)
@@ -127,15 +119,13 @@ public abstract class StoreItemGeneric
         items.forEach(item -> Hibernate.initialize(item.getItemPictures()));
 
         session.close();
-        factory.close();
 
         return items.get(0);
     }
 
     public static List<StoreItemGeneric> searchForItems(String searchTerms)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         String queryString = "from StoreItemGeneric where itemDescription like :terms or itemName like :terms";
         Query query = session.createQuery(queryString)
@@ -146,7 +136,6 @@ public abstract class StoreItemGeneric
         items.forEach(item -> Hibernate.initialize(item.getItemPictures()));
 
         session.close();
-        factory.close();
 
         return items;
     }

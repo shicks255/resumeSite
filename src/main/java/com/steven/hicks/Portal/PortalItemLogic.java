@@ -4,12 +4,11 @@ import com.steven.hicks.PicturesLogic;
 import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.FileRequest;
-import com.steven.hicks.entities.store.items.LegoSet;
-import com.steven.hicks.entities.store.items.MusicAlbum;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import com.steven.hicks.entities.store.StoreItemType;
+import com.steven.hicks.entities.store.items.LegoSet;
+import com.steven.hicks.entities.store.items.MusicAlbum;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -41,8 +40,7 @@ public class PortalItemLogic
 
         File file = fr.getUploadedFile();
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
         if (file != null && file.isFile())
         {
             StoreItemPicture picture = new StoreItemPicture();
@@ -80,7 +78,6 @@ public class PortalItemLogic
         session.save(musicAlbum);
         session.getTransaction().commit();
         session.close();
-        factory.close();
     }
 
     public static void addLegoSet(HttpServletRequest request)
@@ -108,8 +105,7 @@ public class PortalItemLogic
 
         File file = fr.getUploadedFile();
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
         if (file != null && file.isFile())
         {
             StoreItemPicture picture = new StoreItemPicture();
@@ -146,7 +142,6 @@ public class PortalItemLogic
             session.save(legoSet);
             session.getTransaction().commit();
             session.close();
-            factory.close();
         }
         HibernateUtil.createItem(legoSet);
     }

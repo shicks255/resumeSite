@@ -2,10 +2,11 @@ package com.steven.hicks.entities.store;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.List;
 
 @Entity
@@ -20,39 +21,34 @@ public class StoreItemType
 
     public static List<StoreItemType> getItemTypes()
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         Query query = session.createQuery("from StoreItemType order by itemTypeCode");
         List<StoreItemType> list = query.list();
 
         session.close();
-        factory.close();
 
         return list;
     }
 
     public static StoreItemType getItemType(int itemTypeCode)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         StoreItemType itemType = session.get(StoreItemType.class, itemTypeCode);
         session.close();
-        factory.close();
+
         return itemType;
     }
 
     public static StoreItemType getItemTypeByName(String itemTypeName)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         Query query = session.createQuery("from StoreItemType where itemType = \'" + itemTypeName + "\'");
         List<StoreItemType> items = query.list();
 
         session.close();
-        factory.close();
 
         if (items.size() > 0)
             return items.get(0);

@@ -2,7 +2,6 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 
@@ -43,13 +42,11 @@ public class UserAvatar
     {
         if (avatarObjectId != null)
         {
-            SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.openSession();
+            Session session = HibernateUtil.sessionFactory.openSession();
             session.beginTransaction();
             UserAvatar avatar = session.get(UserAvatar.class, avatarObjectId);
 
             session.close();
-            sessionFactory.close();
 
             return avatar;
         }

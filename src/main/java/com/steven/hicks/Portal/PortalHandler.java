@@ -12,7 +12,6 @@ import com.steven.hicks.entities.store.CartItem;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,7 +24,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet (urlPatterns = "/portal")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"user", "admin"} ))
@@ -125,20 +127,16 @@ public class PortalHandler extends HttpServlet
             Map<StoreItemGeneric, CartItem> itemsToCartItems = new HashMap<>();
             Map<StoreItemGeneric, StoreItemPicture> itemsToPicture = new HashMap<>();
 
-            SessionFactory factory = HibernateUtil.getSessionFactory();
-            Session session = factory.openSession();
+            Session session = HibernateUtil.sessionFactory.openSession();
 
 
             for (CartItem cartItem : cartItems)
             {
                 StoreItemGeneric item = session.get(StoreItemGeneric.class, cartItem.getItemObjectIt());
                 Hibernate.initialize(item.getItemPictures());
-//                StoreItemGeneric item = cartItem.getStoreItem();
                 storeItems.add(item);
 
-
                 StoreItemPicture picture = session.get(StoreItemPicture.class, item.getFirstPictureId());
-//                itemPictures.add(item.getItemPictures().get(0));
                 itemPictures.add(picture);
 
                 itemsToCartItems.put(item, cartItem);
@@ -147,7 +145,7 @@ public class PortalHandler extends HttpServlet
             }
 
             session.close();
-            factory.close();
+//            factory.close();
 
             long timnewTimee = System.currentTimeMillis();
             System.out.println("fuck" + (timnewTimee - time));

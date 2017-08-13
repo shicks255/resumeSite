@@ -5,7 +5,6 @@ import com.steven.hicks.entities.FileRequest;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.UserAvatar;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -36,8 +35,7 @@ public class PortalLogic
         UserAvatar avatar = new UserAvatar();
         avatar.setPicture(bytes);
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
         session.beginTransaction();
 
         session.save(avatar);
@@ -47,7 +45,6 @@ public class PortalLogic
 
         session.getTransaction().commit();
         session.close();
-        factory.close();
 
         File tempFile = file.getAbsoluteFile();
         tempFile.delete();

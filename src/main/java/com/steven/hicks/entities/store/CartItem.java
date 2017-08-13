@@ -4,7 +4,6 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -61,41 +60,35 @@ public class CartItem
 
     public static CartItem getCartItem(int objectId)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         CartItem cartItem = session.get(CartItem.class, objectId);
 
         session.close();
-        factory.close();
 
         return cartItem;
     }
 
     public StoreItemGeneric getStoreItem()
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         StoreItemGeneric item = session.get(StoreItemGeneric.class, getItemObjectIt());
         Hibernate.initialize(item.getItemPictures());
 
         session.close();
-        factory.close();
 
         return item;
     }
 
     public static List<CartItem> getAllCartItems()
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         org.hibernate.query.Query query = session.createQuery("from CartItem ");
         List<CartItem> list = query.list();
 
         session.close();
-        factory.close();
 
         return list;
     }

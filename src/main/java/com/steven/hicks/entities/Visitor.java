@@ -2,7 +2,6 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,13 +44,10 @@ public class Visitor
 
     public static Visitor getVisitor(String ip)
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         Visitor visitor = session.get(Visitor.class, ip);
-
         session.close();
-        sessionFactory.close();
 
         return visitor;
     }

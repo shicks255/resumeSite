@@ -2,7 +2,6 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -64,12 +63,10 @@ public class AcademicCourse
 
     public static AcademicCourse getCourse(int courseId)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         AcademicCourse course = session.get(AcademicCourse.class, courseId);
         session.close();
-        factory.close();
         return course;
     }
 

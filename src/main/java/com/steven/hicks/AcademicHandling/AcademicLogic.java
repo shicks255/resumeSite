@@ -1,12 +1,11 @@
 package com.steven.hicks.AcademicHandling;
 
-import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.Utilities.CommonUtils;
+import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.AcademicCourse;
 import com.steven.hicks.entities.Coursework;
 import com.steven.hicks.entities.FileRequest;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import javax.servlet.ServletOutputStream;
@@ -43,13 +42,11 @@ public class AcademicLogic
 
     public static List<AcademicCourse> getCourseList()
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         Query query = session.createQuery("from AcademicCourse order by semesterTrackingNumber");
         List<AcademicCourse> list = query.list();
         session.close();
-        sessionFactory.close();
 
         return list;
     }
@@ -127,16 +124,8 @@ public class AcademicLogic
 
         String errorMessage = "";
         if (coursework != null)
-        {
             HibernateUtil.deleteItem(coursework);
 
-//            AcademicCourse course = coursework.getAcademicCourse();
-//            if (course != null)
-//            {
-//                course.setCountOfCourseworks(course.getCountOfCourseworks() > 0 ? course.getCountOfCourseworks() - 1 : 0);
-//                HibernateUtil.updateItem(course);
-//            }
-        }
         if (coursework == null)
             errorMessage = "Error...coursework not found.";
 

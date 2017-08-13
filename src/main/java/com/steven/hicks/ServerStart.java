@@ -2,7 +2,6 @@ package com.steven.hicks;
 
 import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.Utilities.HibernateUtil;
-import com.steven.hicks.entities.Visitor;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
@@ -25,7 +23,9 @@ public class ServerStart extends HttpServlet
     public void init() throws ServletException
     {
         log.info("ResumeSite starting up");
-        ServerStartupTasks.loadDefaultItemTypes();
+        HibernateUtil.initializeSessionFactory();
+        ServerStartupTasks.loadDefaultItemTypes()
+        ;
         ServletContext sc = getServletContext();
 
         String path = sc.getRealPath("/");
@@ -38,6 +38,7 @@ public class ServerStart extends HttpServlet
     public void destroy()
     {
         log.info("ResumeSite shutting down");
+        HibernateUtil.destroySessionFactory();
     }
 
     @Override

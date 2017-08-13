@@ -4,7 +4,6 @@ import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.Utilities.PasswordUtil;
 import com.steven.hicks.entities.store.Cart;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.*;
 
@@ -69,13 +68,11 @@ public class User
 
     public static User getUser(String userName)
     {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         User user = session.get(User.class, userName);
 
         session.close();
-        sessionFactory.close();
 
         return user;
     }

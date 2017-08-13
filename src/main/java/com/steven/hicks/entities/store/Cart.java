@@ -3,14 +3,8 @@ package com.steven.hicks.entities.store;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,14 +62,12 @@ public class Cart
 
     public static Cart getCartByUser(String userName)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         org.hibernate.query.Query query = session.createQuery("from Cart where userNameOfCart = \'" + userName + "\'");
         List<Cart> carts = query.list();
 
         session.close();
-        factory.close();
 
         Cart userCart = null;
 
@@ -87,14 +79,12 @@ public class Cart
 
     public static Cart getCartByObjectId(int cartObjectId)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         org.hibernate.query.Query query = session.createQuery("from Cart where objectId = " + cartObjectId);
         List<Cart> carts = query.list();
 
         session.close();
-        factory.close();
 
         Cart cart = null;
 
@@ -110,19 +100,15 @@ public class Cart
         List<CartItem> items = itemsInCart;
         BigDecimal subTotal = new BigDecimal("0.0");
 
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         for (CartItem item : items)
         {
             StoreItemGeneric storeItem = session.get(StoreItemGeneric.class, item.getItemObjectIt());
             subTotal = subTotal.add(storeItem.getItemPrice().multiply(new BigDecimal("" + item.getQuantity())));
-
-//            subTotal = subTotal.add(item.getStoreItem().getItemPrice().multiply(new BigDecimal("" + item.getQuantity())));
         }
 
         session.close();
-        factory.close();
 
         return subTotal;
     }

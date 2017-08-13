@@ -3,8 +3,6 @@ package com.steven.hicks.entities.store;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Arrays;
@@ -55,13 +53,10 @@ public class StoreItemPicture
 
     public static StoreItemPicture getItemPicture(int objectId)
     {
-        SessionFactory factory = HibernateUtil.getSessionFactory();
-        Session session = factory.openSession();
+        Session session = HibernateUtil.sessionFactory.openSession();
 
         StoreItemPicture picture = session.get(StoreItemPicture.class, objectId);
-
         session.close();
-        factory.close();
 
         return picture;
     }
