@@ -26,3 +26,7 @@
     margin-top : -5px;
     margin-left : -5px;
 }
+
+dropdown-button-mobile:hover {
+    background-color: rgba(0,0,0,0.1);
+}
