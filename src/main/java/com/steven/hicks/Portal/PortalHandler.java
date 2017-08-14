@@ -113,12 +113,10 @@ public class PortalHandler extends HttpServlet
 //        -----My Cart
         if (action.equalsIgnoreCase("portalCart"))
         {
-            long time = System.currentTimeMillis();
-            System.out.println(time);
-
             HttpSession userSession = request.getSession();
 
-            Cart userCart = (Cart)userSession.getAttribute("cart");
+            User user = (User)userSession.getAttribute("user");
+            Cart userCart = user.getUserCart();
             List<CartItem> cartItems = userCart.getItemsInCart();
 
             List<StoreItemPicture> itemPictures = new ArrayList<>();
@@ -128,7 +126,6 @@ public class PortalHandler extends HttpServlet
             Map<StoreItemGeneric, StoreItemPicture> itemsToPicture = new HashMap<>();
 
             Session session = HibernateUtil.sessionFactory.openSession();
-
 
             for (CartItem cartItem : cartItems)
             {
@@ -145,21 +142,25 @@ public class PortalHandler extends HttpServlet
             }
 
             session.close();
-//            factory.close();
-
-            long timnewTimee = System.currentTimeMillis();
-            System.out.println("fuck" + (timnewTimee - time));
 
             request.setAttribute("storeItems", storeItems);
             request.setAttribute("itemPictures", itemPictures);
             request.setAttribute("cartItems", cartItems);
+            request.setAttribute("cart", userCart);
 
             request.setAttribute("map", itemsToCartItems);
             request.setAttribute("itemsToPicture", itemsToPicture);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalCart.jsp");
             dispatcher.forward(request, response);
+        }
 
+        if (action.equalsIgnoreCase("getNumberOfItemsInCart"))
+        {
+            String userName = request.getParameter("userName");
+
+            Cart cart = Cart.getCartByUser(userName);
+            response.getWriter().println(cart.getItemsInCart().size());
         }
     }
 

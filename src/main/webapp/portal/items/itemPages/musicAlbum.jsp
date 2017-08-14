@@ -20,6 +20,9 @@
             function(data)
             {
                 $('#modal').modal('open');
+
+                getNumberOfItemsInCart();
+
             });
     }
 

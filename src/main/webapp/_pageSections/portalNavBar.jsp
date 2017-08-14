@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:useBean id="user" type="com.steven.hicks.entities.User" scope="session"/>
-<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart" scope="session"/>
+<%--<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart" scope="session"/>--%>
 
 <!DOCTYPE html>
 <html>
@@ -27,6 +27,8 @@
         var searchTerms = '';
         $(document).ready(function()
         {
+            getNumberOfItemsInCart('${user.userName}');
+
             $(function()
             {
                 $.ajax({
@@ -72,10 +74,21 @@
             })
         });
 
+        function getNumberOfItemsInCart()
+        {
+            $.ajax({
+                type: 'GET',
+                url: '${pageContext.request.contextPath}/portal?userName=${user.userName}&action=getNumberOfItemsInCart',
+                success: function(response)
+                {
+                    $( '#numberItemsInCart' ).html("(" + response + ")");
+                }
+            });
+        }
+
         function doSearch()
         {
             searchTerms = $( '#search' ).val();
-            console.log(searchTerms);
             window.open("${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=" + searchTerms, "_self");
         }
 
@@ -162,7 +175,7 @@
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
-                <div class="hide-on-small-and-down" id="test">(<c:out value="${cart.itemsInCart.size()}"/>)</div>
+                <div class="hide-on-small-and-down" id="test"><span id="numberItemsInCart"/></div>
             </li>
         </ul>
     </div>
