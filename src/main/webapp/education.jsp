@@ -82,7 +82,7 @@
 
     <%--Main table displaying all courses--%>
     <div id="courseList" class="">
-        <table class="highlight responsive-table">
+        <table class="highlight" style="width: 100%;overflow:hidden">
             <thead>
             <tr>
                 <th>#:</th>

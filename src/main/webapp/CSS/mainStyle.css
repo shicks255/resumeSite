@@ -31,29 +31,6 @@ input[type=submit] {border-radius : 5px;}
 input[type=submit]:hover {color : red;}
 
 
-
-.notecard {
-    background-color : #FFFFF1;
-    padding : 15px;
-    border : 1px solid black;
-    border-radius : 10px;  }
-
-.notecard table tr{
-    padding : 5px;
-}
-
-.notecard table td{
-    padding : 5px;
-}
-
-.notecard td .alignRight{
-    text-align : right;
-}
-
-.notecard td .alignLeft{
-    text-align : left;
-}
-
 .popup{
     display : block;
     position : fixed;
@@ -64,28 +41,6 @@ input[type=submit]:hover {color : red;}
     height : 100%;
     overflow : auto;
     background-color : rgba(110,110,110,0.6);
-}
-
-.popupAlert{
-    display : block;
-    position : fixed;
-    z-index : 1000;
-    left : 0;
-    top : 0;
-    width : 100%;
-    height : 100%;
-    overflow : auto;
-    background-color : rgba(226,226,112260,0.6);
-}
-
-.popupContentAlert{
-    margin : 15% auto;
-    padding : 20px;
-    border : 1px solid black;
-    background-color : #7fc1a7;
-    width : 20%;
-    text-align: center;
-    border-radius : 10px;
 }
 
 .popupContent{
@@ -135,9 +90,9 @@ label{
     color : #4a148c;
 }
 
-.popupContent{
-    width : 50%;
-}
+/*.popupContent{*/
+    /*width : 50%;*/
+/*}*/
 
 .closeButton{
     float : right;
@@ -151,4 +106,17 @@ label{
 
 #cartIcon :hover {
     background-color : transparent;
+}
+
+@media (max-width : 480px) {
+    .popupContent{
+        margin : 15% auto;
+        padding : 20px;
+        border : 1px solid black;
+        background-color : #f4eff7    ;
+        width : 85%;
+        border-radius : 10px;
+    }
+
+
 }

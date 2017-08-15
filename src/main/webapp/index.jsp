@@ -167,7 +167,7 @@
                     <input type="text" name="emailSubject" id="emailSubject">
 
                     <label for="emailBody">Body:</label>
-                    <textarea style="overflow: hidden;" placeholder="Enter your message here..." id="emailBody" id="emailBody"></textarea>
+                    <textarea style="overflow: hidden;max-width: 100%" placeholder="Enter your message here..." id="emailBody" id="emailBody"></textarea>
                 </form>
             </div>
         </div>
