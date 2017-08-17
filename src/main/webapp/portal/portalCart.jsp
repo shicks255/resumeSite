@@ -15,6 +15,8 @@
 //    :todo what is this
     $(document).ready(function()
     {
+        updateCartTotal();
+        updateCartSubTotal();
         $('.modal').modal();
     });
 
@@ -29,6 +31,8 @@
         {
             $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty, '');
             $( '#updateModal' ).modal('open');
+            updateCartTotal();
+            updateCartSubTotal();
         }
     }
 
@@ -42,6 +46,24 @@
 
                 $( '#removeModal' ).modal('open');
             });
+    }
+
+    function updateCartTotal()
+    {
+        $.get( '${pageContext.request.contextPath}/portalItemHandler?action=updateCartTotal',
+        function(data)
+        {
+            $( '#cartTotal' ).html(data);
+        });
+    }
+
+    function updateCartSubTotal()
+    {
+        $.get( '${pageContext.request.contextPath}/portalItemHandler?action=updateCartSubTotal',
+        function(data)
+        {
+            $( '#cartSubtotal' ).html(data);
+        });
     }
 
 </script>
@@ -61,8 +83,6 @@
         </tr>
         </thead>
 
-        <%--<c:forEach var="item" items="${cartItems}">--%>
-            <%--<c:set var="storeItem" value="${item.storeItem}"/>--%>
         <c:forEach var="storeItem" items="${storeItems}">
             <c:set var="item" value="${map[storeItem]}"/>
         <tr>
@@ -88,12 +108,12 @@
 
         <tr>
             <td colspan="3" style="text-align: right;">Sub-total:</td>
-            <td> $ <c:out value="${cart.subTotal}"/></td>
+            <td> $ <span id="cartSubtotal"></span></td>
             <td></td>
         </tr>
         <tr>
             <td colspan="3" style="text-align: right;">Total:</td>
-            <td> $ <fmt:formatNumber value="${cart.total}" pattern="#.00"/></td>
+            <td> $ <span id="cartTotal"></span></td>
             <td></td>
         </tr>
     </table>

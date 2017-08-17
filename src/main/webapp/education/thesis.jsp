@@ -8,6 +8,7 @@
     $(document).ready(function()
     {
         $( '.scrollspy' ).scrollSpy();
+        $( '.slider' ).slider();
     });
 </script>
 <style>
@@ -36,10 +37,49 @@
 
             <h4 align = "center">Steven M. Hicks</h4><br/>
 
-                <div>
-                    <a style="float:left;" href="/mapImages/cropped_IndianTrailsofNJfromLane.jpg"><img id="thesispic" width="400" class="materialboxed" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_IndianTrailsofNJfromLane.jpg"></img></a>
-                    <a href="/mapImages/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"><image id="thesispic" class="materialboxed" width="400" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_HunterdonCountyearlynineteenthcenturyfromwacker.jpg"></img></a>
-                    <%--<a href="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"><img id="thesispic" width="400" class="materialboxed" alt="sometext" src="http://i3.photobucket.com/albums/y79/shicks25/cropped_NjRoadMapfromPomfret.jpg"></img></a>--%>
+                <%--<div style="height: 400px; width: 400px;overflow:hidden;display:inline-block">--%>
+                    <%--<img class="materialboxed" style="height:800px;width:400px" src="${pageContext.request.contextPath}/mapImages/cropped_Colonial_NJ_Roadways.jpg"/>--%>
+                <%--</div>--%>
+                <%--<div style="height: 400px; width: 400px;overflow:hidden;display:inline-block">--%>
+                    <%--<img class="materialboxed" style="height:800px;width:400px" src="${pageContext.request.contextPath}/mapImages/cropped_Hunterdon%20County%20early%20nineteenth%20century%20from%20wacker.jpg"/>--%>
+                <%--</div>--%>
+                <%--<div style="height: 400px; width: 400px;overflow:hidden;display:inline-block">--%>
+                    <%--<img class="materialboxed" style="height:800px;width:400px" src="${pageContext.request.contextPath}/mapImages/cropped_Indian%20Trails%20of%20NJ%20from%20Lane.jpg"/>--%>
+                <%--</div>--%>
+                <%--<div style="height: 400px; width: 400px;overflow:hidden;display:inline-block">--%>
+                    <%--<img class="materialboxed" style="height:800px;width:400px" src="${pageContext.request.contextPath}/mapImages/cropped_Nj%20Indian%20Trail%20Map%20from%20Wacker.jpg"/>--%>
+                <%--</div>--%>
+                <div class="slider">
+                    <ul class="slides">
+                        <li>
+                            <img style="opacity: .5" src="${pageContext.request.contextPath}/mapImages/cropped_Colonial_NJ_Roadways.jpg""> <!-- random image -->
+                            <div class="caption center-align">
+                                <h3 class="black-text">This is our big Tagline!</h3>
+                                <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img style="opacity: .5" src="${pageContext.request.contextPath}/mapImages/cropped_Hunterdon%20County%20early%20nineteenth%20century%20from%20wacker.jpg"> <!-- random image -->
+                            <div class="caption left-align">
+                                <h3 class="black-text">Left Aligned Caption</h3>
+                                <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img style="opacity: .5" src="${pageContext.request.contextPath}/mapImages/cropped_Indian%20Trails%20of%20NJ%20from%20Lane.jpg"> <!-- random image -->
+                            <div class="caption right-align">
+                                <h3 class="black-text">Right Aligned Caption</h3>
+                                <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img style="opacity: .5" src="${pageContext.request.contextPath}/mapImages/cropped_Nj%20Indian%20Trail%20Map%20from%20Wacker.jpg"> <!-- random image -->
+                            <div class="caption center-align">
+                                <h3 class="black-text">This is our big Tagline!</h3>
+                                <h5 class="light black-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
             <br><br>

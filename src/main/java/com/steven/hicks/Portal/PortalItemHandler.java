@@ -396,6 +396,40 @@ public class PortalItemHandler extends HttpServlet
                 session.close();
             }
         }
+
+//        UPDATE TOTAL
+        if (action.equalsIgnoreCase("updateCartTotal"))
+        {
+            User user = (User)request.getSession().getAttribute("user");
+
+            if (user != null)
+            {
+                Cart userCart = user.getUserCart();
+
+                PrintWriter out = response.getWriter();
+                response.setContentType("text");
+
+                out.println(userCart.getTotal());
+                out.close();
+            }
+
+        }
+
+//        UPDATE SUBTOTAL
+        if (action.equalsIgnoreCase("updateCartSubTotal"))
+        {
+            User user = (User)request.getSession().getAttribute("user");
+            if (user != null)
+            {
+                Cart userCart = user.getUserCart();
+
+                PrintWriter out = response.getWriter();
+                response.setContentType("text");
+
+                out.println(userCart.getSubTotal());
+                out.close();
+            }
+        }
     }
 
     @Override

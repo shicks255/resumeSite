@@ -118,6 +118,7 @@ public class Cart
         BigDecimal subTotal = getSubTotal();
         BigDecimal total = subTotal.multiply(new BigDecimal("1.07"));
 
+        total = total.setScale(2, BigDecimal.ROUND_HALF_UP);
         return total;
     }
 
