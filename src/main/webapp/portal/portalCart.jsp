@@ -71,45 +71,6 @@
 
     <h3>Your Cart:</h3>
 
-    <%--<table>--%>
-        <%--<thead>--%>
-        <%--<tr>--%>
-            <%--<th></th>--%>
-            <%--<th>Item</th>--%>
-            <%--<th>Number</th>--%>
-            <%--<th>Price</th>--%>
-            <%--<th>Quantity</th>--%>
-            <%--<th></th>--%>
-        <%--</tr>--%>
-        <%--</thead>--%>
-
-        <%--<c:forEach var="storeItem" items="${storeItems}">--%>
-            <%--<c:set var="item" value="${map[storeItem]}"/>--%>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${itemsToPicture[storeItem].objectId}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${storeItem.itemName}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${storeItem.itemNumber}"/>--%>
-            <%--</td>--%>
-            <%--<td style="width: 100px;">--%>
-                <%--$ <c:out value="${storeItem.itemPrice}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<input style="width : 25px;" id="qty_${item.objectId}" value="${item.quantity}">--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>--%>
-                <%--<button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>--%>
-            <%--</td>--%>
-
-        <%--</tr>--%>
-        <%--</c:forEach>--%>
-    <%--</table>--%>
-
     <div style="display:grid;grid-gap:5px;grid-template-columns: 25% 35% 10% 10% 15%;">
         <div style="grid-column: 3">
             <b>Price</b>
@@ -153,12 +114,6 @@
 </c:forEach>
 
     <table>
-
-        <thead>
-        <%--<tr>--%>
-            <%--<th colspan="7"></th>--%>
-        <%--</tr>--%>
-        </thead>
         <tr>
             <td class="right-align"><b>Sub-total:</b> $ <span id="cartSubtotal"></span></td>
             <td></td>
