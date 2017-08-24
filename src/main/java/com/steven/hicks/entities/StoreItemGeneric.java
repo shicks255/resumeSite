@@ -2,6 +2,7 @@ package com.steven.hicks.entities;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.store.StoreItemPicture;
+import com.steven.hicks.entities.store.StoreItemType;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -140,6 +141,10 @@ public abstract class StoreItemGeneric
         return items;
     }
 
+    public StoreItemType getItemTypeObject()
+    {
+        return StoreItemType.getItemType(itemType);
+    }
 
     public String getItemName()
     {

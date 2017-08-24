@@ -92,6 +92,12 @@
             window.open("${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=" + searchTerms, "_self");
         }
 
+        function doSearchMobile()
+        {
+            searchTerms = $( '#searchMobile' ).val();
+            window.open("${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=" + searchTerms, "_self");
+        }
+
         function dialogEditProfile()
         {
             $( '#editProfileDialog' ).removeClass('hiddenDiv').addClass('popup');
@@ -114,11 +120,14 @@
     input::-webkit-calendar-picker-indicator {
         display: none;
 }
+    nav a {
+        padding : 0;
+    }
 
-    nav ul {
+    nav .button-collapse {
         /*display :absolute;*/
-        width: 100%;
-        position : absolute;
+        /*width: 100%;*/
+        /*position : absolute;*/
         /*flex-direction:row;*/
         /*justify-content : space-between;*/
         padding : 0;
@@ -126,16 +135,21 @@
     }
 
     nav ul li {
-        display : block;
-        position: relative;
+        /*display : block;*/
+        /*position: relative;*/
+
         list-style : none;
         text-align: center;
     }
     #menuButton{
+        position: absolute;
+        width : 5px;
+        left : 1%;
     }
     #menuButton i {
     }
     #portalNavTitle {
+        margin-left : 5%;
     }
     #searchBar {
         width : 35%;
@@ -146,14 +160,25 @@
     }
     #cartIcon {
         position : absolute;
-        right : 4.5%;
+        /*right : 4.5%;*/
+        right : 4%;
         width : 7.5%;
     }
     #test {
-        /*display:inline-block;*/
+        display:inline-block;
         position : absolute;
         top : 0;
-        right : 1%;
+        right: 0;
+    }
+
+    #searchMobile{
+        width : 95%;
+        left : 5%;
+    }
+
+    #searchIconMobile{
+        position : absolute;
+        right : 5%;
     }
 
 </style>
@@ -167,10 +192,10 @@
             <li id="portalNavTitle">
                 <a href="${pageContext.request.contextPath}/portal?action=form"> Portal Search</a>
             </li>
-            <li id="searchBar">
+            <li id="searchBar" class="hide-on-small-and-down">
                 <input type="text" id="search" name="search" list="items" placeholder="Search for an item">
             </li>
-            <li id="searchIcon">
+            <li id="searchIcon" class="hide-on-small-and-down">
                 <a href="#" onclick="doSearch();" ><i class="material-icons">search</i></a>
             </li>
             <li id="cartIcon">
@@ -181,10 +206,21 @@
     </div>
 
     <div class="nav-wrapper-secondary cyan">
-
     </div>
 </nav>
 
+<nav class="hide-on-med-and-up">
+    <div class="hide-on-med-and-up nav-wrapper cyan">
+        <ul>
+            <li style="width : 90%;">
+                <input type="text" id="searchMobile" name="search" list="items" placeholder="Search for an item">
+            </li>
+            <li id="searchIconMobile">
+                <a href="#" onclick="doSearchMobile();"><i class="material-icons">search</i></a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 
 <ul id="slide-out" class="side-nav">

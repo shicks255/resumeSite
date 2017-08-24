@@ -43,7 +43,6 @@
             function(data)
             {
                 location.reload();
-
                 $( '#removeModal' ).modal('open');
             });
     }
@@ -72,49 +71,101 @@
 
     <h3>Your Cart:</h3>
 
+    <%--<table>--%>
+        <%--<thead>--%>
+        <%--<tr>--%>
+            <%--<th></th>--%>
+            <%--<th>Item</th>--%>
+            <%--<th>Number</th>--%>
+            <%--<th>Price</th>--%>
+            <%--<th>Quantity</th>--%>
+            <%--<th></th>--%>
+        <%--</tr>--%>
+        <%--</thead>--%>
+
+        <%--<c:forEach var="storeItem" items="${storeItems}">--%>
+            <%--<c:set var="item" value="${map[storeItem]}"/>--%>
+        <%--<tr>--%>
+            <%--<td>--%>
+                <%--<img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${itemsToPicture[storeItem].objectId}"/>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<c:out value="${storeItem.itemName}"/>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<c:out value="${storeItem.itemNumber}"/>--%>
+            <%--</td>--%>
+            <%--<td style="width: 100px;">--%>
+                <%--$ <c:out value="${storeItem.itemPrice}"/>--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<input style="width : 25px;" id="qty_${item.objectId}" value="${item.quantity}">--%>
+            <%--</td>--%>
+            <%--<td>--%>
+                <%--<button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>--%>
+                <%--<button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>--%>
+            <%--</td>--%>
+
+        <%--</tr>--%>
+        <%--</c:forEach>--%>
+    <%--</table>--%>
+
+    <div style="display:grid;grid-gap:5px;grid-template-columns: 25% 35% 10% 10% 15%;">
+        <div style="grid-column: 3">
+            <b>Price</b>
+        </div>
+        <div style="grid-column: 4;">
+            <b>Quantity</b>
+        </div>
+    </div>
+<c:forEach var="storeItem" items="${storeItems}">
+    <c:set var="item" value="${map[storeItem]}"/>
+<hr/>
+    <div style="display:grid;grid-gap:5px;grid-template-columns: 25% 35% 10% 10% 15%;
+    grid-template-rows: 50px 20px 20px 20px">
+        <div style="grid-column: 1;grid-row:1/10">
+            <img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${itemsToPicture[storeItem].objectId}"/>
+        </div>
+        <div style="grid-column: 2;grid-row:1;color: dodgerblue">
+            <b><c:out value="${storeItem.itemName}"/></b>
+        </div>
+        <div style="grid-column: 2;grid-row: 2">
+            Item# <c:out value="${storeItem.itemNumber}"/>
+        </div>
+        <div style="grid-column: 2;grid-row:3">
+            <c:out value="${storeItem.itemTypeObject.itemType}"/>
+        </div>
+        <div style="grid-column: 2;grid-row:4">
+            <c:out value="${storeItem.itemDescription}"/>
+        </div>
+        <div style="grid-column: 3;grid-row:1">
+            <c:out value="$${storeItem.itemPrice}"/>
+        </div>
+        <div style="grid-column: 4;grid-row:1">
+            <input style="width : 25px;line-height: 3; height: 1.5em;" id="qty_${item.objectId}" value="${item.quantity}">
+        </div>
+        <div style="grid-column: 5;grid-row:1">
+            <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>
+            <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
+        </div>
+    </div>
+
+</c:forEach>
+
     <table>
+
         <thead>
         <tr>
-            <th></th>
-            <th>Item</th>
-            <th>Number</th>
-            <th>Price</th>
-            <th>Quantity</th>
+            <th colspan="7"></th>
         </tr>
         </thead>
-
-        <c:forEach var="storeItem" items="${storeItems}">
-            <c:set var="item" value="${map[storeItem]}"/>
         <tr>
-            <td>
-                <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${itemsToPicture[storeItem].objectId}"/>
-            </td>
-            <td>
-                <c:out value="${storeItem.itemName}"/>
-            </td>
-            <td>
-                <c:out value="${storeItem.itemNumber}"/>
-            </td>
-            <td>
-                $ <c:out value="${storeItem.itemPrice}"/>
-            </td>
-            <td>
-                <input style="width : 15px; margin-right : 15px;" size="4px" width="4px" type="text" id="qty_${item.objectId}" value="${item.quantity}"><button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>
-                <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
-            </td>
-
-        </tr>
-        </c:forEach>
-
-        <tr>
-            <td colspan="3" style="text-align: right;">Sub-total:</td>
-            <td> $ <span id="cartSubtotal"></span></td>
+            <td class="right-align"><b>Sub-total:</b> $ <span id="cartSubtotal"></span></td>
+            <td></td>
             <td></td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: right;">Total:</td>
-            <td> $ <span id="cartTotal"></span></td>
-            <td></td>
+            <td class="right-align"><b>Total:</b> $ <span id="cartTotal"></span></td>
         </tr>
     </table>
 
