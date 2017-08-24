@@ -52,6 +52,7 @@ public class PortalUserFilter implements Filter
                 session.setAttribute("user", user);
             }
 
+            hSession.close();
 //            Cart cart = (Cart)session.getAttribute("cart");
 //
 //            if (cart == null)
@@ -79,7 +80,7 @@ public class PortalUserFilter implements Filter
 //            hSession.getTransaction().commit();
 //            hSession.close();
 //
-//            session.setAttribute("cart", cart);
+//            session.setAttribute("cart", cart);       hse
         }
 
         chain.doFilter(httpRequest, httpResponse);
