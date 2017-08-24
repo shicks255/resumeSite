@@ -149,15 +149,15 @@
             <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
         </div>
     </div>
-
+<hr/>
 </c:forEach>
 
     <table>
 
         <thead>
-        <tr>
-            <th colspan="7"></th>
-        </tr>
+        <%--<tr>--%>
+            <%--<th colspan="7"></th>--%>
+        <%--</tr>--%>
         </thead>
         <tr>
             <td class="right-align"><b>Sub-total:</b> $ <span id="cartSubtotal"></span></td>
