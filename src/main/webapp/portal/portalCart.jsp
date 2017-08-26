@@ -12,7 +12,6 @@
 
 <script>
 
-//    :todo what is this
     $(document).ready(function()
     {
         updateCartTotal();
@@ -20,28 +19,32 @@
         $('.modal').modal();
     });
 
-    //:todo make a better popup thing to notify
-    function updateQty(itemObjectId, currentQty)
+    function updateQty(itemObjectId)
     {
-        $( '#updateQtyBtn' ).blur();
+        showWaitingPopup('Updating quantity');
+//        $( '#updateQtyBtn' ).blur();
         var itemGetter = '#qty_' + itemObjectId;
         var qty = $( itemGetter ).val();
 
-        if (qty !== currentQty)
-        {
-            $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty, '');
-            $( '#updateModal' ).modal('open');
-            updateCartTotal();
-            updateCartSubTotal();
-        }
+        $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
+            function(data)
+            {
+                hideWaitingPopup();
+
+                $( '#updateModal' ).modal('open');
+                updateCartTotal();
+                updateCartSubTotal();
+            });
     }
 
-    //:todo make a better popup to notify item removed
     function removeItem(itemObjectId)
     {
+        showWaitingPopup('Removing item');
         $.post('${pageContext.request.contextPath}/portalItemHandler?action=removeItemFromCart&itemObjectId=' + itemObjectId,
             function(data)
             {
+                hideWaitingPopup();
+
                 location.reload();
                 $( '#removeModal' ).modal('open');
             });
@@ -106,7 +109,7 @@
             <input style="width : 25px;line-height: 3; height: 1.5em;" id="qty_${item.objectId}" value="${item.quantity}">
         </div>
         <div style="grid-column: 5;grid-row:1">
-            <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}', '${item.quantity}');">Update</button>
+            <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">Update</button>
             <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
         </div>
     </div>

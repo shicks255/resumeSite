@@ -16,13 +16,13 @@
 
     function addToCart(itemObjectId)
     {
+        showWaitingPopup('Adding item to cart');
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
+                hideWaitingPopup();
                 $('#modal').modal('open');
-
                 getNumberOfItemsInCart();
-
             });
     }
 

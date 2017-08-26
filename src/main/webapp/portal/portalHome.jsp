@@ -11,8 +11,6 @@
     <h6>We carry an array of products ranging from Lego toy sets, Music Albums, and other things</h6>
 
 
-
-
 </div>
 
 
