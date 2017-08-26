@@ -3,7 +3,6 @@
    License: none (public domain)
 */
 
-
 body {
     line-height: 1;
     background-color : #e3f2fd;
@@ -14,7 +13,66 @@ body {
 
 /*Mine*/
 
+/*Regular Site Nav Bar*/
 #navBar {color : red;}
+
+
+/*Portal Nav Bar*/
+nav a {
+    padding : 0;
+}
+
+nav .button-collapse {
+    padding : 0;
+    margin : 0;
+}
+
+nav ul li {
+    list-style : none;
+    text-align: center;
+}
+
+#menuButton{
+    position: absolute;
+    width : 5px;
+    left : 1%;
+}
+
+#portalNavTitle {
+    margin-left : 5%;
+}
+
+#searchBar {
+    width : 35%;
+    left : 5%;
+}
+
+#searchIcon {
+    left : 2.5%;
+}
+
+#cartIcon {
+    position : absolute;
+    right : 4%;
+    width : 7.5%;
+}
+
+#cartIconContainer {
+    display:inline-block;
+    position : absolute;
+    top : 0;
+    right: 0;
+}
+
+#searchMobile{
+    width : 95%;
+    left : 5%;
+}
+
+#searchIconMobile{
+    position : absolute;
+    right : 5%;
+}
 
 
 h1 {color : #e57373;
@@ -28,9 +86,10 @@ button:hover {
 }
 
 input[type=submit] {border-radius : 5px;}
+
 input[type=submit]:hover {color : red;}
 
-
+/*Popup stuff*/
 .popup{
     display : block;
     position : fixed;
@@ -90,10 +149,6 @@ label{
     color : #4a148c;
 }
 
-/*.popupContent{*/
-    /*width : 50%;*/
-/*}*/
-
 .closeButton{
     float : right;
 }
@@ -108,12 +163,14 @@ label{
     background-color : transparent;
 }
 
+
+/*Media Queries*/
 @media (max-width : 480px) {
     .popupContent{
         margin : 15% auto;
         padding : 20px;
         border : 1px solid black;
-        background-color : #f4eff7    ;
+        background-color : #f4eff7;
         width : 85%;
         border-radius : 10px;
     }

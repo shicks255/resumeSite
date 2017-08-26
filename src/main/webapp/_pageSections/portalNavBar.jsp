@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:useBean id="user" type="com.steven.hicks.entities.User" scope="session"/>
-<%--<jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart" scope="session"/>--%>
 
 <!DOCTYPE html>
 <html>
@@ -110,14 +109,12 @@
 
         function showWaitingPopup(text)
         {
-            console.log("we got there");
             $( '#popup-processingAction' ).removeClass('hiddenDiv').addClass('popup');
             $( '#_processing_text' ).innerHTML = text;
         }
 
         function hideWaitingPopup()
         {
-            console.log("we ended");
             $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');
         }
 
@@ -133,66 +130,6 @@
     input::-webkit-calendar-picker-indicator {
         display: none;
 }
-    nav a {
-        padding : 0;
-    }
-
-    nav .button-collapse {
-        /*display :absolute;*/
-        /*width: 100%;*/
-        /*position : absolute;*/
-        /*flex-direction:row;*/
-        /*justify-content : space-between;*/
-        padding : 0;
-        margin : 0;
-    }
-
-    nav ul li {
-        /*display : block;*/
-        /*position: relative;*/
-
-        list-style : none;
-        text-align: center;
-    }
-    #menuButton{
-        position: absolute;
-        width : 5px;
-        left : 1%;
-    }
-    #menuButton i {
-    }
-    #portalNavTitle {
-        margin-left : 5%;
-    }
-    #searchBar {
-        width : 35%;
-        left : 5%;
-    }
-    #searchIcon {
-        left : 2.5%;
-    }
-    #cartIcon {
-        position : absolute;
-        /*right : 4.5%;*/
-        right : 4%;
-        width : 7.5%;
-    }
-    #test {
-        display:inline-block;
-        position : absolute;
-        top : 0;
-        right: 0;
-    }
-
-    #searchMobile{
-        width : 95%;
-        left : 5%;
-    }
-
-    #searchIconMobile{
-        position : absolute;
-        right : 5%;
-    }
 
 </style>
 
@@ -213,7 +150,7 @@
             </li>
             <li id="cartIcon">
                 <a href="${pageContext.request.contextPath}/portal?action=portalCart"> <i class="material-icons">shopping_cart</i></a>
-                <div class="hide-on-small-and-down" id="test"><span id="numberItemsInCart"/></div>
+                <div class="hide-on-small-and-down" id="cartIconContainer"><span id="numberItemsInCart"/></div>
             </li>
         </ul>
     </div>
@@ -305,7 +242,6 @@
         </form>
     </div>
 </div>
-
 
 <div id="popup-processingAction" class="hiddenDiv">
     <div id="processingAction" class="popupContent" >

@@ -73,6 +73,17 @@
             });
         }
 
+        function showWaitingPopup(text)
+        {
+            $( '#popup-processingAction' ).removeClass('hiddenDiv').addClass('popup');
+            $( '#_processing_text' ).innerHTML = text;
+        }
+
+        function hideWaitingPopup()
+        {
+            $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');
+        }
+
     </script>
 
 </head>
@@ -149,3 +160,10 @@
     </nav>
 
 
+    <div id="popup-processingAction" class="hiddenDiv">
+        <div id="processingAction" class="popupContent" >
+            <p style="margin: 15pt;text-align: center">
+                <img src="${pageContext.request.contextPath}/icons/waiting.gif" alt="One moment" /> <span id="_processing_text">Processing request...</span>
+            </p>
+        </div>
+    </div>
