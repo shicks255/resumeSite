@@ -68,6 +68,12 @@
         });
     }
 
+    function checkout()
+    {
+        $.post( '${pageContext.request.contextPath}/portal?action=checkout');
+
+    }
+
 </script>
 
 <div class="container">
@@ -124,6 +130,14 @@
         </tr>
         <tr>
             <td class="right-align"><b>Total:</b> $ <span id="cartTotal"></span></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>
+                <button style="display:inline-block" class="btn waves-effect waves-light" id="checkoutBtn" onclick="checkout();">Checkout</button>
+            </td>
         </tr>
     </table>
 

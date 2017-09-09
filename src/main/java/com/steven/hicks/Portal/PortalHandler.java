@@ -162,6 +162,18 @@ public class PortalHandler extends HttpServlet
             Cart cart = Cart.getCartByUser(userName);
             response.getWriter().println(cart.getItemsInCart().size());
         }
+
+        if (action.equalsIgnoreCase("checkout"))
+        {
+            HttpSession userSession = request.getSession();
+
+            User user = (User)userSession.getAttribute("user");
+            Cart userCart = user.getUserCart();
+
+
+
+
+        }
     }
 
     @Override

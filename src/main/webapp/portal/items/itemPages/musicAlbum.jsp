@@ -42,6 +42,10 @@
             <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${picture.objectId}"/>
         </div>
 
+
+
+
+
         <div id="infoDiv" style="float: right; margin-left : 5px; border : 1px solid blue;">
 
             <table>
