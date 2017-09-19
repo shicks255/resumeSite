@@ -1,9 +1,6 @@
 package com.steven.hicks.entities.store;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class OrderPayment
@@ -12,6 +9,8 @@ public class OrderPayment
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int objectId;
 
+    @Embedded
+    public OrderPaymentBehavior m_orderPaymentBehavior;
 
 
 
