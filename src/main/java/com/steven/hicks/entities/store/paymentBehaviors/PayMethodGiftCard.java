@@ -1,4 +1,4 @@
-package com.steven.hicks.entities.store.PaymentBehaviors;
+package com.steven.hicks.entities.store.paymentBehaviors;
 
 import com.steven.hicks.entities.store.OrderPaymentBehavior;
 
