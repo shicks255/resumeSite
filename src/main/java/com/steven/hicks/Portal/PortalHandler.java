@@ -10,6 +10,8 @@ import com.steven.hicks.entities.UserAvatar;
 import com.steven.hicks.entities.store.Cart;
 import com.steven.hicks.entities.store.CartItem;
 import com.steven.hicks.entities.store.StoreItemPicture;
+import com.steven.hicks.entities.store.ordering.StoreOrder;
+import com.steven.hicks.entities.store.ordering.OrderedItem;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
@@ -170,9 +172,28 @@ public class PortalHandler extends HttpServlet
             User user = (User)userSession.getAttribute("user");
             Cart userCart = user.getUserCart();
 
+            Session session = HibernateUtil.sessionFactory.openSession();
+
+            StoreOrder order = new StoreOrder(user.getUserName());
+            session.save(order);
 
 
+            List<OrderedItem> orderedItems = new ArrayList<>();
 
+            for (CartItem item : userCart.getItemsInCart())
+            {
+                OrderedItem orderedItem = new OrderedItem();
+                orderedItem.setItemNumber(item.getStoreItem().getItemNumber());
+                orderedItem.setQuantity(item.getQuantity());
+                orderedItem.setOrder(order);
+
+                orderedItems.add(orderedItem);
+            }
+
+            session.delete(order);
+            session.close();
+
+            response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
         }
     }
 

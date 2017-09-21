@@ -1,4 +1,4 @@
-package com.steven.hicks.entities.store;
+package com.steven.hicks.entities.store.ordering;
 
 import com.steven.hicks.Utilities.HibernateUtil;
 import org.hibernate.Session;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Order
+public class StoreOrder
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,7 +19,7 @@ public class Order
     private String userName = "";
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private List<CartItem> itemsFromOrder = new ArrayList<>();
+    private List<OrderedItem> itemsFromOrder = new ArrayList<>();
 
     @Column
     private LocalDateTime orderTimeStamp;
@@ -27,10 +27,17 @@ public class Order
     @Column
     private int orderPaymentObjectId;
 
+    public StoreOrder() {}
+
+    public StoreOrder(String userName)
+    {
+        this.userName = userName;
+    }
+
     @Override
     public String toString()
     {
-        return "Order{" +
+        return "StoreOrder{" +
                 "objectId=" + objectId +
                 ", userName='" + userName + '\'' +
                 ", orderTimeStamp=" + orderTimeStamp +
@@ -43,7 +50,7 @@ public class Order
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order order = (Order) o;
+        StoreOrder order = (StoreOrder) o;
 
         return objectId == order.objectId;
     }
@@ -54,10 +61,10 @@ public class Order
         return objectId;
     }
 
-    public static Order getOrderById(int objectId)
+    public static StoreOrder getOrderById(int objectId)
     {
         Session session = HibernateUtil.sessionFactory.openSession();
-        Order order = session.get(Order.class, objectId);
+        StoreOrder order = session.get(StoreOrder.class, objectId);
         return order;
     }
 
@@ -81,12 +88,12 @@ public class Order
         this.userName = userName;
     }
 
-    public List<CartItem> getItemsFromOrder()
+    public List<OrderedItem> getItemsFromOrder()
     {
         return itemsFromOrder;
     }
 
-    public void setItemsFromOrder(List<CartItem> itemsFromOrder)
+    public void setItemsFromOrder(List<OrderedItem> itemsFromOrder)
     {
         this.itemsFromOrder = itemsFromOrder;
     }

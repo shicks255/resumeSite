@@ -1,6 +1,6 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
-import com.steven.hicks.entities.store.OrderPaymentBehavior;
+import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 
 public class PayMethodCreditCard extends OrderPaymentBehavior
 {

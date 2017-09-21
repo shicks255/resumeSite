@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 public class CartItem
 {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int objectId;
