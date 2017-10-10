@@ -14,6 +14,7 @@ import com.steven.hicks.entities.store.ordering.StoreOrder;
 import com.steven.hicks.entities.store.ordering.OrderedItem;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import sun.security.x509.RDN;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -172,37 +173,40 @@ public class PortalHandler extends HttpServlet
             User user = (User)userSession.getAttribute("user");
             Cart userCart = user.getUserCart();
 
-            Session session = HibernateUtil.sessionFactory.openSession();
-
-            StoreOrder order = new StoreOrder(user.getUserName());
-            session.save(order);
+            request.setAttribute("cart", userCart);
 
 
-            List<OrderedItem> orderedItems = new ArrayList<>();
-
-            for (CartItem item : userCart.getItemsInCart())
-            {
-                OrderedItem orderedItem = new OrderedItem();
-                orderedItem.setItemNumber(item.getStoreItem().getItemNumber());
-                orderedItem.setQuantity(item.getQuantity());
-                orderedItem.setOrder(order);
-
-                orderedItems.add(orderedItem);
-            }
-
-            order.setItemsFromOrder(orderedItems);
-
-            session.delete(order);
-            session.close();
-
-            response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
-
-            response.sendRedirect(getServletContext().getContextPath() + "/portal/orderCheckout");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/checkout.jsp");
+            dispatcher.forward(request, response);
+//            Session session = HibernateUtil.sessionFactory.openSession();
+//
+//            StoreOrder order = new StoreOrder(user.getUserName());
+//            session.save(order);
+//
+//            List<OrderedItem> orderedItems = new ArrayList<>();
+//
+//            for (CartItem item : userCart.getItemsInCart())
+//            {
+//                OrderedItem orderedItem = new OrderedItem();
+//                orderedItem.setItemNumber(item.getStoreItem().getItemNumber());
+//                orderedItem.setQuantity(item.getQuantity());
+//                orderedItem.setOrder(order);
+//
+//                orderedItems.add(orderedItem);
+//            }
+//
+//            order.setItemsFromOrder(orderedItems);
+//
+//            session.delete(order);
+//            session.close();
+//
+//            response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
+//
+//            response.sendRedirect(getServletContext().getContextPath() + "/portal/orderCheckout");
         }
 
         if (action.equalsIgnoreCase("orderCheckout"))
         {
-
 
         }
     }
