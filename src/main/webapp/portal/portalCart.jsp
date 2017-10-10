@@ -69,7 +69,7 @@
 
     function checkout()
     {
-        $.post( '${pageContext.request.contextPath}/portal?action=checkout');
+        window.location = '${pageContext.request.contextPath}/portal?action=checkout';
     }
 
 </script>
