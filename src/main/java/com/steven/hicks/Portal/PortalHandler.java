@@ -190,10 +190,20 @@ public class PortalHandler extends HttpServlet
                 orderedItems.add(orderedItem);
             }
 
+            order.setItemsFromOrder(orderedItems);
+
             session.delete(order);
             session.close();
 
             response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
+
+            response.sendRedirect(getServletContext().getContextPath() + "/portal/orderCheckout");
+        }
+
+        if (action.equalsIgnoreCase("orderCheckout"))
+        {
+
+
         }
     }
 

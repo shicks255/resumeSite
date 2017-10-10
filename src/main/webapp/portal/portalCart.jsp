@@ -22,7 +22,6 @@
     function updateQty(itemObjectId)
     {
         showWaitingPopup('Updating quantity');
-//        $( '#updateQtyBtn' ).blur();
         var itemGetter = '#qty_' + itemObjectId;
         var qty = $( itemGetter ).val();
 
@@ -71,7 +70,6 @@
     function checkout()
     {
         $.post( '${pageContext.request.contextPath}/portal?action=checkout');
-
     }
 
 </script>

@@ -27,6 +27,7 @@ public class StoreOrder
     @Column
     private int orderPaymentObjectId;
 
+//    --------Constructors
     public StoreOrder() {}
 
     public StoreOrder(String userName)
@@ -68,6 +69,8 @@ public class StoreOrder
         return order;
     }
 
+
+//    ---------Getters & Setters
     public int getObjectId()
     {
         return objectId;

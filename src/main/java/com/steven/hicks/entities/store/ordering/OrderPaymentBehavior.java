@@ -15,6 +15,8 @@ public abstract class OrderPaymentBehavior
     public abstract String pay();
 
 
+
+    //----------Getters & Setters
     public String getPaymentType()
     {
         return paymentType;
