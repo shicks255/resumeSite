@@ -2,7 +2,7 @@ package com.steven.hicks.entities.store.ordering;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 public class OrderPayment
 {
     @Id
@@ -14,7 +14,10 @@ public class OrderPayment
 
     @Column
     @Embedded
-    private OrderPaymentBehavior paymentBehavior;
+    private OrderPaymentBehaviorNew paymentBehavior;
+
+    @Column
+    private String paymentBehaviorType = "";
 
     @Override
     public boolean equals(Object o)
@@ -62,13 +65,23 @@ public class OrderPayment
         this.objectId = objectId;
     }
 
-    public OrderPaymentBehavior getPaymentBehavior()
+    public OrderPaymentBehaviorNew getPaymentBehavior()
     {
         return paymentBehavior;
     }
 
-    public void setPaymentBehavior(OrderPaymentBehavior paymentBehavior)
+    public void setPaymentBehavior(OrderPaymentBehaviorNew paymentBehavior)
     {
         this.paymentBehavior = paymentBehavior;
+    }
+
+    public String getPaymentBehaviorType()
+    {
+        return paymentBehaviorType;
+    }
+
+    public void setPaymentBehaviorType(String paymentBehaviorType)
+    {
+        this.paymentBehaviorType = paymentBehaviorType;
     }
 }

@@ -51,7 +51,8 @@
 
     function doCheckout()
     {
-        window.location = '${pageContext.request.contextPath}/portal?action=orderCheckout';
+        var paymentType = $( '#paymentMethodSelect' ).val();
+        window.location = '${pageContext.request.contextPath}/portal?action=orderCheckout&paymentType=' + paymentType;
     }
 
 </script>

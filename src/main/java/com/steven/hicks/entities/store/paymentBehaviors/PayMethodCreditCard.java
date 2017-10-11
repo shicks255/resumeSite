@@ -1,19 +1,24 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
-import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
+import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
+import com.steven.hicks.entities.store.ordering.StoreOrder;
 
 import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("CreditCard")
-public class PayMethodCreditCard extends OrderPaymentBehavior
+public class PayMethodCreditCard implements OrderPaymentBehaviorNew
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int objectId;
 
+    @OneToOne
+    @JoinColumn
+    private StoreOrder order;
+
     @Column
-    private long creditCardNumber;
+    private String creditCardNumber = "";
 
     @Column
     private String expirationDate = "";
@@ -27,11 +32,9 @@ public class PayMethodCreditCard extends OrderPaymentBehavior
     @Column
     private int cardTypeCode;
 
-    public String pay()
+    public void pay()
     {
         System.out.println("you have paid with a credit card");
-
-        return "You have paid with a credit card.";
     }
 
 
@@ -57,12 +60,22 @@ public class PayMethodCreditCard extends OrderPaymentBehavior
         this.objectId = objectId;
     }
 
-    public long getCreditCardNumber()
+    public StoreOrder getOrder()
+    {
+        return order;
+    }
+
+    public void setOrder(StoreOrder order)
+    {
+        this.order = order;
+    }
+
+    public String getCreditCardNumber()
     {
         return creditCardNumber;
     }
 
-    public void setCreditCardNumber(long creditCardNumber)
+    public void setCreditCardNumber(String creditCardNumber)
     {
         this.creditCardNumber = creditCardNumber;
     }

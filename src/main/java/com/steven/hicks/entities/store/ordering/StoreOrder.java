@@ -21,9 +21,11 @@ public class StoreOrder
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderedItem> itemsFromOrder = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn
-    private OrderPayment orderPayment;
+    @Embedded
+    private OrderPaymentBehaviorNew orderPaymentBehavior;
+
+    @Column
+    private String orderPaymentType = "";
 
     @Column
     private LocalDateTime orderTimeStamp;
@@ -112,13 +114,23 @@ public class StoreOrder
         this.orderTimeStamp = orderTimeStamp;
     }
 
-    public OrderPayment getOrderPayment()
+    public OrderPaymentBehaviorNew getOrderPaymentBehavior()
     {
-        return orderPayment;
+        return orderPaymentBehavior;
     }
 
-    public void setOrderPayment(OrderPayment orderPayment)
+    public void setOrderPaymentBehavior(OrderPaymentBehaviorNew orderPaymentBehavior)
     {
-        this.orderPayment = orderPayment;
+        this.orderPaymentBehavior = orderPaymentBehavior;
+    }
+
+    public String getOrderPaymentType()
+    {
+        return orderPaymentType;
+    }
+
+    public void setOrderPaymentType(String orderPaymentType)
+    {
+        this.orderPaymentType = orderPaymentType;
     }
 }

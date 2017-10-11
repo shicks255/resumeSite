@@ -10,11 +10,8 @@ import com.steven.hicks.entities.UserAvatar;
 import com.steven.hicks.entities.store.Cart;
 import com.steven.hicks.entities.store.CartItem;
 import com.steven.hicks.entities.store.StoreItemPicture;
-import com.steven.hicks.entities.store.ordering.OrderPayment;
-import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
-import com.steven.hicks.entities.store.ordering.StoreOrder;
-import com.steven.hicks.entities.store.ordering.OrderedItem;
-import com.steven.hicks.entities.store.paymentBehaviors.PayMethodCreditCard;
+import com.steven.hicks.entities.store.ordering.*;
+import com.steven.hicks.entities.store.paymentBehaviors.*;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import sun.security.x509.RDN;
@@ -233,14 +230,35 @@ public class PortalHandler extends HttpServlet
 
             order.setItemsFromOrder(orderedItems);
 
-            OrderPayment payment = new OrderPayment();
-            payment.setStoreOrder(order);
+            OrderPaymentBehaviorNew paymentBehavior = null;
 
-            order.setOrderPayment(payment);
+            String paymentType = request.getParameter("paymentType");
+            if (paymentType.length() > 0)
+            {
+                if (paymentType.equalsIgnoreCase("CREDIT"))
+                {
+                    paymentBehavior = PaymentLogic.makeCreditCardPayment(request);
+                }
+                if (paymentType.equalsIgnoreCase("CHECK"))
+                {
+                    paymentBehavior = PaymentLogic.makeCheckPayment(request);
+                }
+                if (paymentType.equalsIgnoreCase("GIFT_CARD"))
+                {
+                    paymentBehavior = PaymentLogic.makeGiftCardPayment(request);
+                }
+                if (paymentType.equalsIgnoreCase("PAYPAL"))
+                {
+                    paymentBehavior = PaymentLogic.makePayPalPayment(request);
+                }
+                if (paymentType.equalsIgnoreCase("BITCOIN"))
+                {
+                    paymentBehavior = PaymentLogic.makeBitCoinPayment(request);
+                }
 
-
-            OrderPaymentBehavior paymentBehavior = new PayMethodCreditCard();
-
+                order.setOrderPaymentType(paymentType);
+                order.setOrderPaymentBehavior(paymentBehavior);
+            }
 
 
             session.delete(order);

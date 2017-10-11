@@ -1,25 +1,26 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
+import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("Paypal")
-public class PayMethodPayPal extends OrderPaymentBehavior
+public class PayMethodPayPal implements OrderPaymentBehaviorNew
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int objectId;
+
     @Column
     public String paypalUserName = "";
 
     @Column
     public String paypalPassword = "";
 
-    public String pay()
+    public void pay()
     {
         System.out.println("you have paid with paypal");
-
-        return "You have paid with paypal";
     }
 }

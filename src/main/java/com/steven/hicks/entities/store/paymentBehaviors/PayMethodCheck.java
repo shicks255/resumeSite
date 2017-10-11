@@ -1,24 +1,26 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
+import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("check")
-public class PayMethodCheck extends OrderPaymentBehavior
+public class PayMethodCheck implements OrderPaymentBehaviorNew
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int objectId;
+
+
 
     @Column
     public String routingNumber;
 
 
-    public String pay()
+    public void pay()
     {
         System.out.println("you have paid with a check");
-
-        return "You have paid with a check";
     }
 }
