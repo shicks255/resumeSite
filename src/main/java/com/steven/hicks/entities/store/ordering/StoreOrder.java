@@ -21,11 +21,12 @@ public class StoreOrder
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderedItem> itemsFromOrder = new ArrayList<>();
 
-    @Column
-    private LocalDateTime orderTimeStamp;
+    @OneToOne
+    @JoinColumn
+    private OrderPayment orderPayment;
 
     @Column
-    private int orderPaymentObjectId;
+    private LocalDateTime orderTimeStamp;
 
 //    --------Constructors
     public StoreOrder() {}
@@ -111,13 +112,13 @@ public class StoreOrder
         this.orderTimeStamp = orderTimeStamp;
     }
 
-    public int getOrderPaymentObjectId()
+    public OrderPayment getOrderPayment()
     {
-        return orderPaymentObjectId;
+        return orderPayment;
     }
 
-    public void setOrderPaymentObjectId(int orderPaymentObjectId)
+    public void setOrderPayment(OrderPayment orderPayment)
     {
-        this.orderPaymentObjectId = orderPaymentObjectId;
+        this.orderPayment = orderPayment;
     }
 }

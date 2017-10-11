@@ -9,7 +9,11 @@ public class OrderPayment
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long objectId;
 
+    @OneToOne (mappedBy = "orderPayment")
+    private StoreOrder storeOrder;
+
     @Column
+    @Embedded
     private OrderPaymentBehavior paymentBehavior;
 
     @Override
@@ -38,6 +42,15 @@ public class OrderPayment
                 '}';
     }
 
+    public StoreOrder getStoreOrder()
+    {
+        return storeOrder;
+    }
+
+    public void setStoreOrder(StoreOrder storeOrder)
+    {
+        this.storeOrder = storeOrder;
+    }
 
     public long getObjectId()
     {

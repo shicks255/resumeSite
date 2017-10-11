@@ -10,8 +10,11 @@ import com.steven.hicks.entities.UserAvatar;
 import com.steven.hicks.entities.store.Cart;
 import com.steven.hicks.entities.store.CartItem;
 import com.steven.hicks.entities.store.StoreItemPicture;
+import com.steven.hicks.entities.store.ordering.OrderPayment;
+import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 import com.steven.hicks.entities.store.ordering.StoreOrder;
 import com.steven.hicks.entities.store.ordering.OrderedItem;
+import com.steven.hicks.entities.store.paymentBehaviors.PayMethodCreditCard;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import sun.security.x509.RDN;
@@ -175,7 +178,6 @@ public class PortalHandler extends HttpServlet
 
             request.setAttribute("cart", userCart);
 
-
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/checkout.jsp");
             dispatcher.forward(request, response);
 //            Session session = HibernateUtil.sessionFactory.openSession();
@@ -207,7 +209,45 @@ public class PortalHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("orderCheckout"))
         {
+            HttpSession userSession = request.getSession();
 
+            User user = (User)userSession.getAttribute("user");
+            Cart userCart = user.getUserCart();
+
+            Session session = HibernateUtil.sessionFactory.openSession();
+
+            StoreOrder order = new StoreOrder(user.getUserName());
+            session.save(order);
+
+            List<OrderedItem> orderedItems = new ArrayList<>();
+
+            for (CartItem item : userCart.getItemsInCart())
+            {
+                OrderedItem orderedItem = new OrderedItem();
+                orderedItem.setItemNumber(item.getStoreItem().getItemNumber());
+                orderedItem.setQuantity(item.getQuantity());
+                orderedItem.setOrder(order);
+
+                orderedItems.add(orderedItem);
+            }
+
+            order.setItemsFromOrder(orderedItems);
+
+            OrderPayment payment = new OrderPayment();
+            payment.setStoreOrder(order);
+
+            order.setOrderPayment(payment);
+
+
+            OrderPaymentBehavior paymentBehavior = new PayMethodCreditCard();
+
+
+
+            session.delete(order);
+            session.close();
+
+//            response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
+//            response.sendRedirect(getServletContext().getContextPath() + "/portal/orderCheckout");
         }
     }
 
