@@ -14,15 +14,20 @@
 
     $(document).ready(function()
     {
+        showPaymentBox();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
     });
 
     function showPaymentBox()
     {
         var paymentType = $( '#paymentMethodSelect' ).val();
-        console.log(paymentType);
-
-//        $('label[id*="toggleExplanation"]')
-
         $( 'div[id*="_PaymentBox"]' ).each(function(i, obj)
         {
             console.log(this);
@@ -57,7 +62,7 @@
 
 </script>
 
-<div class="container">
+<div class="container" style="borer: 1px solid black">
 
 
     <h3>CHECK OUT</h3>
@@ -75,8 +80,45 @@
         <option value="BITCOIN">Bitcoin</option>
     </select>
 
-    <div id="credit_PaymentBox" style="display:none">
-        credit card
+    <div id="credit_PaymentBox" style="padding : 5px; margin: 0 auto; display:none; width: 90%;border: 1px solid black">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Dashes are optional" id="creditCardNumber" type="text" class="validate">
+                        <label for="creditCardNumber">Credit Card #</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="usually 3 or 4 digit number" id="securityCode" type="text" class="validate">
+                        <label for="securityCode">Security Code</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m4 s4 l4">
+                        <input type="text" class="datepicker" id="expirationDate">
+                        <label for="expirationDate">Expiration Date</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Name as it appears on credit card" type="text" id="cardHoldersName">
+                        <label for="cardHoldersName">Cardholder's Name:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m8 s8 l8">
+                        <label for="cardTypeCode">Card Type:</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col m4 s4 l4">
+                        <select class="browser-default" required id="cardTypeCode" name="cardTypeCode">
+                            <option value="VISA">Visa</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 

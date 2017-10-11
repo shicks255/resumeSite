@@ -163,6 +163,10 @@ label{
     background-color : transparent;
 }
 
+.input-field label{
+    color : black;
+}
+
 
 /*Media Queries*/
 @media (max-width : 480px) {
