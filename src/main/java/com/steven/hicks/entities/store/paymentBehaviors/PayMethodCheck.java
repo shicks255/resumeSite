@@ -1,14 +1,13 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
-import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
 
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("check")
-public class PayMethodCheck implements OrderPaymentBehaviorNew
+public class PayMethodCheck implements OrderPaymentBehavior
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

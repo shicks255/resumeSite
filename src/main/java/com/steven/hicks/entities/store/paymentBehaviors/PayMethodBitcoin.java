@@ -1,13 +1,13 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
-import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
+import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("BitCoin")
-public class PayMethodBitcoin implements OrderPaymentBehaviorNew
+public class PayMethodBitcoin implements OrderPaymentBehavior
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

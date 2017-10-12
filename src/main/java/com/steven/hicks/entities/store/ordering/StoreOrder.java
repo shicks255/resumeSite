@@ -22,7 +22,7 @@ public class StoreOrder
     private List<OrderedItem> itemsFromOrder = new ArrayList<>();
 
     @Embedded
-    private OrderPaymentBehaviorNew orderPaymentBehavior;
+    private OrderPaymentBehavior orderPaymentBehavior;
 
     @Column
     private String orderPaymentType = "";
@@ -114,12 +114,12 @@ public class StoreOrder
         this.orderTimeStamp = orderTimeStamp;
     }
 
-    public OrderPaymentBehaviorNew getOrderPaymentBehavior()
+    public OrderPaymentBehavior getOrderPaymentBehavior()
     {
         return orderPaymentBehavior;
     }
 
-    public void setOrderPaymentBehavior(OrderPaymentBehaviorNew orderPaymentBehavior)
+    public void setOrderPaymentBehavior(OrderPaymentBehavior orderPaymentBehavior)
     {
         this.orderPaymentBehavior = orderPaymentBehavior;
     }

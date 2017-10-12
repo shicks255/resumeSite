@@ -11,10 +11,8 @@ import com.steven.hicks.entities.store.Cart;
 import com.steven.hicks.entities.store.CartItem;
 import com.steven.hicks.entities.store.StoreItemPicture;
 import com.steven.hicks.entities.store.ordering.*;
-import com.steven.hicks.entities.store.paymentBehaviors.*;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
-import sun.security.x509.RDN;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -203,7 +201,7 @@ public class PortalHandler extends HttpServlet
 
             order.setItemsFromOrder(orderedItems);
 
-            OrderPaymentBehaviorNew paymentBehavior = PaymentMethodFactory.buildAndReturnPaymentMethod(request);
+            OrderPaymentBehavior paymentBehavior = PaymentMethodFactory.buildAndReturnPaymentMethod(request);
             order.setOrderPaymentBehavior(paymentBehavior);
 
 //            session.delete(order);

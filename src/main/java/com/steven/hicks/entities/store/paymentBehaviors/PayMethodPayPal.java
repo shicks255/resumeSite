@@ -1,14 +1,13 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
-import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
 
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("Paypal")
-public class PayMethodPayPal implements OrderPaymentBehaviorNew
+public class PayMethodPayPal implements OrderPaymentBehavior
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

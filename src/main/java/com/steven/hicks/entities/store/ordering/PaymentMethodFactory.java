@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 public class PaymentMethodFactory
 {
-    public static OrderPaymentBehaviorNew buildAndReturnPaymentMethod(HttpServletRequest request)
+    public static OrderPaymentBehavior buildAndReturnPaymentMethod(HttpServletRequest request)
     {
-        OrderPaymentBehaviorNew paymentBehavior = null;
+        OrderPaymentBehavior paymentBehavior = null;
         String paymentType = request.getParameter("paymentType");
 
         if (paymentType.length() > 0)

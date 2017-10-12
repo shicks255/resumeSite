@@ -14,7 +14,7 @@ public class OrderPayment
 
     @Column
     @Embedded
-    private OrderPaymentBehaviorNew paymentBehavior;
+    private OrderPaymentBehavior paymentBehavior;
 
     @Column
     private String paymentBehaviorType = "";
@@ -65,12 +65,12 @@ public class OrderPayment
         this.objectId = objectId;
     }
 
-    public OrderPaymentBehaviorNew getPaymentBehavior()
+    public OrderPaymentBehavior getPaymentBehavior()
     {
         return paymentBehavior;
     }
 
-    public void setPaymentBehavior(OrderPaymentBehaviorNew paymentBehavior)
+    public void setPaymentBehavior(OrderPaymentBehavior paymentBehavior)
     {
         this.paymentBehavior = paymentBehavior;
     }

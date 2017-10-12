@@ -1,26 +1,16 @@
 package com.steven.hicks.entities.store.ordering;
 
-import javax.persistence.*;
+
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Embeddable;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.servlet.http.HttpServletRequest;
 
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn()
 @Embeddable
-public abstract class OrderPaymentBehavior
+public interface OrderPaymentBehavior
 {
-    @Column
-    public String paymentType;
-
-    public abstract String pay();
-
-    //----------Getters & Setters
-
-    public String getPaymentType()
-    {
-        return paymentType;
-    }
-
-    public void setPaymentType(String paymentType)
-    {
-        this.paymentType = paymentType;
-    }
+    void pay();
 }
