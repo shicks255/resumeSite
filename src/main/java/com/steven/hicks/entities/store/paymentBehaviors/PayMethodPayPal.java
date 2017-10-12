@@ -4,6 +4,7 @@ import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("Paypal")
@@ -23,4 +24,12 @@ public class PayMethodPayPal implements OrderPaymentBehaviorNew
     {
         System.out.println("you have paid with paypal");
     }
+
+    public PayMethodPayPal() {}
+
+    public PayMethodPayPal(HttpServletRequest request)
+    {
+
+    }
+
 }

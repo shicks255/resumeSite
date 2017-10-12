@@ -4,6 +4,7 @@ import com.steven.hicks.entities.store.ordering.OrderPaymentBehaviorNew;
 import com.steven.hicks.entities.store.ordering.StoreOrder;
 
 import javax.persistence.*;
+import javax.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("CreditCard")
@@ -50,6 +51,21 @@ public class PayMethodCreditCard implements OrderPaymentBehaviorNew
                 '}';
     }
 
+    public PayMethodCreditCard()
+    {}
+
+//    --------*BUILD*--------
+    public PayMethodCreditCard(HttpServletRequest request)
+    {
+        String creditCardNumber = request.getParameter("creditCardNumber");
+        int securityCode = Integer.valueOf(request.getParameter("securityCode"));
+        String date = request.getParameter("expirationDate");
+        String cardHoldersName = request.getParameter("cardHoldersName");
+        String cardTypeCode = request.getParameter("cardTypeCode");
+    }
+
+
+//    --------Getters & Setters
     public int getObjectId()
     {
         return objectId;

@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="cart" type="com.steven.hicks.entities.store.Cart"  scope="request"/>
+<jsp:useBean id="creditCards" type="java.util.List<com.steven.hicks.entities.store.ordering.CreditCardTypes>" scope="request"/>
 <%--<jsp:useBean id="cartItems" type="java.util.List<com.steven.hicks.entities.store.CartItem>" scope="request"/>--%>
 <%--<jsp:useBean id="storeItems" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="request"/>--%>
 <%--<jsp:useBean id="itemPictures" type="java.util.List<com.steven.hicks.entities.store.StoreItemPicture>" scope="request"/>--%>
@@ -57,14 +58,14 @@
     function doCheckout()
     {
         var paymentType = $( '#paymentMethodSelect' ).val();
-        window.location = '${pageContext.request.contextPath}/portal?action=orderCheckout&paymentType=' + paymentType;
+        $( '#paymentType' ).val(paymentType);
+        $( '#frmStartCheckout' ).submit();
+        <%--window.location = '${pageContext.request.contextPath}/portal?action=orderCheckout&paymentType=' + paymentType;--%>
     }
 
 </script>
 
 <div class="container" style="borer: 1px solid black">
-
-
     <h3>CHECK OUT</h3>
 
     <button style="display:inline-block" class="btn waves-effect waves-light" id="checkoutBtn" onclick="doCheckout();">Checkout</button>
@@ -80,67 +81,75 @@
         <option value="BITCOIN">Bitcoin</option>
     </select>
 
-    <div id="credit_PaymentBox" style="padding : 5px; margin: 0 auto; display:none; width: 90%;border: 1px solid black">
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Dashes are optional" id="creditCardNumber" type="text" class="validate">
-                        <label for="creditCardNumber">Credit Card #</label>
+    <form name="frmStartCheckout" id="frmStartCheckout" method="post" action="${pageContext.request.contextPath}/portal?action=orderCheckout">
+        <input type="hidden" value="" name="paymentType" id="paymentType"/>
+
+        <div id="credit_PaymentBox" style="padding : 5px; margin: 0 auto; display:none; width: 90%;border: 1px solid black">
+            <div class="row">
+                <%--<form class="col s12">--%>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Dashes are optional" name="creditCardNumber" id="creditCardNumber" type="text" class="validate">
+                            <label for="creditCardNumber">Credit Card #</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="usually 3 or 4 digit number" name="securityCode" id="securityCode" type="text" class="validate">
+                            <label for="securityCode">Security Code</label>
+                        </div>
                     </div>
-                    <div class="input-field col s6">
-                        <input placeholder="usually 3 or 4 digit number" id="securityCode" type="text" class="validate">
-                        <label for="securityCode">Security Code</label>
+                    <div class="row">
+                        <div class="input-field col m4 s4 l4">
+                            <input type="text" class="datepicker" name="expirationDate" id="expirationDate">
+                            <label for="expirationDate">Expiration Date</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col m4 s4 l4">
-                        <input type="text" class="datepicker" id="expirationDate">
-                        <label for="expirationDate">Expiration Date</label>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Name as it appears on credit card" type="text" name="cardHoldersName" id="cardHoldersName">
+                            <label for="cardHoldersName">Cardholder's Name:</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Name as it appears on credit card" type="text" id="cardHoldersName">
-                        <label for="cardHoldersName">Cardholder's Name:</label>
+                    <div class="row">
+                        <div class="input-field col m8 s8 l8">
+                            <label for="cardTypeCode">Card Type:</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col m8 s8 l8">
-                        <label for="cardTypeCode">Card Type:</label>
+
+                    <div class="row">
+                        <div class="input-field col m4 s4 l4">
+                            <input placeholder="Select your credit card" name="cardTypeCode" id="cardTypeCode" type="text" list="creditCardTypes">
+                            <datalist id="creditCardTypes">
+                                <c:forEach var="creditCardType" items="${creditCards}">
+                                <option value="${creditCardType}">
+                                    </c:forEach>
+                            </datalist>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col m4 s4 l4">
-                        <select class="browser-default" required id="cardTypeCode" name="cardTypeCode">
-                            <option value="VISA">Visa</option>
-                        </select>
-                    </div>
-                </div>
-            </form>
+                <%--</form>--%>
+            </div>
         </div>
-    </div>
 
 
-    <div id="check_PaymentBox" style="display:none">
-        check
-    </div>
+        <div id="check_PaymentBox" style="display:none">
+            check
+        </div>
 
 
-    <div id="giftCard_PaymentBox" style="display:none">
-        gift card
-    </div>
+        <div id="giftCard_PaymentBox" style="display:none">
+            gift card
+        </div>
 
 
-    <div id="paypal_PaymentBox" style="display:none">
-        paypal
-    </div>
+        <div id="paypal_PaymentBox" style="display:none">
+            paypal
+        </div>
 
 
-    <div id="bitcoin_PaymentBox" style="display:none">
-        bitcoin
-    </div>
+        <div id="bitcoin_PaymentBox" style="display:none">
+            bitcoin
+        </div>
 
+    </form>
 </div>
 
 <jsp:include page="/_pageSections/portalFooter.jsp" />

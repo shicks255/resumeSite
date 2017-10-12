@@ -27,10 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet (urlPatterns = "/portal")
 @ServletSecurity(value = @HttpConstraint(rolesAllowed = {"user", "admin"} ))
@@ -174,34 +171,10 @@ public class PortalHandler extends HttpServlet
             Cart userCart = user.getUserCart();
 
             request.setAttribute("cart", userCart);
+            request.setAttribute("creditCards", Arrays.asList(CreditCardTypes.values()));
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/checkout.jsp");
             dispatcher.forward(request, response);
-//            Session session = HibernateUtil.sessionFactory.openSession();
-//
-//            StoreOrder order = new StoreOrder(user.getUserName());
-//            session.save(order);
-//
-//            List<OrderedItem> orderedItems = new ArrayList<>();
-//
-//            for (CartItem item : userCart.getItemsInCart())
-//            {
-//                OrderedItem orderedItem = new OrderedItem();
-//                orderedItem.setItemNumber(item.getStoreItem().getItemNumber());
-//                orderedItem.setQuantity(item.getQuantity());
-//                orderedItem.setOrder(order);
-//
-//                orderedItems.add(orderedItem);
-//            }
-//
-//            order.setItemsFromOrder(orderedItems);
-//
-//            session.delete(order);
-//            session.close();
-//
-//            response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
-//
-//            response.sendRedirect(getServletContext().getContextPath() + "/portal/orderCheckout");
         }
 
         if (action.equalsIgnoreCase("orderCheckout"))
@@ -230,39 +203,11 @@ public class PortalHandler extends HttpServlet
 
             order.setItemsFromOrder(orderedItems);
 
-            OrderPaymentBehaviorNew paymentBehavior = null;
+            OrderPaymentBehaviorNew paymentBehavior = PaymentMethodFactory.buildAndReturnPaymentMethod(request);
+            order.setOrderPaymentBehavior(paymentBehavior);
 
-            String paymentType = request.getParameter("paymentType");
-            if (paymentType.length() > 0)
-            {
-                if (paymentType.equalsIgnoreCase("CREDIT"))
-                {
-                    paymentBehavior = PaymentLogic.makeCreditCardPayment(request);
-                }
-                if (paymentType.equalsIgnoreCase("CHECK"))
-                {
-                    paymentBehavior = PaymentLogic.makeCheckPayment(request);
-                }
-                if (paymentType.equalsIgnoreCase("GIFT_CARD"))
-                {
-                    paymentBehavior = PaymentLogic.makeGiftCardPayment(request);
-                }
-                if (paymentType.equalsIgnoreCase("PAYPAL"))
-                {
-                    paymentBehavior = PaymentLogic.makePayPalPayment(request);
-                }
-                if (paymentType.equalsIgnoreCase("BITCOIN"))
-                {
-                    paymentBehavior = PaymentLogic.makeBitCoinPayment(request);
-                }
-
-                order.setOrderPaymentType(paymentType);
-                order.setOrderPaymentBehavior(paymentBehavior);
-            }
-
-
-            session.delete(order);
-            session.close();
+//            session.delete(order);
+//            session.close();
 
 //            response.sendRedirect(getServletContext().getContextPath() + "/portal/portalCart");
 //            response.sendRedirect(getServletContext().getContextPath() + "/portal/orderCheckout");
