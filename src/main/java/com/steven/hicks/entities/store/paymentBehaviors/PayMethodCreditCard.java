@@ -31,7 +31,7 @@ public class PayMethodCreditCard implements OrderPaymentBehaviorNew
     private String cardHoldersName = "";
 
     @Column
-    private int cardTypeCode;
+    private String cardTypeCode;
 
     public void pay()
     {
@@ -62,6 +62,12 @@ public class PayMethodCreditCard implements OrderPaymentBehaviorNew
         String date = request.getParameter("expirationDate");
         String cardHoldersName = request.getParameter("cardHoldersName");
         String cardTypeCode = request.getParameter("cardTypeCode");
+
+        this.creditCardNumber = creditCardNumber;
+        this.secCode = securityCode;
+        this.expirationDate = date;
+        this.cardHoldersName = cardHoldersName;
+        this.cardTypeCode = cardTypeCode;
     }
 
 
@@ -126,12 +132,12 @@ public class PayMethodCreditCard implements OrderPaymentBehaviorNew
         this.cardHoldersName = cardHoldersName;
     }
 
-    public int getCardTypeCode()
+    public String getCardTypeCode()
     {
         return cardTypeCode;
     }
 
-    public void setCardTypeCode(int cardTypeCode)
+    public void setCardTypeCode(String cardTypeCode)
     {
         this.cardTypeCode = cardTypeCode;
     }
