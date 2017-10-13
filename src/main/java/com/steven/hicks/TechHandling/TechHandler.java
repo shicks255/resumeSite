@@ -121,11 +121,6 @@ public class TechHandler extends HttpServlet
         {
             String artistSearchName = request.getParameter("artistSearchField");
 
-            if (artistSearchName.length() == 0)
-            {
-                CommonUtils.setInfoMessage(request, "No search terms were entered", "");
-            }
-
             if (artistSearchName.length() > 0)
             {
                 List<MusicArtist> musicArtists = Collections.emptyList();
