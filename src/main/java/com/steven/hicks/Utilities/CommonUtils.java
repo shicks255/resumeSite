@@ -111,5 +111,10 @@ public final class CommonUtils
         return mimetype;
     }
 
+    public static void setInfoMessage(HttpServletRequest request, String message, String dialogTitle)
+    {
+        if (message != null && message.length() > 0)
+            request.setAttribute("infoMessage", message);
+    }
 
 }

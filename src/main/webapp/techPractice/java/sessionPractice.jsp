@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/WEB-INF/taglib.tld" prefix="sh" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="accessCount" type="java.lang.String" scope="request"/>
@@ -24,6 +25,20 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 <br/>
+
+<sh:bredcrumbTag servletContext="${pageContext.request.servletPath}"/>
+
+<%--<nav>--%>
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <a href="#!" class="breadcrumb">First</a>
+            <a href="#!" class="breadcrumb">Second</a>
+            <a href="#!" class="breadcrumb">Third</a>
+        </div>
+    </div>
+<%--</nav>--%>
+
+<
 
 <div class="container">
     <h1>Session Tracking Practice</h1>

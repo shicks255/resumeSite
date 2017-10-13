@@ -5,17 +5,22 @@ package com.steven.hicks.TechHandling;
 import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
+import com.sun.xml.internal.stream.buffer.XMLStreamBuffer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -42,37 +47,22 @@ public class TechLogic
         return accessCount;
     }
 
-    public static List<Album> searchForAlbums(HttpServletRequest request, String albumSearch)
+    public static List<Album> getAlbumsFromMethodCall(BufferedReader in)
     {
-        List<Album> searchResults = Collections.emptyList();
-
-//        String URLAddress = " http://ws.audioscrobbler.com/2.0/?method=album.search&album=believe&api_key=YOUR_API_KEY "
-        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=album.search&album=" + albumSearch + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml";
+        List<Album> searchResults = new ArrayList<>();
         String inputString = null;
-        List<Album> albums = new ArrayList<>();
+        Map<Integer, String> mapOfArtists = new HashMap<>();
+        boolean startAlbumTag = false;
+        boolean stopAlbumTag = false;
+        String artistName = "";
+        String urll = "";
+        String albumName = "";
+        Album album = new Album();
 
         try
         {
-            URL url = new URL(URLAddress);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
-
-            Map<Integer, String> mapOfMusicArtists = new HashMap<>();
-
-            boolean startAlbumTag = false;
-            boolean stopAlbumTag = false;
-            String artistName = "";
-            String urll = "";
-            String albumName = "";
-            Album album = new Album();
-
             while ((inputString = in.readLine()) != null)
             {
-
                 if (inputString.contains("<album>"))
                 {
                     startAlbumTag = true;
@@ -86,6 +76,7 @@ public class TechLogic
 
                 if (startAlbumTag)
                 {
+                    album = new Album();
 
                     if (inputString.contains("<artist>") && inputString.contains("</artist>"))
                     {
@@ -102,10 +93,9 @@ public class TechLogic
 
                 if (stopAlbumTag)
                 {
-                    album = new Album();
                     album.setArtist(artistName);
                     album.setAlbum(albumName);
-                    albums.add(album);
+                    searchResults.add(album);
                 }
             }
             in.close();
@@ -115,37 +105,50 @@ public class TechLogic
             e.printStackTrace();
         }
 
-        return albums;
-
+        return searchResults;
     }
 
-    public static List<MusicArtist> searchForArtists(HttpServletRequest request, String artistSearch)
+    public static List<Album> searchForAlbums(HttpServletRequest request, String albumSearch) throws Exception
     {
-        List<MusicArtist> searchResults = Collections.emptyList();
+        List<Album> searchResults = Collections.emptyList();
 
-        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + artistSearch + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml&callback=?";
+        albumSearch = albumSearch.replace(" ", "%20");
+
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=album.search&album=" + albumSearch + "&api_key=c349ab1fcb6b132ffb8d842e982458db&page=1&limit=10&format=xml";
         String inputString = null;
-        List<MusicArtist> musicArtists = new ArrayList<>();
+        List<Album> albums = new ArrayList<>();
+
+        URL url = null;
+        url = new URL(URLAddress);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader in = null;
+        in = new BufferedReader(new InputStreamReader(
+                connection.getInputStream()));
+
+        searchResults = getAlbumsFromMethodCall(in);
+
+        return searchResults;
+    }
+
+    public static List<MusicArtist> getArtistsFromMethodCall(BufferedReader in)
+    {
+        String inputString = null;
+        List<MusicArtist> searchResults = new ArrayList<>();
+
+        Map<Integer, String> mapOfMusicArtists = new HashMap<>();
+
+        boolean startArtistTag = false;
+        boolean stopArtistTag = false;
+        String artistName = "";
+        String urll = "";
+        String imageUrl = "";
+        MusicArtist musicArtist = new MusicArtist();
 
         try
         {
-            URL url = new URL(URLAddress);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    connection.getInputStream()));
-
-            Map<Integer, String> mapOfMusicArtists = new HashMap<>();
-
-            boolean startArtistTag = false;
-            boolean stopArtistTag = false;
-            String artistName = "";
-            String urll = "";
-            String imageUrl = "";
-            MusicArtist musicArtist = new MusicArtist();
-
             while ((inputString = in.readLine()) != null)
             {
 
@@ -162,41 +165,60 @@ public class TechLogic
 
                 if (startArtistTag)
                 {
+                    musicArtist = new MusicArtist();
 
                     if (inputString.contains("<name>") && inputString.contains("</name>"))
                     {
                         artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name>"));
-//                        musicArtist.setArtistName(artistName);
+    //                        musicArtist.setArtistName(artistName);
                     }
 
                     if (inputString.contains("<url>") && inputString.contains("</url>"))
                     {
                         urll = inputString.substring(inputString.indexOf("<url>") + 5, inputString.indexOf("</url>"));
-//                        musicArtist.setUrl(urll);
+    //                        musicArtist.setUrl(urll);
                     }
 
                     if (inputString.contains("<image>") && inputString.contains("</image>"))
                     {
                         imageUrl = inputString.substring(inputString.indexOf("<image>") + 5, inputString.indexOf("</image>"));
-//                        musicArtist.setImageURL(imageUrl);
+    //                        musicArtist.setImageURL(imageUrl);
                     }
                 }
 
                 if (stopArtistTag)
                 {
-                    musicArtist = new MusicArtist();
-
                     musicArtist.setArtistName(artistName);
                     musicArtist.setUrl(urll);
-                    musicArtists.add(musicArtist);
+                    searchResults.add(musicArtist);
                 }
             }
             in.close();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             e.printStackTrace();
         }
+
+        return searchResults;
+    }
+
+    public static List<MusicArtist> searchForArtists(HttpServletRequest request, String artistSearch) throws Exception
+    {
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=artist.search&artist=" + artistSearch + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=xml&callback=?";
+        String inputString = null;
+        List<MusicArtist> musicArtists = new ArrayList<>();
+
+        URL url = new URL(URLAddress);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(
+                connection.getInputStream()));
+
+        musicArtists = getArtistsFromMethodCall(in);
+
+        in.close();
 
         return musicArtists;
     }

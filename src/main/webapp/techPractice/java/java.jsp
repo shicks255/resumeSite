@@ -66,52 +66,18 @@
     </button>
     <br/>
 
-    <button class="btn waves-effect waves-light" onclick="">
+    <button class="btn waves-effect waves-light"
+            onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingPage';">
         Multithreading Practice
     </button>
     <br/>
 
-    <button class="btn waves-effect waves-light" onclick="">
+    <button class="btn waves-effect waves-light"
+            onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=designPatternsPage';">
         Design Patterns
     </button>
     <br/>
 
-
-
-
-
-    <button class="btn waves-effect waves-light" onclick='getSteamApi();' >List of All Steam Games</button>
-    <br/><br/>
-
-    <button class="btn waves-effect waves-light" onclick="goToSessionPage();">Session Practice</button>
-    <br/><br/>
-
-    <button class="btn waves-effect waves-light" onclick="getLastFmAPI();">Last FM Api</button>
-    <br/><br/>
-
-    <h3>Last FM API</h3>
-    <label for="artistSearchField">Search for an artist:</label>
-    <input type="text" name="artistSearchField" id="artistSearchField"/>
-    <%--<input type="button" id="artistSearchButton" onclick="searchArtist();" value="Submit" />--%>
-    <button class="btn waves-effect waves-light" onclick="searchArtist();" type="submit" name="artistSearchButton" id="artistSearchButton">
-        Submit
-        <%--<i class="material-icons right">send</i>--%>
-    </button>
-
-    <br/><br/>
-
-    <label for="albumSearchName">Search for an album:</label>
-    <input type="text" name="albumSearchName" id="albumSearchName"/>
-    <%--<input type="button" id="albumSearchButton" onclick="searchAlbum();" value="Submit" />--%>
-    <button class="btn waves-effect waves-light" onclick="searchAlbum();" type="submit" name="albumSearchButton" id="albumSearchButton">
-        Submit
-        <%--<i class="material-icons right">send</i>--%>
-    </button>
-
-    <div id="steamApiResultsBox" class="hiddenDiv">
-        <div id="steamApiResultsPopup" class="popupContent">
-        </div>
-    </div>
 
 </div>
 

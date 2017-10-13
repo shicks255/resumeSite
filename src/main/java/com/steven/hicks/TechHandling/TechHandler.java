@@ -1,5 +1,6 @@
 package com.steven.hicks.TechHandling;
 
+import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/techPractice")
@@ -72,6 +74,20 @@ public class TechHandler extends HttpServlet
             response.sendRedirect(request.getContextPath() + "/techPractice?action=sessionPractice");
         }
 
+        if (action.equalsIgnoreCase("multithreadingPage"))
+        {
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/multithreading.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("designPatternsPage"))
+        {
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/designPatterns.jsp");
+            dispatcher.forward(request, response);
+        }
+
 //        -----RESTFUL SERVICES PAGE
         if (action.equalsIgnoreCase("restfulServicesPage"))
         {
@@ -105,19 +121,43 @@ public class TechHandler extends HttpServlet
         {
             String artistSearchName = request.getParameter("artistSearchField");
 
-            request.setAttribute("musicArtist", TechLogic.searchForArtists(request, artistSearchName));
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCall.jsp");
-            dispatcher.forward(request, response);
+            if (artistSearchName.length() == 0)
+            {
+                CommonUtils.setInfoMessage(request, "No search terms were entered", "");
+            }
+
+            if (artistSearchName.length() > 0)
+            {
+                List<MusicArtist> musicArtists = Collections.emptyList();
+                try
+                {
+                    musicArtists = TechLogic.searchForArtists(request, artistSearchName);
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                request.setAttribute("musicArtist", musicArtists);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCall.jsp");
+                dispatcher.forward(request, response);
+            }
         }
 
-//        -----Album search
+//        -----Last FM Album search
         if (action.equalsIgnoreCase("albumSearch"))
         {
             String albumSearchName = request.getParameter("albumSearchName");
 
-            List<Album> albums = TechLogic.searchForAlbums(request, albumSearchName);
+            List<Album> albums = null;
+            try
+            {
+                albums = TechLogic.searchForAlbums(request, albumSearchName);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
             request.setAttribute("albums", albums);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallAlbum.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallAlbumSearchPopup.jsp");
             dispatcher.forward(request, response);
         }
 

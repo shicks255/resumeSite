@@ -107,13 +107,13 @@
             $( '#editProfileDialog' ).removeClass('popup').addClass('hiddenDiv');
         }
 
-        function showWaitingPopup(text)
+        function showWaitingPopupPortal(text)
         {
             $( '#popup-processingAction' ).removeClass('hiddenDiv').addClass('popup');
             $( '#_processing_text' ).innerHTML = text;
         }
 
-        function hideWaitingPopup()
+        function hideWaitingPopupPortal()
         {
             $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');
         }

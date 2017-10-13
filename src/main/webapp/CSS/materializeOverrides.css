@@ -30,3 +30,18 @@
 dropdown-button-mobile:hover {
     background-color: rgba(0,0,0,0.1);
 }
+
+.breadcrumb {
+    color : #ae87db;
+    font-size : 12px;
+}
+
+.breadcrumb:last-child {
+    color : #391e59
+}
+
+/*.nav-wrapper {*/
+    /*background-color : #e3f2fd;*/
+    /*height : 50px;*/
+    /*line-height : 50px;*/
+/*}*/

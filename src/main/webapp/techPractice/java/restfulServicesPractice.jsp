@@ -8,21 +8,23 @@
 
     $( document ).ready(function()
     {
-//        $( '#artistSearchField' ).keyup(function(event)
-//        {
-//            if (event.keyCode == 13)
-//            {
-//                $( '#artistSearchButton' ).click();
-//            }
-//        });
-//
-//        $( '#albumSearchName' ).keyup(function(event)
-//        {
-//            if (event.keyCode == 13)
-//            {
-//                $( '#albumSearchButton' ).click();
-//            }
-//        });
+
+        //These two functions set an event listener, so if enter is pressed while in that text field, it will submit
+        $( '#artistSearchField' ).keyup(function(event)
+        {
+            if (event.keyCode == 13)
+            {
+                $( '#artistSearchButton' ).click();
+            }
+        });
+
+        $( '#albumSearchName' ).keyup(function(event)
+        {
+            if (event.keyCode == 13)
+            {
+                $( '#albumSearchButton' ).click();
+            }
+        });
 
     });
 
@@ -53,29 +55,46 @@
     function searchArtist()
     {
         var searchTerms = $( '#artistSearchField' ).val();
-
-        $.post( '${pageContext.request.contextPath}/techPractice?&action=artistSearch&artistSearchField=' + searchTerms,
-            function(data)
-            {
-                $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-                $( '#restResultsBoxPopup' ).html(data);
-                $(window).resize();
-            }
-        );
+        if (searchTerms.length === 0)
+            showInfoMessage('No search terms were entered');
+        else
+        {
+            $.post( '${pageContext.request.contextPath}/techPractice?&action=artistSearch&artistSearchField=' + searchTerms,
+                function(data)
+                {
+                    $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                    $( '#restResultsBoxPopup' ).html(data);
+                    $(window).resize();
+                }
+            );
+        }
     }
 
     function searchAlbum()
     {
         var searchTerms = $( '#albumSearchName' ).val();
+        if (searchTerms.length === 0)
+            showInfoMessage('No search terms were entered');
+        else
+        {
+            $.post( '${pageContext.request.contextPath}/techPractice?&action=albumSearch&albumSearchName=' + searchTerms,
+                function(data)
+                {
+                    $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                    $( '#restResultsBoxPopup' ).html(data);
+                    $(window).resize();
+                }
+            );
+        }
+    }
 
-        $.post( '${pageContext.request.contextPath}/techPractice?&action=albumSearch&albumSearchName=' + searchTerms,
-            function(data)
-            {
-                $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-                $( '#restResultsBoxPopup' ).html(data);
-                $(window).resize();
-            }
-        );
+    function closeResultsPopup()
+    {
+        $( '.popup' ).each(function(i, obj){
+            $( this ).removeClass('popup').addClass('hiddenDiv');
+        });
+
+        location.reload();
     }
 
 </script>

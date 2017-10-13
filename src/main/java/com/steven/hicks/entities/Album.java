@@ -4,7 +4,6 @@ public class Album
 {
     private String artist = "";
     private String album = "";
-    private String year = "";
 
     public Album()
     {}
@@ -15,7 +14,6 @@ public class Album
         return "Album{" +
                 "artist='" + artist + '\'' +
                 ", album='" + album + '\'' +
-                ", year='" + year + '\'' +
                 '}';
     }
 
@@ -39,13 +37,4 @@ public class Album
         this.album = album;
     }
 
-    public String getYear()
-    {
-        return year;
-    }
-
-    public void setYear(String year)
-    {
-        this.year = year;
-    }
 }

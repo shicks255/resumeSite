@@ -21,14 +21,14 @@
 
     function updateQty(itemObjectId)
     {
-        showWaitingPopup('Updating quantity');
+        showWaitingPopupPortal('Updating quantity');
         var itemGetter = '#qty_' + itemObjectId;
         var qty = $( itemGetter ).val();
 
         $.post('${pageContext.request.contextPath}/portalItemHandler?action=updateCartQty&itemObjectId=' + itemObjectId +'&newQuantity=' + qty,
             function(data)
             {
-                hideWaitingPopup();
+                hideWaitingPopupPortal();
 
                 $( '#updateModal' ).modal('open');
                 updateCartTotal();
@@ -38,11 +38,11 @@
 
     function removeItem(itemObjectId)
     {
-        showWaitingPopup('Removing item');
+        showWaitingPopupPortal('Removing item');
         $.post('${pageContext.request.contextPath}/portalItemHandler?action=removeItemFromCart&itemObjectId=' + itemObjectId,
             function(data)
             {
-                hideWaitingPopup();
+                hideWaitingPopupPortal();
 
                 location.reload();
                 $( '#removeModal' ).modal('open');

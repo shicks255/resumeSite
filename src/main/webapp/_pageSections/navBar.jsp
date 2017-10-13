@@ -24,6 +24,11 @@
     <script>
         $(document).ready(function()
         {
+            <c:if test="${!empty infoMessage}">
+                console.log("something");
+                showInfoMessage(${infoMessage});
+            </c:if>
+
             doDropdown();
             doDropdownMobile();
 
@@ -83,6 +88,18 @@
         {
             $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');
         }
+
+        function showInfoMessage(infoText)
+        {
+            $( '#popup-infoMessage' ).removeClass('hiddenDiv').addClass('popup');
+            $( '#_info_message_text_' ).text(infoText);
+        }
+
+        function hideInfoMessage()
+        {
+            $( '#popup-infoMessage' ).removeClass('popup').addClass('hiddenDiv');
+        }
+
 
     </script>
 
@@ -165,5 +182,14 @@
             <p style="margin: 15pt;text-align: center">
                 <img src="${pageContext.request.contextPath}/icons/waiting.gif" alt="One moment" /> <span id="_processing_text">Processing request...</span>
             </p>
+        </div>
+    </div>
+
+    <div id="popup-infoMessage" class="hiddenDiv">
+        <div id="infoMessage" class="popupContent">
+            <p style="margin :15pt;text-align: center">
+                <span id="_info_message_text_">Info message</span>
+            </p>
+            <button class="btn waves-effect waves-light" onclick="hideInfoMessage();">Close</button>
         </div>
     </div>
