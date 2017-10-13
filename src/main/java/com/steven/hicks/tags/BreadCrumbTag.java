@@ -26,45 +26,47 @@ public class BreadCrumbTag extends TagSupport
     @Override
     public int doStartTag() throws JspException
     {
-//            <div class="nav-wrapper">
-//        <div class="col s12">
 //            <a href="#!" class="breadcrumb">First</a>
 //            <a href="#!" class="breadcrumb">Second</a>
 //            <a href="#!" class="breadcrumb">Third</a>
-//        </div>
-//    </div>
-
 
             List<String> things = new ArrayList<>();
-
             things = Arrays.asList(servletContext.split("/"));
-
-            things.forEach(thing ->
-            {
-
-            });
-
-
-
         try
         {
             JspWriter out = pageContext.getOut();
 
-            out.println("<div class=\'nav-wrapper\'>");
-                out.println("<div class=\'col s12\'>");
+            int numberOfTabs = things.size();
 
-                for (String thing : things)
+            out.println("<div class=\'nav-wrapper\'>");
+            out.println("<div class=\'col s12\'>");
+
+            for (String thing : things)
+            {
+                if (thing.length() == 0 || thing.contains(".jsp"))
+                    continue;
+                System.out.println(thing);
+
+                String link = "";
+
+                if (things.get(0).equalsIgnoreCase(thing))
                 {
-//                    String link = servletContext.con
+                    link = getServletContext() + thing + "?action=form";
                 }
 
+                if (!things.get(0).equalsIgnoreCase(thing))
+                {
+                    link = getServletContext() + things.get(0) + "action=" + thing;
+                }
 
-                out.println("</div>");
+                out.println("<a href=\'" + link + "\' class=breadcrumb>" + thing + "</a>");
+            }
+
+
+            out.println("</div>");
             out.println("</div>");
 
-
-
-            out.print(servletContext);
+//            out.print(servletContext);
         }
         catch (IOException exception)
         {

@@ -16,6 +16,9 @@ body {
 /*Regular Site Nav Bar*/
 #navBar {color : red;}
 
+.bread {margin-top : 1%;
+        margin-left : 1%}
+
 
 /*Portal Nav Bar*/
 nav a {

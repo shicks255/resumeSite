@@ -6,14 +6,14 @@
 
 <table border="1">
     <tr>
-        <td>#</td>
-        <td>Artist</td>
+        <td><b>#</b></td>
+        <td><b>Artist</b></td>
     </tr>
 
     <c:set var="rowIndex" value="${0}"/>
     <c:forEach var="mu" items="${musicArtist}">
         <tr>
-            <td><c:out value="${rowIndex +1}"/></td>
+            <td><b><c:out value="${rowIndex +1}"/></b></td>
             <td><c:out value="${mu.artistName}"/></td>
         </tr>
         <c:set var="rowIndex" value="${rowIndex +1}"/>

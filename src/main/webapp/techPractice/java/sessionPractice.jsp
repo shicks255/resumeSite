@@ -4,43 +4,25 @@
 
 <jsp:useBean id="accessCount" type="java.lang.String" scope="request"/>
 
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Session Practice</title>
-
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/jquery-3.1.0.js"></script>
+<jsp:include page="/_pageSections/navBar.jsp"/>
 
 <script>
     function resetURL()
     {
-        location.reload(true);
+//        location.reload(true);
         window.open("${pageContext.request.contextPath}/techPractice?action=sessionInvalidate", "_self");
     }
 </script>
 
-<jsp:include page="/_pageSections/navBar.jsp"/>
-<br/>
-
-<sh:bredcrumbTag servletContext="${pageContext.request.servletPath}"/>
-
-<%--<nav>--%>
-    <div class="nav-wrapper">
-        <div class="col s12">
-            <a href="#!" class="breadcrumb">First</a>
-            <a href="#!" class="breadcrumb">Second</a>
-            <a href="#!" class="breadcrumb">Third</a>
-        </div>
+<div class="bread nav-wrapper hide-on-small-and-down">
+    <div class="col s12">
+        <a href="${pageContext.request.contextPath}/techPractice?action=form" class="breadcrumb">Tech Practice</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=java" class="breadcrumb">Java</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=sessionPracticePage" class="breadcrumb">Session Practice</a>
     </div>
-<%--</nav>--%>
-
-<
-
+</div>
 <div class="container">
+
     <h1>Session Tracking Practice</h1>
 
 ${cookie}

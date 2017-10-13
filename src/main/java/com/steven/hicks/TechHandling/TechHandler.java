@@ -71,7 +71,7 @@ public class TechHandler extends HttpServlet
         {
             HttpSession session = request.getSession();
             session.invalidate();
-            response.sendRedirect(request.getContextPath() + "/techPractice?action=sessionPractice");
+            response.sendRedirect(request.getContextPath() + "/techPractice?action=sessionPracticePage");
         }
 
         if (action.equalsIgnoreCase("multithreadingPage"))
@@ -112,7 +112,7 @@ public class TechHandler extends HttpServlet
             List<MusicArtist> musicArtists = TechLogic.getMusicArtistsFromLast_FM(request);
 
             request.setAttribute("musicArtist", musicArtists);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCall.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallArtistSearchPopup.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -137,7 +137,7 @@ public class TechHandler extends HttpServlet
                     e.printStackTrace();
                 }
                 request.setAttribute("musicArtist", musicArtists);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCall.jsp");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallArtistSearchPopup.jsp");
                 dispatcher.forward(request, response);
             }
         }
