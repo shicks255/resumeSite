@@ -26,57 +26,7 @@
 
         });
 
-        function getSteamApi()
-        {
-            $.post( '${pageContext.request.contextPath}/techPractice?action=steamApi&sort=id',
-                function(data)
-                {
-                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-                    $( '#steamApiResultsPopup' ).html(data);
-                    $(window).resize();
-                }
-            );
-        }
 
-        function getLastFmAPI()
-        {
-            $.post( '${pageContext.request.contextPath}/techPractice?action=getMusicArtistsFromLast_FM',
-                function(data)
-                {
-                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-                    $( '#steamApiResultsPopup' ).html(data);
-                    $(window).resize();
-                }
-            );
-        }
-
-        function searchArtist()
-        {
-            var searchTerms = $( '#artistSearchField' ).val();
-
-            $.post( '${pageContext.request.contextPath}/techPractice?&action=artistSearch&artistSearchField=' + searchTerms,
-                function(data)
-                {
-                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-                    $( '#steamApiResultsPopup' ).html(data);
-                    $(window).resize();
-                }
-            );
-        }
-
-        function searchAlbum()
-        {
-            var searchTerms = $( '#albumSearchName' ).val();
-
-            $.post( '${pageContext.request.contextPath}/techPractice?&action=albumSearch&albumSearchName=' + searchTerms,
-                function(data)
-                {
-                    $( '#steamApiResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-                    $( '#steamApiResultsPopup' ).html(data);
-                    $(window).resize();
-                }
-            );
-        }
 
         function goToSessionPage()
         {
@@ -102,6 +52,33 @@
 
     <br/>
     <h1>Java Programs/Practice</h1>
+
+
+    <button class="btn waves-effect waves-light"
+            onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=sessionPracticePage';">
+        Session Practice
+    </button>
+    <br/>
+
+    <button class="btn waves-effect waves-light"
+            onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=restfulServicesPage';">
+        Restful Services Practice
+    </button>
+    <br/>
+
+    <button class="btn waves-effect waves-light" onclick="">
+        Multithreading Practice
+    </button>
+    <br/>
+
+    <button class="btn waves-effect waves-light" onclick="">
+        Design Patterns
+    </button>
+    <br/>
+
+
+
+
 
     <button class="btn waves-effect waves-light" onclick='getSteamApi();' >List of All Steam Games</button>
     <br/><br/>

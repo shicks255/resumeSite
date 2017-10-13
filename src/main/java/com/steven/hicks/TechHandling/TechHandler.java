@@ -6,8 +6,6 @@ import com.steven.hicks.entities.SteamGame;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,19 +49,19 @@ public class TechHandler extends HttpServlet
             HttpSession session = request.getSession();
             request.setAttribute("session", session);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/java.jsp");
             dispatcher.forward(request, response);
         }
 
 //        -----SESSION PRACTICE REDIRECT
-        if (action.equalsIgnoreCase("sessionPractice"))
+        if (action.equalsIgnoreCase("sessionPracticePage"))
         {
             HttpSession session = request.getSession();
 
             int numberOfTimesPageAccessedSoFar = TechLogic.getSessionAccessAcount(session, request);
             request.setAttribute("accessCount", numberOfTimesPageAccessedSoFar + "");
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/sessionPractice.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/sessionPractice.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -74,13 +72,21 @@ public class TechHandler extends HttpServlet
             response.sendRedirect(request.getContextPath() + "/techPractice?action=sessionPractice");
         }
 
+//        -----RESTFUL SERVICES PAGE
+        if (action.equalsIgnoreCase("restfulServicesPage"))
+        {
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/restfulServicesPractice.jsp");
+            dispatcher.forward(request, response);
+        }
+
 //        -----DO STEAM API
         if (action.equalsIgnoreCase("steamApi"))
         {
             List<SteamGame> allGameList = TechLogic.doSteamApiCall(request);
 
             request.setAttribute("allGameList", allGameList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/restfulCall.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/restfulCall.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -90,7 +96,7 @@ public class TechHandler extends HttpServlet
             List<MusicArtist> musicArtists = TechLogic.getMusicArtistsFromLast_FM(request);
 
             request.setAttribute("musicArtist", musicArtists);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCall.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCall.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -100,7 +106,7 @@ public class TechHandler extends HttpServlet
             String artistSearchName = request.getParameter("artistSearchField");
 
             request.setAttribute("musicArtist", TechLogic.searchForArtists(request, artistSearchName));
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCall.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCall.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -111,7 +117,7 @@ public class TechHandler extends HttpServlet
 
             List<Album> albums = TechLogic.searchForAlbums(request, albumSearchName);
             request.setAttribute("albums", albums);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/lastFMCallAlbum.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallAlbum.jsp");
             dispatcher.forward(request, response);
         }
 
