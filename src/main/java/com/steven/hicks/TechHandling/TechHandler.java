@@ -4,6 +4,7 @@ import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
+import com.steven.hicks.entities.TopArtistRecord;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -160,6 +161,18 @@ public class TechHandler extends HttpServlet
             }
             request.setAttribute("albums", albums);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallAlbumSearchPopup.jsp");
+            dispatcher.forward(request, response);
+        }
+
+//        -----Top Artists
+        if (action.equalsIgnoreCase("topArtists"))
+        {
+            String userName = "shicks255";
+
+            List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName);
+
+            request.setAttribute("topArtists", artistRecords);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCalltopArtistPopup.jsp");
             dispatcher.forward(request, response);
         }
 

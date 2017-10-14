@@ -5,6 +5,7 @@ package com.steven.hicks.TechHandling;
 import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
+import com.steven.hicks.entities.TopArtistRecord;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -126,6 +127,40 @@ public class TechLogic
         searchResults = getAlbumsFromMethodCall(in);
 
         return searchResults;
+    }
+
+    public static List<TopArtistRecord> searchForTopArtists(HttpServletRequest request, String userName)
+    {
+        List<TopArtistRecord> topArtistRecords = new ArrayList<>();
+
+        boolean startTag = false;
+        boolean stopTage = false;
+        String artistName = "";
+        int playCount;
+
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartist&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&period=overall&format=xml";
+
+        MusicArtist musicArtist = new MusicArtist();
+
+        try
+        {
+            URL url = null;
+            url = new URL(URLAddress);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader in = null;
+            in = new BufferedReader(new InputStreamReader(
+                    connection.getInputStream()));
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return topArtistRecords;
     }
 
     public static List<MusicArtist> getArtistsFromMethodCall(BufferedReader in)

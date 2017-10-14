@@ -88,6 +88,17 @@
         }
     }
 
+    function getLastFmTopArtists()
+    {
+        $.get( '${pageContext.request.contextPath}/techPractice?action=topArtists',
+            function(data)
+            {
+               $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+               $( '#restResultsBoxPopup' ).html(data);
+            });
+
+    }
+
     function closeResultsPopup()
     {
         $( '.popup' ).each(function(i, obj){
@@ -109,6 +120,9 @@
     <br/><br/>
 
     <button class="btn waves-effect waves-light" onclick="getLastFmAPI();">Last FM Api</button>
+    <br/><br/>
+
+    <button class="btn waves-effect waves-light" onclick="getLastFmTopArtists();">My Last FM Profile</button>
     <br/><br/>
 
     <h3>Last FM API</h3>
