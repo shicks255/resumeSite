@@ -45,6 +45,15 @@
 Javacsript
 
 
+    <br/>
+    <br/>
+
+    <button class="btn waves-effect waves-light" onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=charts'">Charts</button>
+
+
+
+
+
     <script>
         $(document).ready(function() {
             $.getJSON("http://ws.audioscrobbler.com/2.0/?method=user.getTopArtists&user=test&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json&callback=?", function(json) {

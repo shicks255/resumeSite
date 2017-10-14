@@ -41,7 +41,14 @@ public class TechHandler extends HttpServlet
 //        -----JAVASCRIPT REDIRECT
         if (action.equalsIgnoreCase("javaScript"))
         {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javaScript.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/javaScript.jsp");
+            dispatcher.forward(request, response);
+        }
+
+//        ------Charts JS
+        if (action.equalsIgnoreCase("charts"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/charts.jsp");
             dispatcher.forward(request, response);
         }
 
