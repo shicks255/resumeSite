@@ -11,6 +11,13 @@
 
     <h1>Charts JS Library</h1>
 
+
+    <canvas id="myChart2" width="400" height="400"></canvas>
+    <script>
+
+    </script>
+
+
     <canvas id="myChart" width="400" height="400"></canvas>
     <script>
         var ctx = document.getElementById("myChart");
