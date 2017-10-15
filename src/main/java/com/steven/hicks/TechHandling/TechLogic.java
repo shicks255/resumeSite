@@ -138,9 +138,7 @@ public class TechLogic
         String artistName = "";
         int playCount;
 
-        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartist&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&period=overall&format=xml";
-
-        MusicArtist musicArtist = new MusicArtist();
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&period=overall&format=xml";
 
         try
         {
@@ -154,6 +152,8 @@ public class TechLogic
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));
 
+            topArtistRecords = getTopArtistRecordsFromMethodCall(in);
+
         }
         catch (IOException e)
         {
@@ -163,12 +163,81 @@ public class TechLogic
         return topArtistRecords;
     }
 
+    public static List<TopArtistRecord> getTopArtistRecordsFromMethodCall(BufferedReader in)
+    {
+        String inputString = null;
+        List<TopArtistRecord> searchResults = new ArrayList<>();
+
+        boolean startTag = false;
+        boolean stopTag = false;
+        String artistName = "";
+        int rank = 0;
+        int playCount = 0;
+        MusicArtist musicArtist = new MusicArtist();
+        TopArtistRecord record = new TopArtistRecord();
+
+        try
+        {
+            while ((inputString = in.readLine()) != null)
+            {
+                if (inputString.contains("<artist"))
+                {
+                    startTag = true;
+                    stopTag = false;
+                }
+                if (inputString.contains("</artist>"))
+                {
+                    stopTag = true;
+                    startTag = false;
+                }
+
+                if (startTag)
+                {
+                    musicArtist = new MusicArtist();
+                    record = new TopArtistRecord();
+
+                    if (inputString.contains("rank=") && inputString.contains("<artist"))
+                    {
+                        int startOfRankNumber = inputString.indexOf("rank=\"") + 6;
+                        String rankString = inputString.substring(startOfRankNumber);
+                        rankString.replace("\"", "").trim();
+
+                        rank = Integer.valueOf(rankString.substring(0, rankString.indexOf(">")-1));
+                    }
+
+                    if (inputString.contains("<name>") && inputString.contains("</name>"))
+                    {
+                        artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
+                    }
+
+                    if (inputString.contains("<playcount>") && inputString.contains("</playcount>"))
+                    {
+                        playCount = Integer.valueOf(inputString.substring(inputString.indexOf("<playcount>") + 11, inputString.indexOf("</playcount>")));
+                    }
+                }
+
+                if (stopTag)
+                {
+                    musicArtist.setArtistName(artistName);
+                    record.setMusicArtist(musicArtist);
+                    record.setPlayCount(playCount);
+                    record.setRank(rank);
+                    searchResults.add(record);
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return searchResults;
+    }
+
     public static List<MusicArtist> getArtistsFromMethodCall(BufferedReader in)
     {
         String inputString = null;
         List<MusicArtist> searchResults = new ArrayList<>();
-
-        Map<Integer, String> mapOfMusicArtists = new HashMap<>();
 
         boolean startArtistTag = false;
         boolean stopArtistTag = false;

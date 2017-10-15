@@ -90,12 +90,19 @@
 
     function getLastFmTopArtists()
     {
-        $.get( '${pageContext.request.contextPath}/techPractice?action=topArtists',
-            function(data)
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/techPractice?action=topArtists",
+            success: function(data)
             {
-               $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
-               $( '#restResultsBoxPopup' ).html(data);
-            });
+                $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                $( '#restResultsBoxPopup' ).html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("error, status is " + textStatus + ", error is " + errorThrown);
+            }
+        });
 
     }
 
@@ -122,7 +129,7 @@
     <button class="btn waves-effect waves-light" onclick="getLastFmAPI();">Last FM Api</button>
     <br/><br/>
 
-    <button class="btn waves-effect waves-light" onclick="getLastFmTopArtists();">My Last FM Profile</button>
+    <button class="btn waves-effect waves-light" onclick='getLastFmTopArtists();'>My Last FM Profile</button>
     <br/><br/>
 
     <h3>Last FM API</h3>

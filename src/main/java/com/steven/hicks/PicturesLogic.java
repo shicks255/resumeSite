@@ -21,10 +21,10 @@ public class PicturesLogic
     {
         String path = sc.getRealPath("/");
 
-        String imageRoot = path.replace(path, "") + File.separator + "images" + File.separator;
+            String imageRoot = path.replace(path, "") + File.separator + "images" + File.separator;
 
-        try
-        {
+            try
+            {
             List<File> imageFiles = Files.walk(Paths.get(path + imageRoot))
                     .filter(Files::isRegularFile)
                     .map(Path::toFile)

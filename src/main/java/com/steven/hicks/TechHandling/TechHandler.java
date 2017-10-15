@@ -1,6 +1,5 @@
 package com.steven.hicks.TechHandling;
 
-import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.Album;
 import com.steven.hicks.entities.MusicArtist;
 import com.steven.hicks.entities.SteamGame;
@@ -110,7 +109,7 @@ public class TechHandler extends HttpServlet
             List<SteamGame> allGameList = TechLogic.doSteamApiCall(request);
 
             request.setAttribute("allGameList", allGameList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/restfulCall.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/steamRestCall.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -172,7 +171,7 @@ public class TechHandler extends HttpServlet
             List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName);
 
             request.setAttribute("topArtists", artistRecords);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCalltopArtistPopup.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallTopArtistsPopup.jsp");
             dispatcher.forward(request, response);
         }
 

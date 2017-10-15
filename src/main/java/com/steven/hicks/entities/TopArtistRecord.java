@@ -7,6 +7,11 @@ public class TopArtistRecord
     private int playCount;
     private int rank;
 
+    public TopArtistRecord()
+    {
+
+    }
+
     public TopArtistRecord(MusicArtist artist, int playCount, int rank)
     {
         musicArtist = artist;
