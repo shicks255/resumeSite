@@ -285,4 +285,38 @@ public class AcademicLogic
             default : return BigDecimal.ZERO;
         }
     }
+
+    public static String getLetterFromBigDecimal(BigDecimal grade)
+    {
+//        3.5 - 4.0 = A
+//        3.00 - 3.49 = A-
+//        2.5 - 2.99 = B
+//        2.0 - 2.49 = B-
+//        1.50 - 1.99 = C
+//        1.0 - 1.49 = C-;
+//        .5 - .99 = C
+//        0.0 - .49 = D
+
+
+        String letter = "";
+
+        if (grade.compareTo(new BigDecimal("3.5")) >= 0)
+            letter = "A";
+        if (grade.compareTo(new BigDecimal("3.0")) >=0 && grade.compareTo(new BigDecimal("3.49")) <= 0)
+            letter = "A-";
+        if (grade.compareTo(new BigDecimal("2.5")) >= 0 && grade.compareTo(new BigDecimal("2.99")) <= 0)
+            letter = "B";
+        if (grade.compareTo(new BigDecimal("2.0")) >= 0 && grade.compareTo(new BigDecimal("2.49")) <= 0)
+            letter = "B-";
+        if (grade.compareTo(new BigDecimal("1.5")) >= 0 && grade.compareTo(new BigDecimal("1.99")) <= 0)
+            letter = "B";
+        if (grade.compareTo(new BigDecimal("1.0")) >= 0 && grade.compareTo(new BigDecimal("1.49")) <= 0)
+            letter = "C";
+        if (grade.compareTo(new BigDecimal(".5")) >= 0 && grade.compareTo(new BigDecimal(".99")) <= 0)
+            letter = "C-";
+        if (grade.compareTo(new BigDecimal("0")) >= 0 && grade.compareTo(new BigDecimal("0.49")) <= 0)
+            letter = "D";
+
+        return letter;
+    }
 }

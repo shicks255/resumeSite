@@ -2,7 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="courses" type="java.util.List<com.steven.hicks.entities.AcademicCourse>" scope="request"/>
+<jsp:useBean id="semesterAverages" type="java.util.Map<java.lang.String, java.lang.String>" scope="request"/>
+<jsp:useBean id="semesters"        type="java.util.List<java.lang.String>"                  scope="request"/>
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
@@ -25,10 +26,10 @@
                 datasets: [{
                     label: "School Grades",
                     data: [{
-                        <c:forEach varStatus="loop" var="course" items="${courses}">
-                        x: '${course.semester}',
-                        y: '${course.gradeReceived}'
-                        <c:if test="${courses.indexOf(course) != courses.size()}">
+                        <c:forEach varStatus="loop" var="semester" items="${semesters}">
+                        x: '${semester}',
+                        y: '${semesterAverages[semester]}'
+                        <c:if test="${semesters.indexOf(semester) != semesters.size()}">
                     }, {
                         </c:if>
                         </c:forEach>

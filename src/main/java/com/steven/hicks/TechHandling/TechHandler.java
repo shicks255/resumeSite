@@ -51,12 +51,16 @@ public class TechHandler extends HttpServlet
         {
             List<AcademicCourse> courses = AcademicLogic.getCourseList();
 
-            Map<String, BigDecimal> semesterAverage = new HashMap<>();
-
-            String semester = "";
+            Map<String, String> semesterAverage = new HashMap<>();
 
             Map<String, List<AcademicCourse>> test = courses.stream()
                     .collect(Collectors.groupingBy(AcademicCourse::getSemester));
+
+            List<String> semesters = courses.stream()
+                    .sorted(Comparator.comparing(AcademicCourse::getSemesterTrackingNumber))
+                    .map(AcademicCourse::getSemester)
+                    .distinct()
+                    .collect(Collectors.toList());
 
             Iterator it = test.entrySet().iterator();
             while (it.hasNext())
@@ -70,13 +74,13 @@ public class TechHandler extends HttpServlet
                         .reduce(BigDecimal.ZERO, BigDecimal::add);
                 BigDecimal avearagee = average.divide(new BigDecimal(courses1.size()), 2, RoundingMode.HALF_DOWN);
 
-                semesterAverage.put((String)pair.getKey(), avearagee);
+                String gradeFromAverage = AcademicLogic.getLetterFromBigDecimal(avearagee);
+
+                semesterAverage.put((String)pair.getKey(), gradeFromAverage);
             }
 
-
-
-
-            request.setAttribute("courses", courses);
+            request.setAttribute("semesters", semesters);
+            request.setAttribute("semesterAverages", semesterAverage);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/charts.jsp");
             dispatcher.forward(request, response);
