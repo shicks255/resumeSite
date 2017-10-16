@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -259,5 +260,29 @@ public class AcademicLogic
                 break;
         }
         return semesterNumber;
+    }
+
+    public static BigDecimal getIntFromLetterGrade(String letter)
+    {
+        switch (letter)
+        {
+            case "A" : return new BigDecimal("4");
+
+            case "A-" : return new BigDecimal("3.5");
+
+            case "B" : return new BigDecimal("3");
+
+            case "B-": return new BigDecimal("2.5");
+
+            case "C": return new BigDecimal("2");
+
+            case "C-": return new BigDecimal("1.5");
+
+            case "D": return new BigDecimal("1");
+
+            case "D-": return new BigDecimal("0.5");
+
+            default : return BigDecimal.ZERO;
+        }
     }
 }

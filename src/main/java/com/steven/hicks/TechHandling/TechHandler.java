@@ -1,9 +1,7 @@
 package com.steven.hicks.TechHandling;
 
-import com.steven.hicks.entities.Album;
-import com.steven.hicks.entities.MusicArtist;
-import com.steven.hicks.entities.SteamGame;
-import com.steven.hicks.entities.TopArtistRecord;
+import com.steven.hicks.AcademicHandling.AcademicLogic;
+import com.steven.hicks.entities.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/techPractice")
 public class TechHandler extends HttpServlet
@@ -48,6 +49,35 @@ public class TechHandler extends HttpServlet
 //        ------Charts JS
         if (action.equalsIgnoreCase("charts"))
         {
+            List<AcademicCourse> courses = AcademicLogic.getCourseList();
+
+            Map<String, BigDecimal> semesterAverage = new HashMap<>();
+
+            String semester = "";
+
+            Map<String, List<AcademicCourse>> test = courses.stream()
+                    .collect(Collectors.groupingBy(AcademicCourse::getSemester));
+
+            Iterator it = test.entrySet().iterator();
+            while (it.hasNext())
+            {
+                Map.Entry pair = (Map.Entry)it.next();
+                List<AcademicCourse> courses1 = (List)pair.getValue();
+
+                BigDecimal average = courses1.stream()
+                        .map(AcademicCourse::getGradeReceived)
+                        .map(grade -> AcademicLogic.getIntFromLetterGrade(grade))
+                        .reduce(BigDecimal.ZERO, BigDecimal::add);
+                BigDecimal avearagee = average.divide(new BigDecimal(courses1.size()), 2, RoundingMode.HALF_DOWN);
+
+                semesterAverage.put((String)pair.getKey(), avearagee);
+            }
+
+
+
+
+            request.setAttribute("courses", courses);
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/charts.jsp");
             dispatcher.forward(request, response);
         }

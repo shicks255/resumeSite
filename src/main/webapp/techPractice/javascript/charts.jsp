@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<jsp:useBean id="courses" type="java.util.List<com.steven.hicks.entities.AcademicCourse>" scope="request"/>
+
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js">
@@ -11,10 +13,69 @@
 
     <h1>Charts JS Library</h1>
 
-
-    <canvas id="myChart2" width="400" height="400"></canvas>
+    <canvas id="myChart3" width="400" height="400"></canvas>
     <script>
+        var ctx3 = document.getElementById("myChart3");
+        var myChart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['2007Fall', '2008Spring', '2008Fall', '2009Spring', '2009Fall', '2010Spring', '2010Summer',
+                    '2010Fall', '2011Spring', '2011Fall', '2012Spring', '2012Summer', '2012Fall', '2013Spring',
+                    '2014Summer', '2014Fall', '2015Spring', '2015Summer', '2015Fall', '2016Spring', '2016Summer'],
+                datasets: [{
+                    label: "School Grades",
+                    data: [{
+                        <c:forEach varStatus="loop" var="course" items="${courses}">
+                        x: '${course.semester}',
+                        y: '${course.gradeReceived}'
+                        <c:if test="${courses.indexOf(course) != courses.size()}">
+                    }, {
+                        </c:if>
+                        </c:forEach>
+                    }]
+                }]
+            },
+            options:  {
+                scales: {
+                    yAxes: [{
+                        type: 'category',
+                        labels: ['A', 'A-','B','B-','C','C-','D','D-','F','W']
+                    }]
+                }
+            }
+        });
+    </script>
 
+
+    <canvas id="myChart2" width=200" height="200"></canvas>
+    <script>
+        var ctx2 = document.getElementById("myChart2");
+        var myChart2 = new Chart(ctx2, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: "School Grades",
+                    data: [{
+                        x: -10,
+                        y: 0
+                    }, {
+                        x: 0,
+                        y: 10
+                    }, {
+                        x: 10,
+                        y: 5
+                    }]
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        type: 'linear',
+                        position: 'bottom'
+                    }]
+                }
+            }
+        });
     </script>
 
 
