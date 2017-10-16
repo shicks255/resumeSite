@@ -82,6 +82,10 @@ public class TechHandler extends HttpServlet
             request.setAttribute("semesters", semesters);
             request.setAttribute("semesterAverages", semesterAverage);
 
+
+            Map<String, Integer> averageGrades = new HashMap<>();
+
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/charts.jsp");
             dispatcher.forward(request, response);
         }
