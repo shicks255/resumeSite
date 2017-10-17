@@ -50,19 +50,14 @@ public class TechHandler extends HttpServlet
 //        ------Charts JS
         if (action.equalsIgnoreCase("charts"))
         {
-            List<AcademicCourse> courses = AcademicLogic.getCourseList();
-            Map<String, String> semesterAverage = new HashMap<>();
+            List<AcademicCourse> allCourses = AcademicLogic.getCourseList();
+            Map<String, String> mapOfSemesterAverages = new HashMap<>();
 
-            Map<String, List<AcademicCourse>> test = courses.stream()
+            Map<String, List<AcademicCourse>> mapOfAcademicCoursesBySemester = allCourses.stream()
                     .collect(Collectors.groupingBy(AcademicCourse::getSemester));
 
-            List<String> semesters = courses.stream()
-                    .sorted(Comparator.comparing(AcademicCourse::getSemesterTrackingNumber))
-                    .map(AcademicCourse::getSemester)
-                    .distinct()
-                    .collect(Collectors.toList());
 
-            Iterator it = test.entrySet().iterator();
+            Iterator it = mapOfAcademicCoursesBySemester.entrySet().iterator();
             while (it.hasNext())
             {
                 Map.Entry pair = (Map.Entry)it.next();
@@ -76,21 +71,27 @@ public class TechHandler extends HttpServlet
 
                 String gradeFromAverage = AcademicLogic.getLetterFromBigDecimal(avearagee);
 
-                semesterAverage.put((String)pair.getKey(), gradeFromAverage);
+                mapOfSemesterAverages.put((String)pair.getKey(), gradeFromAverage);
             }
 
-            request.setAttribute("semesters", semesters);
-            request.setAttribute("semesterAverages", semesterAverage);
+            List<String> listOfSemesters = allCourses.stream()
+                    .sorted(Comparator.comparing(AcademicCourse::getSemesterTrackingNumber))
+                    .map(AcademicCourse::getSemester)
+                    .distinct()
+                    .collect(Collectors.toList());
+
+            request.setAttribute("semesters", listOfSemesters);
+            request.setAttribute("semesterAverages", mapOfSemesterAverages);
 
 
             //For averages of letters
             Map<String, Long> averageGrades = new HashMap<>();
-            averageGrades = courses.stream()
+            averageGrades = allCourses.stream()
                     .map(AcademicCourse::getGradeReceived)
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
 
-            List<String> allGradeList = courses.stream()
+            List<String> allGradeList = allCourses.stream()
                     .sorted(Comparator.comparing(AcademicCourse::getGradeReceived))
                     .map(AcademicCourse::getGradeReceived)
                     .distinct()
