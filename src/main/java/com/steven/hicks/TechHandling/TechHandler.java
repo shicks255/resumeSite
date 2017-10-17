@@ -51,7 +51,6 @@ public class TechHandler extends HttpServlet
         if (action.equalsIgnoreCase("charts"))
         {
             List<AcademicCourse> courses = AcademicLogic.getCourseList();
-
             Map<String, String> semesterAverage = new HashMap<>();
 
             Map<String, List<AcademicCourse>> test = courses.stream()
@@ -84,6 +83,7 @@ public class TechHandler extends HttpServlet
             request.setAttribute("semesterAverages", semesterAverage);
 
 
+            //For averages of letters
             Map<String, Long> averageGrades = new HashMap<>();
             averageGrades = courses.stream()
                     .map(AcademicCourse::getGradeReceived)

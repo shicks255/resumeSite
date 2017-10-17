@@ -266,21 +266,21 @@ public class AcademicLogic
     {
         switch (letter)
         {
-            case "A" : return new BigDecimal("4");
+            case "A+" : return new BigDecimal("4");
+            case "A"  : return new BigDecimal("3.75");
+            case "A-" : return new BigDecimal("3.25");
 
-            case "A-" : return new BigDecimal("3.5");
+            case "B+" : return new BigDecimal("3");
+            case "B" : return new BigDecimal("2.75");
+            case "B-": return new BigDecimal("2.25");
 
-            case "B" : return new BigDecimal("3");
+            case "C+" : return new BigDecimal("2");
+            case "C": return new BigDecimal("1.75");
+            case "C-": return new BigDecimal("1.25");
 
-            case "B-": return new BigDecimal("2.5");
-
-            case "C": return new BigDecimal("2");
-
-            case "C-": return new BigDecimal("1.5");
-
-            case "D": return new BigDecimal("1");
-
-            case "D-": return new BigDecimal("0.5");
+            case "D+" : return new BigDecimal("1");
+            case "D": return new BigDecimal("0.75");
+            case "D-": return new BigDecimal("0.25");
 
             default : return BigDecimal.ZERO;
         }
@@ -309,13 +309,13 @@ public class AcademicLogic
         if (grade.compareTo(new BigDecimal("2.0")) >= 0 && grade.compareTo(new BigDecimal("2.49")) <= 0)
             letter = "B-";
         if (grade.compareTo(new BigDecimal("1.5")) >= 0 && grade.compareTo(new BigDecimal("1.99")) <= 0)
-            letter = "B";
-        if (grade.compareTo(new BigDecimal("1.0")) >= 0 && grade.compareTo(new BigDecimal("1.49")) <= 0)
             letter = "C";
-        if (grade.compareTo(new BigDecimal(".5")) >= 0 && grade.compareTo(new BigDecimal(".99")) <= 0)
+        if (grade.compareTo(new BigDecimal("1.0")) >= 0 && grade.compareTo(new BigDecimal("1.49")) <= 0)
             letter = "C-";
-        if (grade.compareTo(new BigDecimal("0")) >= 0 && grade.compareTo(new BigDecimal("0.49")) <= 0)
+        if (grade.compareTo(new BigDecimal(".5")) >= 0 && grade.compareTo(new BigDecimal(".99")) <= 0)
             letter = "D";
+        if (grade.compareTo(new BigDecimal("0")) >= 0 && grade.compareTo(new BigDecimal("0.49")) <= 0)
+            letter = "D-";
 
         return letter;
     }

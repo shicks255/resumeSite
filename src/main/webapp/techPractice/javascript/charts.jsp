@@ -38,14 +38,25 @@
                         ,
                         </c:if>
                         </c:forEach>
-                    ]
+                    ],
+                    backgroundColor: [
+                        "rgb(102, 204, 255)",
+                        "rgb(0, 102, 255)",
+                        "rgb(51, 51, 204)",
+                        "rgb(102, 0, 204)",
+                        "rgb(204, 0, 255)",
+                        "rgb(255, 0, 102)",
+                        "rgb(255, 0, 0)",
+                        "rgb(153, 0, 0)",
+                        "rgb(102, 51, 0)"]
                 }]
             },
             options: {
                 scales: {
                     yAxes: [],
                     xAxes: []
-                }
+                },
+                cutoutPercentage: [0]
             }
         });
     </script>
@@ -62,7 +73,7 @@
                 datasets: [{
                     label: "School Grades",
                     data: [{
-                        <c:forEach varStatus="loop" var="semester" items="${semesters}">
+                        <c:forEach var="semester" items="${semesters}">
                         x: '${semester}',
                         y: '${semesterAverages[semester]}'
                         <c:if test="${semesters.indexOf(semester) != semesters.size()}">
