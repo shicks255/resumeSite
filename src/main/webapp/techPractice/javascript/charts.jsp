@@ -4,6 +4,8 @@
 
 <jsp:useBean id="semesterAverages" type="java.util.Map<java.lang.String, java.lang.String>" scope="request"/>
 <jsp:useBean id="semesters"        type="java.util.List<java.lang.String>"                  scope="request"/>
+<jsp:useBean id="averageGrades"    type="java.util.Map<java.lang.String, java.lang.Integer>" scope="request"/>
+<jsp:useBean id="allGrades"        type="java.util.List<java.lang.String>"                   scope="request"/>
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
@@ -13,6 +15,40 @@
 <div class="container">
 
     <h1>Charts JS Library</h1>
+
+    <canvas id="myChart4" width="400" height="400"></canvas>
+    <script>
+        var ctx4 = document.getElementById("myChart4");
+        var myChart4 = new Chart(ctx4, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    <c:forEach var="letter" items="${allGrades}">
+                    "${letter}"
+                    <c:if test="${allGrades.indexOf(letter) != allGrades.size()-1}">
+                    ,
+                    </c:if>
+                    </c:forEach>
+                ],
+                datasets: [{
+                    data: [
+                        <c:forEach var="letter" items="${allGrades}">
+                        ${averageGrades[letter].intValue()}
+                        <c:if test="${allGrades.indexOf(letter) != allGrades.size()-1}">
+                        ,
+                        </c:if>
+                        </c:forEach>
+                    ]
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [],
+                    xAxes: []
+                }
+            }
+        });
+    </script>
 
     <canvas id="myChart3" width="400" height="400"></canvas>
     <script>
@@ -41,7 +77,8 @@
                     yAxes: [{
                         type: 'category',
                         labels: ['A', 'A-','B','B-','C','C-','D','D-','F','W']
-                    }]
+                    }],
+                    xAxes: []
                 }
             }
         });

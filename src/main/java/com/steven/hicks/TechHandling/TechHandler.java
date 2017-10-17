@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/techPractice")
@@ -83,7 +84,19 @@ public class TechHandler extends HttpServlet
             request.setAttribute("semesterAverages", semesterAverage);
 
 
-            Map<String, Integer> averageGrades = new HashMap<>();
+            Map<String, Long> averageGrades = new HashMap<>();
+            averageGrades = courses.stream()
+                    .map(AcademicCourse::getGradeReceived)
+                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+
+            List<String> allGradeList = courses.stream()
+                    .sorted(Comparator.comparing(AcademicCourse::getGradeReceived))
+                    .map(AcademicCourse::getGradeReceived)
+                    .distinct()
+                    .collect(Collectors.toList());
+            request.setAttribute("averageGrades", averageGrades);
+            request.setAttribute("allGrades", allGradeList);
 
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/charts.jsp");
