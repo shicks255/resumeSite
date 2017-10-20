@@ -80,8 +80,8 @@
 
         function showWaitingPopup(text)
         {
-            $( '#popup-processingAction' ).removeClass('hiddenDiv').addClass('popup');
-            $( '#_processing_text' ).innerHTML = text;
+            $( '#popup-processingAction' ).removeClass('hiddenDiv').addClass('popup').addClass('important');
+            $( '#_processing_text' ).text(text);
         }
 
         function hideWaitingPopup()
@@ -91,7 +91,7 @@
 
         function showInfoMessage(infoText)
         {
-            $( '#popup-infoMessage' ).removeClass('hiddenDiv').addClass('popup');
+            $( '#popup-infoMessage' ).removeClass('hiddenDiv').addClass('popup').addClass('important');
             $( '#_info_message_text_' ).text(infoText);
         }
 
@@ -177,8 +177,8 @@
     </nav>
 
 
-    <div id="popup-processingAction" class="hiddenDiv">
-        <div id="processingAction" class="popupContent" >
+    <div id="popup-processingAction" class="hiddenDiv important">
+        <div id="processingAction" class="popupContent">
             <p style="margin: 15pt;text-align: center">
                 <img src="${pageContext.request.contextPath}/icons/waiting.gif" alt="One moment" /> <span id="_processing_text">Processing request...</span>
             </p>
@@ -186,7 +186,7 @@
     </div>
 
     <div id="popup-infoMessage" class="hiddenDiv">
-        <div id="infoMessage" class="popupContent">
+        <div id="infoMessage" class="popupContent important">
             <p style="margin :15pt;text-align: center">
                 <span id="_info_message_text_">Info message</span>
             </p>

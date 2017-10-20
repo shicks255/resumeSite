@@ -129,7 +129,7 @@ public class TechLogic
         return searchResults;
     }
 
-    public static List<TopArtistRecord> searchForTopArtists(HttpServletRequest request, String userName)
+    public static List<TopArtistRecord> searchForTopArtists(HttpServletRequest request, String userName, String selectedTimePeriod)
     {
         List<TopArtistRecord> topArtistRecords = new ArrayList<>();
 
@@ -138,7 +138,7 @@ public class TechLogic
         String artistName = "";
         int playCount;
 
-        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&period=overall&format=xml";
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=125&format=xml&period=" + selectedTimePeriod;
 
         try
         {

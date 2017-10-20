@@ -220,9 +220,19 @@ public class TechHandler extends HttpServlet
         {
             String userName = "shicks255";
 
-            List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName);
 
+            String selectedOption = request.getParameter("selectedTimeOption");
+            if (selectedOption == null || selectedOption.length() == 0)
+                selectedOption = "overall";
+
+            request.setAttribute("selectedTimePeriod", selectedOption);
+
+            List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName, selectedOption);
             request.setAttribute("topArtists", artistRecords);
+
+            List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
+            request.setAttribute("timeOptions", timeOptions);
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallTopArtistsPopup.jsp");
             dispatcher.forward(request, response);
         }
