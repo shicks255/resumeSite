@@ -82,6 +82,10 @@ h1 {color : #e57373;
     text-align : center;
 }
 
+h2 {  color : #ff9e80;  }
+
+h3 {  color : #2ab5e0;  }
+
 button {border-radius : 5px;}
 
 button:hover {
@@ -174,6 +178,42 @@ label{
     color : black;
 }
 
+.footer-text{
+    color : darkslateblue;
+}
+
+/*Calculator specific stuff*/
+#calculatorBox {border : 1px solid black;
+    height : 50%;
+    width : 25%;
+    border-radius : 10px;
+    background-color : grey;}
+#buttons {width : auto;
+    font-size : 85%;}
+
+.calcButton {border : 1px solid black;
+    height : 7.6%;
+    width : 15%;
+    margin : 3%;
+    border-radius : 5px;
+    text-align : center;
+    display : inline-block;
+}
+
+#outputt {width : 80%;
+    margin-left : 5%;
+    margin-right : 5%;
+    margin-top : 5%;
+    border : 2px solid black;
+    height : 5%;
+    background-color : white;
+    padding : 5px;}
+
+#calculatorBox button {
+    box-shadow : 2px 2px 2px black;}
+
+#calculatorBox button:active {
+    transform : translate(2px, 1px);}
 
 /*Media Queries*/
 @media (max-width : 480px) {

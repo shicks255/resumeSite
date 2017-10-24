@@ -4,97 +4,46 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<head>
-    <style>
-        #calculatorBox {border : 1px solid black;
-            height : 50%;
-            width : 25%;
-            border-radius : 10px;
-            background-color : grey;}
-        #buttons {width : auto;
-            font-size : 85%;}
-
-        .calcButton {border : 1px solid black;
-            height : 7.6%;
-            width : 15%;
-            margin : 3%;
-            border-radius : 5px;
-            text-align : center;
-            display : inline-block;
-        }
-
-        #outputt {width : 80%;
-            margin-left : 5%;
-            margin-right : 5%;
-            margin-top : 5%;
-            border : 2px solid black;
-            height : 5%;
-            background-color : white;
-            padding : 5px;}
-
-        button {box-shadow : 2px 2px 2px black;}
-
-        button:active {transform : translate(2px, 1px);}
-
-    </style>
-</head>
-
 <div class="container">
 
 <br/>
-Javacsript
-
+    <h1>Javacsript Practice</h1>
 
     <br/>
     <br/>
 
     <button class="btn waves-effect waves-light" onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=charts'">Charts</button>
 
-
-
-
-
-    <script>
-        $(document).ready(function() {
-            $.getJSON("http://ws.audioscrobbler.com/2.0/?method=user.getTopArtists&user=test&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json&callback=?", function(json) {
-                var html = '';
-                $.each(json.topartists.artist, function(i, item) {
-                    html += "<p><a href=" + item.url + " target='_blank'>" + item.name + " - " + "Play count : " +item.playcount + "</a></p>";
-                });
-                $('#result').append(html);
-            });
-        });
-    </script>
-    <div id="result"></div>
+    <%--<script>--%>
+        <%--$(document).ready(function() {--%>
+            <%--$.getJSON("http://ws.audioscrobbler.com/2.0/?method=user.getTopArtists&user=test&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json&callback=?",--%>
+                <%--function(json)--%>
+                <%--{--%>
+                    <%--console.log(json);--%>
+                    <%--var html = '';--%>
+                    <%--$.each(json.topartists.artist,--%>
+                        <%--function(i, item)--%>
+                        <%--{--%>
+                            <%--html += "<p><a href=" + item.url + " target='_blank'>" + item.name + " - " + "Play count : " +item.playcount + "</a></p>";--%>
+                        <%--});--%>
+                    <%--$('#result').append(html);--%>
+                <%--});--%>
+        <%--});--%>
+<%--//    </script>--%>
+<%--//    <div id="result"></div>--%>
 
     <br/>
     <br/>
-    <br/>
 
-    <html>
-
-    <head>
-
-
-
-    </head>
-
-    <body>
-
-
+    <h3>A Calculator</h3>
 
     <div id="calculatorBox">
-
         <div id="buttons">
-
-            <div id="outputt">
-            </div>
+            <div id="outputt"></div>
 
             <button class="calcButton" onClick="Clear()" style="display:block;min-width : 40px;">
                 Clear
             </button>
-
-
 
             <button class="calcButton" onClick="ButtonPress('7')">
                 7
@@ -212,9 +161,5 @@ Javacsript
             }
         }
     </script>
-
-
-    </body>
-
 </div>
 <jsp:include page="/_pageSections/footer.jsp" />

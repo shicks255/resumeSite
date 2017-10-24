@@ -33,10 +33,10 @@
     <div class="container">
         <div class="row">
             <div class="col s12 center">
-                <h5 class="blue-text center">Site Map</h5>
+                <h5 class="footer-text center">Site Map</h5>
             </div>
             <div class="col s4 center">
-                <h5 class="blue-text">Education</h5>
+                <h5 class="footer-text">Education</h5>
                 <ul>
                     <li><a class="black-text text-lighten-3" href="${pageContext.request.contextPath}/academic?action=form">Education</a></li>
                     <li><a class="black-text text-lighten-3" href="${pageContext.request.contextPath}/academic?&action=thesis">Thesis</a></li>
@@ -44,7 +44,7 @@
                 </ul>
             </div>
             <div class="col s4 center">
-                <h5 class="blue-text">Tech Practice</h5>
+                <h5 class="footer-text">Tech Practice</h5>
                 <ul>
                     <li><a class="black-text text-lighten-3" href="${pageContext.request.contextPath}/techPractice?action=form">Tech Practice</a></li>
                     <li><a class="black-text text-lighten-3" href="${pageContext.request.contextPath}/techPractice?&action=java">Java</a></li>
@@ -53,7 +53,7 @@
                 </ul>
             </div>
             <div class="col s4 center">
-                <h5 class="blue-text">Links</h5>
+                <h5 class="footer-text">Links</h5>
                 <ul>
                     <li><a class="black-text text-lighten-3" href="https://shicks255.wordpress.com/">My First WordPress</a></li>
                     <li><a class="black-text text-lighten-3" href="https://www.linkedin.com/in/steven-hicks-03390093/">LinkedIn</a></li>
