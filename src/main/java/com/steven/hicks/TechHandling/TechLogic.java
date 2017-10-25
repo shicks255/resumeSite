@@ -138,7 +138,7 @@ public class TechLogic
         String artistName = "";
         int playCount;
 
-        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=125&format=xml&period=" + selectedTimePeriod;
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=250&format=xml&period=" + selectedTimePeriod;
 
         try
         {
