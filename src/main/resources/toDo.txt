@@ -1,0 +1,8 @@
+-Make my popups draggable
+-Make my popups resizable
+
+-redo the stripped table colors from Material overrides css
+
+-work with H1,H2,H3,H4 colors
+
+-polish up portal nav bar
