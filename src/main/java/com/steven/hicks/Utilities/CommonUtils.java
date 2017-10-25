@@ -1,11 +1,14 @@
 package com.steven.hicks.Utilities;
 
+import com.steven.hicks.ResultsPage;
 import com.steven.hicks.ServerStart;
 import com.steven.hicks.entities.Visitor;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public final class CommonUtils
@@ -112,5 +115,38 @@ public final class CommonUtils
             if (extension.equals("mov")) mimetype = "video/quicktime";
         }
         return mimetype;
+    }
+
+    //:todo rename this function
+    public static List<ResultsPage> putResultsInPage(List <?> results, Integer resultsPerPage)
+    {
+        if (resultsPerPage == null || resultsPerPage < 3)
+            resultsPerPage = 10;
+
+        List<ResultsPage> resultPages = new ArrayList<>();
+
+        int counter = 1;
+
+        ResultsPage resultsPage = new ResultsPage();
+        resultsPage.setPageNumber(counter);
+
+        for (Object result : results)
+        {
+            if (resultsPage.getResults().size() == resultsPerPage)
+            {
+                resultPages.add(resultsPage);
+                resultsPage = new ResultsPage();
+                resultsPage.setResultsPerPage(resultsPerPage);
+                resultsPage.setPageNumber(resultPages.size()+1);
+            }
+
+            if (counter == results.size())
+                resultsPage.setLastPage(true);
+
+            resultsPage.getResults().add(result);
+            counter++;
+        }
+
+        return resultPages;
     }
 }

@@ -1,6 +1,8 @@
 package com.steven.hicks.TechHandling;
 
 import com.steven.hicks.AcademicHandling.AcademicLogic;
+import com.steven.hicks.ResultsPage;
+import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.*;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.*;
 import java.util.function.Function;
@@ -219,24 +220,27 @@ public class TechHandler extends HttpServlet
         if (action.equalsIgnoreCase("topArtists"))
         {
             String userName = "shicks255";
-
+            String pageNumberString = request.getParameter("pageNumber");
+            if (pageNumberString == null || pageNumberString.length() == 0)
+                pageNumberString = "1";
+            int pageNumber = Integer.parseInt(pageNumberString);
 
             String selectedOption = request.getParameter("selectedTimeOption");
             if (selectedOption == null || selectedOption.length() == 0)
                 selectedOption = "overall";
-
             request.setAttribute("selectedTimePeriod", selectedOption);
-
-            List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName, selectedOption);
-            request.setAttribute("topArtists", artistRecords);
 
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
 
+            List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName, selectedOption);
+            List<ResultsPage> resultPages = CommonUtils.putResultsInPage(artistRecords, 10);
+            request.setAttribute("resultPages", resultPages);
+            request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallTopArtistsPopup.jsp");
             dispatcher.forward(request, response);
         }
-
     }
 
     @Override
