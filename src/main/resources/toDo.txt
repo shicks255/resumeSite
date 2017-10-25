@@ -6,3 +6,5 @@
 -work with H1,H2,H3,H4 colors
 
 -polish up portal nav bar
+
+-when hovering over an artist, have a picture popup?
