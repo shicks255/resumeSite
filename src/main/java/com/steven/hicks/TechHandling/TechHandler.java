@@ -217,6 +217,7 @@ public class TechHandler extends HttpServlet
         }
 
 //        -----Top Artists
+        //:todo make it so that only a certain amount of paginations are visable at a time, and the rest will be...s
         if (action.equalsIgnoreCase("topArtists"))
         {
             String userName = "shicks255";
