@@ -90,11 +90,13 @@
 
     function getLastFmTopArtists()
     {
+        showWaitingPopup("receiving data...");
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/techPractice?action=topArtists",
             success: function(data)
             {
+                hideWaitingPopup();
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
             },
@@ -107,11 +109,13 @@
 
     function getLastFmTopSongs()
     {
+        showWaitingPopup("receiving data...");
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/techPractice?action=topSongs",
             success:function(data)
             {
+                hideWaitingPopup();
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
             },
@@ -124,11 +128,13 @@
 
     function getLastFmTopAlbums()
     {
+        showWaitingPopup("receiving data...");
         $.ajax({
             type: "GET",
             url: "${pageContext.request.contextPath}/techPractice?action=topAlbums",
             success:function(data)
             {
+                hideWaitingPopup();
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
             },
