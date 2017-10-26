@@ -2,10 +2,7 @@ package com.steven.hicks.TechHandling;
 
 //import com.sun.org.apache.xerces.internal.parsers.SAXParser;
 
-import com.steven.hicks.entities.Album;
-import com.steven.hicks.entities.MusicArtist;
-import com.steven.hicks.entities.SteamGame;
-import com.steven.hicks.entities.TopArtistRecord;
+import com.steven.hicks.entities.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -133,13 +130,7 @@ public class TechLogic
     {
         List<TopArtistRecord> topArtistRecords = new ArrayList<>();
 
-        boolean startTag = false;
-        boolean stopTage = false;
-        String artistName = "";
-        int playCount;
-
         String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=250&format=xml&period=" + selectedTimePeriod;
-
         try
         {
             URL url = null;
@@ -161,6 +152,99 @@ public class TechLogic
         }
 
         return topArtistRecords;
+    }
+
+    public static List<TopAlbumRecord> getTopAlbumRecordsFromMethodCall(BufferedReader in)
+    {
+        String inputString = null;
+        List<TopAlbumRecord> searchResults = new ArrayList<>();
+
+        boolean startTag = false;
+        boolean stopTag = false;
+
+        boolean startArtistTag = false;
+        boolean stopArtistTag = false;
+
+        String artistName = "";
+        String albumName = "";
+        int rank = 0;
+        int playCount = 0;
+
+        Album album = new Album();
+        TopAlbumRecord record = new TopAlbumRecord();
+
+        try
+        {
+            while ((inputString = in.readLine()) != null)
+            {
+                if (inputString.contains("<album"))
+                {
+                    startTag = true;
+                    stopTag = false;
+                }
+                if (inputString.contains("</album>"))
+                {
+                    startTag = false;
+                    stopTag = true;
+                }
+                if (inputString.contains("<artist>"))
+                {
+                    startArtistTag = true;
+                    stopArtistTag = false;
+                }
+                if (inputString.contains("</artist>"))
+                {
+                    startArtistTag = false;
+                    stopArtistTag = true;
+                }
+
+                if (startTag)
+                {
+                    album = new Album();
+                    record = new TopAlbumRecord();
+
+                    if (inputString.contains("rank="))
+                    {
+                        int startOfRankNumber = inputString.indexOf("rank=\"") + 6;
+                        String rankString = inputString.substring(startOfRankNumber);
+                        rankString.replace("\"", "").trim();
+
+                        rank = Integer.valueOf(rankString.substring(0, rankString.indexOf(">")-1));
+                    }
+
+                    if (inputString.contains("<name>") && inputString.contains("</name>") && !startArtistTag)
+                    {
+                        albumName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
+
+                    }
+                    if (inputString.contains("<name>") && inputString.contains("</name>") && startArtistTag)
+                    {
+                        artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
+                    }
+
+                    if (inputString.contains("<playcount>") && inputString.contains("</playcount>"))
+                    {
+                        playCount = Integer.valueOf(inputString.substring(inputString.indexOf("<playcount>") + 11, inputString.indexOf("</playcount>")));
+                    }
+                }
+
+                if (stopTag)
+                {
+                    album.setArtist(artistName);
+                    album.setAlbum(albumName);
+                    record.setAlbum(album);
+                    record.setPlayCount(playCount);
+                    record.setRank(rank);
+                    searchResults.add(record);
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return searchResults;
     }
 
     public static List<TopArtistRecord> getTopArtistRecordsFromMethodCall(BufferedReader in)
@@ -231,6 +315,148 @@ public class TechLogic
             e.printStackTrace();
         }
 
+        return searchResults;
+    }
+
+    public static List<TopAlbumRecord> searchForTopAlbums(HttpServletRequest request, String userName, String selectedTimePeriod)
+    {
+        List<TopAlbumRecord> topAlbumRecords = new ArrayList<>();
+
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettopalbums&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=250&format=xml&period=" + selectedTimePeriod;
+        try
+        {
+            URL url = null;
+            url = new URL(URLAddress);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader in = null;
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            topAlbumRecords = getTopAlbumRecordsFromMethodCall(in);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return topAlbumRecords;
+    }
+
+    public static List<TopSongRecord> searchForTopSongs(HttpServletRequest request, String userName, String selectedTimePeriod)
+    {
+        List<TopSongRecord> topSongRecords = new ArrayList<>();
+
+        String URLAddress = "http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=" + userName + "&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=250&format=xml&period=" + selectedTimePeriod;
+        try
+        {
+            URL url = null;
+            url = new URL(URLAddress);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader in = null;
+            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            topSongRecords = getTopSongRecordsFromMethodCall(in);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return topSongRecords;
+    }
+
+    public static List<TopSongRecord> getTopSongRecordsFromMethodCall(BufferedReader in)
+    {
+        String inputString = null;
+        List<TopSongRecord> searchResults = new ArrayList<>();
+
+        boolean startTag = false;
+        boolean stopTag = false;
+
+        boolean startArtistTag = false;
+        boolean stopArtistTag = false;
+
+        String artistName = "";
+        String songName = "";
+        int rank = 0;
+        int playCount = 0;
+
+        Song song = new Song();
+        TopSongRecord record = new TopSongRecord();
+
+        try
+        {
+            while ((inputString = in.readLine()) != null)
+            {
+                if (inputString.contains("<track"))
+                {
+                    startTag = true;
+                    stopTag = false;
+                }
+                if (inputString.contains("</track>"))
+                {
+                    startTag = false;
+                    stopTag = true;
+                }
+                if (inputString.contains("<artist>"))
+                {
+                    startArtistTag = true;
+                    stopArtistTag = false;
+                }
+                if (inputString.contains("</artist>"))
+                {
+                    startArtistTag = false;
+                    stopArtistTag = true;
+                }
+
+                if (startTag)
+                {
+                    song = new Song();
+                    record = new TopSongRecord();
+
+                    if (inputString.contains("rank="))
+                    {
+                        int startOfRankNumber = inputString.indexOf("rank=\"") + 6;
+                        String rankString = inputString.substring(startOfRankNumber);
+                        rankString.replace("\"", "").trim();
+
+                        rank = Integer.valueOf(rankString.substring(0, rankString.indexOf(">")-1));
+                    }
+
+                    if (inputString.contains("<name>") && inputString.contains("</name>") && !startArtistTag)
+                    {
+                        songName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
+
+                    }
+                    if (inputString.contains("<name>") && inputString.contains("</name>") && startArtistTag)
+                    {
+                        artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
+                    }
+
+                    if (inputString.contains("<playcount>") && inputString.contains("</playcount>"))
+                    {
+                        playCount = Integer.valueOf(inputString.substring(inputString.indexOf("<playcount>") + 11, inputString.indexOf("</playcount>")));
+                    }
+                }
+
+                if (stopTag)
+                {
+                    song.setArtist(artistName);
+                    song.setTitle(songName);
+                    record.setSong(song);
+                    record.setPlayCount(playCount);
+                    record.setRank(rank);
+                    searchResults.add(record);
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         return searchResults;
     }
 

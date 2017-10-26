@@ -4,6 +4,7 @@ import com.steven.hicks.AcademicHandling.AcademicLogic;
 import com.steven.hicks.ResultsPage;
 import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.*;
+import com.sun.org.apache.regexp.internal.REDebugCompiler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -234,13 +235,67 @@ public class TechHandler extends HttpServlet
 
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
+            request.setAttribute("lookupCriteria", "artist");
 
             List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName, selectedOption);
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(artistRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallTopArtistsPopup.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallTopArtistsPopup.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("topAlbums"))
+        {
+            String userName = "shicks255";
+            String pageNumberString = request.getParameter("pageNumber");
+            if (pageNumberString == null || pageNumberString.length() == 0)
+                pageNumberString = "1";
+            int pageNumber = Integer.parseInt(pageNumberString);
+
+            String selectedOption = request.getParameter("selectedTimeOption");
+            if (selectedOption == null || selectedOption.length() == 0)
+                selectedOption = "overall";
+            request.setAttribute("selectedTimePeriod", selectedOption);
+
+            List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
+            request.setAttribute("timeOptions", timeOptions);
+            request.setAttribute("lookupCriteria", "albums");
+
+            List<TopAlbumRecord> albumRecords = TechLogic.searchForTopAlbums(request, userName, selectedOption);
+            List<ResultsPage> resultPages = CommonUtils.putResultsInPage(albumRecords, 10);
+            request.setAttribute("resultPages", resultPages);
+            request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallTopAlbumsPopup.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equalsIgnoreCase("topSongs"))
+        {
+            String userName = "shicks255";
+            String pageNumberString = request.getParameter("pageNumber");
+            if (pageNumberString == null || pageNumberString.length() == 0)
+                pageNumberString = "1";
+            int pageNumber = Integer.parseInt(pageNumberString);
+
+            String selectedOption = request.getParameter("selectedTimeOption");
+            if (selectedOption == null || selectedOption.length() == 0)
+                selectedOption = "overall";
+            request.setAttribute("selectedTimePeriod", selectedOption);
+
+            List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
+            request.setAttribute("timeOptions", timeOptions);
+
+            List<TopSongRecord> songRecords = TechLogic.searchForTopSongs(request, userName, selectedOption);
+            List<ResultsPage> resultPages = CommonUtils.putResultsInPage(songRecords, 10);
+            request.setAttribute("resultPages", resultPages);
+            request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
+
+            request.setAttribute("lookupCriteria", "songs");
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallTopSongsPopup.jsp");
             dispatcher.forward(request, response);
         }
     }

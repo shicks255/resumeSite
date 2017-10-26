@@ -53,16 +53,7 @@
 
 </script>
 
-<button class="waves-effect waves-light btn" onclick="closeResultsPopup();">Close</button>
-
-<select class="browser-default" onchange="getTopArtistsForTime();" required id="timePeriod" name="timePeriod">
-
-    <c:forEach var="option" items="${timeOptions}">
-        <option value="${option}" <c:if test="${option.equals(selectedTimePeriod)}">selected</c:if>>
-            <c:out value="${option}"/>
-        </option>
-    </c:forEach>
-</select>
+<jsp:include page="lastFMTopRecordsNavBar.jsp"/>
 
 <table border="1" class="striped">
     <tr>

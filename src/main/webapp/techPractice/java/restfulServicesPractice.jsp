@@ -103,7 +103,40 @@
                 alert("error, status is " + textStatus + ", error is " + errorThrown);
             }
         });
+    }
 
+    function getLastFmTopSongs()
+    {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/techPractice?action=topSongs",
+            success:function(data)
+            {
+                $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                $( '#restResultsBoxPopup' ).html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("error, status is " + textStatus + ", error is " + errorThrown);
+            }
+        });
+    }
+
+    function getLastFmTopAlbums()
+    {
+        $.ajax({
+            type: "GET",
+            url: "${pageContext.request.contextPath}/techPractice?action=topAlbums",
+            success:function(data)
+            {
+                $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
+                $( '#restResultsBoxPopup' ).html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                alert("error, status is " + textStatus + ", error is " + errorThrown);
+            }
+        });
     }
 
     function closeResultsPopup()
