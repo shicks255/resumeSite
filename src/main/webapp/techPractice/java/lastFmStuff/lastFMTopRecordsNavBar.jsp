@@ -15,7 +15,6 @@
 <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('song')}">pressed</c:if>" onclick="getLastFmTopSongs();">Songs</button>
 
 <label for="timePeriod">Time period:</label>
-
 <c:set var="onChangeEvent" value=""/>
 <c:if test="${lookupCriteria.equals('artist')}">
     <c:set var="onChangeEvent" value="getTopArtistsForTime();"/>
