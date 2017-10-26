@@ -4,6 +4,10 @@
     margin-bottom : 2px;
 }
 
+.pressed {
+    background-color: #1d7d74;
+}
+
 .carousel .carousel-item{
     width : 600px;
     height : 600px;

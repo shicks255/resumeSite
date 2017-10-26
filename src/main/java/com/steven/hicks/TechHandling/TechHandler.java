@@ -235,12 +235,12 @@ public class TechHandler extends HttpServlet
 
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
-            request.setAttribute("lookupCriteria", "artist");
 
             List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName, selectedOption);
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(artistRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
+            request.setAttribute("lookupCriteria", "artist");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallTopArtistsPopup.jsp");
             dispatcher.forward(request, response);
@@ -261,12 +261,12 @@ public class TechHandler extends HttpServlet
 
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
-            request.setAttribute("lookupCriteria", "albums");
 
             List<TopAlbumRecord> albumRecords = TechLogic.searchForTopAlbums(request, userName, selectedOption);
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(albumRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
+            request.setAttribute("lookupCriteria", "album");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallTopAlbumsPopup.jsp");
             dispatcher.forward(request, response);
@@ -292,8 +292,7 @@ public class TechHandler extends HttpServlet
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(songRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
-
-            request.setAttribute("lookupCriteria", "songs");
+            request.setAttribute("lookupCriteria", "song");
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallTopSongsPopup.jsp");
             dispatcher.forward(request, response);

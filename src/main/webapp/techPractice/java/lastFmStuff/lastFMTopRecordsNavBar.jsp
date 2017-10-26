@@ -10,20 +10,20 @@
 <br/>
 <br/>
 <br/>
-<button class="waves-effect waves-light btn" onclick="getLastFmTopArtists();">Artists</button>
-<button class="waves-effect waves-light btn" onclick="getLastFmTopAlbums();">Albums</button>
-<button class="waves-effect waves-light btn" onclick="getLastFmTopSongs();">Songs</button>
+<button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('artist')}">pressed</c:if>" onclick="getLastFmTopArtists();">Artists</button>
+<button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('album')}">pressed</c:if>" onclick="getLastFmTopAlbums();">Albums</button>
+<button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('song')}">pressed</c:if>" onclick="getLastFmTopSongs();">Songs</button>
 
 <label for="timePeriod">Time period:</label>
 
 <c:set var="onChangeEvent" value=""/>
-<c:if test="${lookupCriteria.equals('artists')}">
+<c:if test="${lookupCriteria.equals('artist')}">
     <c:set var="onChangeEvent" value="getTopArtistsForTime();"/>
 </c:if>
-<c:if test="${lookupCriteria.equals('albums')}">
+<c:if test="${lookupCriteria.equals('album')}">
     <c:set var="onChangeEvent" value="getTopAlbumsForTime();"/>
 </c:if>
-<c:if test="${lookupCriteria.equals('songs')}">
+<c:if test="${lookupCriteria.equals('song')}">
     <c:set var="onChangeEvent" value="getTopSongsForTime();"/>
 </c:if>
 
