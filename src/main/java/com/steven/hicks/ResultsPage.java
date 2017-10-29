@@ -3,10 +3,9 @@ package com.steven.hicks;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultsPage
+public class ResultsPage<T>
 {
-
-    private List<Object> results;
+    private List<T> results;
     private int pageNumber;
     private int resultsPerPage;
     private boolean lastPage;
@@ -17,12 +16,12 @@ public class ResultsPage
         resultsPerPage = 10;
     }
 
-    public List<Object> getResults()
+    public List<T> getResults()
     {
         return results;
     }
 
-    public void setResults(List<Object> results)
+    public void setResults(List<T> results)
     {
         this.results = results;
     }
