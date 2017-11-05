@@ -5,6 +5,10 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
+<style>
+    td {padding : 0;}
+</style>
+
 <script>
     function emailPopup()
     {
@@ -24,8 +28,9 @@
                     {
                         $( '#recentTracksTable tr:last' ).after(
                             '<tr>' +
+                            '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
                             '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
-                            '<td> now playing </td>' +
+                            '<td> <i class="material-icons">equalizer</i>" now playing </td>' +
                             '</tr>'
                         );
                     }
@@ -35,6 +40,7 @@
                         date.setHours(date.getHours() - 5);
                         $( '#recentTracksTable tr:last' ).after(
                             '<tr>' +
+                            '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
                             '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
                             '<td>' + date.toLocaleString() + '</td>' +
                             '</tr>'
