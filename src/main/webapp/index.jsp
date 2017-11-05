@@ -10,12 +10,52 @@
     {
         $( '#dialog-emailPopup' ).removeClass('hiddenDiv').addClass('popup');
     }
+
+    function getRecentTracks()
+    {
+        console.log("getting recent track info");
+        $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
+            function(json)
+            {
+                console.log(json);
+                $.each(json.recenttracks.track, function(i, item)
+                {
+                    if (item['@attr'])
+                    {
+                        $( '#recentTracksTable tr:last' ).after(
+                            '<tr>' +
+                            '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
+                            '<td> now playing </td>' +
+                            '</tr>'
+                        );
+                    }
+                    else
+                    {
+                        var date = new Date(item.date['#text']);
+                        date.setHours(date.getHours() - 5);
+                        $( '#recentTracksTable tr:last' ).after(
+                            '<tr>' +
+                            '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
+                            '<td>' + date.toLocaleString() + '</td>' +
+                            '</tr>'
+                        );
+                    }
+                });
+            });
+    }
 </script>
 
 <div class="container">
 
     <div onclick="emailPopup();" class="fixed-action-btn hide-on-small-and-down" style="bottom:45px; right: 14px;">
         <a class="btn-floating btn-medium waves-effect waves-light deep-purple lighten-3"><i class="large material-icons">mail</i></a>
+    </div>
+
+    <button class="btn waves-effect waves-light" onclick="getRecentTracks();">Musivc</button>
+    <div id="recentTracks" name="recentTracks">
+        <table id="recentTracksTable" class="striped">
+            <tr></tr>
+        </table>
     </div>
 
     <br><br>

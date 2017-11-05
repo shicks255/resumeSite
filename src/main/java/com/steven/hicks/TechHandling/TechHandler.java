@@ -4,7 +4,6 @@ import com.steven.hicks.AcademicHandling.AcademicLogic;
 import com.steven.hicks.ResultsPage;
 import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.*;
-import com.sun.org.apache.regexp.internal.REDebugCompiler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
