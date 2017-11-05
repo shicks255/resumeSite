@@ -100,6 +100,45 @@
             $( '#popup-infoMessage' ).removeClass('popup').addClass('hiddenDiv');
         }
 
+        function showRecentTracks()
+        {
+            $( '#recentTracksContainer' ).removeClass('hiddenDiv').addClass('popup');
+            $( '#recentTracks' ).empty();
+            $( '#recentTracks' ).append(
+                '<button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>' +
+                '<table class="striped">'
+            );
+            $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
+                function(json)
+                {
+                    $.each(json.recenttracks.track, function(i, item)
+                    {
+                        if (item['@attr'])
+                        {
+                            $( '#recentTracks' ).append(
+                                '<tr>' +
+                                '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
+                                '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
+                                '<td> <i class="material-icons">equalizer</i>now playing </td>' +
+                                '</tr>'
+                            );
+                        }
+                        else
+                        {
+                            var date = new Date(item.date['#text']);
+                            date.setHours(date.getHours() - 5);
+                            $( '#recentTracks' ).append(
+                                '<tr>' +
+                                '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
+                                '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
+                                '<td>' + date.toLocaleString() + '</td>' +
+                                '</tr>'
+                            );
+                        }
+                    });
+                    $( '#recentTracks' ).append('</table>');
+                });
+        }
 
     </script>
 
@@ -138,6 +177,7 @@
     </ul>
 
     <ul id="dropdown5" class="dropdown-content cyan right">
+        <li><a class="dropdown-button-mobile" onclick="showRecentTracks();" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/last-fm-3-24_smaller.png"/></i></a></li>
         <li><a class="dropdown-button-mobile" target="_blank" href="https://www.linkedin.com/in/steven-hicks-03390093/"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a></li>
         <li><a class="dropdown-button-mobile" target="_blank" href="https://www.facebook.com/steven.hix.9"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a></li>
         <li><a class="dropdown-button-mobile" target="_blank" href="https://stackoverflow.com/users/8138169/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a></li>
@@ -148,7 +188,7 @@
         <div class="nav-wrapper cyan">
             <%--Icons--%>
             <div class="brand-logo right cyan" style="min-width: 115px;">
-                <a target="_blank" href="" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/last-fm-3-24.png"/></i></a>
+                <a target="_blank" style="cursor:pointer" onclick="showRecentTracks();" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/last-fm-3-24_smaller.png"/></i></a>
                 <a target="_blank" href="https://www.linkedin.com/in/steven-hicks-03390093/" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a>
                 <a target="_blank" href="https://www.facebook.com/steven.hix.9" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a>
                 <a target="_blank" href="https://stackoverflow.com/users/8138169/shicks255" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a>
@@ -192,5 +232,10 @@
                 <span id="_info_message_text_">Info message</span>
             </p>
             <button class="btn waves-effect waves-light" onclick="hideInfoMessage();">Close</button>
+        </div>
+    </div>
+
+    <div class="hiddenDiv" id="recentTracksContainer">
+        <div id="recentTracks" class="popupContent">
         </div>
     </div>

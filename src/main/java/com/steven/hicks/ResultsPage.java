@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultsPage<T>
+
 {
     private List<T> results;
     private int pageNumber;
