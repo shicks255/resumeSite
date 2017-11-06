@@ -51,7 +51,17 @@ table.striped > tbody > tr:nth-child(odd) {
 }
 
 td {
-    padding : 0 5px 0 5px;
+    padding : 0 10px 0 5px;
+}
+
+@media (max-width : 480px) {
+    td{
+        padding : 0;
+    }
+}
+
+.pagination {
+    text-align : center;
 }
 
 /*.nav-wrapper {*/

@@ -7,6 +7,8 @@
 <button class="waves-effect waves-light btn" onclick="closeResultsPopup();">Close</button>
 <br/>
 
+<h4>My Last.fm Profile Data</h4>
+
 <br/>
 <br/>
 <br/>
@@ -14,7 +16,6 @@
 <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('album')}">pressed</c:if>" onclick="getLastFmTopAlbums();">Albums</button>
 <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('song')}">pressed</c:if>" onclick="getLastFmTopSongs();">Songs</button>
 <br/>
-<label for="timePeriod">Time period:</label>
 <c:set var="onChangeEvent" value=""/>
 <c:if test="${lookupCriteria.equals('artist')}">
     <c:set var="onChangeEvent" value="getTopArtistsForTime();"/>
@@ -26,8 +27,21 @@
     <c:set var="onChangeEvent" value="getTopSongsForTime();"/>
 </c:if>
 
-<select class="browser-default" onchange="${onChangeEvent}" required id="timePeriod" name="timePeriod">
+<h5>
+    <label for="timePeriod"><h5>Time period:</h5></label>
+</h5>
 
+<style>
+    @media (min-width : 720px)
+    {
+        .changeSize
+        {
+            width : 20% ;
+        }
+    }
+</style>
+
+<select class="browser-default changeSize" onchange="${onChangeEvent}" required id="timePeriod" name="timePeriod">
     <c:forEach var="option" items="${timeOptions}">
         <option value="${option}" <c:if test="${option.equals(selectedTimePeriod)}">selected</c:if>>
             <c:out value="${option}"/>

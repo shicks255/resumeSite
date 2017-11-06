@@ -113,10 +113,10 @@
                         if (item['@attr'])
                         {
                             $( '#recentTracksTable' ).find('tbody').append(
-                                '<tr align="center">' +
-                                '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
+                                '<tr align="center" style="width:100%;">' +
+                                '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
-                                '<td> <i class="material-icons">equalizer</i>now playing </td>' +
+                                '<td style="text-align:right;"> <i class="material-icons right"">equalizer</i>now playing </td>' +
                                 '</tr>'
                             );
                         }

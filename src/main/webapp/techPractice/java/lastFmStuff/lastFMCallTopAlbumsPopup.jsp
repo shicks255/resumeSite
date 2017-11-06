@@ -59,7 +59,6 @@
     <thead>
     <tr>
         <th><b>Rank</b></th>
-        <th></th>
         <th><b>Album</b></th>
         <th><b>Artist</b></th>
         <th><b>Play Count</b></th>
@@ -74,14 +73,33 @@
         </c:if>
         <tr>
             <td><b><c:out value="${result.rank}"/></b></td>
-            <td><img alt="albumImg" src="${imageUrl}"/></td>
-            <td><c:out value="${result.album.album}"/></td>
+            <td valign="middle">
+                <img class="makeSmaller" alt="albumImg" src="${imageUrl}"/>
+                <span class="makeSmaller"><c:out value="${result.album.album}"/></span>
+            </td>
             <td><c:out value="${result.album.artist}"/></td>
             <td><fmt:formatNumber value="${result.playCount}" pattern="#,###"/></td>
         </tr>
     </c:forEach>
-
 </table>
+
+<style>
+    @media (min-width : 860px)
+    {
+        .makeSmaller
+        {
+            display : inline-block;
+            vertical-align: middle;
+        }
+    }
+    @media (max-width : 860px)
+    {
+        .makeSmaller
+        {
+            display : block;
+        }
+    }
+</style>
 
 <ul class="pagination">
     <%--Back arrow--%>
@@ -105,5 +123,4 @@
         <c:set var="forwardArrowClass" value="disabled"/>
     </c:if>
     <li class="${forwardArrowClass}"><a onclick="changePage('${selectedPage.pageNumber + 1}');"><i class="material-icons">chevron_right</i></a></li>
-
 </ul>
