@@ -13,7 +13,7 @@
 <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('artist')}">pressed</c:if>" onclick="getLastFmTopArtists();">Artists</button>
 <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('album')}">pressed</c:if>" onclick="getLastFmTopAlbums();">Albums</button>
 <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('song')}">pressed</c:if>" onclick="getLastFmTopSongs();">Songs</button>
-
+<br/>
 <label for="timePeriod">Time period:</label>
 <c:set var="onChangeEvent" value=""/>
 <c:if test="${lookupCriteria.equals('artist')}">

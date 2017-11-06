@@ -58,6 +58,7 @@
 <table border="1" class="striped">
     <tr>
         <td><b>Rank</b></td>
+        <td></td>
         <td><b>Album</b></td>
         <td><b>Artist</b></td>
         <td><b>Play Count</b></td>
@@ -67,6 +68,7 @@
     <c:forEach var="result" items="${selectedPage.results}">
         <tr>
             <td><b><c:out value="${result.rank}"/></b></td>
+            <td><img alt="albumImg" src="${result.album.medImageUrl}"/></td>
             <td><c:out value="${result.album.album}"/></td>
             <td><c:out value="${result.album.artist}"/></td>
             <td><fmt:formatNumber value="${result.playCount}" pattern="#,###"/></td>
