@@ -5,6 +5,9 @@ public class Album
     private String artist = "";
     private String album = "";
 
+    String smallImageUrl;
+    String medImageUrl;
+
     public Album()
     {}
 
@@ -37,4 +40,23 @@ public class Album
         this.album = album;
     }
 
+    public String getSmallImageUrl()
+    {
+        return smallImageUrl;
+    }
+
+    public void setSmallImageUrl(String smallImageUrl)
+    {
+        this.smallImageUrl = smallImageUrl;
+    }
+
+    public String getMedImageUrl()
+    {
+        return medImageUrl;
+    }
+
+    public void setMedImageUrl(String medImageUrl)
+    {
+        this.medImageUrl = medImageUrl;
+    }
 }

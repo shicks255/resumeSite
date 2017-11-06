@@ -167,6 +167,8 @@ public class TechLogic
 
         String artistName = "";
         String albumName = "";
+        String smallImage = "";
+        String medImage = "";
         int rank = 0;
         int playCount = 0;
 
@@ -226,12 +228,21 @@ public class TechLogic
                     {
                         playCount = Integer.valueOf(inputString.substring(inputString.indexOf("<playcount>") + 11, inputString.indexOf("</playcount>")));
                     }
+                    if (inputString.contains("<image size="))
+                    {
+                        if (inputString.contains("size=\"small\""))
+                            smallImage = inputString.substring(inputString.indexOf("size=\"small\"") + 13, inputString.indexOf("</image>"));
+                        if (inputString.contains("size=\"medium\""))
+                            medImage = inputString.substring(inputString.indexOf("size=\"medium\"") + 14, inputString.indexOf("</image>"));
+                    }
                 }
 
                 if (stopTag)
                 {
                     album.setArtist(artistName);
                     album.setAlbum(albumName);
+                    album.setSmallImageUrl(smallImage);
+                    album.setMedImageUrl(medImage);
                     record.setAlbum(album);
                     record.setPlayCount(playCount);
                     record.setRank(rank);
@@ -257,6 +268,8 @@ public class TechLogic
         String artistName = "";
         int rank = 0;
         int playCount = 0;
+        String smallImage = "";
+        String medImage = "";
         MusicArtist musicArtist = new MusicArtist();
         TopArtistRecord record = new TopArtistRecord();
 
@@ -288,21 +301,28 @@ public class TechLogic
 
                         rank = Integer.valueOf(rankString.substring(0, rankString.indexOf(">")-1));
                     }
-
                     if (inputString.contains("<name>") && inputString.contains("</name>"))
                     {
                         artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
                     }
-
                     if (inputString.contains("<playcount>") && inputString.contains("</playcount>"))
                     {
                         playCount = Integer.valueOf(inputString.substring(inputString.indexOf("<playcount>") + 11, inputString.indexOf("</playcount>")));
+                    }
+                    if (inputString.contains("<image size="))
+                    {
+                        if (inputString.contains("size=\"small\""))
+                            smallImage = inputString.substring(inputString.indexOf("size=\"small\"") + 13, inputString.indexOf("</image>"));
+                        if (inputString.contains("size=\"medium\""))
+                            medImage = inputString.substring(inputString.indexOf("size=\"medium\"") + 14, inputString.indexOf("</image>"));
                     }
                 }
 
                 if (stopTag)
                 {
                     musicArtist.setArtistName(artistName);
+                    musicArtist.setSmallImageUrl(smallImage);
+                    musicArtist.setMedImageUrl(medImage);
                     record.setMusicArtist(musicArtist);
                     record.setPlayCount(playCount);
                     record.setRank(rank);
@@ -381,6 +401,8 @@ public class TechLogic
 
         String artistName = "";
         String songName = "";
+        String smallImage = "";
+        String medImage = "";
         int rank = 0;
         int playCount = 0;
 
@@ -425,7 +447,6 @@ public class TechLogic
 
                         rank = Integer.valueOf(rankString.substring(0, rankString.indexOf(">")-1));
                     }
-
                     if (inputString.contains("<name>") && inputString.contains("</name>") && !startArtistTag)
                     {
                         songName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
@@ -435,10 +456,16 @@ public class TechLogic
                     {
                         artistName = inputString.substring(inputString.indexOf("<name>") + 6, inputString.indexOf("</name"));
                     }
-
                     if (inputString.contains("<playcount>") && inputString.contains("</playcount>"))
                     {
                         playCount = Integer.valueOf(inputString.substring(inputString.indexOf("<playcount>") + 11, inputString.indexOf("</playcount>")));
+                    }
+                    if (inputString.contains("<image size="))
+                    {
+                        if (inputString.contains("size=\"small\""))
+                            smallImage = inputString.substring(inputString.indexOf("size=\"small\"") + 13, inputString.indexOf("</image>"));
+                        if (inputString.contains("size=\"medium\""))
+                            medImage = inputString.substring(inputString.indexOf("size=\"medium\"") + 14, inputString.indexOf("</image>"));
                     }
                 }
 
@@ -446,6 +473,8 @@ public class TechLogic
                 {
                     song.setArtist(artistName);
                     song.setTitle(songName);
+                    song.setSmallImageUrl(smallImage);
+                    song.setMedImageUrl(medImage);
                     record.setSong(song);
                     record.setPlayCount(playCount);
                     record.setRank(rank);
@@ -468,8 +497,8 @@ public class TechLogic
         boolean startArtistTag = false;
         boolean stopArtistTag = false;
         String artistName = "";
-        String urll = "";
-        String imageUrl = "";
+//        String urll = "";??
+//        String imageUrl = "";
         MusicArtist musicArtist = new MusicArtist();
 
         try
@@ -498,23 +527,23 @@ public class TechLogic
     //                        musicArtist.setArtistName(artistName);
                     }
 
-                    if (inputString.contains("<url>") && inputString.contains("</url>"))
-                    {
-                        urll = inputString.substring(inputString.indexOf("<url>") + 5, inputString.indexOf("</url>"));
-    //                        musicArtist.setUrl(urll);
-                    }
-
-                    if (inputString.contains("<image>") && inputString.contains("</image>"))
-                    {
-                        imageUrl = inputString.substring(inputString.indexOf("<image>") + 5, inputString.indexOf("</image>"));
-    //                        musicArtist.setImageURL(imageUrl);
-                    }
+//                    if (inputString.contains("<url>") && inputString.contains("</url>"))
+//                    {
+//                        urll = inputString.substring(inputString.indexOf("<url>") + 5, inputString.indexOf("</url>"));
+//                            musicArtist.setUrl(urll);
+//                    }
+//
+//                    if (inputString.contains("<image>") && inputString.contains("</image>"))
+//                    {
+//                        imageUrl = inputString.substring(inputString.indexOf("<image>") + 5, inputString.indexOf("</image>"));
+//                            musicArtist.setImageURL(imageUrl);
+//                    }
                 }
 
                 if (stopArtistTag)
                 {
                     musicArtist.setArtistName(artistName);
-                    musicArtist.setUrl(urll);
+//                    musicArtist.setUrl(urll);
                     searchResults.add(musicArtist);
                 }
             }

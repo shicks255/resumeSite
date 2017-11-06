@@ -5,6 +5,8 @@ public class Song
     private String title;
     private String album;
     private String artist;
+    String smallImageUrl;
+    String medImageUrl;
 
 
     public String getTitle()
@@ -35,5 +37,25 @@ public class Song
     public void setArtist(String artist)
     {
         this.artist = artist;
+    }
+
+    public String getSmallImageUrl()
+    {
+        return smallImageUrl;
+    }
+
+    public void setSmallImageUrl(String smallImageUrl)
+    {
+        this.smallImageUrl = smallImageUrl;
+    }
+
+    public String getMedImageUrl()
+    {
+        return medImageUrl;
+    }
+
+    public void setMedImageUrl(String medImageUrl)
+    {
+        this.medImageUrl = medImageUrl;
     }
 }

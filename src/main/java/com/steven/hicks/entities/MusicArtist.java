@@ -4,8 +4,8 @@ public class MusicArtist
 {
     private String artistName = "";
 
-    private String url = "";
-    private String imageURL = "";
+    String smallImageUrl;
+    String medImageUrl;
 
     public MusicArtist() {}
 
@@ -32,23 +32,23 @@ public class MusicArtist
         this.artistName = artistName;
     }
 
-    public String getUrl()
+    public String getSmallImageUrl()
     {
-        return url;
+        return smallImageUrl;
     }
 
-    public void setUrl(String url)
+    public void setSmallImageUrl(String smallImageUrl)
     {
-        this.url = url;
+        this.smallImageUrl = smallImageUrl;
     }
 
-    public String getImageURL()
+    public String getMedImageUrl()
     {
-        return imageURL;
+        return medImageUrl;
     }
 
-    public void setImageURL(String imageURL)
+    public void setMedImageUrl(String medImageUrl)
     {
-        this.imageURL = imageURL;
+        this.medImageUrl = medImageUrl;
     }
 }
