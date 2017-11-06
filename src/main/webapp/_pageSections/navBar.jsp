@@ -104,8 +104,7 @@
         {
             showWaitingPopup("gathering data...");
             $( '#recentTracksContainer' ).removeClass('hiddenDiv').addClass('popup');
-            $( '#recentTracksContent' ).empty();
-            $( '#recentTracksContent' ).append('<table class="striped">');
+            $( '#recentTracksTable tbody' ).empty();
             $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
                 function(json)
                 {
@@ -113,8 +112,8 @@
                     {
                         if (item['@attr'])
                         {
-                            $( '#recentTracksContent' ).append(
-                                '<tr>' +
+                            $( '#recentTracksTable' ).find('tbody').append(
+                                '<tr align="center">' +
                                 '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
                                 '<td> <i class="material-icons">equalizer</i>now playing </td>' +
@@ -125,8 +124,8 @@
                         {
                             var date = new Date(item.date['#text']);
                             date.setHours(date.getHours() - 5);
-                            $( '#recentTracksContent' ).append(
-                                '<tr>' +
+                            $( '#recentTracksTable' ).find('tbody').append(
+                                '<tr align="center" style="width:100%;">' +
                                 '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
                                 '<td>' + date.toLocaleString() + '</td>' +
@@ -134,8 +133,8 @@
                             );
                         }
                     });
-                    $( '#recentTracks' ).append('</table>');
                     hideWaitingPopup();
+                    $( '#recentTracksContent' ).append('</table>');
                 });
         }
 
@@ -238,7 +237,9 @@
         <div id="recentTracks" class="popupContent">
             <button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>
             <h4>Recently Listened To</h4>
-            <div id="recentTracksContent">
-            </div>
+            <table id="recentTracksTable">
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>

@@ -116,7 +116,9 @@ input[type=submit]:hover {color : red;}
 }
 
 .popupContent{
-    margin : 15% auto;
+    margin-left : 15%;
+    margin-right : 15%;
+    margin-top : 3.25%;
     padding : 20px;
     border : 1px solid black;
     background-color : #f4eff7    ;
