@@ -86,6 +86,8 @@ h2 {  color : #ff9e80;  }
 
 h3 {  color : #2ab5e0;  }
 
+h4 { color : #9fa8da; text-align: center}
+
 button {border-radius : 5px;}
 
 button:hover {

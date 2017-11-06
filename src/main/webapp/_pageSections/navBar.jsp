@@ -104,11 +104,8 @@
         {
             showWaitingPopup("gathering data...");
             $( '#recentTracksContainer' ).removeClass('hiddenDiv').addClass('popup');
-            $( '#recentTracks' ).empty();
-            $( '#recentTracks' ).append(
-                '<button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>' +
-                '<table class="striped">'
-            );
+            $( '#recentTracksContent' ).empty();
+            $( '#recentTracksContent' ).append('<table class="striped">');
             $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
                 function(json)
                 {
@@ -116,7 +113,7 @@
                     {
                         if (item['@attr'])
                         {
-                            $( '#recentTracks' ).append(
+                            $( '#recentTracksContent' ).append(
                                 '<tr>' +
                                 '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
@@ -128,7 +125,7 @@
                         {
                             var date = new Date(item.date['#text']);
                             date.setHours(date.getHours() - 5);
-                            $( '#recentTracks' ).append(
+                            $( '#recentTracksContent' ).append(
                                 '<tr>' +
                                 '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
@@ -239,5 +236,9 @@
 
     <div class="hiddenDiv" id="recentTracksContainer">
         <div id="recentTracks" class="popupContent">
+            <button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>
+            <h4>Recently Listened To</h4>
+            <div id="recentTracksContent">
+            </div>
         </div>
     </div>
