@@ -145,7 +145,7 @@ input::-moz-placeholder {
     line-height: 3;
 }
 
-
+/*Table Stuff*/
 .slimTable {
     width : 80%;
 }
@@ -218,6 +218,8 @@ label{
 
 #calculatorBox button:active {
     transform : translate(2px, 1px);}
+
+
 
 /*Media Queries*/
 @media (max-width : 480px) {

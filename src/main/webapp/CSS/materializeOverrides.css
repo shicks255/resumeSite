@@ -44,6 +44,16 @@ dropdown-button-mobile:hover {
     color : #391e59
 }
 
+table.striped > tbody > tr:nth-child(odd) {
+    background-color: #DFDFDF;
+}table.striped > tbody > tr:nth-child(even) {
+    background-color: #FFEBEE;
+}
+
+td {
+    padding : 0 5px 0 5px;
+}
+
 /*.nav-wrapper {*/
     /*background-color : #e3f2fd;*/
     /*height : 50px;*/

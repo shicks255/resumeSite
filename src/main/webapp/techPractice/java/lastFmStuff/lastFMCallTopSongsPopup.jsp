@@ -56,13 +56,15 @@
 <jsp:include page="lastFMTopRecordsNavBar.jsp"/>
 
 <table border="1" class="striped">
+    <thead>
     <tr>
-        <td><b>Rank</b></td>
-        <td></td>
-        <td><b>Song</b></td>
-        <td><b>Artist</b></td>
-        <td><b>Play Count</b></td>
+        <th><b>Rank</b></th>
+        <th></th>
+        <th><b>Song</b></th>
+        <th><b>Artist</b></th>
+        <th><b>Play Count</b></th>
     </tr>
+    </thead>
 
     <c:set var="rowIndex" value="${0}"/>
     <c:forEach var="result" items="${selectedPage.results}">

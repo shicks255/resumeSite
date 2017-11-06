@@ -126,9 +126,9 @@
                             date.setHours(date.getHours() - 5);
                             $( '#recentTracksTable' ).find('tbody').append(
                                 '<tr align="center" style="width:100%;">' +
-                                '<td><img src="' + item.image[1]['#text'] + '" /></td>' +
+                                '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
-                                '<td>' + date.toLocaleString() + '</td>' +
+                                '<td style="text-align:right;">' + date.toLocaleString() + '</td>' +
                                 '</tr>'
                             );
                         }
@@ -237,7 +237,7 @@
         <div id="recentTracks" class="popupContent">
             <button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>
             <h4>Recently Listened To</h4>
-            <table id="recentTracksTable">
+            <table class="striped" id="recentTracksTable" align="center">
                 <tbody>
                 </tbody>
             </table>

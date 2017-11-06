@@ -5,10 +5,6 @@
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
-<style>
-    td {padding : 0;}
-</style>
-
 <script>
     function emailPopup()
     {
