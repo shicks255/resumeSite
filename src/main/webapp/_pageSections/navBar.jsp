@@ -102,6 +102,7 @@
 
         function showRecentTracks()
         {
+            showWaitingPopup("gathering data...");
             $( '#recentTracksContainer' ).removeClass('hiddenDiv').addClass('popup');
             $( '#recentTracks' ).empty();
             $( '#recentTracks' ).append(
@@ -137,6 +138,7 @@
                         }
                     });
                     $( '#recentTracks' ).append('</table>');
+                    hideWaitingPopup();
                 });
         }
 
