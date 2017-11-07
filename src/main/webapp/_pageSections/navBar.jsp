@@ -21,13 +21,13 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.js"></script>
 
     <script>
+        window.setInterval(function()
+        {
+            ajaxToGetTracks();
+        }, 20000);
+
         $(document).ready(function()
         {
-//            :todo do i need this?
-            <%--<c:if test="${!empty infoMessage}">--%>
-//                console.log("something");
-                <%--showInfoMessage(${infoMessage});--%>
-            <%--</c:if>--%>
 
             doDropdown();
             doDropdownMobile();
@@ -100,10 +100,9 @@
             $( '#popup-infoMessage' ).removeClass('popup').addClass('hiddenDiv');
         }
 
-        function showRecentTracks()
+        function ajaxToGetTracks()
         {
-            showWaitingPopup("gathering data...");
-            $( '#recentTracksContainer' ).removeClass('hiddenDiv').addClass('popup');
+            console.log("fuck me");
             $( '#recentTracksTable tbody' ).empty();
             $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
                 function(json)
@@ -116,7 +115,7 @@
                                 '<tr align="center" style="width:100%;">' +
                                 '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
                                 '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
-                                '<td style="text-align:right;"> <i class="material-icons right"">equalizer</i>now playing </td>' +
+                                '<td style="text-align:right;"> <i class="material-icons right"><img src="${pageContext.request.contextPath}/icons/musicPlaying.gif"/></i>now playing </td>' +
                                 '</tr>'
                             );
                         }
@@ -133,9 +132,15 @@
                             );
                         }
                     });
-                    hideWaitingPopup();
-                    $( '#recentTracksContent' ).append('</table>');
                 });
+        }
+
+        function showRecentTracks()
+        {
+            showWaitingPopup("gathering data...");
+            ajaxToGetTracks();
+            $( '#recentTracksContainer' ).removeClass('hiddenDiv').addClass('popup');
+            hideWaitingPopup();
         }
 
     </script>
