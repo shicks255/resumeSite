@@ -21,6 +21,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.js"></script>
 
     <script>
+//        //:todo make is so the whole page doesnt refresh
         window.setInterval(function()
         {
             ajaxToGetTracks();
