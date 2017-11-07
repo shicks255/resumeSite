@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/mainStyle.css">
     <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/icons/ShicksLogo.ico" />
     <title>Steven M Hicks | Java Developer</title>
 
@@ -19,15 +18,16 @@
     <meta name="keywords" content="Steven Hicks, Steven M Hicks, Steven M. Hicks, shicks, shicks255, New Jersey, NJ, Hunterdon County, java, forge-tech, forge tech, web developer, software developer, computer programmer, programming"/>
 
     <script type="text/javascript" src=https://code.jquery.com/jquery-2.1.1.min.js></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/JS/materialize.js"></script>
 
     <script>
         $(document).ready(function()
         {
-            <c:if test="${!empty infoMessage}">
-                console.log("something");
-                showInfoMessage(${infoMessage});
-            </c:if>
+//            :todo do i need this?
+            <%--<c:if test="${!empty infoMessage}">--%>
+//                console.log("something");
+                <%--showInfoMessage(${infoMessage});--%>
+            <%--</c:if>--%>
 
             doDropdown();
             doDropdownMobile();
@@ -142,46 +142,6 @@
 
 </head>
 <body>
-    <ul id="dropdown1" class="dropdown-content cyan">
-        <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?action=thesis">Thesis</a></li>
-        <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a></li>
-    </ul>
-
-    <ul id="dropdown2" class="dropdown-content cyan">
-        <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=java">Java</a></li>
-        <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=javaScript">JavaScript</a></li>
-        <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=css">CSS</a></li>
-    </ul>
-
-    <ul id="dropdown4" class="dropdown-content cyan">
-        <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=java">Java</a></li>
-        <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=javaScript">JavaScript</a></li>
-        <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/techPractice?action=css">CSS</a></li>
-    </ul>
-
-    <ul id="dropdown3" class="dropdown-content cyan">
-        <li class="divider"></li>
-        <li><a class="white-text" href="${pageContext.request.contextPath}/academic?action=thesis">Thesis</a></li>
-        <li class="divider"></li>
-        <li><a class="white-text " href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a></li>
-    </ul>
-
-    <ul id="dropdown5" class="dropdown-content cyan right">
-        <li><a class="dropdown-button-mobile" onclick="showRecentTracks();" class="hide-on-med-and-down cyan"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/last-fm-3-24_smaller.png"/></i></a></li>
-        <li><a class="dropdown-button-mobile" target="_blank" href="https://www.linkedin.com/in/steven-hicks-03390093/"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a></li>
-        <li><a class="dropdown-button-mobile" target="_blank" href="https://www.facebook.com/steven.hix.9"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a></li>
-        <li><a class="dropdown-button-mobile" target="_blank" href="https://stackoverflow.com/users/8138169/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a></li>
-        <li><a class="dropdown-button-mobile" target="_blank" href="https://github.com/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a></li>
-    </ul>
-
     <nav>
         <div class="nav-wrapper cyan">
             <%--Icons--%>
@@ -198,10 +158,10 @@
             </div>
 
                 <%--NavBar big screen--%>
-            <ul id="nav-mobile" class="left hide-on-small-and-down cyan" style="min-width: 115px">
+            <ul id="nav" class="left hide-on-small-and-down cyan" style="min-width: 115px">
                 <li><a href="${pageContext.request.contextPath}/">Home</a></li>
-                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/academic?action=form"     data-activates="dropdown3">Education<i class="material-icons right"></i></a></li>
-                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown4">Tech Practice<i class="material-icons right"></i></a></li>
+                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/academic?action=form"     data-activates="dropdown3">Education</a></li>
+                <li><a class="dropdown-button" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown4">Tech Practice</a></li>
                 <li><a href="${pageContext.request.contextPath}/pictures?action=form">Galleries</a></li>
             </ul>
 
@@ -212,6 +172,60 @@
                 <li><a class="dropdown-button-mobile" href="${pageContext.request.contextPath}/techPractice?action=form" data-activates="dropdown2"><i class="material-icons">memory</i></a></li>
                 <li><a href="${pageContext.request.contextPath}/pictures?action=form"><i class="material-icons">collections</i></a></li>
             </ul>
+
+                <%--dropdown for small education--%>
+                <ul id="dropdown1" class="dropdown-content cyan">
+                    <li class="divider"></li>
+                    <li><a class="white-text" href="${pageContext.request.contextPath}/academic?action=thesis">Thesis</a></li>
+                    <li class="divider"></li>
+                    <li><a class="white-text " href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a></li>
+                </ul>
+                <%--dropdown for normal size education--%>
+                <ul id="dropdown3" class="dropdown-content cyan">
+                    <li class="divider"></li>
+                    <li>
+                        <a class="white-text" href="${pageContext.request.contextPath}/academic?action=thesis">Thesis</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="white-text" href="${pageContext.request.contextPath}/academic?action=bibliography">Bibliography</a>
+                    </li>
+                </ul>
+
+                <%--dropdown for small tech--%>
+                <ul id="dropdown2" class="dropdown-content cyan">
+                    <li class="divider"></li>
+                    <li>
+                        <a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=java">Java</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=javaScript">JavaScript</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=css">CSS</a>
+                    </li>
+                </ul>
+
+                <%--dropdown for normal size tech--%>
+                <ul id="dropdown4" class="dropdown-content cyan">
+                    <li class="divider"></li>
+                    <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=java">Java</a></li>
+                    <li class="divider"></li>
+                    <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=javaScript">JavaScript</a></li>
+                    <li class="divider"></li>
+                    <li><a class="white-text" href="${pageContext.request.contextPath}/techPractice?action=css">CSS</a></li>
+                </ul>
+
+                <%--dropdown for small icon colum--%>
+                <ul id="dropdown5" class="dropdown-content cyan right">
+                    <li><a class="dropdown-button-mobile" onclick="showRecentTracks();"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/last-fm-3-24_smaller.png"/></i></a></li>
+                    <li><a class="dropdown-button-mobile" target="_blank" href="https://www.linkedin.com/in/steven-hicks-03390093/"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/linkedin-box.png"/></i></a></li>
+                    <li><a class="dropdown-button-mobile" target="_blank" href="https://www.facebook.com/steven.hix.9"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/facebook-box_white.png"/></i></a></li>
+                    <li><a class="dropdown-button-mobile" target="_blank" href="https://stackoverflow.com/users/8138169/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/stackoverflow_white.png"/></i></a></li>
+                    <li><a class="dropdown-button-mobile" target="_blank" href="https://github.com/shicks255"><i class="material-icons"><img src="${pageContext.request.contextPath}/icons/github-circle_white.png"/></i></a></li>
+                </ul>
         </div>
     </nav>
 
