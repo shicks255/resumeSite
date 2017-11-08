@@ -103,7 +103,6 @@
 
         function ajaxToGetTracks()
         {
-            console.log("fuck me");
             $( '#recentTracksTable tbody' ).empty();
             $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
                 function(json)
