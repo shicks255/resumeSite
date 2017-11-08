@@ -34,6 +34,8 @@ public class ImageScreenRenderServlet extends HttpServlet
             response.setContentLengthLong(avatar.getPicture().length);
 
             response.getOutputStream().write(avatar.getPicture());
+            //do i need this??
+            response.getOutputStream().flush();
         }
     }
 
