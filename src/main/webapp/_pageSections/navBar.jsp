@@ -101,41 +101,46 @@
             $( '#popup-infoMessage' ).removeClass('popup').addClass('hiddenDiv');
         }
 
+        var currentTrackList;
         function ajaxToGetTracks()
         {
-            $( '#recentTracksTable tbody' ).empty();
             $.getJSON('https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=shicks255&api_key=c349ab1fcb6b132ffb8d842e982458db&limit=10&format=json',
                 function(json)
                 {
-                    $.each(json.recenttracks.track, function(i, item)
+                    if (currentTrackList !== json)
                     {
-                        if (item['@attr'])
+                        currentTrackList = json;
+                        $( '#recentTracksTable tbody' ).empty();
+                        $.each(json.recenttracks.track, function(i, item)
                         {
-                            $( '#recentTracksTable' ).find('tbody').append(
-                                '<tr align="center" style="width:100%;">' +
-                                '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
-                                '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
-                                '<td style="text-align:right;"> <i class="material-icons right"><img src="${pageContext.request.contextPath}/icons/musicPlaying.gif"/></i>now playing </td>' +
-                                '</tr>'
-                            );
-                        }
-                        else
-                        {
-                            var date = new Date(item.date['#text']);
-                            date.setHours(date.getHours() - 5);
-                            $( '#recentTracksTable' ).find('tbody').append(
-                                '<tr align="center" style="width:100%;">' +
-                                '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
-                                '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
-                                '<td style="text-align:right;">' + date.toLocaleString() + '</td>' +
-                                '</tr>'
-                            );
-                        }
-                    });
+                            if (item['@attr'])
+                            {
+                                $( '#recentTracksTable' ).find('tbody').append(
+                                    '<tr align="center" style="width:100%;">' +
+                                    '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
+                                    '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
+                                    '<td style="text-align:right;"> <i class="material-icons right"><img src="${pageContext.request.contextPath}/icons/musicPlaying.gif"/></i>now playing </td>' +
+                                    '</tr>'
+                                );
+                            }
+                            else
+                            {
+                                var date = new Date(item.date['#text']);
+                                date.setHours(date.getHours() - 5);
+                                $( '#recentTracksTable' ).find('tbody').append(
+                                    '<tr align="center" style="width:100%;">' +
+                                    '<td style="padding:0;"><img src="' + item.image[1]['#text'] + '" /></td>' +
+                                    '<td>' + item.artist['#text'] + ' - ' + item.name + '</td>' +
+                                    '<td style="text-align:right;">' + date.toLocaleString() + '</td>' +
+                                    '</tr>'
+                                );
+                            }
+                        });
+                    }
                 });
         }
 
-        function showRecentTracks()
+function showRecentTracks()
         {
             showWaitingPopup("gathering data...");
             ajaxToGetTracks();
