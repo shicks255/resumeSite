@@ -6,5 +6,9 @@
 -work with H1,H2,H3,H4 colors
 
 -polish up portal nav bar
+-possibly redo the regular nav bar, it's a little wonky
 
--when hovering over an artist, have a picture popup?
+-add color to the charts js grad average per semester, and i'm not sure if it's working
+
+
+-check if things look good on mobile, the education page is ugly on a small screen

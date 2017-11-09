@@ -23,9 +23,6 @@ public class ImageScreenRenderServlet extends HttpServlet
 
         if (action.equalsIgnoreCase("form"))
         {
-//            HttpSession session = request.getSession();
-//            User user = (User) session.getAttribute("user");
-
             int avatarId = Integer.valueOf(request.getParameter("avatarId"));
 
             UserAvatar avatar = UserAvatar.getAvatar(avatarId);
