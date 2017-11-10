@@ -72,10 +72,16 @@
                     '2014Summer', '2014Fall', '2015Spring', '2015Summer', '2015Fall', '2016Spring', '2016Summer'],
                 datasets: [{
                     label: "School Grades",
+                    lineTension: 0,
+                    pointHoverRadius: 15,
+                    pointHitRadius: 5,
+                    pointBorderColor: "rgb(102, 51, 0)",
+                    borderColor: "rgb(102, 51, 0)",
+                    backgroundColor: "rgb(102, 51, 0)",
                     data: [{
                         <c:forEach var="semester" items="${semesters}">
                         x: '${semester}',
-                        y: '${semesterAverages[semester]}'
+                        y: '${semesterAverages[semester]}',
                         <c:if test="${semesters.indexOf(semester) != semesters.size()}">
                     }, {
                         </c:if>
@@ -89,7 +95,8 @@
                         type: 'category',
                         labels: ['A', 'A-','B','B-','C','C-','D','D-','F','W']
                     }],
-                    xAxes: []
+                    xAxes: [{
+                    }]
                 }
             }
         });
