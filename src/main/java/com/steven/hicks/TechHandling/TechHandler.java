@@ -68,9 +68,9 @@ public class TechHandler extends HttpServlet
                         .map(AcademicCourse::getGradeReceived)
                         .map(grade -> AcademicLogic.getIntFromLetterGrade(grade))
                         .reduce(BigDecimal.ZERO, BigDecimal::add);
-                BigDecimal avearagee = average.divide(new BigDecimal(courses1.size()), 2, RoundingMode.HALF_DOWN);
+                BigDecimal average2 = average.divide(new BigDecimal(courses1.size()), 2, RoundingMode.HALF_DOWN);
 
-                String gradeFromAverage = AcademicLogic.getLetterFromBigDecimal(avearagee);
+                String gradeFromAverage = AcademicLogic.getLetterFromBigDecimal(average2);
 
                 mapOfSemesterAverages.put((String)pair.getKey(), gradeFromAverage);
             }
