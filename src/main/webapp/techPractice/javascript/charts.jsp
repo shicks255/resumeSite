@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:useBean id="semesterAverages" type="java.util.Map<java.lang.String, java.lang.String>" scope="request"/>
 <jsp:useBean id="semesters"        type="java.util.List<java.lang.String>"                  scope="request"/>
 <jsp:useBean id="averageGrades"    type="java.util.Map<java.lang.String, java.lang.Integer>" scope="request"/>
 <jsp:useBean id="allGrades"        type="java.util.List<java.lang.String>"                   scope="request"/>
+<jsp:useBean id="averages"         type="java.util.Map<java.lang.String, java.math.BigDecimal>"              scope="request"/>
 
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
@@ -72,68 +72,28 @@
                     '2014Summer', '2014Fall', '2015Spring', '2015Summer', '2015Fall', '2016Spring', '2016Summer'],
                 datasets: [{
                     label: "School Grades",
-                    lineTension: 0,
+                    lineTension: 0.5,
                     pointHoverRadius: 15,
                     pointHitRadius: 5,
                     pointBorderColor: "rgb(102, 51, 0)",
-                    borderColor: "rgb(102, 51, 0)",
-                    backgroundColor: "rgb(102, 51, 0)",
-                    data: [{
+                    borderColor: "rgb(188, 43, 86)",
+                    backgroundColor: "rgb(66, 203, 244)",
+                    data: [
                         <c:forEach var="semester" items="${semesters}">
-                        x: '${semester}',
-                        y: '${semesterAverages[semester]}',
-                        <c:if test="${semesters.indexOf(semester) != semesters.size()}">
-                    }, {
-                        </c:if>
+                        '${averages[semester]}'
+                        <c:if test="${semesters.indexOf(semester) != semesters.size()}">,</c:if>
                         </c:forEach>
-                    }]
+                    ]
                 }]
             },
             options:  {
                 scales: {
-                    yAxes: [{
-                        type: 'category',
-                        labels: ['A', 'A-','B','B-','C','C-','D','D-','F','W']
-                    }],
-                    xAxes: [{
-                    }]
+                    yAxes: [],
+                    xAxes: []
                 }
             }
         });
     </script>
-
-
-    <canvas id="myChart2" width=200" height="200"></canvas>
-    <script>
-        var ctx2 = document.getElementById("myChart2");
-        var myChart2 = new Chart(ctx2, {
-            type: 'scatter',
-            data: {
-                datasets: [{
-                    label: "School Grades",
-                    data: [{
-                        x: -10,
-                        y: 0
-                    }, {
-                        x: 0,
-                        y: 10
-                    }, {
-                        x: 10,
-                        y: 5
-                    }]
-                }]
-            },
-            options: {
-                scales: {
-                    xAxes: [{
-                        type: 'linear',
-                        position: 'bottom'
-                    }]
-                }
-            }
-        });
-    </script>
-
 
     <canvas id="myChart" width="400" height="400"></canvas>
     <script>
