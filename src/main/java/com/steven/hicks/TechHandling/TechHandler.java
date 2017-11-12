@@ -132,6 +132,25 @@ public class TechHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("multithreadingPage"))
         {
+            String function = request.getParameter("function");
+            if (function != null && function.length() > 0)
+            {
+                if (function.equals("largeNumMultiThread"))
+                {
+                    TechLogic.doLargeNumberFunctionMultiThread();
+
+                }
+                if (function.equals("largeNum"))
+                {
+                    TechLogic.doLargeNumberFunction();
+                }
+//                if (function.equals("largeNumMultiThread"))
+//                {
+//
+//                }
+
+            }
+
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/multithreading.jsp");
             dispatcher.forward(request, response);

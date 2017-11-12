@@ -734,59 +734,54 @@ public class TechLogic
         return (ArrayList<SteamGame>) allGameList;
     }
 
-    private static class MyHandler extends DefaultHandler
+    public static int doLargeNumberFunction()
     {
-        private List<String> gameList = null;
+        int answer = 0;
 
-        public List<String> getList()
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 1; i <=100000; i++)
         {
-            return gameList;
+            int square = i * i;
+//            System.out.println(i + "  squared is " + square);
         }
+        long endTime = System.currentTimeMillis() - startTime;
+        System.out.println(endTime);
 
-        boolean bGameName = false;
-        boolean bGameId = false;
-
-        StringBuilder game = new StringBuilder();
-
-        @Override
-        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException
-        {
-            if (qName.equalsIgnoreCase("app"))
-            {
-                if (gameList == null)
-                    gameList = new ArrayList<>();
-            }
-            else if (qName.equalsIgnoreCase("appid"))
-            {
-                bGameId = true;
-            }
-            else if (qName.equalsIgnoreCase("name"))
-            {
-                bGameName = true;
-            }
-        }
-
-        @Override
-        public void endElement(String uri, String localName, String qName)throws SAXException
-        {
-            if (qName.equalsIgnoreCase("app"))
-                gameList.add(game.toString());
-        }
-
-        @Override
-        public void characters(char[] ch, int start, int length) throws SAXException
-        {
-            if (bGameId)
-            {
-                game.append(new String(ch, start, length));
-                bGameId = false;
-            }
-
-            if (bGameName)
-            {
-                game.append(new String(ch, start, length));
-                bGameName = false;
-            }
-        }
+        return answer;
     }
+
+    public static int doLargeNumberFunctionMultiThread()
+    {
+        int answer = 0;
+
+        Thread t = new Thread(() ->
+        {
+            long startTime = System.currentTimeMillis();
+            for (int i = 1; i <=50000; i++)
+            {
+                int square = i * i;
+//                System.out.println(i + "  squared is " + square);
+            }
+            long endTime = System.currentTimeMillis() - startTime;
+            System.out.println(endTime);
+        });
+        t.start();
+
+        Thread t2 = new Thread(() ->
+        {
+            long startTime = System.currentTimeMillis();
+            for (int i = 50001; i <= 100000; i++)
+            {
+                int square = i * i;
+//                System.out.println(i + " squared is " + square);
+            }
+            long endTime = System.currentTimeMillis() - startTime;
+            System.out.println(endTime);
+        });
+        t2.start();
+
+        return answer;
+    }
+
 }
