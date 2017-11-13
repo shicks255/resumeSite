@@ -734,7 +734,7 @@ public class TechLogic
         return (ArrayList<SteamGame>) allGameList;
     }
 
-    public static int doLargeNumberFunction()
+    public static int getLargestPrimeNumberUnderAMillion()
     {
         int answer = 0;
 
@@ -742,8 +742,17 @@ public class TechLogic
 
         for (int i = 1; i <=100000; i++)
         {
-            int square = i * i;
-//            System.out.println(i + "  squared is " + square);
+            boolean isPrime = true;
+            for (int j = 2; j < i; j++)
+            {
+                if (i % j == 0)
+                    isPrime = false;
+            }
+            if (isPrime)
+            {
+                System.out.println(i + " is a prime number");
+                answer = i;
+            }
         }
         long endTime = System.currentTimeMillis() - startTime;
         System.out.println(endTime);

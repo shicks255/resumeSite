@@ -142,7 +142,7 @@ public class TechHandler extends HttpServlet
                 }
                 if (function.equals("largeNum"))
                 {
-                    TechLogic.doLargeNumberFunction();
+                    int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
                 }
 //                if (function.equals("largeNumMultiThread"))
 //                {
