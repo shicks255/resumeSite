@@ -754,17 +754,18 @@ public class TechLogic
 
     public static int getLargestPalindromeNumber()
     {
-            int answer = 0;
-            for (int i = 1; i <= 999; i++)
-                for (int j = 1; j <= 999; j++)
-                {
-                    int product = i * j;
-                    String productString = ""+product;
-                    if (productString.equals(new StringBuilder(productString).reverse().toString()))
+        int answer = 0;
+        for (int i = 1; i <= 999; i++)
+            for (int j = 1; j <= 999; j++)
+            {
+                int product = i * j;
+                System.out.println(product);
+                String productString = ""+product;
+                if (productString.equals(new StringBuilder(productString).reverse().toString()))
+                    if (product > answer)
                         answer = product;
-                }
-
-            return answer;
+            }
+        return answer;
     }
 
 
