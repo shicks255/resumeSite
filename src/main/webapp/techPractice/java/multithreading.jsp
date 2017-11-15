@@ -15,17 +15,17 @@
 
     function doRaceCondition()
     {
-        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingPage&function=largeNumMultiThread';
+        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNumMultiThread';
     }
 
     function largeNumbersMultiThread()
     {
-        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingPage&function=largeNumMultiThread';
+        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNumMultiThread';
     }
 
     function largeNumbers()
     {
-        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingPage&function=largeNum';
+        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNum';
     }
 
 </script>

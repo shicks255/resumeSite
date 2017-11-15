@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -737,17 +738,11 @@ public class TechLogic
     public static int getLargestPrimeNumberUnderAMillion()
     {
         int answer = 0;
-        for (int i = 1; i <=100000; i++)
+        for (int i = 1; i <=500000; i++)
         {
-            boolean isPrime = true;
-            for (int j = 2; j < i; j++)
-                if (i % j == 0)
-                    isPrime = false;
+            boolean isPrime = isPrime(i);
             if (isPrime)
-            {
-                System.out.println(i + " is a prime number");
                 answer = i;
-            }
         }
         return answer;
     }
@@ -755,11 +750,10 @@ public class TechLogic
     public static int getLargestPalindromeNumber()
     {
         int answer = 0;
-        for (int i = 1; i <= 999; i++)
-            for (int j = 1; j <= 999; j++)
+        for (int i = 1; i <= 9999; i++)
+            for (int j = 1; j <= 9999; j++)
             {
                 int product = i * j;
-                System.out.println(product);
                 String productString = ""+product;
                 if (productString.equals(new StringBuilder(productString).reverse().toString()))
                     if (product > answer)
@@ -768,5 +762,26 @@ public class TechLogic
         return answer;
     }
 
+    public static long getLargestPrimeFactor()
+    {
+        long answer = 0;
+        long bigNum = 6008514757L;
+        for (long i = 1; i <= bigNum; i++)
+            if (bigNum % i == 0 && isPrime(i))
+                if (i > answer)
+                    answer = i;
+        return answer;
+    }
+
+    public static boolean isPrime(long number)
+    {
+        boolean isPrime = true;
+        for (long i = 2; i < number; i++)
+        {
+            if (number % 2 == 0)
+                isPrime = false;
+        }
+        return isPrime;
+    }
 
 }

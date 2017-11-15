@@ -132,23 +132,52 @@ public class TechHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("multithreadingPage"))
         {
+            String responseMessage = request.getParameter("responseMessage");
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/multithreading.jsp");
+            dispatcher.forward(request, response);
+        }
+
+        if (action.equals("multithreadingFunction"))
+        {
             String function = request.getParameter("function");
             if (function != null && function.length() > 0)
             {
                 if (function.equals("largeNumMultiThread"))
                 {
-                    int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
-                    int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
+                    new Thread(() ->
+                    {
+                        long startTime = System.currentTimeMillis();
+                        int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
+                        long test = TechLogic.getLargestPrimeFactor();
+                        int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
+                        System.out.println(System.currentTimeMillis()-startTime + " first");
+                    }).start();
+//                    new Thread(() ->
+//                    {
+//                        long startTime = System.currentTimeMillis();
+//                        System.out.println(System.currentTimeMillis()-startTime + " - second");
+//                    }).start();
+//                    new Thread(() ->
+//                    {
+//                        long startTime = System.currentTimeMillis();
+//                        System.out.println(System.currentTimeMillis()-startTime + " - third");
+//                    }).start();
+//                    long endTime = System.currentTimeMillis() - startTime;
+//                    System.out.println(endTime);
                 }
                 if (function.equals("largeNum"))
                 {
+                    long startTime = System.currentTimeMillis();
                     int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
                     int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
+                    long test = TechLogic.getLargestPrimeFactor();
+                    long endTime = System.currentTimeMillis() - startTime;
+                    System.out.println(endTime);
                 }
             }
-
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/multithreading.jsp");
-            dispatcher.forward(request, response);
+            String message = "fuck";
+            response.sendRedirect(request.getContextPath() + "/techPractice?action=multithreadingPage&responseMessage=" + message);
         }
 
         if (action.equalsIgnoreCase("designPatternsPage"))
