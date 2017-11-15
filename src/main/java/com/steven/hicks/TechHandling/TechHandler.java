@@ -137,20 +137,15 @@ public class TechHandler extends HttpServlet
             {
                 if (function.equals("largeNumMultiThread"))
                 {
-                    TechLogic.doLargeNumberFunctionMultiThread();
-
+                    int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
+                    int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
                 }
                 if (function.equals("largeNum"))
                 {
                     int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
+                    int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
                 }
-//                if (function.equals("largeNumMultiThread"))
-//                {
-//
-//                }
-
             }
-
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/multithreading.jsp");
             dispatcher.forward(request, response);

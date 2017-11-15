@@ -737,60 +737,35 @@ public class TechLogic
     public static int getLargestPrimeNumberUnderAMillion()
     {
         int answer = 0;
-
-        long startTime = System.currentTimeMillis();
-
         for (int i = 1; i <=100000; i++)
         {
             boolean isPrime = true;
             for (int j = 2; j < i; j++)
-            {
                 if (i % j == 0)
                     isPrime = false;
-            }
             if (isPrime)
             {
                 System.out.println(i + " is a prime number");
                 answer = i;
             }
         }
-        long endTime = System.currentTimeMillis() - startTime;
-        System.out.println(endTime);
-
         return answer;
     }
 
-    public static int doLargeNumberFunctionMultiThread()
+    public static int getLargestPalindromeNumber()
     {
-        int answer = 0;
+            int answer = 0;
+            for (int i = 1; i <= 999; i++)
+                for (int j = 1; j <= 999; j++)
+                {
+                    int product = i * j;
+                    String productString = ""+product;
+                    if (productString.equals(new StringBuilder(productString).reverse().toString()))
+                        answer = product;
+                }
 
-        Thread t = new Thread(() ->
-        {
-            long startTime = System.currentTimeMillis();
-            for (int i = 1; i <=50000; i++)
-            {
-                int square = i * i;
-//                System.out.println(i + "  squared is " + square);
-            }
-            long endTime = System.currentTimeMillis() - startTime;
-            System.out.println(endTime);
-        });
-        t.start();
-
-        Thread t2 = new Thread(() ->
-        {
-            long startTime = System.currentTimeMillis();
-            for (int i = 50001; i <= 100000; i++)
-            {
-                int square = i * i;
-//                System.out.println(i + " squared is " + square);
-            }
-            long endTime = System.currentTimeMillis() - startTime;
-            System.out.println(endTime);
-        });
-        t2.start();
-
-        return answer;
+            return answer;
     }
+
 
 }
