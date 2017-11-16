@@ -173,43 +173,6 @@ public class TechHandler extends HttpServlet
                     long endTime = System.currentTimeMillis() - startTime;
                     System.out.println(endTime);
 
-//                    Thread t1 = new Thread(() ->
-//                    {
-//                        long startTime = System.currentTimeMillis();
-//                        int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
-//                        System.out.println(System.currentTimeMillis()-startTime + " first");
-//                    });
-
-//                    Thread t2 = new Thread(() ->
-//                    {
-//                        long startTime = System.currentTimeMillis();
-//                        long test = TechLogic.getLargestPrimeFactor();
-//                        System.out.println(System.currentTimeMillis()-startTime + " - second");
-//                    });
-
-//                    Thread t3 = new Thread(() ->
-//                    {
-//                        long startTime = System.currentTimeMillis();
-//                        int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
-//                        System.out.println(System.currentTimeMillis()-startTime + " - third");
-//                    });
-
-//                    try
-//                    {
-//                        t1.start();
-//                        t2.start();
-//                        t3.start();
-//                        t1.join();
-//                        t2.join();
-//                        t3.join();
-
-//                    } catch (InterruptedException e)
-//                    {
-//                        e.printStackTrace();
-//                    }
-
-//                    long endTime = System.currentTimeMillis() - startTime;
-//                    System.out.println(endTime);
                 }
                 if (function.equals("largeNum"))
                 {
