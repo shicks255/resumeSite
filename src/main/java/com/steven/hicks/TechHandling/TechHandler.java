@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -145,24 +148,66 @@ public class TechHandler extends HttpServlet
             {
                 if (function.equals("largeNumMultiThread"))
                 {
-                    new Thread(() ->
+                    long startTime = System.currentTimeMillis();
+
+                    ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+                    Future f1 = executorService.submit(() ->
                     {
-                        long startTime = System.currentTimeMillis();
                         int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
-                        long test = TechLogic.getLargestPrimeFactor();
-                        int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
-                        System.out.println(System.currentTimeMillis()-startTime + " first");
-                    }).start();
-//                    new Thread(() ->
+                    });
+                    Future f2 = executorService.submit(() ->
+                    {
+                       long test = TechLogic.getLargestPrimeFactor();
+                    });
+                    Future f3 = executorService.submit(() ->
+                    {
+                       long test = TechLogic.getLargestPalindromeNumber();
+                    });
+                    executorService.shutdown();
+
+                    while (!f1.isDone() || !f2.isDone() || !f3.isDone())
+                    {
+//                        System.out.println("Calculating");
+                    }
+                    long endTime = System.currentTimeMillis() - startTime;
+                    System.out.println(endTime);
+
+//                    Thread t1 = new Thread(() ->
 //                    {
 //                        long startTime = System.currentTimeMillis();
+//                        int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
+//                        System.out.println(System.currentTimeMillis()-startTime + " first");
+//                    });
+
+//                    Thread t2 = new Thread(() ->
+//                    {
+//                        long startTime = System.currentTimeMillis();
+//                        long test = TechLogic.getLargestPrimeFactor();
 //                        System.out.println(System.currentTimeMillis()-startTime + " - second");
-//                    }).start();
-//                    new Thread(() ->
+//                    });
+
+//                    Thread t3 = new Thread(() ->
 //                    {
 //                        long startTime = System.currentTimeMillis();
+//                        int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
 //                        System.out.println(System.currentTimeMillis()-startTime + " - third");
-//                    }).start();
+//                    });
+
+//                    try
+//                    {
+//                        t1.start();
+//                        t2.start();
+//                        t3.start();
+//                        t1.join();
+//                        t2.join();
+//                        t3.join();
+
+//                    } catch (InterruptedException e)
+//                    {
+//                        e.printStackTrace();
+//                    }
+
 //                    long endTime = System.currentTimeMillis() - startTime;
 //                    System.out.println(endTime);
                 }
