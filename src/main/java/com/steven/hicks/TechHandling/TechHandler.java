@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -185,7 +186,11 @@ public class TechHandler extends HttpServlet
                 }
             }
             String message = "fuck";
-            response.sendRedirect(request.getContextPath() + "/techPractice?action=multithreadingPage&responseMessage=" + message);
+
+            PrintWriter out = response.getWriter();
+            out.println(message);
+            out.flush();
+//            response.sendRedirect(request.getContextPath() + "/techPractice?action=multithreadingPage&responseMessage=" + message);
         }
 
         if (action.equalsIgnoreCase("designPatternsPage"))

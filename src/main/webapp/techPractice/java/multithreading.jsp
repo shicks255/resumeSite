@@ -20,12 +20,25 @@
 
     function largeNumbersMultiThread()
     {
-        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNumMultiThread';
+        showWaitingPopup("Calculating multithreaded response");
+        $.get('${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNumMultiThread',
+            function(data)
+            {
+                $( '#answerPopup' ).removeClass('hiddenDiv').addClass('popup');
+                console.log(data);
+                $( '#answer' ).val(data);
+                hideWaitingPopup();
+            });
     }
 
     function largeNumbers()
     {
-        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNum';
+        $.get('${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNum',
+                function(data)
+                {
+                    $( '#answerPopup' ).removeClass('hiddenDiv').addClass('popup');
+                    $( '#answer' ).html(data);
+                });
     }
 
 </script>
@@ -40,6 +53,10 @@
     <button class="btn waves-effect waves-light" onclick="largeNumbers();">Large Number Count</button>
     <button class="btn waves-effect waves-light" onclick="largeNumbersMultiThread();">Large Number Count Multi-Threaded</button>
 
+    <div id="answerPopup" class="hiddenDiv">
+        <div id="popup" class="popupContent">
+        </div>
+    </div>
 
 
 </div>
