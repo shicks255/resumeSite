@@ -181,7 +181,7 @@ public class TechHandler extends HttpServlet
                 }
             }
             String message = "The answers were... " +
-                    "Largest prime number under 500,000 - "+ answers[0] + ".<br/> " +
+                    "Largest prime number under 250,000 - "+ answers[0] + ".<br/> " +
                     "Largest palindrome product of 2 four digit numbers - " + answers[1] + ".<br/>" +
                     "Largest prime factor of 600851475 - " + answers[2] + ".<br/>" +
                     " and it took " + answers[3]/1000 + " seconds.";
