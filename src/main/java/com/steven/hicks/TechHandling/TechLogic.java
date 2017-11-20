@@ -720,7 +720,6 @@ public class TechLogic
                             .sorted( (o1, o2) -> -o1.getName().compareTo(o2.getName()))
                             .collect(Collectors.toList());
                 }
-
             }
             catch (IOException e)
             {
@@ -750,8 +749,8 @@ public class TechLogic
     public static int getLargestPalindromeNumber()
     {
         int answer = 0;
-        for (int i = 1; i <= 999; i++)
-            for (int j = 1; j <= 999; j++)
+        for (int i = 1; i <= 9999; i++)
+            for (int j = 1; j <= 9999; j++)
             {
                 int product = i * j;
                 String productString = ""+product;
@@ -765,7 +764,7 @@ public class TechLogic
     public static long getLargestPrimeFactor()
     {
         long answer = 0;
-        long bigNum = 6008514757L;
+        long bigNum = 600851475L;
         for (long i = 1; i <= bigNum; i++)
             if (bigNum % i == 0 && isPrime(i))
                 if (i > answer)

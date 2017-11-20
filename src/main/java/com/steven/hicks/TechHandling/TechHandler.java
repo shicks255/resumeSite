@@ -145,6 +145,9 @@ public class TechHandler extends HttpServlet
         if (action.equals("multithreadingFunction"))
         {
             String function = request.getParameter("function");
+
+            int[] answers = new int[4];
+
             if (function != null && function.length() > 0)
             {
                 if (function.equals("largeNumMultiThread"))
@@ -152,19 +155,9 @@ public class TechHandler extends HttpServlet
                     long startTime = System.currentTimeMillis();
 
                     ExecutorService executorService = Executors.newFixedThreadPool(4);
-
-                    Future f1 = executorService.submit(() ->
-                    {
-                        int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
-                    });
-                    Future f2 = executorService.submit(() ->
-                    {
-                       long test = TechLogic.getLargestPrimeFactor();
-                    });
-                    Future f3 = executorService.submit(() ->
-                    {
-                       long test = TechLogic.getLargestPalindromeNumber();
-                    });
+                    Future f1 = executorService.submit(() -> answers[0] = TechLogic.getLargestPrimeNumberUnderAMillion());
+                    Future f3 = executorService.submit(() -> answers[1] = TechLogic.getLargestPalindromeNumber());
+                    Future f2 = executorService.submit(() -> answers[2] = (int)TechLogic.getLargestPrimeFactor());
                     executorService.shutdown();
 
                     while (!f1.isDone() || !f2.isDone() || !f3.isDone())
@@ -172,25 +165,30 @@ public class TechHandler extends HttpServlet
 //                        System.out.println("Calculating");
                     }
                     long endTime = System.currentTimeMillis() - startTime;
-                    System.out.println(endTime);
-
+                    answers[3] = (int)endTime;
                 }
                 if (function.equals("largeNum"))
                 {
                     long startTime = System.currentTimeMillis();
                     int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
+                    answers[0] = largestPrime;
                     int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
+                    answers[1] = largestPalindromeProduct;
                     long test = TechLogic.getLargestPrimeFactor();
+                    answers[2] = (int)test;
                     long endTime = System.currentTimeMillis() - startTime;
-                    System.out.println(endTime);
+                    answers[3] = (int)endTime;
                 }
             }
-            String message = "fuck";
+            String message = "The answers were... " +
+                    "Largest prime number under 500,000 - "+ answers[0] + ".<br/> " +
+                    "Largest palindrome product of 2 four digit numbers - " + answers[1] + ".<br/>" +
+                    "Largest prime factor of 600851475 - " + answers[2] + ".<br/>" +
+                    " and it took " + answers[3]/1000 + " seconds.";
 
             PrintWriter out = response.getWriter();
             out.println(message);
             out.flush();
-//            response.sendRedirect(request.getContextPath() + "/techPractice?action=multithreadingPage&responseMessage=" + message);
         }
 
         if (action.equalsIgnoreCase("designPatternsPage"))

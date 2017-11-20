@@ -20,24 +20,26 @@
 
     function largeNumbersMultiThread()
     {
-        showWaitingPopup("Calculating multithreaded response");
+        showWaitingPopup("Calculating multithreaded answer.");
         $.get('${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNumMultiThread',
             function(data)
             {
                 $( '#answerPopup' ).removeClass('hiddenDiv').addClass('popup');
                 console.log(data);
-                $( '#answer' ).val(data);
+                $( '#answer' ).html(data);
                 hideWaitingPopup();
             });
     }
 
     function largeNumbers()
     {
+        showWaitingPopup("Calculating single threaded answer.");
         $.get('${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNum',
                 function(data)
                 {
                     $( '#answerPopup' ).removeClass('hiddenDiv').addClass('popup');
                     $( '#answer' ).html(data);
+                    hideWaitingPopup();
                 });
     }
 
@@ -54,7 +56,9 @@
     <button class="btn waves-effect waves-light" onclick="largeNumbersMultiThread();">Large Number Count Multi-Threaded</button>
 
     <div id="answerPopup" class="hiddenDiv">
-        <div id="popup" class="popupContent">
+        <div class="popupContent">
+            <button class="btn waves-effect waves-light" onclick="closePopups();">Close</button>
+            <div id="answer"></div>
         </div>
     </div>
 
