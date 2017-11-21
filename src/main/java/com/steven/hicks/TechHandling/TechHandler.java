@@ -301,6 +301,7 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        --TOP ALBUMS
         if (action.equalsIgnoreCase("topAlbums"))
         {
             String userName = "shicks255";
@@ -327,6 +328,7 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//       -----TOP SONGS
         if (action.equalsIgnoreCase("topSongs"))
         {
             String userName = "shicks255";

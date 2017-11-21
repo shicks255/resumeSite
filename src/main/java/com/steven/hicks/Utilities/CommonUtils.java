@@ -147,6 +147,9 @@ public final class CommonUtils
             counter++;
         }
 
+        if (resultPages.size() == 0)
+            resultPages.add(resultsPage);
+
         return resultPages;
     }
 }

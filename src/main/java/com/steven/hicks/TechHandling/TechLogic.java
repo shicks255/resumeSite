@@ -94,6 +94,7 @@ public class TechLogic
                     album.setArtist(artistName);
                     album.setAlbum(albumName);
                     searchResults.add(album);
+                    stopAlbumTag = false;
                 }
             }
             in.close();
@@ -252,6 +253,7 @@ public class TechLogic
                     record.setPlayCount(playCount);
                     record.setRank(rank);
                     searchResults.add(record);
+                    stopTag = false;
                 }
             }
         }
@@ -332,6 +334,7 @@ public class TechLogic
                     record.setPlayCount(playCount);
                     record.setRank(rank);
                     searchResults.add(record);
+                    stopTag = false;
                 }
             }
         }
@@ -484,6 +487,7 @@ public class TechLogic
                     record.setPlayCount(playCount);
                     record.setRank(rank);
                     searchResults.add(record);
+                    stopTag = false;
                 }
             }
         }
@@ -550,6 +554,7 @@ public class TechLogic
                     musicArtist.setArtistName(artistName);
 //                    musicArtist.setUrl(urll);
                     searchResults.add(musicArtist);
+                    stopArtistTag = false;
                 }
             }
             in.close();
@@ -779,36 +784,36 @@ public class TechLogic
     public static int doRaceCondition()
     {
         int[] answer = new int[1];
-        ReentrantLock lock = new ReentrantLock();
+//        ReentrantLock lock = new ReentrantLock();
         answer[0] = 1;
 
         Thread t1 = new Thread(() ->
         {
-            lock.lock();
-            try
-            {
+//            lock.lock();
+//            try
+//            {
                 for (int i = 1; i <= 1000000; i++)
                     answer[0] = answer[0] + 1;
-            }
-            finally
-            {
-                lock.unlock();
-            }
+//            }
+//            finally
+//            {
+//                lock.unlock();
+//            }
 
         });
 
         Thread t2 = new Thread(() ->
         {
-            lock.lock();
-            try
-            {
+//            lock.lock();
+//            try
+//            {
                 for (int i = 0; i < 1000000; i++)
                     answer[0] = answer[0] + 1;
-            }
-            finally
-            {
-                lock.unlock();
-            }
+//            }
+//            finally
+//            {
+//                lock.unlock();
+//            }
         });
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
