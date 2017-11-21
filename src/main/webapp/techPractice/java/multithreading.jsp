@@ -15,7 +15,14 @@
 
     function doRaceCondition()
     {
-        window.location.href = '${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=largeNumMultiThread';
+        showWaitingPopup('Calculating...');
+        $.get('${pageContext.request.contextPath}/techPractice?action=multithreadingFunction&function=raceCondition',
+            function(data)
+            {
+               $( '#answerPopup' ).removeClass('hiddenDiv').addClass('popup');
+               $( '#answer' ).html(data);
+               hideWaitingPopup();
+            });
     }
 
     function largeNumbersMultiThread()
@@ -25,7 +32,6 @@
             function(data)
             {
                 $( '#answerPopup' ).removeClass('hiddenDiv').addClass('popup');
-                console.log(data);
                 $( '#answer' ).html(data);
                 hideWaitingPopup();
             });
@@ -51,9 +57,21 @@
     <h1>Java Multithreading</h1>
 
 
-    <button class="btn waves-effect waves-light" onclick="doRaceCondition();">Race Condition</button>
+    Both of these buttons will do the same 3 mathematical calculations.
+    <br/>
+    Click to see the difference between running all through in sequence, vs running each problem in parallel through multithreading.
+    <br/>
     <button class="btn waves-effect waves-light" onclick="largeNumbers();">Large Number Count</button>
     <button class="btn waves-effect waves-light" onclick="largeNumbersMultiThread();">Large Number Count Multi-Threaded</button>
+
+    <br/><br/>
+
+    This button will cause a race condition.
+    <br/>
+    Two different threads will attempt to increment the same number a million times.
+    <br/>
+
+    <button class="btn waves-effect waves-light" onclick="doRaceCondition();">Race Condition</button>
 
     <div id="answerPopup" class="hiddenDiv">
         <div class="popupContent">

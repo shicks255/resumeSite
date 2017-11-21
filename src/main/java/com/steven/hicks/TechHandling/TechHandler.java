@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -150,6 +151,10 @@ public class TechHandler extends HttpServlet
 
             if (function != null && function.length() > 0)
             {
+                if (function.equals("raceCondition"))
+                {
+                    int result = TechLogic.doRaceCondition();
+                }
                 if (function.equals("largeNumMultiThread"))
                 {
                     long startTime = System.currentTimeMillis();
@@ -180,11 +185,12 @@ public class TechHandler extends HttpServlet
                     answers[3] = (int)endTime;
                 }
             }
-            String message = "The answers were... " +
-                    "Largest prime number under 250,000 - "+ answers[0] + ".<br/> " +
-                    "Largest palindrome product of 2 four digit numbers - " + answers[1] + ".<br/>" +
-                    "Largest prime factor of 600851475 - " + answers[2] + ".<br/>" +
-                    " and it took " + answers[3]/1000 + " seconds.";
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+            String message = "The answers were...<br/> " +
+                    "Largest prime number under 250,000 = "+ numberFormat.format(answers[0]) + ".<br/> " +
+                    "Largest palindrome product of 2 four digit numbers = " + numberFormat.format(answers[1]) + ".<br/>" +
+                    "Largest prime factor of 600,851,475 = " + numberFormat.format(answers[2]) + ".<br/><br/>" +
+                    " and it ran in " + numberFormat.format(answers[3]/1000) + " seconds.";
 
             PrintWriter out = response.getWriter();
             out.println(message);

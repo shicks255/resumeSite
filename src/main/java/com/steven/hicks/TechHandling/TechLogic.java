@@ -17,6 +17,10 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class TechLogic
@@ -770,6 +774,53 @@ public class TechLogic
                 if (i > answer)
                     answer = i;
         return answer;
+    }
+
+    public static int doRaceCondition()
+    {
+        int[] answer = new int[1];
+        ReentrantLock lock = new ReentrantLock();
+        answer[0] = 1;
+
+        Thread t1 = new Thread(() ->
+        {
+            lock.lock();
+            try
+            {
+                for (int i = 1; i <= 1000000; i++)
+                    answer[0] = answer[0] + 1;
+            }
+            finally
+            {
+                lock.unlock();
+            }
+
+        });
+
+        Thread t2 = new Thread(() ->
+        {
+            lock.lock();
+            try
+            {
+                for (int i = 0; i < 1000000; i++)
+                    answer[0] = answer[0] + 1;
+            }
+            finally
+            {
+                lock.unlock();
+            }
+        });
+
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        Future f1 = executorService.submit(t1);
+        Future f2 = executorService.submit(t2);
+        executorService.shutdown();
+
+        while (!f1.isDone() || !f2.isDone())
+        {}
+
+        System.out.println(answer[0]);
+        return answer[0];
     }
 
     public static boolean isPrime(long number)
