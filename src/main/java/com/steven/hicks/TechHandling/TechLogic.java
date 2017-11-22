@@ -746,7 +746,7 @@ public class TechLogic
     public static int getLargestPrimeNumberUnderAMillion()
     {
         int answer = 0;
-        for (int i = 1; i <=200000; i++)
+        for (int i = 1; i <=100_000; i++)
         {
             boolean isPrime = isPrime(i);
             if (isPrime)
@@ -773,7 +773,7 @@ public class TechLogic
     public static long getLargestPrimeFactor()
     {
         long answer = 0;
-        long bigNum = 1008514756L;
+        long bigNum = 100851475L;
         for (long i = 2; i < bigNum; i++)
             if (bigNum % i == 0 && isPrime(i))
                 if (i > answer)

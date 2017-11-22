@@ -56,7 +56,13 @@
                     yAxes: [],
                     xAxes: []
                 },
-                cutoutPercentage: [0]
+                cutoutPercentage: [0],
+                title: {
+                    display: true,
+                    text: 'TestTest',
+                    position: 'top',
+                    fontSize: 20
+                }
             }
         });
     </script>
@@ -86,10 +92,16 @@
                     ]
                 }]
             },
-            options:  {
+            options: {
                 scales: {
                     yAxes: [],
                     xAxes: []
+                },
+                title: {
+                    display: true,
+                    text: 'TestTest',
+                    position: 'top',
+                    fontSize: 20
                 }
             }
         });
@@ -128,9 +140,15 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
+                },
+                title: {
+                    display: true,
+                    text: 'TestTest',
+                    position: 'top',
+                    fontSize: 20
                 }
             }
         });

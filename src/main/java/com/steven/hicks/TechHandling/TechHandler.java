@@ -159,7 +159,7 @@ public class TechHandler extends HttpServlet
                 {
                     long startTime = System.currentTimeMillis();
 
-                    ExecutorService executorService = Executors.newFixedThreadPool(4);
+                    ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
                     Future f1 = executorService.submit(() -> answers[0] = TechLogic.getLargestPrimeNumberUnderAMillion());
                     Future f3 = executorService.submit(() -> answers[1] = TechLogic.getLargestPalindromeNumber());
                     Future f2 = executorService.submit(() -> answers[2] = (int)TechLogic.getLargestPrimeFactor());
