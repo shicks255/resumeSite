@@ -143,6 +143,12 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+        if (action.equalsIgnoreCase("treeGame"))
+        {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/treeGame.jsp");
+            dispatcher.forward(request, response);
+        }
+
         if (action.equals("multithreadingFunction"))
         {
             String function = request.getParameter("function");

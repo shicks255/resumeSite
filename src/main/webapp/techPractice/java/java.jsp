@@ -78,6 +78,11 @@
     </button>
     <br/>
 
+    <button class="btn waves-effect waves-light"
+            onclick="window.location.href = '${pageContext.request.contextPath}/techPractice?action=treeGame';">
+        Binary Tree Game
+    </button>
+
 
 </div>
 
