@@ -259,11 +259,15 @@ function showRecentTracks()
 
     <div class="hiddenDiv" id="recentTracksContainer">
         <div id="recentTracks" class="popupContent">
-            <button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>
-            <h4>Recently Listened To</h4>
-            <table class="striped" id="recentTracksTable" align="center">
-                <tbody>
-                </tbody>
-            </table>
+            <div class="popupHeader">
+                <button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>
+            </div>
+            <div class="popupContainer">
+                <h4>Recently Listened To</h4>
+                <table class="striped" id="recentTracksTable" align="center">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
