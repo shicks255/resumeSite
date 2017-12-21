@@ -119,26 +119,29 @@ input[type=submit]:hover {color : red;}
     margin-left : 15%;
     margin-right : 15%;
     margin-top : 3.25%;
-    /*padding : 20px;*/
     border : 1px solid black;
     background-color : #f4eff7    ;
     width : 65%;
-    border-radius : 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .popupHeader{
     background-color: #7986cb;
     text-align:right;
-    border-top: 1px solid black;
-    border-right: 1px solid black;
-    border-left:1px solid black;
-    border-radius : 10px;
+    overflow: hidden;
+    height: 100%;
+    display:flex;
+    justify-content: flex-end;
+    border-collapse: collapse;
 }
 
+.closeIcon:hover {
+    background-color: #4c5ba8;
+}
 .popupContainer{
-    /*margin-left : 15%;*/
-    /*margin-right : 15%;*/
-    /*margin-top : 3.25%;*/
     padding : 10px 20px 2px 20px;
 }
 

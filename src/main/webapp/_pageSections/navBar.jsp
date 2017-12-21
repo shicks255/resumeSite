@@ -260,7 +260,7 @@ function showRecentTracks()
     <div class="hiddenDiv" id="recentTracksContainer">
         <div id="recentTracks" class="popupContent">
             <div class="popupHeader">
-                <button class="waves-effect waves-light btn" onclick="closePopups();">Close</button>
+                <i class="medium material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
             </div>
             <div class="popupContainer">
                 <h4>Recently Listened To</h4>
