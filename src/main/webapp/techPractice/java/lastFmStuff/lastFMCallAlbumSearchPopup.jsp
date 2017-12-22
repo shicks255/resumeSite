@@ -2,8 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="albums" type="java.util.List<com.steven.hicks.entities.Album>" scope="request"/>
 
-<button class="waves-effect waves-light btn" onclick="closeResultsPopup();">Close</button>
-
 <table border="1">
     <tr>
         <td>#</td>

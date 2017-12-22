@@ -45,6 +45,7 @@
         $.post( '${pageContext.request.contextPath}/techPractice?action=getMusicArtistsFromLast_FM',
             function(data)
             {
+                $( '#popupTitle' ).html('Last FM Example');
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
                 $(window).resize();
@@ -62,6 +63,7 @@
             $.post( '${pageContext.request.contextPath}/techPractice?&action=artistSearch&artistSearchField=' + searchTerms,
                 function(data)
                 {
+                    $( '#popupTitle' ).html('Artist Search Results');
                     $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                     $( '#restResultsBoxPopup' ).html(data);
                     $(window).resize();
@@ -80,6 +82,7 @@
             $.post( '${pageContext.request.contextPath}/techPractice?&action=albumSearch&albumSearchName=' + searchTerms,
                 function(data)
                 {
+                    $( '#popupTitle' ).html('Album Search Results');
                     $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                     $( '#restResultsBoxPopup' ).html(data);
                     $(window).resize();
@@ -145,17 +148,15 @@
         });
     }
 
-    function closeResultsPopup()
-    {
-        $( '.popup' ).each(function(i, obj){
-            $( this ).removeClass('popup').addClass('hiddenDiv');
-        });
-
-        location.reload();
-    }
-
 </script>
 
+<div class="bread nav-wrapper hide-on-small-and-down">
+    <div class="col s12">
+        <a href="${pageContext.request.contextPath}/techPractice?action=form" class="breadcrumb">Tech Practice</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=java" class="breadcrumb">Java</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=sessionPracticePage" class="breadcrumb">Session Practice</a>
+    </div>
+</div>
 <div class="container">
 
     <br/>
@@ -187,7 +188,13 @@
     </button>
 
     <div id="restResultsBox" class="hiddenDiv">
-        <div id="restResultsBoxPopup" class="popupContent">
+        <div class="popupContent">
+            <div class="popupHeader">
+                <span style="margin: auto;" id="popupTitle"></span>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div id="restResultsBoxPopup" class="popupContainer">
+            </div>
         </div>
     </div>
 

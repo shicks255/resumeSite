@@ -75,8 +75,12 @@
 
     <div id="answerPopup" class="hiddenDiv">
         <div class="popupContent">
-            <button class="btn waves-effect waves-light" onclick="closePopups();">Close</button>
-            <div id="answer"></div>
+            <div class="popupHeader">
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <div id="answer"></div>
+            </div>
         </div>
     </div>
 

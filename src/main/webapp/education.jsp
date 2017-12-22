@@ -127,123 +127,129 @@
 <%--Upload coursework popup--%>
 <div id="uploadFile" class="hiddenDiv">
     <div class="popupContent">
-        <button class="waves-effect waves-light btn closeButton" id="closeUpload" name="closeUpload" onclick="closePopups();">
-            Close
-            <i class="material-icons right">clear</i>
-        </button>
-        <form enctype="multipart/form-data" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
-            <input type="hidden" name="uploadCourseId" id="uploadCourseId" value=""/>
-            <br/>
-            <input type="file" name="file" id="file" enctype="multipart/form-data">
-            <br/>
-            <br/>
-            <label for="courseworkNotes">Coursework notes:</label>
-            <input type="text" name="courseworkNotes" id="courseworkNotes"/>
-            <button class="btn waves-effect waves-light submitButton" type="submit" name="action">Upload
-                <i class="material-icons right">send</i>
-            </button>
-        </form>
+        <div class="popupHeader">
+            <span style="margin: auto;">Upload A File</span>
+            <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+        </div>
+        <div class="popupContainer">
+            <form enctype="multipart/form-data" name="frmUploadFile" id="frmUploadFile" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
+                <input type="hidden" name="uploadCourseId" id="uploadCourseId" value=""/>
+                <br/>
+                <input type="file" name="file" id="file" enctype="multipart/form-data">
+                <br/>
+                <br/>
+                <label for="courseworkNotes">Coursework notes:</label>
+                <input type="text" name="courseworkNotes" id="courseworkNotes"/>
+                <button class="btn waves-effect waves-light submitButton" type="submit" name="action">Upload
+                    <i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
 <%--Delete course popup--%>
 <div id="deletePrompt" class="hiddenDiv">
     <div class="popupContent">
-        <h4>Are you sure you wanna delete this entry?</h4>
-        <button class="waves-effect waves-light btn" id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >
-            Ok
-            <i class="material-icons right">check</i>
-        </button>
-        <button class="waves-effect waves-light btn" id="deletePrompt_denyButton" onclick="location.reload();">
-            Cancel
-            <i class="material-icons right">close</i>
-        </button>
+        <div class="popupHeader">
+            <span style="margin: auto;">Delete Course</span>
+            <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+        </div>
+        <div class="popupContainer">
+            <h4>Are you sure you wanna delete this entry?</h4>
+            <button class="waves-effect waves-light btn" id="deletePrompt_confirmButton" onclick="deleteCourse(courseObjectId)" >
+                Ok
+                <i class="material-icons right">check</i>
+            </button>
+        </div>
     </div>/
 </div>
 
 <%--Add a course popup--%>
 <div id="addACourse"  class="hiddenDiv">
     <div id="frmDiv" class="popupContent">
-        <button class="waves-effect waves-light btn closeButton" id="closeAddCourse" name="closeAddCourse" onclick="closePopups();">
-            Close
-            <i class="material-icons right">clear</i>
-        </button>
-        <br/>
-        <br/>
-        <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
+        <div class="popupHeader">
+            <span style="margin: auto;">Add A Course</span>
+            <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+        </div>
+        <div class="popupContainer">
+            <br/>
+            <br/>
+            <form name="frmAddACourse" id="frmAddACourse" action="${pageContext.request.contextPath}\academic?&action=addACourse" method="post">
 
-            <table class="slimTable">
-                <tr>
-                    <td class="rightCell"><label for="courseName">Course Name:</label></td>
-                    <td class="left-align"><input type="text" name="courseName" id="courseName"/></td>
-                </tr>
-                <tr>
-                    <td class="rightCell"><label for="courseCode">Course Code:</label></td>
-                    <td><input required="true" type="text" name="courseCode" id="courseCode"/></td>
-                </tr>
-                <tr>
-                    <td class="rightCell"><label for="collegeName">College:</label></td>
-                    <td class="input-field col s12">
-                        <select class="browser-default" required="true" id="collegeName" name="collegeName">
-                            <option value="RVCC">RVCC</option>
-                            <option value="Stockton College">Stockton College</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="rightCell"><label for="semester">Semester:</label></td>
-                    <td class="input-field col s12">
-                        <select class="browser-default" required="true" name="semester" id="semester">
-                            <option value="2007Fall">Fall 2007</option>
-                            <option value="2008Spring">Spring 2008</option>
-                            <option value="2008Summer">Summer 2008</option>
-                            <option value="2008Fall">Fall 2008</option>
-                            <option value="2009Spring">Spring 2009</option>
-                            <option value="2009Summer">Summer 2009</option>
-                            <option value="2009Fall">Fall 2009</option>
-                            <option value="2010Spring">Spring 2010</option>
-                            <option value="2010Summer">Summer 2010</option>
-                            <option value="2010Fall">Fall 2010</option>
-                            <option value="2011Spring">Spring 2011</option>
-                            <option value="2011Summer">Summer 2011</option>
-                            <option value="2011Fall">Fall 2011</option>
-                            <option value="2012Spring">Spring 2012</option>
-                            <option value="2012Summer">Summer 2012</option>
-                            <option value="2012Fall">Fall 2012</option>
-                            <option value="2013Spring">Spring 2013</option>
-                            <option value="2013Summer">Summer 2013</option>
-                            <option value="2013Fall">Fall 2013</option>
-                            <option value="2014Spring">Spring 2014</option>
-                            <option value="2014Summer">Summer 2014</option>
-                            <option value="2014Fall">Fall 2014</option>
-                            <option value="2015Spring">Spring 2015</option>
-                            <option value="2015Summer">Summer 2015</option>
-                            <option value="2015Fall">Fall 2015</option>
-                            <option value="2016Spring">Spring 2016</option>
-                            <option value="2016Summer">Summer 2016</option>
-                            <option value="2016Fall">Fall 2016</option>
-                        </select></td>
-                </tr>
-                <tr>
-                    <td class="rightCell"><label for="courseGrade">Course Grade:</label></td>
-                    <td><input type="text" id="courseGrade" name="courseGrade"/></td>
-                </tr>
-                <tr>
-                    <td class="rightCell"><label for="relevantCourseWork">Relevant <br/> Course Work:</label></td>
-                    <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <button class="waves-effect waves-light btn submitButton" type="submit" value="Submit">
-                            Submit
-                            <i class="material-icons right">send</i>
-                        </button>
-                    </td>
-                </tr>
+                <table class="slimTable">
+                    <tr>
+                        <td class="rightCell"><label for="courseName">Course Name:</label></td>
+                        <td class="left-align"><input type="text" name="courseName" id="courseName"/></td>
+                    </tr>
+                    <tr>
+                        <td class="rightCell"><label for="courseCode">Course Code:</label></td>
+                        <td><input required="true" type="text" name="courseCode" id="courseCode"/></td>
+                    </tr>
+                    <tr>
+                        <td class="rightCell"><label for="collegeName">College:</label></td>
+                        <td class="input-field col s12">
+                            <select class="browser-default" required="true" id="collegeName" name="collegeName">
+                                <option value="RVCC">RVCC</option>
+                                <option value="Stockton College">Stockton College</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="rightCell"><label for="semester">Semester:</label></td>
+                        <td class="input-field col s12">
+                            <select class="browser-default" required="true" name="semester" id="semester">
+                                <option value="2007Fall">Fall 2007</option>
+                                <option value="2008Spring">Spring 2008</option>
+                                <option value="2008Summer">Summer 2008</option>
+                                <option value="2008Fall">Fall 2008</option>
+                                <option value="2009Spring">Spring 2009</option>
+                                <option value="2009Summer">Summer 2009</option>
+                                <option value="2009Fall">Fall 2009</option>
+                                <option value="2010Spring">Spring 2010</option>
+                                <option value="2010Summer">Summer 2010</option>
+                                <option value="2010Fall">Fall 2010</option>
+                                <option value="2011Spring">Spring 2011</option>
+                                <option value="2011Summer">Summer 2011</option>
+                                <option value="2011Fall">Fall 2011</option>
+                                <option value="2012Spring">Spring 2012</option>
+                                <option value="2012Summer">Summer 2012</option>
+                                <option value="2012Fall">Fall 2012</option>
+                                <option value="2013Spring">Spring 2013</option>
+                                <option value="2013Summer">Summer 2013</option>
+                                <option value="2013Fall">Fall 2013</option>
+                                <option value="2014Spring">Spring 2014</option>
+                                <option value="2014Summer">Summer 2014</option>
+                                <option value="2014Fall">Fall 2014</option>
+                                <option value="2015Spring">Spring 2015</option>
+                                <option value="2015Summer">Summer 2015</option>
+                                <option value="2015Fall">Fall 2015</option>
+                                <option value="2016Spring">Spring 2016</option>
+                                <option value="2016Summer">Summer 2016</option>
+                                <option value="2016Fall">Fall 2016</option>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td class="rightCell"><label for="courseGrade">Course Grade:</label></td>
+                        <td><input type="text" id="courseGrade" name="courseGrade"/></td>
+                    </tr>
+                    <tr>
+                        <td class="rightCell"><label for="relevantCourseWork">Relevant <br/> Course Work:</label></td>
+                        <td><input type="text" id="relevantCourseWork" name="relevantCourseWork"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button class="waves-effect waves-light btn submitButton" type="submit" value="Submit">
+                                Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </td>
+                    </tr>
 
-            </table>
-        </form>
+                </table>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -42,7 +42,6 @@
 
     </script>
 
-<button class="waves-effect waves-light btn" onclick="closePopup();">Close</button>
 <button class="waves-effect waves-light btn" onclick="sortReverseIdOrder();">Reverse Order</button>
 <button class="waves-effect waves-light btn" onclick="sortAlpha();">Alphabetical</button>
 <button class="waves-effect waves-light btn" onclick="sortReverseAlpha();">Reverse Alphabetical</button>

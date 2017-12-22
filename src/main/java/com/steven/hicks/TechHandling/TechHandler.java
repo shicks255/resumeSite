@@ -234,7 +234,7 @@ public class TechHandler extends HttpServlet
             List<MusicArtist> musicArtists = TechLogic.getMusicArtistsFromLast_FM(request);
 
             request.setAttribute("musicArtist", musicArtists);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallArtistSearchPopup.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallArtistSearchPopup.jsp");
             dispatcher.forward(request, response);
         }
 
@@ -254,7 +254,7 @@ public class TechHandler extends HttpServlet
                     e.printStackTrace();
                 }
                 request.setAttribute("musicArtist", musicArtists);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallArtistSearchPopup.jsp");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallArtistSearchPopup.jsp");
                 dispatcher.forward(request, response);
             }
         }
@@ -274,7 +274,7 @@ public class TechHandler extends HttpServlet
                 e.printStackTrace();
             }
             request.setAttribute("albums", albums);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFMCallAlbumSearchPopup.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallAlbumSearchPopup.jsp");
             dispatcher.forward(request, response);
         }
 

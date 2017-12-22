@@ -250,17 +250,22 @@ function showRecentTracks()
 
     <div id="popup-infoMessage" class="hiddenDiv">
         <div id="infoMessage" class="popupContent important">
-            <p style="margin :15pt;text-align: center">
-                <span id="_info_message_text_">Info message</span>
-            </p>
-            <button class="btn waves-effect waves-light" onclick="hideInfoMessage();">Close</button>
+            <div class="popupHeader">
+                <span style="margin: auto;">Info</span>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <p style="margin :15pt;text-align: center">
+                    <span id="_info_message_text_">Info message</span>
+                </p>
+            </div>
         </div>
     </div>
 
     <div class="hiddenDiv" id="recentTracksContainer">
         <div id="recentTracks" class="popupContent">
             <div class="popupHeader">
-                <i class="medium material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
             </div>
             <div class="popupContainer">
                 <h4>Recently Listened To</h4>

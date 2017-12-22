@@ -158,12 +158,15 @@
 
         <br><br>
 
-        <div id="dialog-emailPopup" class="hiddenDiv">
-            <div class="popupContent">
-                <button class="waves-effect waves-light btn closeButton" id="closeEmail" name="closeEmail" onclick="closePopups();">Close</button>
-                    <br/>
-                    <br/>
-                    <br/>
+    <div id="dialog-emailPopup" class="hiddenDiv">
+        <div class="popupContent">
+            <div class="popupHeader">
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <br/>
+                <br/>
+                <br/>
                 <form name="" id="" method="post" action="${pageContext.request.contextPath}\academic?action=uploadCoursework">
                     <label for="emailSubject">Subject:</label>
                     <input type="text" name="emailSubject" id="emailSubject">
@@ -173,6 +176,7 @@
                 </form>
             </div>
         </div>
+    </div>
 
 </div>
 

@@ -31,13 +31,12 @@
 <body>
 
 <div class="popupContent">
-    Coursework for <b>${course.courseName}</b>
-        <a class="waves-effect waves-light btn closeButton" value="Cancel" onclick="closePopups();">
-            Close
-            <i class="material-icons right">close</i>
-        </a>
-    <br/><br/>
-    <br/><br/>
+    <div class="popupHeader">
+        <span style="margin: auto;">Coursework for <b>${course.courseName}</b></span>
+        <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+    </div>
+    <div class="popupContainer">
+        <br/><br/>
         <c:set var="index" value="${0}"/>
         <table>
             <thead>
@@ -68,6 +67,7 @@
                 </tr>
             </c:if>
         </table>
+    </div>
 </div>
 
 </body>

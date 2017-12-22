@@ -4,9 +4,6 @@
 <jsp:useBean id="selectedTimePeriod" type="java.lang.String" scope="request"/>
 <jsp:useBean id="lookupCriteria" type="java.lang.String" scope="request"/>
 
-<button class="waves-effect waves-light btn" onclick="closeResultsPopup();">Close</button>
-<br/>
-
 <h4>My Last.fm Profile Data</h4>
 
 <br/>
