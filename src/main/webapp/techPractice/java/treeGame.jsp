@@ -12,7 +12,23 @@
 
     function runGame()
     {
-        $( '#gamePopup' ).removeClass('hiddenDiv').addClass('popup');
+        $.get( '${pageContext.request.contextPath}/techPractice?action=runTreeGame',
+            function(data)
+            {
+                $( '#question' ).html(data);
+                $( '#gamePopup' ).removeClass('hiddenDiv').addClass('popup');
+            });
+    }
+
+    function next()
+    {
+        var answer = $( "input[name='treeAnswer']:checked").val();
+        $.get( '${pageContext.request.contextPath}/techPractice?action=queryTreeGame&treeAnswer=' + answer,
+            function(data)
+            {
+               $( "input[name='treeAnswer']" ).prop('checked', false);
+               $( '#question' ).html(data);
+            });
     }
 
 </script>
@@ -32,11 +48,25 @@
 
     <div id="gamePopup" class="hiddenDiv">
         <div class="popupContent">
-            <button class="btn waves-light waves-effect" onclick="closePopups();">
-                Close
-            </button>
-            <br/>
-            test
+            <div class="popupHeader">
+                <span style="margin: auto;" id="popupTitle">Binary Tree Animal Guessing Game</span>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <div id="question">
+                </div>
+                <br/>
+                <div id="answer">
+                    <input type="radio" id="answerYes" name="treeAnswer" value="Yes">
+                    <label for="answerYes">Yes</label>
+                    <br/>
+                    <input type="radio" id="answerNo" name="treeAnswer" value="No">
+                    <label for="answerNo">No</label>
+                </div>
+                <button class="btn waves-effect waves-light" onclick="next();">
+                    Next
+                </button>
+            </div>
         </div>
     </div>
 

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<questionTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="animalTreeSchema.xsd">
+    <node id="1   " parentId="1   " data="Are you a mammal">
+        <left id="2   " parentId="1   " data="Are you bigger than a cat?"/>
+        <left id="3   " parentId="2   " data="Do you have spots?"/>
+        <left id="4   " parentId="3   " data="Cow"/>
+        <right id="5   " parentId="3   " data="Kangaroo"/>
+        <right id="6   " parentId="2   " data="Mouse"/>
+        <right id="7   " parentId="1   " data="Do you live underwater?"/>
+        <left id="8   " parentId="7   " data="Trout"/>
+        <right id="9   " parentId="7   " data="Robin"/>
+    </node>
+</questionTree>

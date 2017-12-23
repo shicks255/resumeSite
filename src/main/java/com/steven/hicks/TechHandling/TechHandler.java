@@ -149,6 +149,34 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+        if (action.equalsIgnoreCase("runTreeGame"))
+        {
+            BTNode<String> rootNode = TechLogic.getNodesFromXML();
+
+            request.getSession().setAttribute("currentNode", rootNode);
+
+            PrintWriter out = response.getWriter();
+            out.println(rootNode.getData());
+            out.flush();
+        }
+
+        if (action.equalsIgnoreCase("queryTreeGame"))
+        {
+            HttpSession session = request.getSession();
+            BTNode<String> currentNode = (BTNode<String>)session.getAttribute("currentNode");
+
+            String answer = request.getParameter("treeAnswer");
+            if (answer.equalsIgnoreCase("Yes"))
+                currentNode = currentNode.getLeft();
+            if (answer.equalsIgnoreCase("no"))
+                currentNode = currentNode.getRight();
+
+            session.setAttribute("currentNode", currentNode);
+            PrintWriter out = response.getWriter();
+            out.println(currentNode.getData());
+            out.flush();
+        }
+
         if (action.equals("multithreadingFunction"))
         {
             String function = request.getParameter("function");
