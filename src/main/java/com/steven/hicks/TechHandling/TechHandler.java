@@ -2,6 +2,7 @@ package com.steven.hicks.TechHandling;
 
 import com.steven.hicks.AcademicHandling.AcademicLogic;
 import com.steven.hicks.ResultsPage;
+import com.steven.hicks.TechHandling.logics.*;
 import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.*;
 
@@ -151,7 +152,7 @@ public class TechHandler extends HttpServlet
 
         if (action.equalsIgnoreCase("runTreeGame"))
         {
-            BTNode<String> rootNode = TechLogic.getNodesFromXML();
+            BTNode<String> rootNode = BinaryTreeGameLogic.getNodesFromXML();
 
             request.getSession().setAttribute("currentNode", rootNode);
 
@@ -187,16 +188,16 @@ public class TechHandler extends HttpServlet
             {
                 if (function.equals("raceCondition"))
                 {
-                    int result = TechLogic.doRaceCondition();
+                    int result = MathLogic.doRaceCondition();
                 }
                 if (function.equals("largeNumMultiThread"))
                 {
                     long startTime = System.currentTimeMillis();
 
                     ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-                    Future f1 = executorService.submit(() -> answers[0] = TechLogic.getLargestPrimeNumberUnderAMillion());
-                    Future f3 = executorService.submit(() -> answers[1] = TechLogic.getLargestPalindromeNumber());
-                    Future f2 = executorService.submit(() -> answers[2] = (int)TechLogic.getLargestPrimeFactor());
+                    Future f1 = executorService.submit(() -> answers[0] = MathLogic.getLargestPrimeNumberUnderAMillion());
+                    Future f3 = executorService.submit(() -> answers[1] = MathLogic.getLargestPalindromeNumber());
+                    Future f2 = executorService.submit(() -> answers[2] = (int)MathLogic.getLargestPrimeFactor());
                     executorService.shutdown();
 
                     while (!f1.isDone() || !f2.isDone() || !f3.isDone())
@@ -209,11 +210,11 @@ public class TechHandler extends HttpServlet
                 if (function.equals("largeNum"))
                 {
                     long startTime = System.currentTimeMillis();
-                    int largestPrime = TechLogic.getLargestPrimeNumberUnderAMillion();
+                    int largestPrime = MathLogic.getLargestPrimeNumberUnderAMillion();
                     answers[0] = largestPrime;
-                    int largestPalindromeProduct = TechLogic.getLargestPalindromeNumber();
+                    int largestPalindromeProduct = MathLogic.getLargestPalindromeNumber();
                     answers[1] = largestPalindromeProduct;
-                    long test = TechLogic.getLargestPrimeFactor();
+                    long test = MathLogic.getLargestPrimeFactor();
                     answers[2] = (int)test;
                     long endTime = System.currentTimeMillis() - startTime;
                     answers[3] = (int)endTime;

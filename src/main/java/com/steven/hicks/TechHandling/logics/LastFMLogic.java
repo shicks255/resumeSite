@@ -1,4 +1,4 @@
-package com.steven.hicks.TechHandling;
+package com.steven.hicks.TechHandling.logics;
 
 import com.steven.hicks.entities.*;
 
