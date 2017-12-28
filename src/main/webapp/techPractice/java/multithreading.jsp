@@ -51,6 +51,13 @@
 
 </script>
 
+<div class="bread nav-wrapper hide-on-small-and-down">
+    <div class="col s12">
+        <a href="${pageContext.request.contextPath}/techPractice?action=form" class="breadcrumb">Tech Practice</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=java" class="breadcrumb">Java</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=multithreadingPage" class="breadcrumb">Multithreading</a>
+    </div>
+</div>
 <div class="container">
 
     <br/>

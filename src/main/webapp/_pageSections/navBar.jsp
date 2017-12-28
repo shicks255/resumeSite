@@ -265,6 +265,7 @@ function showRecentTracks()
     <div class="hiddenDiv" id="recentTracksContainer">
         <div id="recentTracks" class="popupContent">
             <div class="popupHeader">
+                <span style="margin: auto;">My Recently Played Tracks</span>
                 <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
             </div>
             <div class="popupContainer">
