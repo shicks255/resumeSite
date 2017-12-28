@@ -4,14 +4,26 @@
 <jsp:useBean id="selectedTimePeriod" type="java.lang.String" scope="request"/>
 <jsp:useBean id="lookupCriteria" type="java.lang.String" scope="request"/>
 
+<style>
+    @media (min-width : 720px)
+    {
+        .changeSize
+        {
+            width : 20% ;
+        }
+    }
+</style>
+
 <h4>My Last.fm Profile Data</h4>
 
 <br/>
 <br/>
 <br/>
-<button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('artist')}">pressed</c:if>" onclick="getLastFmTopArtists();">Artists</button>
-<button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('album')}">pressed</c:if>" onclick="getLastFmTopAlbums();">Albums</button>
-<button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('song')}">pressed</c:if>" onclick="getLastFmTopSongs();">Songs</button>
+<div style="text-align:center">
+    <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('artist')}">pressed</c:if>" onclick="getLastFmTopArtists();">Artists</button>
+    <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('album')}">pressed</c:if>" onclick="getLastFmTopAlbums();">Albums</button>
+    <button class="waves-effect waves-light btn <c:if test="${lookupCriteria.equals('song')}">pressed</c:if>" onclick="getLastFmTopSongs();">Songs</button>
+</div>
 <br/>
 <c:set var="onChangeEvent" value=""/>
 <c:if test="${lookupCriteria.equals('artist')}">
@@ -25,18 +37,8 @@
 </c:if>
 
 <h5>
-    <label for="timePeriod"><h5>Time period:</h5></label>
+    <label for="timePeriod">Time period:</label>
 </h5>
-
-<style>
-    @media (min-width : 720px)
-    {
-        .changeSize
-        {
-            width : 20% ;
-        }
-    }
-</style>
 
 <select class="browser-default changeSize" onchange="${onChangeEvent}" required id="timePeriod" name="timePeriod">
     <c:forEach var="option" items="${timeOptions}">

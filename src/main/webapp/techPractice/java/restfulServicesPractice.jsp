@@ -100,6 +100,7 @@
             success: function(data)
             {
                 hideWaitingPopup();
+                $( '#popupTitle' ).html('My Top Listened To Artists');
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
             },
@@ -119,6 +120,7 @@
             success:function(data)
             {
                 hideWaitingPopup();
+                $( '#popupTitle' ).html('My Top Listened To Songs');
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
             },
@@ -138,6 +140,7 @@
             success:function(data)
             {
                 hideWaitingPopup();
+                $( '#popupTitle' ).html('My Top Listened To Albums');
                 $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                 $( '#restResultsBoxPopup' ).html(data);
             },
@@ -154,7 +157,7 @@
     <div class="col s12">
         <a href="${pageContext.request.contextPath}/techPractice?action=form" class="breadcrumb">Tech Practice</a>
         <a href="${pageContext.request.contextPath}/techPractice?action=java" class="breadcrumb">Java</a>
-        <a href="${pageContext.request.contextPath}/techPractice?action=sessionPracticePage" class="breadcrumb">Session Practice</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=restfulServicesPage" class="breadcrumb">Restful Services</a>
     </div>
 </div>
 <div class="container">

@@ -12,6 +12,13 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js">
 </script>
 
+<div class="bread nav-wrapper hide-on-small-and-down">
+    <div class="col s12">
+        <a href="${pageContext.request.contextPath}/techPractice?action=form" class="breadcrumb">Tech Practice</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=javaScript" class="breadcrumb">Javascript</a>
+        <a href="${pageContext.request.contextPath}/techPractice?action=charts" class="breadcrumb">Charts</a>
+    </div>
+</div>
 <div class="container">
 
     <h1>Charts JS Library</h1>
