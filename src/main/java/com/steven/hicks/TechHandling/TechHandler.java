@@ -249,7 +249,7 @@ public class TechHandler extends HttpServlet
 //        -----DO STEAM API
         if (action.equalsIgnoreCase("steamApi"))
         {
-            List<SteamGame> allGameList = TechLogic.doSteamApiCall(request);
+            List<SteamGame> allGameList = SteamAPILogic.doSteamApiCall(request);
 
             request.setAttribute("allGameList", allGameList);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/steamRestCall.jsp");
@@ -259,7 +259,7 @@ public class TechHandler extends HttpServlet
 //        -----Do last.fm call
         if (action.equalsIgnoreCase("getMusicArtistsFromLast_FM"))
         {
-            List<MusicArtist> musicArtists = TechLogic.getMusicArtistsFromLast_FM(request);
+            List<MusicArtist> musicArtists = LastFMLogic.getMusicArtistsFromLast_FM();
 
             request.setAttribute("musicArtist", musicArtists);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/lastFmStuff/lastFMCallArtistSearchPopup.jsp");
@@ -276,7 +276,7 @@ public class TechHandler extends HttpServlet
                 List<MusicArtist> musicArtists = Collections.emptyList();
                 try
                 {
-                    musicArtists = TechLogic.searchForArtists(request, artistSearchName);
+                    musicArtists = LastFMLogic.searchForArtists(request, artistSearchName);
                 } catch (Exception e)
                 {
                     e.printStackTrace();
@@ -295,7 +295,7 @@ public class TechHandler extends HttpServlet
             List<Album> albums = null;
             try
             {
-                albums = TechLogic.searchForAlbums(request, albumSearchName);
+                albums = LastFMLogic.searchForAlbums(albumSearchName);
             }
             catch (Exception e)
             {
@@ -325,7 +325,7 @@ public class TechHandler extends HttpServlet
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
 
-            List<TopArtistRecord> artistRecords = TechLogic.searchForTopArtists(request, userName, selectedOption);
+            List<TopArtistRecord> artistRecords = LastFMLogic.searchForTopArtists(userName, selectedOption);
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(artistRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
@@ -352,7 +352,7 @@ public class TechHandler extends HttpServlet
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
 
-            List<TopAlbumRecord> albumRecords = TechLogic.searchForTopAlbums(request, userName, selectedOption);
+            List<TopAlbumRecord> albumRecords = LastFMLogic.searchForTopAlbums(userName, selectedOption);
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(albumRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
@@ -379,7 +379,7 @@ public class TechHandler extends HttpServlet
             List<String> timeOptions = Arrays.asList("overall", "7day", "1month", "3month", "6month", "12month");
             request.setAttribute("timeOptions", timeOptions);
 
-            List<TopSongRecord> songRecords = TechLogic.searchForTopSongs(request, userName, selectedOption);
+            List<TopSongRecord> songRecords = LastFMLogic.searchForTopSongs(userName, selectedOption);
             List<ResultsPage> resultPages = CommonUtils.putResultsInPage(songRecords, 10);
             request.setAttribute("resultPages", resultPages);
             request.setAttribute("selectedPage", resultPages.get(pageNumber-1));
