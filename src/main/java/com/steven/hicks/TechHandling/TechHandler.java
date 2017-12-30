@@ -135,6 +135,7 @@ public class TechHandler extends HttpServlet
             response.sendRedirect(request.getContextPath() + "/techPractice?action=sessionPracticePage");
         }
 
+//        ------MULTITHREADING PAGE
         if (action.equalsIgnoreCase("multithreadingPage"))
         {
             String responseMessage = request.getParameter("responseMessage");
@@ -143,12 +144,14 @@ public class TechHandler extends HttpServlet
             dispatcher.forward(request, response);
         }
 
+//        --------TREE GAME PAGE
         if (action.equalsIgnoreCase("treeGame"))
         {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/java/treeGame.jsp");
             dispatcher.forward(request, response);
         }
 
+//        --------RUN/START TREE GAME
         if (action.equalsIgnoreCase("runTreeGame"))
         {
             BTNode<String> rootNode = BinaryTreeGameLogic.getNodesFromXML();
@@ -160,6 +163,7 @@ public class TechHandler extends HttpServlet
             out.flush();
         }
 
+//        ---------QUERY TREE GAME
         if (action.equalsIgnoreCase("queryTreeGame"))
         {
             HttpSession session = request.getSession();
@@ -173,9 +177,15 @@ public class TechHandler extends HttpServlet
 
             session.setAttribute("currentNode", currentNode);
             PrintWriter out = response.getWriter();
-            out.println(currentNode.getData());
+
+            if (!currentNode.isLeaf())
+                out.println(currentNode.getData());
+            if (currentNode.isLeaf())
+                out.println("<leaf>" + currentNode.getData());
+
             out.flush();
         }
+
 
         if (action.equals("multithreadingFunction"))
         {
@@ -231,6 +241,7 @@ public class TechHandler extends HttpServlet
             out.flush();
         }
 
+//        --------DESIGN PATTERNS
         if (action.equalsIgnoreCase("designPatternsPage"))
         {
 

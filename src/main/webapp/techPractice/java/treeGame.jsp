@@ -26,8 +26,17 @@
         $.get( '${pageContext.request.contextPath}/techPractice?action=queryTreeGame&treeAnswer=' + answer,
             function(data)
             {
-               $( "input[name='treeAnswer']" ).prop('checked', false);
-               $( '#question' ).html(data);
+                $( "input[name='treeAnswer']" ).prop('checked', false);
+                if (data.indexOf('<leaf>') !== -1)
+                {
+                    $( '#question' ).html('testtest');
+                    $( '#newAnimalToAddContainer' ).css('display', 'inline');
+                }
+                if (data.indexOf('<leaf>') === -1)
+                {
+                    // $( '#question' ).append(data);
+                    $( '#question' ).html(data);
+                }
             });
     }
 
@@ -69,6 +78,15 @@
                     <br/>
                     <input type="radio" id="answerNo" name="treeAnswer" value="No">
                     <label for="answerNo">No</label>
+
+                    <div id="newAnimalToAddContainer" style="display:none">
+                        <label for="newAnimalToAdd">Animal</label>
+                        <input type="text" id="newAnimalToAdd" name="newAnimalToAdd"/>
+                        <br/>
+                        <label for="questionForAnimal">Question</label>
+                        <input type="text" id="questionForAnimal" name="questionForAnimal"/>
+                    </div>
+
                 </div>
                 <button class="btn waves-effect waves-light" onclick="next();">
                     Next
