@@ -102,7 +102,6 @@ public class TechHandler extends HttpServlet
                     .collect(Collectors.toList());
             request.setAttribute("allGrades", allGradeList);
 
-
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice/javascript/charts.jsp");
             dispatcher.forward(request, response);
         }

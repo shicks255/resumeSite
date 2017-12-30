@@ -130,6 +130,7 @@ input[type=submit]:hover {color : red;}
 
 .popupHeader{
     background-color: #7986cb;
+    width: 100%;
     text-align:right;
     overflow: hidden;
     height: 100%;
@@ -242,13 +243,9 @@ label{
 
 /*Media Queries*/
 @media (max-width : 480px) {
-    .popupContent{
-        margin : 15% auto;
-        padding : 20px;
-        border : 1px solid black;
+    .popupContainer{
         background-color : #f4eff7;
-        width : 85%;
-        border-radius : 10px;
+        /*width : 85%;*/
     }
 
 
