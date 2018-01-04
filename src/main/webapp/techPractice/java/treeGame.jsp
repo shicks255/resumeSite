@@ -29,14 +29,30 @@
                 $( "input[name='treeAnswer']" ).prop('checked', false);
                 if (data.indexOf('<leaf>') !== -1)
                 {
-                    $( '#question' ).html('testtest');
+                    var question = $( '#question' );
+                    question.html('My guess is ' + data + ',');
+                    question.append('<br/>was I right?');
+
                     $( '#newAnimalToAddContainer' ).css('display', 'inline');
+                    $( '#nextButton' ).css('display', 'none');
                 }
                 if (data.indexOf('<leaf>') === -1)
                 {
                     // $( '#question' ).append(data);
                     $( '#question' ).html(data);
                 }
+            });
+    }
+
+    function submitAnimal()
+    {
+        console.log('submit');
+        var animal = $( '#newAnimalToAdd' ).val();
+        var question = $( '#questionForAnimal' ).val();
+        $.post( '${pageContext.request.contextPath}/techPractice?action=addAnimalToTreeGame&animal=' + animal + '&question=' + question,
+            function(data)
+            {
+                location.reload();
             });
     }
 
@@ -80,15 +96,23 @@
                     <label for="answerNo">No</label>
 
                     <div id="newAnimalToAddContainer" style="display:none">
-                        <label for="newAnimalToAdd">Animal</label>
+                        <br/><br/>
+                        <label for="newAnimalToAdd">What animal were you thinking of?</label>
                         <input type="text" id="newAnimalToAdd" name="newAnimalToAdd"/>
                         <br/>
-                        <label for="questionForAnimal">Question</label>
+                        <label for="questionForAnimal">Enter a 'Yes' question that would lead to this animal</label>
                         <input type="text" id="questionForAnimal" name="questionForAnimal"/>
+
+                        <button class="btn waves-effect waves-light" onclick="submitAnimal();">
+                            Submit
+                        </button>
+                        <button class="btn waves-effect waves-light" onclick='window.location.reload();'>
+                            Cancel
+                        </button>
                     </div>
 
                 </div>
-                <button class="btn waves-effect waves-light" onclick="next();">
+                <button id="nextButton" class="btn waves-effect waves-light" onclick="next();">
                     Next
                 </button>
             </div>

@@ -186,6 +186,19 @@ public class TechHandler extends HttpServlet
             out.flush();
         }
 
+        if (action.equalsIgnoreCase("addAnimalToTreeGame"))
+        {
+            String animal = request.getParameter("animal");
+            String question = request.getParameter("question");
+
+            HttpSession session = request.getSession();
+            BTNode<String> currentNode = (BTNode<String>)session.getAttribute("currentNode");
+
+            if (animal.length() > 0 && question.length() > 0)
+            {
+                BinaryTreeGameLogic.addNode(animal, question, currentNode);
+            }
+        }
 
         if (action.equals("multithreadingFunction"))
         {

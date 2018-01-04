@@ -81,7 +81,10 @@ public class BinaryTreeGameLogic
         }
 
         return root;
+    }
 
+    public static void addNode(String animal, String question, BTNode currentNode)
+    {
 
     }
 
