@@ -157,6 +157,7 @@ public class TechHandler extends HttpServlet
             BTNode<String> rootNode = BinaryTreeGameLogic.getNodesFromXML();
 
             request.getSession().setAttribute("currentNode", rootNode);
+            request.getSession().setAttribute("rootNode", rootNode);
 
             PrintWriter out = response.getWriter();
             out.println(rootNode.getData());
@@ -193,10 +194,11 @@ public class TechHandler extends HttpServlet
 
             HttpSession session = request.getSession();
             BTNode<String> currentNode = (BTNode<String>)session.getAttribute("currentNode");
+            BTNode<String> rootNode = (BTNode<String>)session.getAttribute("rootNode");
 
             if (animal.length() > 0 && question.length() > 0)
             {
-                BinaryTreeGameLogic.addNode(animal, question, currentNode);
+                BinaryTreeGameLogic.addNode(animal, question, currentNode, rootNode);
             }
         }
 

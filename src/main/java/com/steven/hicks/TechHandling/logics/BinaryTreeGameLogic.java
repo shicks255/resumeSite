@@ -87,7 +87,7 @@ public class BinaryTreeGameLogic
         return root;
     }
 
-    public static void addNode(String animal, String question, BTNode currentNode)
+    public static void addNode(String animal, String question, BTNode currentNode, BTNode root)
     {
         BTNode<String> oldAnswer = new BTNode<String>((String)currentNode.getData(), null, null);
 
@@ -102,7 +102,6 @@ public class BinaryTreeGameLogic
             FileWriter fr = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fr);
 
-            BTNode<String> root = getNodesFromXML();
             writer.write("<?xml version=\"1.0\"?>");
             writer.write("\r\n\t<questionTree xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"animalTreeSchema.xsd\">");
             writer.write("\r\n\t\t<node id=\"1   \" parentId=\"1   \" data=\"" + root.getData() + "\">");
