@@ -36,6 +36,9 @@ public class TechHandler extends HttpServlet
 //        -----PAGE LOAD
         if (action.equalsIgnoreCase("form"))
         {
+            if (CommonUtils.isAdminVisitor(request))
+                request.setAttribute("adminComputer", "adminComputer");
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/techPractice.jsp");
             dispatcher.forward(request, response);
         }
@@ -187,6 +190,7 @@ public class TechHandler extends HttpServlet
             out.flush();
         }
 
+        //----------ADD AN ANIMAL TO TREE GAME
         if (action.equalsIgnoreCase("addAnimalToTreeGame"))
         {
             String animal = request.getParameter("animal");

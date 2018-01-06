@@ -29,9 +29,13 @@
     <br/>
 
     <%--Add admin portal account--%>
-    <%--<a class="waves-effect waves-light btn" name="addAdminUserButton" id="addAdminUserButton" onclick="showAddAdminDialog();" value="Edit">here</a>--%>
-
-
+    <c:if test="${!empty adminComputer}">
+        <button class="waves-effect waves-light btn" name="addAdminUserButton" id="addAdminUserButton" onclick="showAddAdminDialog();" value="Edit">
+            Add an admin user
+            <i class="large material-icons">person_add</i>
+        </button>
+        <br/>
+    </c:if>
 
     <div id="addAdminUser" name="addAdminUser" class="hiddenDiv">
         <div class="popupContent">
