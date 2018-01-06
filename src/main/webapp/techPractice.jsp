@@ -5,12 +5,10 @@
 <jsp:include page="/_pageSections/navBar.jsp"/>
 
 <script>
-
     function showAddAdminDialog()
     {
         $( '#addAdminUser' ).removeClass('hiddenDiv').addClass('popup');
     }
-
 </script>
 
 <div class="container">
