@@ -11,17 +11,11 @@
         $( '#addAdminUser' ).removeClass('hiddenDiv').addClass('popup');
     }
 
-    function closeAddAdminUser()
-    {
-        $( '#addAdminUser' ).removeClass('popup').addClass('hiddenDiv');
-    }
-
 </script>
 
 <div class="container">
 
-    <h1>Tech Practice:</h1>
-
+    <h1>Tech Practice</h1>
 
     Enter the store <a href="${pageContext.request.contextPath}/portal?action=form">here</a>
 
@@ -39,46 +33,48 @@
 
     <div id="addAdminUser" name="addAdminUser" class="hiddenDiv">
         <div class="popupContent">
-            <form name="frmAddAdminUser" method="post" action="${pageContext.request.contextPath}/userRegistration?action=addAdminUser">
-                <a class="waves-effect waves-light btn" name="closeAddAdminUser" id="closeAddAdminUser" onclick="closeAddAdminUser();">Close</a>
-                <table>
-                    <tr>
-                        <td>
-                            <label for="adminUserName">Username:</label>
-                            <input type="text" name="adminUserName" id="adminUserName">
-                        </td>
-                        <td>
-                            <label for="adminPassword">Password:</label>
-                            <input type="text" name="adminPassword" id="adminPassword">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="adminEmail">Email:</label>
-                            <input type="text" name="adminEmail" id="adminEmail">
-                        </td>
-                        <td>
-                            <label for="adminFirstName">First Name:</label>
-                            <input type="text" name="adminFirstName" id="adminFirstName">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="adminLastName">Last Name:</label>
-                            <input type="text" name="adminLastName" id="adminLastName">
-                        </td>
-                    </tr>
-                </table>
-                <button class="btn waves-effect waves-light" type="submit" id="addAdminBtn" name="action">Create
-                    <i class="material-icons right">forward</i>
-                </button>
-            </form>
+            <div class="popupHeader">
+                <span style="margin: auto;">Upload A File</span>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <form name="frmAddAdminUser" method="post" action="${pageContext.request.contextPath}/userRegistration?action=addAdminUser">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="adminUserName">Username:</label>
+                                <input type="text" name="adminUserName" id="adminUserName">
+                            </td>
+                            <td>
+                                <label for="adminPassword">Password:</label>
+                                <input type="text" name="adminPassword" id="adminPassword">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="adminEmail">Email:</label>
+                                <input type="text" name="adminEmail" id="adminEmail">
+                            </td>
+                            <td>
+                                <label for="adminFirstName">First Name:</label>
+                                <input type="text" name="adminFirstName" id="adminFirstName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="adminLastName">Last Name:</label>
+                                <input type="text" name="adminLastName" id="adminLastName">
+                            </td>
+                        </tr>
+                    </table>
+                    <button class="btn waves-effect waves-light" type="submit" id="addAdminBtn" name="action">Create
+                        <i class="material-icons right">forward</i>
+                    </button>
+                </form>
+                <br/>
+            </div>
         </div>
     </div>
-
-
-
-
 
 </div>
 <jsp:include page="_pageSections/footer.jsp" />
