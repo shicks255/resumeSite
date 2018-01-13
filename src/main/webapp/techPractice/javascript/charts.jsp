@@ -66,7 +66,7 @@
                 cutoutPercentage: [0],
                 title: {
                     display: true,
-                    text: 'TestTest',
+                    text: 'Count Of Grades',
                     position: 'top',
                     fontSize: 20
                 }
@@ -106,7 +106,7 @@
                 },
                 title: {
                     display: true,
-                    text: 'TestTest',
+                    text: 'Average GPA Per Semester',
                     position: 'top',
                     fontSize: 20
                 }
