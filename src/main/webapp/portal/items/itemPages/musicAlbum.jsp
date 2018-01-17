@@ -30,24 +30,33 @@
 
 <div class="container">
 
-    <div id="itemContainer" style="border : 1px solid black;
-                                    margin : 10%;">
+    <div style="display:grid;grid-gap:5px;grid-template-colums: 45% 55%;
+        grid-template-rows: 50px 20px 20px 20px;">
 
+        <div style="grid-column: 1; grid-row: 1/4">
+            <img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.firstPictureId}"/>
+        </div>
+        <div style="grid-column: 2; grid-row:1">
+            <b><c:out value="${album.albumTitle}"/> </b>
+        </div>
+        <div style="grid-column: 2; grid-row: 2">
+            <c:out value="${album.artist}"/>
+        </div>
+        <div style="grid-column: 2; grid-row: 3">
+
+        </div>
+    </div>
+
+    <div id="itemContainer" style="border : 1px solid black; margin : 10%;">
         <a class="btn modal-trigger" href="#modal" style="visibility: collapse"></a>
 
         <div id="imageDiv" style="display : inline-block;
                                     float : left;
-                                    border : 1px solid red;
-                                    ">
+                                    border : 1px solid red;">
             <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${picture.objectId}"/>
         </div>
 
-
-
-
-
         <div id="infoDiv" style="float: right; margin-left : 5px; border : 1px solid blue;">
-
             <table>
                 <tr>
                     <td><c:out value="${album.albumTitle}"/></td>
