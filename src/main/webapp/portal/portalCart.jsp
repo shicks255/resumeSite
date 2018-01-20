@@ -76,7 +76,7 @@
 
 <div class="container">
 
-    <h3>Your Cart:</h3>
+    <h3 style="text-align: center;">Your Cart</h3>
 
     <div style="display:grid;grid-gap:5px;grid-template-columns: 25% 35% 10% 10% 15%;">
         <div style="grid-column: 3">

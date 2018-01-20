@@ -25,81 +25,39 @@
                 getNumberOfItemsInCart();
             });
     }
-
 </script>
 
 <div class="container">
-
-    <div style="display:grid;grid-gap:5px;grid-template-colums: 45% 55%;
-        grid-template-rows: 50px 20px 20px 20px;">
+    <br/>
+    <div style="display:grid;grid-gap:5px;grid-template-columns: 45% 55%;
+        grid-template-rows: 40px 20px 20px 20px 20px;">
 
         <div style="grid-column: 1; grid-row: 1/4">
             <img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.firstPictureId}"/>
         </div>
-        <div style="grid-column: 2; grid-row:1">
+        <div style="grid-column: 2; grid-row:1;">
             <b><c:out value="${album.albumTitle}"/> </b>
         </div>
-        <div style="grid-column: 2; grid-row: 2">
+        <div style="grid-column: 2; grid-row: 2;">
             <c:out value="${album.artist}"/>
         </div>
-        <div style="grid-column: 2; grid-row: 3">
-
+        <div style="grid-column: 2; grid-row: 3;">
+            <c:out value="${album.itemCode}"/>
+        </div>
+        <div style="grid-column: 2; grid-row: 4;">
+            $<c:out value="${album.itemPrice}"/>
+        </div>
+        <div style="grid-column: 2; grid-row: 5;">
+            released: <c:out value="${album.releaseYear}"/>
         </div>
     </div>
 
-    <div id="itemContainer" style="border : 1px solid black; margin : 10%;">
-        <a class="btn modal-trigger" href="#modal" style="visibility: collapse"></a>
+    <br/>
 
-        <div id="imageDiv" style="display : inline-block;
-                                    float : left;
-                                    border : 1px solid red;">
-            <img alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${picture.objectId}"/>
-        </div>
-
-        <div id="infoDiv" style="float: right; margin-left : 5px; border : 1px solid blue;">
-            <table>
-                <tr>
-                    <td><c:out value="${album.albumTitle}"/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><c:out value="${album.artist}"/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><c:out value="${album.itemCode}"/> </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><c:out value="${album.itemDescription}"/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>$<c:out value="${album.itemPrice}"/> pieces </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>released: <c:out value="${album.releaseYear}"/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="btn waves-effect waves-light" onclick="addToCart('${album.itemNumber}');" type="submit" name="action">Add To Cart
-                            <i class="material-icons right">add_shopping_cart</i>
-                        </button>
-                    </td>
-                    <td></td>
-                </tr>
-            </table>
-
-        </div>
-    </div>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h4>Added to cart</h4>
-            <p>A bunch of text</p>
-        </div>
+    <div class="center">
+        <button class="btn waves-effect waves-light" onclick="addToCart('${album.itemNumber}');" type="submit" name="action">Add To Cart
+            <i class="material-icons right">add_shopping_cart</i>
+        </button>
     </div>
 
 </div>
