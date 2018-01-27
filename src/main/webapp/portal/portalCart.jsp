@@ -127,7 +127,6 @@
     </div>
 <hr/>
 </c:forEach>
-
     <table>
         <tr>
             <td class="right-align"><b>Sub-total:</b> $ <span id="cartSubtotal"></span></td>
@@ -145,6 +144,10 @@
                 <button style="display:inline-block" class="btn waves-effect waves-light" id="checkoutBtn" onclick="checkout();">
                     Checkout
                     <i class="small material-icons" style="cursor:pointer">credit_card</i>
+                </button>
+                <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">
+                    Update
+                    <i class="small material-icons" style="cursor:pointer">update</i>
                 </button>
             </td>
         </tr>
