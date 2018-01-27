@@ -10,7 +10,6 @@
     {
         $( '#dialog-emailPopup' ).removeClass('hiddenDiv').addClass('popup');
     }
-
 </script>
 
 <div class="container">
@@ -19,11 +18,9 @@
         <a class="btn-floating btn-medium waves-effect waves-light deep-purple lighten-3"><i class="large material-icons">mail</i></a>
     </div>
 
-
     <br><br>
     <h1 style="text-align: center; font-weight : bold;">Skills</h1>
     <br>
-
         <div style="text-align: center;">
             <ul>
                 Maintain and enhance the functionality of an industry leading JAVA EE8 web application used by New Jersey schools for staff management.

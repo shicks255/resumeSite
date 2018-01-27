@@ -53,34 +53,6 @@ public class PortalUserFilter implements Filter
             }
 
             hSession.close();
-//            Cart cart = (Cart)session.getAttribute("cart");
-//
-//            if (cart == null)
-//            {
-//
-//                Query query = hSession.createQuery("from Cart where userNameOfCart = \'" + principal.getName() + "\'");
-//                List<Cart> carts = query.list();
-//
-//                if (carts.size() > 0)
-//                    cart = carts.get(0);
-//
-//                cart = Cart.getCartByUser(user.getUserName());
-//                if (cart == null)
-//                {
-//                    cart = new Cart();
-//                    cart.setUserNameOfCart(user.getUserName());
-//                    hSession.save(cart);
-////                    HibernateUtil.createItem(cart);
-//                }
-//            }
-
-//
-//            hSession.refresh(cart);
-////            hSession.load(Cart.class, cart);
-//            hSession.getTransaction().commit();
-//            hSession.close();
-//
-//            session.setAttribute("cart", cart);       hse
         }
 
         chain.doFilter(httpRequest, httpResponse);

@@ -15,7 +15,9 @@
 
     <h1>Tech Practice</h1>
 
-    Enter the store <a href="${pageContext.request.contextPath}/portal?action=form">here</a>
+    <button class="waves-effect waves-light btn" name="enterStoreButton" id="enterStoreButton" onclick="window.location.href = '${pageContext.request.contextPath}/portal?action=form';" value="Edit Store">
+        Enter Store
+    </button>
 
     <br/>
     <br/>

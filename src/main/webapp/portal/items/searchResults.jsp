@@ -24,10 +24,10 @@
         <table>
             <c:forEach var="item" items="${items}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><img height="250"  alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}"/> </a></td>
-                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><c:out value="${item.itemName}"/>   </a></td>
-                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><c:out value="${item.itemNumber}"/> </a></td>
-                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemName=${item.itemName}"><c:out value="${item.itemPrice}"/>  </a></td>
+                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemNumber=${item.itemNumber}"><img height="250"  alt="no good" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}"/> </a></td>
+                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemNumber=${item.itemNumber}"><c:out value="${item.itemName}"/>   </a></td>
+                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemNumber=${item.itemNumber}"><c:out value="${item.itemNumber}"/> </a></td>
+                    <td><a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemNumber=${item.itemNumber}"><c:out value="${item.itemPrice}"/>  </a></td>
                     <td>description will go here </td>
                 </tr>
             </c:forEach>

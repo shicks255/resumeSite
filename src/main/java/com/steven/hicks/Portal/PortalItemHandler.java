@@ -205,12 +205,14 @@ public class PortalItemHandler extends HttpServlet
 //        NAVIGATE TO SHOW ITEM PAGE
         if (action.equalsIgnoreCase("showItemPage"))
         {
-            String itemName = request.getParameter("itemName");
+//            String itemName = request.getParameter("itemName");
+
+            Integer itemNumber = Integer.valueOf(request.getParameter("itemNumber"));
 
             Session session = HibernateUtil.sessionFactory.openSession();
 
-            String queryString = "from StoreItemGeneric where itemName=:title";
-            Query query = session.createQuery(queryString).setParameter("title", itemName);
+            String queryString = "from StoreItemGeneric where itemNumber=:itemNumber";
+            Query query = session.createQuery(queryString).setParameter("itemNumber", itemNumber);
             List<StoreItemGeneric> items = query.list();
             StoreItemGeneric item = items.get(0);
 

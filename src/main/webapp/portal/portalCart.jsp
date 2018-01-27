@@ -95,7 +95,9 @@
             <img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${itemsToPicture[storeItem].objectId}"/>
         </div>
         <div style="grid-column: 2;grid-row:1;color: dodgerblue">
-            <b><c:out value="${storeItem.itemName}"/></b>
+            <b>
+                <a href="${pageContext.request.contextPath}/portalItemHandler?action=showItemPage&itemNumber=${storeItem.itemNumber}"><c:out value="${storeItem.itemName}"/> </a>
+            </b>
         </div>
         <div style="grid-column: 2;grid-row: 2">
             Item# <c:out value="${storeItem.itemNumber}"/>
