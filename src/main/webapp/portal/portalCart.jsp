@@ -115,8 +115,14 @@
             <input style="width : 25px;line-height: 3; height: 1.5em;" id="qty_${item.objectId}" value="${item.quantity}">
         </div>
         <div style="grid-column: 5;grid-row:1">
-            <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">Update</button>
-            <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">Remove</button>
+            <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">
+                Update
+                <i class="small material-icons" style="cursor:pointer">update</i>
+            </button>
+            <button style="display:inline-block" id="removeItemBtn" class="btn waves-effect waves-light" onclick="removeItem('${item.objectId}');this.blur();">
+                Remove
+                <i class="small material-icons closeIcon" style="cursor:pointer">credit_card</i>
+            </button>
         </div>
     </div>
 <hr/>
@@ -136,7 +142,10 @@
     <table>
         <tr>
             <td>
-                <button style="display:inline-block" class="btn waves-effect waves-light" id="checkoutBtn" onclick="checkout();">Checkout</button>
+                <button style="display:inline-block" class="btn waves-effect waves-light" id="checkoutBtn" onclick="checkout();">
+                    Checkout
+                    <i class="small material-icons" style="cursor:pointer">credit_card</i>
+                </button>
             </td>
         </tr>
     </table>

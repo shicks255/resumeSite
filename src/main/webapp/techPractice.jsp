@@ -17,6 +17,7 @@
 
     <button class="waves-effect waves-light btn" name="enterStoreButton" id="enterStoreButton" onclick="window.location.href = '${pageContext.request.contextPath}/portal?action=form';" value="Edit Store">
         Enter Store
+        <i class="large material-icons">forward</i>
     </button>
 
     <br/>

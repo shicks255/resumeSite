@@ -59,7 +59,7 @@
 
 <div class="container">
 
-<h1 style="text-align:center;">Course History:</h1>
+<h1 style="text-align:center;">Course History</h1>
 
 <c:if test="${!empty adminComputer}">
     <button class="waves-effect waves-light btn" value="Add A Course" onclick="buttonAddACourse();">
