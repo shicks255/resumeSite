@@ -85,13 +85,13 @@
         <table class="highlight" style="width: 100%;overflow:hidden">
             <thead>
             <tr>
-                <th>#:</th>
-                <th>Semester:</th>
-                <th>College:</th>
-                <th>Code:</th>
-                <th>Course:</th>
-                <th>Grade:</th>
-                <th class="rightAlign">Actions:</th>
+                <td><b>#</b></td>
+                <td><b>Semester</b></td>
+                <td><b>College</b></td>
+                <td><b>Code</b></td>
+                <td><b>Course</b></td>
+                <td><b>Grade</b></td>
+                <td><b>Action</b></td>
             </tr>
             </thead>
 

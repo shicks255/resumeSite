@@ -86,9 +86,9 @@
             <b>Quantity</b>
         </div>
     </div>
+    <hr/>
 <c:forEach var="storeItem" items="${storeItems}">
     <c:set var="item" value="${map[storeItem]}"/>
-<hr/>
     <div style="display:grid;grid-gap:5px;grid-template-columns: 25% 35% 10% 10% 15%;
     grid-template-rows: 50px 20px 20px 20px">
         <div style="grid-column: 1;grid-row:1/10">
@@ -144,10 +144,6 @@
                 <button style="display:inline-block" class="btn waves-effect waves-light" id="checkoutBtn" onclick="checkout();">
                     Checkout
                     <i class="small material-icons" style="cursor:pointer">credit_card</i>
-                </button>
-                <button style="display:inline-block" class="btn waves-effect waves-light" id="updateQtyBtn" onclick="updateQty('${item.objectId}');">
-                    Update
-                    <i class="small material-icons" style="cursor:pointer">update</i>
                 </button>
             </td>
         </tr>
