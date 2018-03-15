@@ -98,6 +98,24 @@ input[type=submit] {border-radius : 5px;}
 
 input[type=submit]:hover {color : red;}
 
+/*Portal Item Page*/
+
+.itemDescription {
+    width: 60%;
+    padding-top: calc(1% - 5px);
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    border: 1px solid black;
+    margin-top : 5%;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius: 5px;
+    background-color: #fff3e0;
+    text-align:center;
+}
+
+
 /*Popup stuff*/
 .popup{
     display : block;

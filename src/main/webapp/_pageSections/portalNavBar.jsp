@@ -110,7 +110,7 @@
         function showWaitingPopupPortal(text)
         {
             $( '#popup-processingAction' ).removeClass('hiddenDiv').addClass('popup');
-            $( '#_processing_text' ).innerHTML = text;
+            $( '#_processing_text' ).text(text);
         }
 
         function hideWaitingPopupPortal()

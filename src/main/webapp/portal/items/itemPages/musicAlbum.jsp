@@ -7,11 +7,40 @@
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 
+<style>
+
+    .itemGridContainerLarge {display: grid;}
+    .itemGridContainerSmall {display: inline-block;}
+
+    @media(min-width: 320px) and (max-width: 980px)
+    {
+        .itemGridContainerLarge{
+            display:none;
+        }
+
+        .itemGridContainerSmall{
+            display:inline-block;
+        }
+    }
+    @media(min-width: 980px)
+    {
+        .itemGridContainerLarge{
+            display: grid;
+        }
+
+        .itemGridContainerSmall{
+            display: none;
+        }
+    }
+
+
+</style>
+
 <script>
 
     $(document).ready(function()
     {
-        $('.modal').modal();
+        // $('.modal').modal();
     });
 
     function addToCart(itemObjectId)
@@ -21,7 +50,6 @@
             function(data)
             {
                 hideWaitingPopupPortal();
-                $('#modal').modal('open');
                 getNumberOfItemsInCart();
             });
     }
@@ -29,11 +57,11 @@
 
 <div class="container">
     <br/>
-    <div style="display:grid;grid-gap:5px;grid-template-columns: 45% 55%;
+    <div class="itemGridContainerLarge" style="grid-gap:5px;grid-template-columns: 45% 55%;
         grid-template-rows: 40px 20px 20px 20px 20px;">
 
         <div style="grid-column: 1; grid-row: 1/4">
-            <img class="responsive-img" alt="no good" height="150" width="150" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.firstPictureId}"/>
+            <img class="responsive-img" alt="no good" height="200" width="200" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.firstPictureId}"/>
         </div>
         <div style="grid-column: 2; grid-row:1;">
             <b><c:out value="${album.albumTitle}"/> </b>
@@ -42,7 +70,7 @@
             <c:out value="${album.artist}"/>
         </div>
         <div style="grid-column: 2; grid-row: 3;">
-            <c:out value="${album.itemCode}"/>
+            Item # <c:out value="${album.itemNumber}"/>
         </div>
         <div style="grid-column: 2; grid-row: 4;">
             $<c:out value="${album.itemPrice}"/>
@@ -52,12 +80,33 @@
         </div>
     </div>
 
+    <div class="itemGridContainerSmall center" style="margin: auto;width: 100%;text-align: center">
+        <img class="responsive-img" alt="no good" height="250" width="250" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${album.firstPictureId}"/>
+
+        <br/><br/>
+        <b><c:out value="${album.albumTitle}"/></b>
+        <br/>
+        <c:out value="${album.artist}"/>
+        <br/>
+        Item # <c:out value="${album.itemNumber}"/>
+        <br/>
+        $<c:out value="${album.itemPrice}"/>
+        <br/>
+        Released: <c:out value="${album.releaseYear}"/>
+
+    </div>
+
     <br/>
 
     <div class="center">
         <button class="btn waves-effect waves-light" onclick="addToCart('${album.itemNumber}');" type="submit" name="action">Add To Cart
             <i class="material-icons right">add_shopping_cart</i>
         </button>
+    </div>
+
+    <div  class="itemDescription">
+        <h5>Item Description:</h5>
+        <c:out value="${album.itemDescription}"/>
     </div>
 
 </div>
