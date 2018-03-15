@@ -45,11 +45,18 @@ public class PortalUserFilter implements Filter
             hSession.beginTransaction();
 
             User user = (User)session.getAttribute("user");
-
             if (user == null)
             {
                 user = hSession.get(User.class, principal.getName());
                 session.setAttribute("user", user);
+            }
+
+            Cart cart = user.getUserCart();
+            if (cart == null)
+            {
+                cart = new Cart();
+                cart.setUserNameOfCart(user.getUserName());
+                HibernateUtil.createItem(cart);
             }
 
             hSession.close();

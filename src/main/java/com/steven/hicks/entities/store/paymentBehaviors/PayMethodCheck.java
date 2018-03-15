@@ -14,7 +14,6 @@ public class PayMethodCheck implements OrderPaymentBehavior
     private int objectId;
 
 
-
     @Column
     public String routingNumber;
 

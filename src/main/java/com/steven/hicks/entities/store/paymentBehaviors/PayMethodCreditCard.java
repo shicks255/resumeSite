@@ -1,5 +1,6 @@
 package com.steven.hicks.entities.store.paymentBehaviors;
 
+import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 import com.steven.hicks.entities.store.ordering.StoreOrder;
 
@@ -57,11 +58,11 @@ public class PayMethodCreditCard implements OrderPaymentBehavior
 //    --------*BUILD*--------
     public PayMethodCreditCard(HttpServletRequest request)
     {
-        String creditCardNumber = request.getParameter("creditCardNumber");
-        int securityCode = Integer.valueOf(request.getParameter("securityCode"));
-        String date = request.getParameter("expirationDate");
-        String cardHoldersName = request.getParameter("cardHoldersName");
-        String cardTypeCode = request.getParameter("cardTypeCode");
+        String creditCardNumber = CommonUtils.getString(request.getParameter("creditCardNumber"));
+        int securityCode = CommonUtils.getInteger(request.getParameter("securityCode"));
+        String date = CommonUtils.getString(request.getParameter("expirationDate"));
+        String cardHoldersName = CommonUtils.getString(request.getParameter("cardHoldersName"));
+        String cardTypeCode = CommonUtils.getString(request.getParameter("cardTypeCode"));
 
         this.creditCardNumber = creditCardNumber;
         this.secCode = securityCode;

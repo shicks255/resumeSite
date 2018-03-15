@@ -117,6 +117,33 @@ public final class CommonUtils
         return mimetype;
     }
 
+    public static Integer getInteger(String integer)
+    {
+        if (integer==null || integer.trim().length()==0) return 0;
+        integer = integer.trim();
+
+        int value=0;
+        try
+        {
+            value = Integer.parseInt(integer);
+        }
+        catch (NumberFormatException e)
+        {
+        }
+
+        return value;
+    }
+
+    public static String getString(String string)
+    {
+        if (string.length() ==0)
+            return "";
+
+        string = string.trim();
+
+        return string;
+    }
+
     //:todo rename this function
     public static List<ResultsPage> putResultsInPage(List <?> results, Integer resultsPerPage)
     {
