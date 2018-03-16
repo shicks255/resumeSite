@@ -47,6 +47,12 @@ public class PortalUserFilter implements Filter
             User user = (User)session.getAttribute("user");
             if (user == null)
             {
+                if (principal == null)
+                {
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/portal/login.jsp");
+                    dispatcher.forward(request, response);
+                    chain.doFilter(httpRequest, httpResponse);
+                }
                 user = hSession.get(User.class, principal.getName());
                 session.setAttribute("user", user);
             }
