@@ -5,6 +5,7 @@ import com.steven.hicks.entities.store.StoreItemPicture;
 import com.steven.hicks.entities.store.StoreItemType;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.Type;
 import org.hibernate.query.Query;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public abstract class StoreItemGeneric
     @Column
     private String itemName;
     @Column
+    @Type(type="text")
     private String itemDescription;
     @Column
     private int itemType;

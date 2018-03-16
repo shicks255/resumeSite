@@ -255,9 +255,10 @@ public class PortalItemHandler extends HttpServlet
         {
             String searchTerms = request.getParameter("searchTerms");
             List<StoreItemGeneric> itemSearchResults = StoreItemGeneric.searchForItems(searchTerms);
-
-
             request.setAttribute("items", itemSearchResults);
+
+
+            request.setAttribute("searchTerms", searchTerms);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("portal/items/searchResults.jsp");
             dispatcher.forward(request, response);
