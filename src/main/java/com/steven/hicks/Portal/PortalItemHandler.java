@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -268,6 +269,7 @@ public class PortalItemHandler extends HttpServlet
         if (action.equalsIgnoreCase("getAllItemsJSON"))
         {
             List<StoreItemGeneric> allItems = StoreItemGeneric.getAllItems();
+            allItems.sort(Comparator.comparing(StoreItemGeneric::getItemName));
 
             String jsonString = "[";
 
