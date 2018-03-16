@@ -67,7 +67,7 @@
             <b><c:out value="${album.albumTitle}"/> </b>
         </div>
         <div style="grid-column: 2; grid-row: 2;">
-            <c:out value="${album.artist}"/>
+            <a href="${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=${album.artist}"><c:out value="${album.artist}"/> </a>
         </div>
         <div style="grid-column: 2; grid-row: 3;">
             Item # <c:out value="${album.itemNumber}"/>
@@ -86,7 +86,7 @@
         <br/><br/>
         <b><c:out value="${album.albumTitle}"/></b>
         <br/>
-        <c:out value="${album.artist}"/>
+        <a href="${pageContext.request.contextPath}/portalItemHandler?action=searchForItems&searchTerms=${album.artist}"><c:out value="${album.artist}"/> </a>
         <br/>
         Item # <c:out value="${album.itemNumber}"/>
         <br/>

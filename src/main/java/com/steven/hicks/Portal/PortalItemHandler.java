@@ -245,7 +245,6 @@ public class PortalItemHandler extends HttpServlet
                         dispatcher.forward(request, response);
                     }
                 }
-
             }
 
             session.close();
