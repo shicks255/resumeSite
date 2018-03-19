@@ -3,7 +3,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.StoreItemGeneric>" scope="request"/>
-<jsp:useBean id="searchTerms" type="java.lang.String" scope="request"/>
 
 <jsp:include page="/_pageSections/portalNavBar.jsp"/>
 

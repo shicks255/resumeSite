@@ -74,7 +74,7 @@
         Add Items
         <i class="material-icons right">add</i>
     </button>
-    <button class="waves-effect waves-light btn" name="btnEditItems" id="btnEditItems" href="${pageContext.request.contextPath}/portalItemHandler?action=editItems">
+    <button class="waves-effect waves-light btn" name="btnEditItems" id="btnEditItems" onclick="window.location.href = href='${pageContext.request.contextPath}/portalItemHandler?action=editItems'">
         Edit Items
         <i class="material-icons right">mode_edit</i>
     </button>

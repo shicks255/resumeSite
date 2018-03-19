@@ -14,7 +14,7 @@
 </script>
 
 <form name="frmEditMusicAlbum" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editMusicAlbums">
-    <table class="highlight striped centered">
+    <table class="highlight centered">
         <thead>
         <tr>
             <th></th>
@@ -43,8 +43,12 @@
                 <td><input name="albumTitle_${item.itemNumber}" id="albumTitle_${item.itemNumber}" type="text" value="${item.albumTitle}"/></td>
                 <td><input name="releaseYear_${item.itemNumber}" id="releaseYear_${item.itemNumber}" type="text" value="${item.releaseYear}"/></td>
                 <td>
-                    <button class="btn waves-effect waves-light" onclick="deleteItem('${item.itemNumber}');" type="submit" name="action">Delete
-                        <i class="material-icons right">send</i>
+                    <button class="small btn waves-effect waves-light" onclick="showEditPopup();" type="button" name="editButton">
+                        Edit
+                        <i class="material-icons right">mode_edit</i>
+                    </button>
+                    <button class="small btn waves-effect waves-light" onclick="deleteItem('${item.itemNumber}');" type="submit" name="action">Delete
+                        <i class="small material-icons right">send</i>
                     </button>
                 </td>
             </tr>

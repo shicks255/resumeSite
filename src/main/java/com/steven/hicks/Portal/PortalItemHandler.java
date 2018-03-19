@@ -183,6 +183,9 @@ public class PortalItemHandler extends HttpServlet
             Query query = session.createQuery("from StoreItemGeneric ");
             List<StoreItemGeneric> list = query.list();
 
+            //to prevent lazy initialization exceptions
+            list.forEach(e -> e.getFirstPictureId());
+
             session.close();
 
             list.removeIf(item -> item.getItemType() != storeItemType.getItemTypeCode());
