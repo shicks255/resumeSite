@@ -19,6 +19,11 @@
         <tag-class>com.steven.hicks.tags.CurrentDateTimeTag</tag-class>
         <body-content>empty</body-content>
     </tag>
+    <tag>
+        <name>pageAndHandlerInfo</name>
+        <tag-class>com.steven.hicks.tags.PageAndHandlerInfo</tag-class>
+        <body-content>empty</body-content>
+    </tag>
 
     <tag>
         <name>weekdayGreeting</name>

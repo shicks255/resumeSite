@@ -63,8 +63,6 @@
 
 <div class="container">
 
-    Search: <c:out value="${searchTerms}"/>
-
     <br/>
 
     <table class="showOnMedAndUp">

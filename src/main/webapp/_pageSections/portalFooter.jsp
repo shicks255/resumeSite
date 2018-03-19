@@ -22,6 +22,7 @@
 
     <div class="container">
         <sh:currentDateTime/>
+        <sh:pageAndHandlerInfo/>
     </div>
 </footer>
 
