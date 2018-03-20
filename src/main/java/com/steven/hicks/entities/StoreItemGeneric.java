@@ -110,6 +110,17 @@ public abstract class StoreItemGeneric
         return item;
     }
 
+    public static StoreItemGeneric getItemWithPictures(int itemNumber)
+    {
+        Session session = HibernateUtil.sessionFactory.openSession();
+
+        StoreItemGeneric item = session.get(StoreItemGeneric.class, itemNumber);
+        item.getItemPictures();
+        session.close();
+
+        return item;
+    }
+
     public static StoreItemGeneric getItemByName(String name)
     {
         Session session = HibernateUtil.sessionFactory.openSession();

@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.beans.IntrospectionException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -308,7 +309,7 @@ public class PortalItemHandler extends HttpServlet
             Integer itemNumber = CommonUtils.getInteger(request.getParameter("itemNumber"));
             if (itemNumber != null)
             {
-                StoreItemGeneric storeItem = StoreItemGeneric.getItem(itemNumber);
+                StoreItemGeneric storeItem = StoreItemGeneric.getItemWithPictures(itemNumber);
                 if (storeItem != null)
                 {
                     try
@@ -320,7 +321,7 @@ public class PortalItemHandler extends HttpServlet
                         writer.println(jsonString);
                         writer.close();
                     }
-                    catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
+                    catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | IntrospectionException e)
                     {
                         System.out.println(e);
                         log.error(e.getMessage());

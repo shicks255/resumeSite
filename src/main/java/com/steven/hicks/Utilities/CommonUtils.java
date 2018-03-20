@@ -10,6 +10,9 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -187,23 +190,26 @@ public final class CommonUtils
         return resultPages;
     }
 
-    public static String getJSONStringForItem(StoreItemGeneric item) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException
+    public static String getJSONStringForItem(StoreItemGeneric item) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException, IntrospectionException
     {
         String json = "[";
 
         if (item.getItemType() == 113)
         {
             MusicAlbum album = (MusicAlbum)item;
-            List<Method> methods = Arrays
-                    .asList(Class.forName("com.steven.hicks.entities.store.items.MusicAlbum")
-                            .getMethods());
-            for (Method method : methods)
-            {
-                String answer = getString(method.invoke(album));
 
-                json += "{\"" + method.getName() + "\":" + "\"" + answer + "\"}";
-                if (methods.indexOf(method) != methods.size()-1)
-                    json += ",";
+            List<PropertyDescriptor> pds = Arrays.asList(Introspector.getBeanInfo(Class.forName("com.steven.hicks.entities.store.items.MusicAlbum")).getPropertyDescriptors());
+            for (PropertyDescriptor pd : pds)
+            {
+                Method method = pd.getReadMethod();
+                Object answer1 = method.invoke(album);
+                if (answer1 != null && answer1 instanceof Object && !method.getName().equalsIgnoreCase("getClass"))
+                {
+                    String answer = getString(answer1);
+                    json += "{\"" + method.getName() + "\":" + "\"" + answer + "\"}";
+                    if (pds.indexOf(pd) != pds.size() - 1)
+                        json += ",";
+                }
             }
         }
 
