@@ -2,12 +2,18 @@ package com.steven.hicks.Utilities;
 
 import com.steven.hicks.ResultsPage;
 import com.steven.hicks.ServerStart;
+import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.Visitor;
+import com.steven.hicks.entities.store.items.LegoSet;
+import com.steven.hicks.entities.store.items.MusicAlbum;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -134,14 +140,15 @@ public final class CommonUtils
         return value;
     }
 
-    public static String getString(String string)
+    public static String getString(Object objectToStringify)
     {
-        if (string.length() ==0)
+        String object = (String)objectToStringify;
+        if (object.length() ==0)
             return "";
 
-        string = string.trim();
+        object = object.trim();
 
-        return string;
+        return object;
     }
 
     //:todo rename this function
@@ -178,5 +185,34 @@ public final class CommonUtils
             resultPages.add(resultsPage);
 
         return resultPages;
+    }
+
+    public static String getJSONStringForItem(StoreItemGeneric item) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException
+    {
+        String json = "[";
+
+        if (item.getItemType() == 113)
+        {
+            MusicAlbum album = (MusicAlbum)item;
+            List<Method> methods = Arrays
+                    .asList(Class.forName("com.steven.hicks.entities.store.items.MusicAlbum")
+                            .getMethods());
+            for (Method method : methods)
+            {
+                String answer = getString(method.invoke(album));
+
+                json += "{\"" + method.getName() + "\":" + "\"" + answer + "\"}";
+                if (methods.indexOf(method) != methods.size()-1)
+                    json += ",";
+            }
+        }
+
+        if (item.getItemType() == 114)
+        {
+            LegoSet legoSet = (LegoSet)item;
+        }
+        json += "]";
+
+        return json;
     }
 }

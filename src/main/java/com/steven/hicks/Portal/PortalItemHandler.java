@@ -1,6 +1,7 @@
 package com.steven.hicks.Portal;
 
 
+import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
@@ -10,6 +11,8 @@ import com.steven.hicks.entities.store.StoreItemPicture;
 import com.steven.hicks.entities.store.StoreItemType;
 import com.steven.hicks.entities.store.items.LegoSet;
 import com.steven.hicks.entities.store.items.MusicAlbum;
+import com.steven.hicks.filters.LogFilter;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -22,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
@@ -30,6 +35,7 @@ import java.util.stream.Collectors;
 @WebServlet(urlPatterns = "/portalItemHandler")
 public class PortalItemHandler extends HttpServlet
 {
+    private static final Logger log = Logger.getLogger(LogFilter.class.getName());
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
@@ -297,10 +303,36 @@ public class PortalItemHandler extends HttpServlet
 
         }
 
+        if (action.equalsIgnoreCase("ajaxGetJSONItem"))
+        {
+            Integer itemNumber = CommonUtils.getInteger(request.getParameter("itemNumber"));
+            if (itemNumber != null)
+            {
+                StoreItemGeneric storeItem = StoreItemGeneric.getItem(itemNumber);
+                if (storeItem != null)
+                {
+                    try
+                    {
+                        String jsonString = CommonUtils.getJSONStringForItem(storeItem);
+
+                        PrintWriter writer = response.getWriter();
+                        response.setContentType("text");
+                        writer.println(jsonString);
+                        writer.close();
+                    }
+                    catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException e)
+                    {
+                        System.out.println(e);
+                        log.error(e.getMessage());
+                    }
+                }
+            }
+        }
+
 //        ADD ITEM TO CART
         if (action.equalsIgnoreCase("addItemToCart"))
         {
-            int itemNumber = Integer.valueOf(request.getParameter("itemObjectId"));
+            Integer itemNumber = CommonUtils.getInteger(request.getParameter("itemObjectId"));
 
             Session hibernateSession = HibernateUtil.sessionFactory.openSession();
             hibernateSession.beginTransaction();

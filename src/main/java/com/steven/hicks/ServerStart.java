@@ -24,8 +24,7 @@ public class ServerStart extends HttpServlet
     {
         log.info("ResumeSite starting up");
         HibernateUtil.initializeSessionFactory();
-        ServerStartupTasks.loadDefaultItemTypes()
-        ;
+        ServerStartupTasks.loadDefaultItemTypes();
         ServletContext sc = getServletContext();
 
         String path = sc.getRealPath("/");
