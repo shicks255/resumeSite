@@ -120,9 +120,12 @@
             });
         }
 
-        function hideWaitingPopupPortal()
+        function hideWaitingPopupPortal(minSecondsToShow)
         {
-            $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');
+            setTimeout(function()
+            {
+                $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');
+            }, minSecondsToShow);
         }
 
     </script>

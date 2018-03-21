@@ -43,14 +43,16 @@
         // $('.modal').modal();
     });
 
-    function addToCart(itemObjectId)
+    function addToCart(buttonId, itemObjectId)
     {
         showWaitingPopupPortal('Adding item to cart');
         $.post( '${pageContext.request.contextPath}/portalItemHandler?action=addItemToCart&itemObjectId=' + itemObjectId,
             function(data)
             {
-                hideWaitingPopupPortal();
+                hideWaitingPopupPortal(1000);
                 getNumberOfItemsInCart();
+                var buttonClicked = document.getElementById(buttonId);
+                buttonClicked.blur();
             });
     }
 </script>
@@ -99,7 +101,7 @@
     <br/>
 
     <div class="center">
-        <button class="btn waves-effect waves-light" onclick="addToCart('${album.itemNumber}');" type="submit" name="action">Add To Cart
+        <button class="btn waves-effect waves-light" onclick="addToCart(this.id, '${album.itemNumber}');" name="addCartButton" id="addCartButton">Add To Cart
             <i class="material-icons right">add_shopping_cart</i>
         </button>
     </div>
