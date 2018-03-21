@@ -2,7 +2,9 @@ package com.steven.hicks.Portal;
 
 
 import com.steven.hicks.Utilities.CommonUtils;
+import com.steven.hicks.Utilities.FileUploadUtil;
 import com.steven.hicks.Utilities.HibernateUtil;
+import com.steven.hicks.entities.FileRequest;
 import com.steven.hicks.entities.StoreItemGeneric;
 import com.steven.hicks.entities.User;
 import com.steven.hicks.entities.store.Cart;
@@ -31,6 +33,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "/portalItemHandler")
@@ -80,37 +83,31 @@ public class PortalItemHandler extends HttpServlet
 //        EDIT MUSIC ALBUM
         if (action.equalsIgnoreCase("editMusicAlbums"))
         {
-            List<StoreItemGeneric> musicAlbums = StoreItemGeneric.getItemsOfType("MusicAlbum");
-            StoreItemType itemType = StoreItemType.getItemTypeByName("MusicAlbum");
+            FileRequest fr = FileUploadUtil.getFileRequest(request);
+            Map<String, String> params = fr.getParameters();
 
-            List<MusicAlbum> albums = musicAlbums.stream()
-                    .filter(item -> item.getItemType() == itemType.getItemTypeCode())
-                    .map(item -> (MusicAlbum)item)
-                    .collect(Collectors.toList());
+            int itemNumber = CommonUtils.getInteger(params.get("itemNumber"));
 
-            for (MusicAlbum album : albums)
+            MusicAlbum albumToEdit = (MusicAlbum)MusicAlbum.getItem(itemNumber);
+
+            if (albumToEdit != null)
             {
-                String newName = request.getParameter("name_" + album.getItemNumber());
-                String newDescription = request.getParameter("description_" + album.getItemNumber());
-                BigDecimal newPrice = new BigDecimal(request.getParameter("price_" + album.getItemNumber()));
-                String newArtistName = request.getParameter("artist_" + album.getItemNumber());
-                String newAlbumTitle = request.getParameter("albumTitle_" + album.getItemNumber());
-                String newReleaseYear = request.getParameter("releaseYear_" + album.getItemNumber());
+                String newName = CommonUtils.getString(params.get("artistName"));
+                String newAlbumName = CommonUtils.getString(params.get("albumName"));
+                String newPrice = CommonUtils.getString(params.get("price"));
+                String newReleaseYear = CommonUtils.getString(params.get("releaseYear"));
+                String newDescription = CommonUtils.getString(params.get("itemDescription"));
 
-                if (newName.length() > 0)
-                    album.setItemName(newName);
-                if (newDescription.length() > 0)
-                    album.setItemDescription(newDescription);
-                if (newPrice != null)
-                    album.setItemPrice(newPrice);
-                if (newArtistName.length() > 0)
-                    album.setArtist(newArtistName);
-                if (newAlbumTitle.length() > 0)
-                    album.setAlbumTitle(newAlbumTitle);
-                if (newReleaseYear.length() > 0)
-                    album.setReleaseYear(newReleaseYear);
+                albumToEdit.setArtist(newName);
+                albumToEdit.setAlbumTitle(newAlbumName);
+                albumToEdit.setItemDescription(newDescription);
 
-                HibernateUtil.updateItem(album);
+                BigDecimal price = new BigDecimal(newPrice);
+                if (price != null)
+                    albumToEdit.setItemPrice(new BigDecimal(newPrice));
+                albumToEdit.setReleaseYear(newReleaseYear);
+
+                HibernateUtil.updateItem(albumToEdit);
             }
 
             response.sendRedirect("portalItemHandler?action=editItems");

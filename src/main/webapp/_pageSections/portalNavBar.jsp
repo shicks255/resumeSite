@@ -113,6 +113,13 @@
             $( '#_processing_text' ).text(text);
         }
 
+        function closePopups()
+        {
+            $( '.popup' ).each(function(i, obj){
+                $( this ).removeClass('popup').addClass('hiddenDiv');
+            });
+        }
+
         function hideWaitingPopupPortal()
         {
             $( '#popup-processingAction' ).removeClass('popup').addClass('hiddenDiv');

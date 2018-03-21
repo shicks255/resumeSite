@@ -20,10 +20,16 @@
         $.getJSON('${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetJSONItem&itemNumber=' + itemNumber,
             function(data)
             {
+                $( '#artistName' ).val(data[0].getArtist);
+                $( '#albumName' ).val(data[0].getAlbumTitle);
+                $( '#price' ).val(data[0].getItemPrice);
+                $( '#releaseYear' ).val(data[0].getReleaseYear);
+                $( '#itemNumber' ).val(data[0].getItemNumber);
+                $( '#itemDescription' ).val(data[0].getItemDescription);
 
             });
-
     }
+
 </script>
 
 <%--<form name="frmEditMusicAlbum" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editMusicAlbums">--%>
@@ -64,10 +70,13 @@
 <div id="editAlbumPopup" class="hiddenDiv">
     <div class="popupContent">
         <div class="popupHeader">
-            <span id="editAlbumHeader"></span>
+            <span style="margin: auto;">Edit Album</span>
+            <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
         </div>
         <div class="popupContainer">
-            <form method="post" action="">
+            <form enctype="multipart/form-data" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editMusicAlbums">
+                <input type="hidden" name="itemNumber" id="itemNumber" value=""/>
+
                 <label for="artistName">Name</label>
                 <input id="artistName" name="artistName" type="text" value=""/>
 
@@ -79,6 +88,16 @@
 
                 <label for="releaseYear">Released:</label>
                 <input type="text" name="releaseYear" id="releaseYear" value=""/>
+
+                <label for="itemDescription">Description</label>
+                <textarea rows="5" cols="5" name="itemDescription" id="itemDescription">
+
+                </textarea>
+
+                <button class="waves-effect waves-light btn submitButton" type="submit" value="Update">
+                    Update
+                    <i class="material-icons right">send</i>
+                </button>
 
             </form>
         </div>
