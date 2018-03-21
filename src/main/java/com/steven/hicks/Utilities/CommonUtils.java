@@ -145,6 +145,11 @@ public final class CommonUtils
 
     public static String getString(Object objectToStringify)
     {
+        String answer = "";
+
+        if (objectToStringify instanceof Number)
+            return (answer += objectToStringify);
+
         String object = (String)objectToStringify;
         if (object.length() ==0)
             return "";
@@ -192,7 +197,7 @@ public final class CommonUtils
 
     public static String getJSONStringForItem(StoreItemGeneric item) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException, IntrospectionException
     {
-        String json = "[";
+        String json = "[{";
 
         if (item.getItemType() == 113)
         {
@@ -203,21 +208,20 @@ public final class CommonUtils
             {
                 Method method = pd.getReadMethod();
                 Object answer1 = method.invoke(album);
-                if (answer1 != null && answer1 instanceof Object && !method.getName().equalsIgnoreCase("getClass"))
+                if (answer1 != null && answer1 instanceof Object
+                        && !method.getName().equalsIgnoreCase("getClass")
+                        && !method.getName().equalsIgnoreCase("getItemPictures")
+                        && !method.getName().equalsIgnoreCase("getItemTypeObject"))
                 {
                     String answer = getString(answer1);
-                    json += "{\"" + method.getName() + "\":" + "\"" + answer + "\"}";
+                    json += "\"" + method.getName() + "\":" + "\"" + answer + "\"";
                     if (pds.indexOf(pd) != pds.size() - 1)
                         json += ",";
                 }
             }
         }
 
-        if (item.getItemType() == 114)
-        {
-            LegoSet legoSet = (LegoSet)item;
-        }
-        json += "]";
+        json += "}]";
 
         return json;
     }

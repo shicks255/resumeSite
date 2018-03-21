@@ -115,7 +115,7 @@ public abstract class StoreItemGeneric
         Session session = HibernateUtil.sessionFactory.openSession();
 
         StoreItemGeneric item = session.get(StoreItemGeneric.class, itemNumber);
-        item.getItemPictures();
+        Hibernate.initialize(item.getItemPictures());
         session.close();
 
         return item;
