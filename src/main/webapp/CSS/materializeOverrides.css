@@ -3,15 +3,6 @@
     margin-top : 2px;
     margin-bottom : 2px;
 }
-/*.btn:focus {*/
-    /*animation: buttonColor 2s;*/
-/*}*/
-/*@keyframes buttonColor*/
-/*{*/
-    /*0% {backgrond-color: #26a69a;}*/
-    /*50% {background-color:blue;}*/
-    /*100% {background-color:#26a69a;}*/
-/*}*/
 
 .pressed {
     background-color: #1d7d74;

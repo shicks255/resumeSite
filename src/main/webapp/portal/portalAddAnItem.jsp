@@ -61,20 +61,29 @@
             $( '#addLegoSet' ).css('display', 'inline');
     }
 
-    function badDataMessage()
+    function goToAddButtonPage(toCloseId)
     {
+        var button = document.getElementById(toCloseId);
+        button.blur();
+        window.location.href = "${pageContext.request.contextPath}/portalItemHandler?action=form";
+    }
 
+    function goToEditButtonPage(toCloseId)
+    {
+        var button = document.getElementById(toCloseId);
+        button.blur();
+        window.location.href = "${pageContext.request.contextPath}/portalItemHandler?action=editItems";
     }
 
 </script>
 
 <div class="container">
 
-    <button class="waves-effect waves-light btn" name="btnAddAnItem" id="btnAddAnItem" href="${pageContext.request.contextPath}/portalItemHandler?action=form">
+    <button class="btn waves-effect waves-light" id="addItemButton" name="addItemButton" onclick="goToAddButtonPage(this.id);">
         Add Items
         <i class="material-icons right">add</i>
     </button>
-    <button class="waves-effect waves-light btn" name="btnEditItems" id="btnEditItems" onclick="window.location.href = href='${pageContext.request.contextPath}/portalItemHandler?action=editItems'">
+    <button class="btn waves-light waves-effect" id="editItemButton" name="editItemButton" onclick="goToEditButtonPage(this.id);">
         Edit Items
         <i class="material-icons right">mode_edit</i>
     </button>

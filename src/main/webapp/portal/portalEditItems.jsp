@@ -29,13 +29,33 @@
         }
     }
 
+    function goToAddButtonPage(toCloseId)
+    {
+        var button = document.getElementById(toCloseId);
+        button.blur();
+        window.location.href = "${pageContext.request.contextPath}/portalItemHandler?action=form";
+    }
+
+    function goToEditButtonPage(toCloseId)
+    {
+        var button = document.getElementById(toCloseId);
+        button.blur();
+        window.location.href = "${pageContext.request.contextPath}/portalItemHandler?action=editItems";
+    }
+
 
 </script>
 
 <div class="container">
 
-    <a class="waves-effect waves-light btn" name="btnAddAnItem" id="btnAddAnItem" href="${pageContext.request.contextPath}/portalItemHandler?action=form">Add Items</a>
-    <a class="waves-effect waves-light btn" name="btnEditItems" id="btnEditItems" href="${pageContext.request.contextPath}/portalItemHandler?action=editItems">Edit Items</a>
+    <button class="btn waves-effect waves-light" id="addItemButton" name="addItemButton" onclick="goToAddButtonPage(this.id);">
+        Add Items
+        <i class="material-icons right">add</i>
+    </button>
+    <button class="btn waves-light waves-effect" id="editItemButton" name="editItemButton" onclick="goToEditButtonPage(this.id);">
+        Edit Items
+        <i class="material-icons right">mode_edit</i>
+    </button>
 
     <h3>Edit Items</h3>
 
