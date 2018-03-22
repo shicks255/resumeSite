@@ -57,6 +57,10 @@
                     <button class="small btn waves-effect waves-light" onclick="deleteItem('${item.itemNumber}');" type="submit" name="action">Delete
                         <i class="small material-icons right">send</i>
                     </button>
+                    <button class="small btn waves-effect waves-light" onclick="window.location.href = '${pageContext.request.contextPath}/portalItemHandler?action=showEditItemPicture&itemNumber=${item.itemNumber}';">
+                        Pictures
+                        <i class="material-icons small right">photo</i>
+                    </button>
                 </td>
             </tr>
         </c:forEach>

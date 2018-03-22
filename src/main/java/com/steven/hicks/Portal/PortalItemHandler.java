@@ -94,6 +94,17 @@ public class PortalItemHandler extends HttpServlet
             response.sendRedirect("portalItemHandler?action=editItems");
         }
 
+//        NAVIGATE TO ITEM PICTURES
+        if (action.equalsIgnoreCase("showEditItemPicture"))
+        {
+            Integer itemNumber = CommonUtils.getInteger(request.getParameter("itemNumber"));
+            StoreItemGeneric item = StoreItemGeneric.getItemWithPictures(itemNumber);
+            request.setAttribute("item", item);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("portal/portalEditItemPictures.jsp");
+            dispatcher.forward(request, response);
+        }
+
 //        GET AN ITEMS PICTURE
         if (action.equalsIgnoreCase("getItemPicture"))
         {
