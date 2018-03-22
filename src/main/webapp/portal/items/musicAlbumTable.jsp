@@ -37,8 +37,7 @@
         <thead>
         <tr>
             <th></th>
-            <th>Item <br/> Number</th>
-            <th>Name</th>
+            <th>Item</th>
             <th></th>
         </tr>
         </thead>
@@ -50,7 +49,6 @@
                     <img class="" alt="no good" height="175" width="175" id="itemPic_${item.itemNumber}" src="${pageContext.request.contextPath}/portalItemHandler?action=getItemPicture&itemPictureObjectId=${item.firstPictureId}">
                 </td>
                 <td><c:out value="${item.itemName}"/></td>
-                <td></td>
                 <td>
                     <button class="small btn waves-effect waves-light" onclick="editItem('${item.itemNumber}');" type="button" name="editButton">
                         Edit
@@ -93,6 +91,8 @@
                 <textarea rows="5" cols="5" name="itemDescription" id="itemDescription">
 
                 </textarea>
+
+                <input type="file" name="editAvatar" id="editAvatar" enctype="multipart/form-data">
 
                 <button class="waves-effect waves-light btn submitButton" type="submit" value="Update">
                     Update

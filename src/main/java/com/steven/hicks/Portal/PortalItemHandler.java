@@ -83,75 +83,14 @@ public class PortalItemHandler extends HttpServlet
 //        EDIT MUSIC ALBUM
         if (action.equalsIgnoreCase("editMusicAlbums"))
         {
-            FileRequest fr = FileUploadUtil.getFileRequest(request);
-            Map<String, String> params = fr.getParameters();
-
-            int itemNumber = CommonUtils.getInteger(params.get("itemNumber"));
-
-            MusicAlbum albumToEdit = (MusicAlbum)MusicAlbum.getItem(itemNumber);
-
-            if (albumToEdit != null)
-            {
-                String newName = CommonUtils.getString(params.get("artistName"));
-                String newAlbumName = CommonUtils.getString(params.get("albumName"));
-                String newPrice = CommonUtils.getString(params.get("price"));
-                String newReleaseYear = CommonUtils.getString(params.get("releaseYear"));
-                String newDescription = CommonUtils.getString(params.get("itemDescription"));
-
-                albumToEdit.setArtist(newName);
-                albumToEdit.setAlbumTitle(newAlbumName);
-                albumToEdit.setItemDescription(newDescription);
-
-                BigDecimal price = new BigDecimal(newPrice);
-                if (price != null)
-                    albumToEdit.setItemPrice(new BigDecimal(newPrice));
-                albumToEdit.setReleaseYear(newReleaseYear);
-
-                HibernateUtil.updateItem(albumToEdit);
-            }
-
+            PortalItemLogic.editMusicAlbum(request);
             response.sendRedirect("portalItemHandler?action=editItems");
         }
 
 //        EDIT LEGO SET
         if (action.equalsIgnoreCase("editLegoSet"))
         {
-            List<StoreItemGeneric> genericItems = StoreItemGeneric.getItemsOfType("LegoSet");
-            StoreItemType itemType = StoreItemType.getItemTypeByName("LegoSet");
-
-            List<LegoSet> legoSets = genericItems.stream()
-                    .filter(item -> item.getItemType() == itemType.getItemTypeCode())
-                    .map(item -> (LegoSet)item)
-                    .collect(Collectors.toList());
-
-            for (LegoSet legoSet : legoSets)
-            {
-                String newName = request.getParameter("name_" + legoSet.getItemNumber());
-                String newDescription = request.getParameter("description_" + legoSet.getItemNumber());
-                BigDecimal newPrice = new BigDecimal(request.getParameter("price_" + legoSet.getItemNumber()));
-                String newLegoCode = request.getParameter("legoCode_" + legoSet.getItemNumber());
-                String newTheme = request.getParameter("theme_" + legoSet.getItemNumber());
-                String newPieces = request.getParameter("pieces_" + legoSet.getItemNumber());
-                String newReleaseYear = request.getParameter("releaseYear_" + legoSet.getItemNumber());
-
-                if (newName.length() > 0)
-                    legoSet.setItemName(newName);
-                if (newDescription.length() > 0)
-                    legoSet.setItemDescription(newDescription);
-                if (newPrice != null)
-                    legoSet.setItemPrice(newPrice);
-                if (newLegoCode.length() > 0)
-                    legoSet.setLegoCode(newLegoCode);
-                if (newTheme.length() > 0)
-                    legoSet.setLegoTheme(newTheme);
-                if (newPieces.length() > 0)
-                    legoSet.setNumberOfPieces(Integer.valueOf(newPieces));
-                if (newReleaseYear.length() > 0)
-                    legoSet.setReleaseYear(newReleaseYear);
-
-                HibernateUtil.updateItem(legoSet);
-            }
-
+            PortalItemLogic.editLegoSet(request);
             response.sendRedirect("portalItemHandler?action=editItems");
         }
 
