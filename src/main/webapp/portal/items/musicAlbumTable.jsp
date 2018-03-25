@@ -6,10 +6,23 @@
 <jsp:useBean id="items" type="java.util.List<com.steven.hicks.entities.store.items.MusicAlbum>" scope="request"/>
 
 <script>
-    function deleteItem(itemNumber)
+
+    function promptToDelete(itemNumber)
     {
-        $.post("${pageContext.request.contextPath}/portalItemHandler?action=deleteItem&itemNumber=" + itemNumber);
-        location.reload();
+        $( '#deleteItemNumber' ).val(itemNumber);
+        $( '#confirmDialog' ).removeClass('hiddenDiv');
+        $( '#confirmDialog' ).addClass('popup');
+    }
+
+    function deleteItem()
+    {
+        var confirmText = $( '#confirmPromptText' ).val();
+        if (confirmText === 'DELETE')
+        {
+            var itemNumber = $( '#deleteItemNumber' ).val();
+            $.post("${pageContext.request.contextPath}/portalItemHandler?action=deleteItem&itemNumber=" + itemNumber);
+            location.reload();
+        }
     }
 
     function editItem(itemNumber)
@@ -32,7 +45,6 @@
 
 </script>
 
-<%--<form name="frmEditMusicAlbum" method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editMusicAlbums">--%>
     <table class="highlight centered">
         <thead>
         <tr>
@@ -54,7 +66,8 @@
                         Edit
                         <i class="material-icons right">mode_edit</i>
                     </button>
-                    <button class="small btn waves-effect waves-light" onclick="deleteItem('${item.itemNumber}');" type="submit" name="action">Delete
+                    <button class="small btn waves-effect waves-light" onclick="promptToDelete('${item.itemNumber}');" type="submit" name="action">
+                        Delete
                         <i class="small material-icons right">send</i>
                     </button>
                     <button class="small btn waves-effect waves-light" onclick="window.location.href = '${pageContext.request.contextPath}/portalItemHandler?action=showEditItemPicture&itemNumber=${item.itemNumber}';">
@@ -67,7 +80,6 @@
         </tbody>
 
     </table>
-<%--</form>--%>
 
 <div id="editAlbumPopup" class="hiddenDiv">
     <div class="popupContent">
@@ -96,14 +108,30 @@
 
                 </textarea>
 
-                <input type="file" name="editAvatar" id="editAvatar" enctype="multipart/form-data">
-
                 <button class="waves-effect waves-light btn submitButton" type="submit" value="Update">
                     Update
                     <i class="material-icons right">send</i>
                 </button>
 
             </form>
+        </div>
+    </div>
+</div>
+
+<div id="confirmDialog" class="hiddenDiv">
+    <div class="popupContent">
+        <div class="popupHeader">
+            <span style="margin: auto;">Edit Album</span>
+            <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+        </div>
+        <div class="popupContainer">
+            <label for="confirmPromptText">Type DELETE to confirm removing this item.</label>
+            <input type="text" id="confirmPromptText" name="confirmPromptText" value=""/>
+            <input type="hidden" id="deleteItemNumber" name="deleteItemNumber" value=""/>
+            <button class="waves-effect waves-light btn" value="Confirm" onclick="deleteItem();">
+                Confirm
+                <i class="material-icons right">delete</i>
+            </button>
         </div>
     </div>
 </div>
