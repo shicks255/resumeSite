@@ -121,14 +121,14 @@
 <div id="confirmDialog" class="hiddenDiv">
     <div class="popupContent">
         <div class="popupHeader">
-            <span style="margin: auto;">Edit Album</span>
+            <span style="margin: auto;">Delete Album</span>
             <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
         </div>
         <div class="popupContainer">
             <label for="confirmPromptText">Type DELETE to confirm removing this item.</label>
             <input type="text" id="confirmPromptText" name="confirmPromptText" value=""/>
             <input type="hidden" id="deleteItemNumber" name="deleteItemNumber" value=""/>
-            <button class="waves-effect waves-light btn" value="Confirm" onclick="deleteItem();">
+            <button class="waves-effect waves-light btn submitButton" value="Confirm" onclick="deleteItem();">
                 Confirm
                 <i class="material-icons right">delete</i>
             </button>

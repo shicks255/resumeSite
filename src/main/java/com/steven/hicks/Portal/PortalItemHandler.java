@@ -381,6 +381,55 @@ public class PortalItemHandler extends HttpServlet
             }
         }
 
+//        DELETE ITEM PICTURE
+        if (action.equalsIgnoreCase("deleteItemPicture"))
+        {
+            Integer pictureNumber = CommonUtils.getInteger(request.getParameter("pictureNumber"));
+            if (pictureNumber != null)
+            {
+                StoreItemPicture picture = StoreItemPicture.getItemPicture(pictureNumber);
+                if (picture != null)
+                    HibernateUtil.deleteItem(picture);
+            }
+        }
+
+//        GET PICTURE CAPTION
+        if (action.equalsIgnoreCase("ajaxGetPictureCaption"))
+        {
+            Integer pictureNumber = CommonUtils.getInteger(request.getParameter("pictureNumber"));
+            if (pictureNumber != null)
+            {
+                StoreItemPicture picture = StoreItemPicture.getItemPicture(pictureNumber);
+                if (picture != null)
+                {
+                    PrintWriter out = response.getWriter();
+                    out.println(picture.getPictureCaption());
+                    out.flush();
+                    out.close();
+                }
+            }
+        }
+
+//        CHANGE PICTURE CAPTION
+        if (action.equalsIgnoreCase("changePictureCaption"))
+        {
+            Integer pictureNumber = CommonUtils.getInteger(request.getParameter("changeCaptionPictureNumber"));
+            if (pictureNumber != null)
+            {
+                StoreItemPicture picture = StoreItemPicture.getItemPicture(pictureNumber);
+                if (picture != null)
+                {
+                    String newCaption = CommonUtils.getString(request.getParameter("changeCaptionText"));
+                    picture.setPictureCaption(newCaption);
+                    HibernateUtil.updateItem(picture);
+
+                    response.sendRedirect("portalItemHandler?action=showEditItemPicture&itemNumber=" + picture.getStoreItemGeneric().getItemNumber());
+                    return;
+                }
+            }
+            response.sendRedirect("portalItemHandler?action=editItems");
+        }
+
 //        UPDATE TOTAL
         if (action.equalsIgnoreCase("updateCartTotal"))
         {

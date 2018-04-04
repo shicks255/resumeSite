@@ -13,29 +13,47 @@
         $( '#productType' ).val('');
     });
 
-    function deletePicture(buttonId, pictureNumber)
+    function promptToConfirmDelete(pictureNumber)
     {
-        var buttonPressed = document.getElementById(buttonId);
-        buttonPressed.blur();
-
-        window.location.href = '${pageContext.request.contextPath}/portalItemHandler?action=deleteItemPicture&itemNumber=' + pictureNumber;
+        $( '#deletePictureNumber' ).val(pictureNumber);
+        $( '#confirmDialog' ).removeClass('hiddenDiv');
+        $( '#confirmDialog' ).addClass('popup');
     }
 
-    //:todo going to have to ajax this
-    function changeCaption(buttonId, pictureNumber, currentCaption)
+    function deletePicture()
+    {
+        var confirmText = $( '#confirmPromptText' ).val();
+        if (confirmText === 'DELETE')
+        {
+            var pictureNumber = $( '#deletePictureNumber' ).val();
+            $.post( '${pageContext.request.contextPath}/portalItemHandler?action=deleteItemPicture&pictureNumber=' + pictureNumber );
+            location.reload();
+        }
+    }
+
+    function addPicture()
+    {
+
+    }
+
+    function changeCaption(buttonId, pictureNumber)
     {
         var buttonPressed = document.getElementById(buttonId);
         buttonPressed.blur();
 
-        $( '#editPictureCaption' ).removeClass('hiddenDiv').addClass('popup');
-
-        $( '#caption' ).val(currentCaption);
-        $( '#pictureNumber' ).val(pictureNumber);
+        $.get( '${pageContext.request.contextPath}/portalItemHandler?action=ajaxGetPictureCaption&pictureNumber=' + pictureNumber,
+            function(data)
+            {
+                $( '#changeCaptionPictureNumber' ).val(pictureNumber);
+                $( '#changeCaptionText' ).val(data);
+                $( '#changeCaptionDialog' ).removeClass('hiddenDiv').addClass('popup');
+            });
     }
 
     function makePrimary(buttonId, pictureNumber)
     {
         var buttonPressed = document.getElementById(buttonId);
+        console.log(buttonPressed);
         buttonPressed.blur();
     }
 
@@ -43,10 +61,10 @@
 
 <div class="container">
 
-        <button class="btn waves-light waves-effect" id="deleteButton'" name="deleteButton" onclick="deletePicture(this.id, '${picture.objectId}');">
-            Add pictre
-            <i class="material-icons right"></i>
-        </button>
+    <button class="btn waves-light waves-effect" id="deleteButton'" name="deleteButton" onclick="addPicture(this.id);">
+        Add picture
+        <i class="material-icons right"></i>
+    </button>
 
     <table>
         <c:forEach var="picture" items="${item.itemPictures}">
@@ -58,11 +76,11 @@
                     <c:out value="${picture.pictureCaption}"/>
                 </td>
                 <td>
-                    <button class="btn waves-light waves-effect" id="deleteButton" name="deleteButton" onclick="deletePicture(this.id, '${picture.objectId}');">
+                    <button class="btn waves-light waves-effect" id="deleteButton" name="deleteButton" onclick="promptToConfirmDelete('${picture.objectId}');">
                         Delete
                         <i class="material-icons right"></i>
                     </button>
-                    <button class="btn waves-light waves-effect" id="changeCaptionButton" name="changeCaptionButton" onclick="changeCaption(this.id, '${picture.objectId}', '${picture.pictureCaption}');">
+                    <button class="btn waves-light waves-effect" id="changeCaptionButton" name="changeCaptionButton" onclick="changeCaption(this.id, '${picture.objectId}');">
                         Change caption
                         <i class="material-icons right"></i>
                     </button>
@@ -75,19 +93,39 @@
         </c:forEach>
     </table>
 
-
-    <div id="editPictureCaption" class="hiddenDiv">
+    <div id="confirmDialog" class="hiddenDiv">
         <div class="popupContent">
             <div class="popupHeader">
-                <span style="margin: auto;">Edit Album</span>
+                <span style="margin: auto;">Delete Picture</span>
                 <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
             </div>
             <div class="popupContainer">
-                <form method="post" action="${pageContext.request.contextPath}/portalItemHandler?action=editPictureCaption">
-                    <input type="hidden" name="pictureNumber" id="pictureNumber" value=""/>
+                <label for="confirmPromptText">Type DELETE to confirm removing this item.</label>
+                <input type="text" id="confirmPromptText" name="confirmPromptText" value=""/>
+                <input type="hidden" id="deletePictureNumber" name="deletePictureNumber" value=""/>
+                <button class="waves-effect waves-light btn submitButton" value="Confirm" onclick="deletePicture();">
+                    Confirm
+                    <i class="material-icons right">delete</i>
+                </button>
+            </div>
+        </div>
+    </div>
 
-                    <label for="caption">Name</label>
-                    <input id="caption" name="caption" type="text" value=""/>
+    <div id="changeCaptionDialog" class="hiddenDiv">
+        <div class="popupContent">
+            <div class="popupHeader">
+                <span style="margin: auto;">Change Caption</span>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <form method="post" name="frmChangeCaption" id="frmChangeCaption" action="${pageContext.request.contextPath}/portalItemHandler?action=changePictureCaption">
+                    <input type="hidden" name="changeCaptionPictureNumber" id="changeCaptionPictureNumber" value=""/>
+                    <label for="changeCaptionText">Caption:</label>
+                    <textarea name="changeCaptionText" id="changeCaptionText"></textarea>
+                    <button class="waves-effect waves-light btn submitButton" value="Change" onclick="$('#frmChangeCaption').submit();">
+                        Change
+                        <i class="material-tooltip right">send</i>
+                    </button>
                 </form>
             </div>
         </div>
