@@ -42,6 +42,7 @@
                     $( '#restResultsBox' ).removeClass('hiddenDiv').addClass('popup');
                     $( '#restResultsBoxPopup' ).html(data);
                     hideWaitingPopup();
+                    $( 'html,body' ).scrollTop(0);
                 },
                 error: function(jqXHR, textStatus, errorThrown)
                 {
