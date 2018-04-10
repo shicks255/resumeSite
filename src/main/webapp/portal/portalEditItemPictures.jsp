@@ -31,9 +31,12 @@
         }
     }
 
-    function addPicture()
+    function addPicture(buttonId)
     {
+        var buttonPressed = document.getElementById(buttonId);
+        buttonPressed.blur();
 
+        $( '#addPictureDialog' ).removeClass('hiddenDiv').addClass('popup');
     }
 
     function changeCaption(buttonId, pictureNumber)
@@ -124,8 +127,33 @@
                     <textarea name="changeCaptionText" id="changeCaptionText"></textarea>
                     <button class="waves-effect waves-light btn submitButton" value="Change" onclick="$('#frmChangeCaption').submit();">
                         Change
-                        <i class="material-tooltip right">send</i>
+                        <i class="material-icons right">send</i>
                     </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addPictureDialog" class="hiddenDiv">
+        <div class="popupContent">
+            <div class="popupHeader">
+                <span style="margin: auto;">Add a picture</span>
+                <i class="small material-icons closeIcon" style="cursor:pointer" onclick="closePopups();">close</i>
+            </div>
+            <div class="popupContainer">
+                <form method="post" enctype="multipart/form-data" name="frmAddPicture" id="frmAddPicture" action="${pageContext.request.contextPath}/portalItemHandler?action=addPicture">
+                    <input type="hidden" id="itemNumber" name="itemNumber" value="${item.itemNumber}"/>
+
+                    <label for="newPictureCaption">Caption:</label>
+                    <textarea name="newPictureCaption" id="newPictureCaption"></textarea>
+
+                    <input type="file" name="newPictureFile" id="newPictureFile" enctype="multipart/form-data">
+
+                    <button class="waves-effect waves-light btn submitButton" value="Add" onclick="$( '#frmAddPicture' ).submit();">
+                        Upload
+                        <i class="material-icons right">send</i>
+                    </button>
+
                 </form>
             </div>
         </div>

@@ -20,6 +20,48 @@ import java.util.Map;
 
 public class PortalItemLogic
 {
+    public static void addNewPicture(FileRequest fr)
+    {
+        Map<String, String> params = fr.getParameters();
+
+        Integer itemNumber = CommonUtils.getInteger(params.get("itemNumber"));
+        StoreItemGeneric item = StoreItemGeneric.getItemWithPictures(itemNumber);
+
+        if (item != null)
+        {
+            StoreItemPicture newPicture = new StoreItemPicture();
+            newPicture.setPictureCaption(params.get("newPictureCaption"));
+
+            File file = fr.getUploadedFile();
+
+            Session session = HibernateUtil.sessionFactory.openSession();
+            if (file != null && file.isFile())
+            {
+                byte[] bytes = new byte[(int) file.length()];
+
+                try(FileInputStream inputStream = new FileInputStream(file))
+                {
+                    inputStream.read(bytes);
+                }
+                catch (Exception e)
+                {
+                    System.out.println(e);
+                }
+                newPicture.setImage(bytes);
+                newPicture.setStoreItemGeneric(item);
+
+                session.beginTransaction();
+                session.save(newPicture);
+
+                item.getItemPictures().add(newPicture);
+
+                session.update(item);
+                session.getTransaction().commit();
+                session.close();
+            }
+        }
+    }
+
     public static void addMusicAlbum(HttpServletRequest request)
     {
         FileRequest fr = FileUploadUtil.getFileRequest(request);

@@ -44,7 +44,7 @@ public class PortalItemHandler extends HttpServlet
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
-        String action = request.getParameter("action");
+        String action = CommonUtils.getString(request.getParameter("action"));
 
 //        NAVIGATE TO ADD AN ITEM
         if (action.equalsIgnoreCase("form"))
@@ -428,6 +428,18 @@ public class PortalItemHandler extends HttpServlet
                 }
             }
             response.sendRedirect("portalItemHandler?action=editItems");
+        }
+
+        //ADD ITEM PICTURE
+        if (action.equalsIgnoreCase("addPicture"))
+        {
+            FileRequest fr = FileUploadUtil.getFileRequest(request);
+            Map<String, String> params = fr.getParameters();
+
+            Integer itemNumber = CommonUtils.getInteger(params.get("itemNumber"));
+
+            PortalItemLogic.addNewPicture(fr);
+            response.sendRedirect("portalItemHandler?action=showEditItemPicture&itemNumber=" + itemNumber);
         }
 
 //        UPDATE TOTAL
