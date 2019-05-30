@@ -20,17 +20,18 @@ public class ServerStart extends HttpServlet
     private static final Logger log = Logger.getLogger(ServerStart.class.getName());
 
     @Override
-    public void init() throws ServletException
+    public void init()
     {
         log.info("ResumeSite starting up");
         HibernateUtil.initializeSessionFactory();
-        ServerStartupTasks.loadDefaultItemTypes();
-        ServletContext sc = getServletContext();
 
-        String path = sc.getRealPath("/");
-        sc.setAttribute("imagesPath", path.replace(path, "") + File.separator + "images" + File.separator);
+        new Thread(() -> {
+            ServerStartupTasks.loadDefaultItemTypes();
+            ServerStartupTasks.initializePictures(getServletContext());
+            log.info("Startup tasks complete, server fully started");
+        }).start();
 
-        PicturesLogic.loadPicturesForGallery(sc);
+        log.info("Starting Tasks");
     }
 
     @Override

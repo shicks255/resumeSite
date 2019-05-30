@@ -24,26 +24,24 @@ public class PageAndHandlerInfo extends TagSupport
         if (CommonUtils.isAdminVisitor(request))
         {
             String pageName = request.getServletPath();
-
             Map<String, String[]> paramMap = pageContext.getRequest().getParameterMap();
-            String action = paramMap.get("action")[0];
-
-            String info = "Action=<b>" + action + "</b> | " + "JspPage=<b>" + pageName + "</b>";
-
-            try
+            if (!paramMap.isEmpty())
             {
-                out.println(info);
-            } catch (IOException e)
-            {
-                log.error(e.getMessage());
-                System.out.println(e);
+                String action = paramMap.get("action")[0];
+                String info = "Action=<b>" + action + "</b> | " + "JspPage=<b>" + pageName + "</b>";
+
+                try
+                {
+                    out.println(info);
+                } catch (IOException e)
+                {
+                    log.error(e.getMessage());
+                    System.out.println(e);
+                }
             }
         }
 
         return SKIP_BODY;
     }
-
-
-
 
 }
