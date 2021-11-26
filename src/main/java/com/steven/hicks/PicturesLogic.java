@@ -1,7 +1,7 @@
 package com.steven.hicks;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;

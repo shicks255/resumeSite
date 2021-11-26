@@ -4,7 +4,7 @@ package com.steven.hicks;
 import com.steven.hicks.Utilities.HibernateUtil;
 import com.steven.hicks.entities.store.StoreItemType;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

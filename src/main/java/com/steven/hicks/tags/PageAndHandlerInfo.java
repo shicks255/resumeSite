@@ -4,9 +4,9 @@ import com.steven.hicks.Utilities.CommonUtils;
 import com.steven.hicks.filters.LogFilter;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.TagSupport;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.jsp.JspWriter;
+import jakarta.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.Map;
 

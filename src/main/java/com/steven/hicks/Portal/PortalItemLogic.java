@@ -12,7 +12,7 @@ import com.steven.hicks.entities.store.items.LegoSet;
 import com.steven.hicks.entities.store.items.MusicAlbum;
 import org.hibernate.Session;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
 import java.math.BigDecimal;

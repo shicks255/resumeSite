@@ -3,7 +3,7 @@ package com.steven.hicks.entities.store.paymentBehaviors;
 import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("BitCoin")

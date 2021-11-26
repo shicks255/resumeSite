@@ -5,7 +5,7 @@ import com.steven.hicks.entities.store.ordering.OrderPaymentBehavior;
 import com.steven.hicks.entities.store.ordering.StoreOrder;
 
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Entity
 @DiscriminatorValue("CreditCard")

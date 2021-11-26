@@ -5,9 +5,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
@@ -36,7 +36,7 @@ public class FileUploadUtil extends HttpServlet
             upload.setSizeMax(maxFileSize);
             try
             {
-                List fileItems = upload.parseRequest(request);
+                List fileItems = upload.parseRequest((javax.servlet.http.HttpServletRequest) request);
 
                 Iterator i = fileItems.iterator();
 
@@ -82,7 +82,7 @@ public class FileUploadUtil extends HttpServlet
         File tempFile = null;
         try
         {
-            List items = upload.parseRequest(request);
+            List items = upload.parseRequest((javax.servlet.http.HttpServletRequest) request);
             for(Object item1 : items)
             {
                 FileItem item = (FileItem) item1;

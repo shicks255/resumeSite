@@ -2,7 +2,7 @@ package com.steven.hicks.entities.store.ordering;
 
 import com.steven.hicks.entities.store.paymentBehaviors.*;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class PaymentMethodFactory
 {

@@ -8,8 +8,8 @@ import com.steven.hicks.entities.store.items.LegoSet;
 import com.steven.hicks.entities.store.items.MusicAlbum;
 import org.apache.log4j.Logger;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
